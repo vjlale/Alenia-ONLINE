@@ -137,7 +137,7 @@ CNAME   www     vjlale.github.io
 ### Fase 1: Lanzamiento (Semana 1-2)
 - [x] Configuración inicial del repositorio
 - [x] Landing page principal
-- [ ] Configuración DNS y GitHub Pages
+- [x] Configuración DNS y GitHub Pages
 - [ ] Blog básico con primeros posts
 
 ### Fase 2: Funcionalidades (Semana 3-4)
