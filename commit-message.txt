@@ -1,0 +1,1 @@
+Forzar actualización de index.html para asegurar sincronización
