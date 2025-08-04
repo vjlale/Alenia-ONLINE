@@ -1,0 +1,119 @@
+﻿Manual de Identidad Visual y Comunicación Web - ALENIA (V2 - Neon Glow)
+1. Filosofía de Diseño
+La identidad visual de ALEN.iA se basa en tres pilares: Inteligencia, Modernidad y Energía Digital. La nueva estética "Neon Glow" busca proyectar una imagen audaz, tecnológica y de vanguardia, reflejando la potencia de nuestras herramientas de IA. El diseño es inmersivo, utilizando contrastes fuertes para guiar al usuario y crear una experiencia memorable.
+La estética general es un "Dark Mode" con acentos de neón, donde la luz emana de los elementos interactivos, creando profundidad y un claro foco de atención.
+2. Paleta de Colores
+La paleta se redefine para maximizar el efecto neón y la vibración de los colores sobre una base oscura.
+Colores de Base (Fondos)
+Se utilizan para crear el lienzo oscuro profundo que permite que los brillos de neón destaquen.
+Uso
+	Color
+	HEX
+	Tailwind Class
+	Fondo Principal
+	Azul Abisal
+	#100f1c
+	bg-[#100f1c]
+	Fondo Secundario
+	Azul Oscuro
+	#1a1a2e
+	bg-[#1a1a2e]
+	Bordes/Líneas
+	Gris Azulado
+	#3A3A5A
+	border-slate-700
+	Texto Principal
+	Blanco Roto
+	#F1F5F9
+	text-slate-100
+	Texto Secundario
+	Gris Claro
+	#94A3B8
+	text-slate-400
+	Colores de Acento (Gradientes)
+Son el corazón de la marca. Se usan para llamados a la acción (CTAs), títulos importantes y elementos que requieren la atención del usuario.
+Gradiente Principal (Púrpura): Para acciones primarias, botones y enlaces importantes.
+* De: #7b2cbf (Púrpura Intenso)
+* A: #c77dff (Lavanda Claro)
+* Tailwind: bg-gradient-to-r from-[#7b2cbf] to-[#c77dff]
+Gradiente Secundario (Verde/Cyan): Para el logo, mensajes de éxito, resultados positivos y elementos de demo.
+* De: #00FF88 (Verde Menta)
+* A: #00CCFF (Cyan Eléctrico)
+* Tailwind: bg-gradient-to-r from-[#00FF88] to-[#00CCFF]
+3. Tipografía
+La tipografía se elige para maximizar la legibilidad y mantener una estética moderna y limpia.
+* Fuente para Títulos (headings): Poppins
+   * Uso: h1, h2, h3. Aporta impacto y modernidad.
+   * Pesos: 700 (Bold), 800 (ExtraBold).
+* Fuente para Cuerpo de Texto (body): Inter
+   * Uso: Párrafos, etiquetas, menús. Optimizada para la lectura en pantalla.
+   * Pesos: 400 (Regular), 500 (Medium), 600 (SemiBold).
+Jerarquía de Texto:
+* h1: Poppins Bold, 48px - 72px
+* h2: Poppins Bold, 36px - 48px
+* h3: Poppins SemiBold, 24px - 30px
+* p (Párrafo): Inter Regular, 16px - 18px
+* small (Etiqueta): Inter Medium, 14px
+4. Componentes y Formas (UI)
+La consistencia en los componentes es clave. Todos los elementos deben ser responsivos y mantener una coherencia visual.
+Tarjetas y Contenedores
+* Fondo: bg-[#1a1a2e] (Azul Oscuro).
+* Bordes: 1px solid #3A3A5A (border border-slate-700).
+* Radio de Esquina: 16px (rounded-2xl).
+* Efecto de Profundidad (Glow): Para crear la sensación de luz difuminada por detrás, se aplica una sombra de caja con un color de acento y un gran desenfoque. Este efecto debe usarse sutilmente en tarjetas destacadas o al pasar el cursor.
+/* Ejemplo de clase para el efecto de brillo púrpura */
+.card-glow-purple:hover {
+ box-shadow: 0px 0px 35px -5px rgba(123, 44, 191, 0.3);
+}
+
+/* Ejemplo de clase para el efecto de brillo cyan */
+.card-glow-cyan:hover {
+ box-shadow: 0px 0px 35px -5px rgba(0, 204, 255, 0.25);
+}
+
+
+Botones (CTAs)
+Los botones deben ser sólidos, llamativos y seguir la lógica de neón para una máxima claridad y atractivo visual.
+* Botón Primario ("Agendar Consultoría"):
+   * Fondo: Púrpura Neón (bg-[#8A2BE2]).
+   * Texto: Blanco, font-bold.
+   * Efecto: transition-all duration-300, al pasar el cursor, el brillo se intensifica: hover:shadow-[0_0_20px_#8A2BE2].
+* Botón Secundario ("Visitar Sitio Web"):
+   * Fondo: Transparente (bg-transparent).
+   * Borde: 2px solid #39FF14 (Verde Neón).
+   * Texto: Verde Neón (text-[#39FF14]).
+   * Efecto: Al pasar el cursor, el fondo se rellena y el texto se invierte: hover:bg-[#39FF14] hover:text-black.
+* Botón de Demo:
+   * Fondo: Transparente (bg-transparent).
+   * Borde: 2px solid #ADFF2F (Verde Lima).
+   * Texto: Verde Lima (text-[#ADFF2F]).
+   * Efecto: hover:bg-[#ADFF2F] hover:text-black.
+5. Iconografía y Librerías
+* Iconos: Se utiliza la librería Lucide React. Los iconos deben ser minimalistas, de trazo fino (strokeWidth="2") y limpios. El color debe ser text-slate-400 por defecto y puede usar un color de acento para destacar.
+* Animaciones: Se utiliza Framer Motion para animaciones sutiles y fluidas. Las animaciones de entrada (fade-in, slide-in) deben ser rápidas y no intrusivas (duración 0.3s - 0.5s).
+* Gráficos y Charts: Se utiliza Recharts. Los gráficos deben usar la paleta de colores completa para diferenciar datos, priorizando los gradientes de acento para las series de datos más importantes.
+6. Manual de Comunicación
+Principios Clave
+1. Claridad ante todo: Usar lenguaje sencillo y directo. Evitar la jerga técnica.
+2. Enfocado en el beneficio: Comunicar siempre el "qué hay para el cliente". En lugar de "Usamos IA", decir "Obtén mejores resultados con análisis inteligentes".
+3. Tono cercano y experto: Somos el socio tecnológico que entiende los desafíos de las PYMES. Hablamos con autoridad, pero también con empatía.
+4. Llamadas a la acción claras: Cada pieza de comunicación debe guiar al usuario hacia el siguiente paso de forma evidente ("Prueba la Demo", "Agenda una Consulta", "Comenzar Proyecto").
+Tono de Voz
+* Profesional pero no corporativo.
+* Innovador pero no arrogante.
+* Accesible pero no simplista.
+✅ Sí Decimos / ❌ No Decimos
+Sí Decimos 👍
+	No Decimos 👎
+	"Impulsa tu negocio con IA"
+	"Implementamos algoritmos de Machine Learning"
+	"Automatización simple y efectiva"
+	"Orquestación de workflows complejos"
+	"Resultados medibles desde el día 1"
+	"Nuestro software es el mejor del mercado"
+	"Tu socio en transformación digital"
+	"Somos una corporación líder en sinergias digitales"
+	"Descubre lo que tus competidores hacen"
+	"Análisis de la data competitiva"
+	"Hablemos de tu proyecto"
+	"Envíe su solicitud de presupuesto"

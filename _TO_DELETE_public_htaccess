@@ -1,0 +1,73 @@
+# Archivo .htaccess optimizado para Alenia Website
+# Configuración para Single Page Application con sistema de fallback
+
+# Habilitar el motor de reescritura
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Si el archivo solicitado existe físicamente, servir directamente
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+    
+    # Si la solicitud es para la página estática de fallback, servirla directamente
+    RewriteRule ^static-fallback\.html$ - [L]
+    
+    # Para solicitudes de API, permitir errores 404 naturales
+    RewriteCond %{REQUEST_URI} ^/api/ [NC]
+    RewriteRule ^ - [L]
+    
+    # Redireccionar todas las demás solicitudes a index.html
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# Configuración de caché para mejorar el rendimiento
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Activos estáticos: 1 semana
+    ExpiresByType image/jpeg "access plus 1 week"
+    ExpiresByType image/png "access plus 1 week"
+    ExpiresByType image/gif "access plus 1 week"
+    ExpiresByType image/svg+xml "access plus 1 week"
+    ExpiresByType text/css "access plus 1 week"
+    
+    # JavaScript: 3 días (para permitir actualizaciones más frecuentes)
+    ExpiresByType application/javascript "access plus 3 days"
+    
+    # Fallback: 1 día
+    ExpiresByType text/html "access plus 1 day"
+</IfModule>
+
+# Compresión GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>
+
+# Seguridad: Prevenir listado de directorios
+Options -Indexes
+
+# Forzar HTTPS
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Configurar encabezados de seguridad
+<IfModule mod_headers.c>
+    # Permitir CORS para recursos estáticos
+    <FilesMatch "\.(css|js|svg|png|jpg|jpeg|gif|ico)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+    
+    # Seguridad
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Manejar errores 404
+ErrorDocument 404 /index.html

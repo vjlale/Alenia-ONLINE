@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos globales base según identidad visual */
+@layer base {
+  body {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    background: #0a0a23;
+    color: #f8fafc;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Efectos de vidrio y glassmorphism */
+@layer components {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+  }
+}
+
+/* Colores de marca según identidad visual */
+@layer utilities {
+  /* Colores principales estilo Neon Glow */
+  .bg-brand-primary {
+    background: #0a0a23;
+  }
+  .bg-brand-accent {
+    background: #00ffe7;
+  }
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, #06baa8 0%, #be06af 100%);
+  }
+  .text-brand-accent {
+    color: #3800e1;
+  }
+  .text-brand-secondary {
+    color: #000000;
+  }
+  .border-brand {
+    border: 1px solid #f8fbfb;
+  }
+  .text-shadow-glow {
+    text-shadow: 0 0 8px #00ffe7, 0 0 16px #ff00ea;
+  }
+  .box-shadow-brand {
+    box-shadow: 0 0 24px 4px #00ffe7, 0 0 48px 8px #ff00ea33;
+  }
+  .box-shadow-card {
+    box-shadow: 0 2px 24px 0 #00ffe799, 0 1px 8px 0 #ff00ea33;
+  }
+  .glow-btn {
+    box-shadow: 0 0 12px 2px #00ffe7, 0 0 24px 4px #ff00ea66;
+    transition: box-shadow 0.2s;
+  }
+  .glow-btn:hover {
+    box-shadow: 0 0 24px 6px #00ffe7, 0 0 48px 12px #ff00ea;
+  }
+  /* Utilidades para legibilidad en fondos claros y oscuros */
+  .text-black-bold {
+    color: #111;
+    font-weight: bold;
+  }
+  .text-white-bold {
+    color: #fff;
+    font-weight: bold;
+  }
+  .btn-black-bold {
+    color: #111;
+    font-weight: bold;
+    background: transparent;
+  }
+}

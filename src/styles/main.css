@@ -1,0 +1,198 @@
+/* Reseteamos algunos estilos básicos - equivalente a Tailwind base */
+*, ::before, ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  line-height: inherit;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: #f8fafc;
+  letter-spacing: 0.01em;
+}
+
+/* Utilidades básicas de flexbox */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Utilidades de espaciado */
+.m-0 { margin: 0; }
+.p-0 { padding: 0; }
+.m-1 { margin: 0.25rem; }
+.p-1 { padding: 0.25rem; }
+.m-2 { margin: 0.5rem; }
+.p-2 { padding: 0.5rem; }
+.m-4 { margin: 1rem; }
+.p-4 { padding: 1rem; }
+.m-8 { margin: 2rem; }
+.p-8 { padding: 2rem; }
+
+/* Efectos de vidrio y glassmorphism */
+/* Componentes personalizados */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Utilidades de texto */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-normal { font-weight: 400; }
+
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+
+/* Utilidades de bordes */
+.rounded { border-radius: 0.25rem; }
+.rounded-lg { border-radius: 0.5rem; }
+.rounded-xl { border-radius: 0.75rem; }
+.rounded-full { border-radius: 9999px; }
+
+/* Definición explícita de colores personalizados para garantizar compatibilidad */
+  .text-alenia-primary {
+    color: #00ff88;
+  }
+  
+  .bg-alenia-primary {
+    background-color: #00ff88;
+  }
+  
+  .border-alenia-primary {
+    border-color: #00ff88;
+  }
+  
+  .text-alenia-secondary {
+    color: #0066ff;
+  }
+  
+  .bg-alenia-secondary {
+    background-color: #0066ff;
+  }
+  
+  .border-alenia-secondary {
+    border-color: #0066ff;
+  }
+  
+  .text-alenia-accent {
+    color: #ff0066;
+  }
+  
+  .bg-alenia-accent {
+    background-color: #ff0066;
+  }
+  
+  .border-alenia-accent {
+    border-color: #ff0066;
+  }
+  
+  .text-alenia-dark {
+    color: #0a0a0a;
+  }
+  
+  .bg-alenia-dark {
+    background-color: #0a0a0a;
+  }
+  
+  .border-alenia-dark {
+    border-color: #0a0a0a;
+  }
+  
+  .text-alenia-light {
+    color: #f8fafc;
+  }
+  
+  .bg-alenia-light {
+    background-color: #f8fafc;
+  }
+  
+  .border-alenia-light {
+    border-color: #f8fafc;
+  }
+  
+  /* Aseguramos que los gradientes personalizados también estén definidos */
+  .bg-gradient-alenia {
+    background: linear-gradient(135deg, #00ff88, #0066ff);
+  }
+
+  /* Utilidades adicionales de diseño */
+  .w-full { width: 100%; }
+  .h-full { height: 100%; }
+  .w-screen { width: 100vw; }
+  .h-screen { height: 100vh; }
+  
+  /* Grid y contenedores */
+  .container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  
+  .grid { display: grid; }
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  
+  /* Breakpoints (media queries) */
+  @media (min-width: 640px) {
+    .container { max-width: 640px; }
+    .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  
+  @media (min-width: 768px) {
+    .container { max-width: 768px; }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  
+  @media (min-width: 1024px) {
+    .container { max-width: 1024px; }
+    .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  
+  @media (min-width: 1280px) {
+    .container { max-width: 1280px; }
+  }
+
+/* Resto de estilos globales mantenidos del archivo original */
