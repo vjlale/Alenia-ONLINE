@@ -10,7 +10,7 @@ const NotFound = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen pt-16 flex items-center justify-center"
     >
-      <div className="container mx-auto px-4 text-center">
+      <div className="container mx-auto px-4 text-center bg-brand-primary box-shadow-brand rounded-2xl py-16">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -38,7 +38,7 @@ const NotFound = () => {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="w-16 h-16 bg-gradient-to-r from-alenia-primary to-alenia-secondary rounded-full flex items-center justify-center"
+                className="w-16 h-16 bg-brand-gradient rounded-full flex items-center justify-center box-shadow-card border border-brand"
               >
                 <Search className="w-8 h-8 text-white" />
               </motion.div>
@@ -97,7 +97,7 @@ const NotFound = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 to="/"
-                className="flex items-center justify-center space-x-2 bg-gradient-to-r from-alenia-primary to-alenia-secondary text-alenia-dark px-8 py-4 rounded-lg font-bold hover:neon-glow transition-all duration-300"
+                className="flex items-center justify-center space-x-2 bg-brand-gradient text-brand-primary px-8 py-4 rounded-lg font-bold glow-btn box-shadow-card border border-brand hover:bg-brand-accent transition-all duration-300"
               >
                 <Home className="w-5 h-5" />
                 <span>Volver al Inicio</span>
@@ -107,7 +107,7 @@ const NotFound = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <button
                 onClick={() => window.history.back()}
-                className="flex items-center justify-center space-x-2 glass-effect text-alenia-light px-8 py-4 rounded-lg font-medium hover:bg-white/20 transition-all duration-300"
+                className="flex items-center justify-center space-x-2 bg-brand-primary/80 text-brand-accent px-8 py-4 rounded-lg font-medium box-shadow-card border border-brand hover:bg-brand-gradient transition-all duration-300"
               >
                 <ArrowLeft className="w-5 h-5" />
                 <span>Página Anterior</span>

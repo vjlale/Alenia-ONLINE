@@ -1,29 +1,22 @@
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion } from 'framer-motion';
 import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock,
-  Send,
-  CheckCircle,
-  MessageSquare,
-  Calendar,
-  Zap
-} from 'lucide-react'
+  Mail, Phone, MapPin, Clock, MessageSquare, 
+  CheckCircle, ArrowRight, Send, Calendar
+} from 'lucide-react';
+import { useState } from 'react';
 
-const Contact = () => {
+export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
+    phone: '',
     service: '',
-    budget: '',
     message: ''
-  })
-  
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const services = [
     'Automatización WhatsApp',
@@ -31,223 +24,133 @@ const Contact = () => {
     'Email Marketing',
     'Análisis con IA',
     'CRM Personalizado',
-    'Consultoría General'
-  ]
+    'Consultoría IA',
+    'Otro'
+  ];
 
-  const budgetRanges = [
-    'Menos de $500',
-    '$500 - $1,000',
-    '$1,000 - $2,500',
-    '$2,500 - $5,000',
-    'Más de $5,000'
-  ]
-
-  const contactMethods = [
+  const contactInfo = [
     {
-      icon: Mail,
+      icon: <Mail className="w-6 h-6" />,
       title: 'Email',
-      value: 'contacto@alenia.online',
-      description: 'Respuesta en 24 horas',
-      gradient: 'from-blue-500 to-cyan-600'
+      value: 'alenia.online@gmail.com',
+      action: 'mailto:alenia.online@gmail.com'
     },
     {
-      icon: MessageSquare,
+      icon: <Phone className="w-6 h-6" />,
       title: 'WhatsApp',
-      value: '+54 9 351 123-4567',
-      description: 'Respuesta inmediata',
-      gradient: 'from-green-500 to-emerald-600'
+      value: '+54 9 XXX XXX-XXXX',
+      action: 'https://wa.me/54XXXXXXXXXX'
     },
     {
-      icon: Calendar,
-      title: 'Reunión Virtual',
-      value: 'Agendar llamada',
-      description: '30 min gratuitos',
-      gradient: 'from-purple-500 to-pink-600'
+      icon: <MapPin className="w-6 h-6" />,
+      title: 'Ubicación',
+      value: 'Córdoba, Argentina',
+      action: null
+    },
+    {
+      icon: <Clock className="w-6 h-6" />,
+      title: 'Horario',
+      value: 'Lun - Vie: 9:00 - 18:00',
+      action: null
     }
-  ]
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    // Simular envío del formulario
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-  }
+  ];
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-  if (isSubmitted) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="min-h-screen pt-16 flex items-center justify-center"
-      >
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="max-w-2xl mx-auto glass-effect rounded-2xl p-8"
-          >
-            <div className="w-20 h-20 bg-gradient-to-r from-alenia-primary to-alenia-secondary rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-white" />
-            </div>
-            
-            <h1 className="text-3xl font-display font-bold text-white mb-4">
-              ¡Mensaje enviado con éxito!
-            </h1>
-            
-            <p className="text-xl text-alenia-light/80 mb-6">
-              Gracias por contactarnos. Nuestro equipo revisará tu consulta y te responderá en menos de 24 horas.
-            </p>
-            
-            <p className="text-alenia-primary font-medium mb-8">
-              📧 Enviaremos la respuesta a: {formData.email}
-            </p>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              onClick={() => {
-                setIsSubmitted(false)
-                setFormData({
-                  name: '',
-                  email: '',
-                  company: '',
-                  service: '',
-                  budget: '',
-                  message: ''
-                })
-              }}
-              className="bg-gradient-to-r from-alenia-primary to-alenia-secondary text-alenia-dark px-8 py-3 rounded-lg font-medium"
-            >
-              Enviar otro mensaje
-            </motion.button>
-          </motion.div>
-        </div>
-      </motion.div>
-    )
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simular envío de formulario
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        service: '',
+        message: ''
+      });
+      
+      // Limpiar mensaje de éxito después de 5 segundos
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }, 2000);
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen pt-16"
-    >
-      {/* Hero Section */}
-      <section className="py-20 text-center">
-        <div className="container mx-auto px-4">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-display font-bold mb-6"
-          >
-            <span className="text-white">Hablemos de tu</span>{' '}
-            <span className="gradient-text">Proyecto</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-alenia-light/80 max-w-3xl mx-auto mb-12"
-          >
-            Estamos aquí para ayudarte a transformar tu negocio con soluciones inteligentes. 
-            Cuéntanos tu idea y diseñemos juntos la estrategia perfecta.
-          </motion.p>
-        </div>
-      </section>
+    <main className="min-h-screen bg-slate-50 py-20">
+      <div className="container mx-auto px-6">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+            Hablemos de tu <span className="text-green-500">Proyecto</span>
+          </h1>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            Estamos listos para ayudarte a transformar tu empresa con tecnología e inteligencia artificial
+          </p>
+        </motion.div>
 
-      {/* Contact Methods */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {contactMethods.map((method, index) => {
-              const Icon = method.icon
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="glass-effect rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300"
-                >
-                  <div className={`w-16 h-16 bg-gradient-to-r ${method.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    {method.title}
-                  </h3>
-                  <p className="text-alenia-primary font-medium mb-2">
-                    {method.value}
-                  </p>
-                  <p className="text-sm text-alenia-light/70">
-                    {method.description}
-                  </p>
-                </motion.div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Form */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="glass-effect rounded-2xl p-8"
-              >
-                <h2 className="text-2xl font-display font-bold text-white mb-6">
-                  Consulta Gratuita
-                </h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-alenia-light mb-2">
-                        Nombre completo *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 glass-effect rounded-lg text-alenia-light placeholder-alenia-light/50 focus:outline-none focus:ring-2 focus:ring-alenia-primary"
-                        placeholder="Tu nombre"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-alenia-light mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 glass-effect rounded-lg text-alenia-light placeholder-alenia-light/50 focus:outline-none focus:ring-2 focus:ring-alenia-primary"
-                        placeholder="tu@email.com"
-                      />
-                    </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6">
+                Envíanos un mensaje
+              </h2>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Nombre completo *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                      placeholder="Tu nombre"
+                    />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-alenia-light mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                      placeholder="tu@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Empresa
                     </label>
                     <input
@@ -255,171 +158,190 @@ const Contact = () => {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 glass-effect rounded-lg text-alenia-light placeholder-alenia-light/50 focus:outline-none focus:ring-2 focus:ring-alenia-primary"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
                       placeholder="Nombre de tu empresa"
                     />
                   </div>
                   
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-alenia-light mb-2">
-                        Servicio de interés
-                      </label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 glass-effect rounded-lg text-alenia-light focus:outline-none focus:ring-2 focus:ring-alenia-primary"
-                      >
-                        <option value="">Seleccionar servicio</option>
-                        {services.map((service, index) => (
-                          <option key={index} value={service} className="bg-alenia-dark">
-                            {service}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-alenia-light mb-2">
-                        Presupuesto estimado
-                      </label>
-                      <select
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 glass-effect rounded-lg text-alenia-light focus:outline-none focus:ring-2 focus:ring-alenia-primary"
-                      >
-                        <option value="">Seleccionar rango</option>
-                        {budgetRanges.map((range, index) => (
-                          <option key={index} value={range} className="bg-alenia-dark">
-                            {range}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  
                   <div>
-                    <label className="block text-sm font-medium text-alenia-light mb-2">
-                      Cuéntanos sobre tu proyecto *
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Teléfono
                     </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
                       onChange={handleInputChange}
-                      required
-                      rows={4}
-                      className="w-full px-4 py-3 glass-effect rounded-lg text-alenia-light placeholder-alenia-light/50 focus:outline-none focus:ring-2 focus:ring-alenia-primary resize-none"
-                      placeholder="Describe tu proyecto, objetivos y cualquier detalle relevante..."
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                      placeholder="+54 9 XXX XXX-XXXX"
                     />
                   </div>
-                  
-                  <motion.button
-                    type="submit"
-                    disabled={isSubmitting}
-                    whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
-                    className="w-full bg-gradient-to-r from-alenia-primary to-alenia-secondary text-alenia-dark px-8 py-4 rounded-lg font-bold text-lg hover:neon-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <div className="flex items-center justify-center space-x-2">
-                        <div className="w-5 h-5 border-2 border-alenia-dark/30 border-t-alenia-dark rounded-full animate-spin" />
-                        <span>Enviando...</span>
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center space-x-2">
-                        <Send className="w-5 h-5" />
-                        <span>Enviar Consulta</span>
-                      </div>
-                    )}
-                  </motion.button>
-                  
-                  <p className="text-sm text-alenia-light/60 text-center">
-                    📞 Te contactaremos en menos de 24 horas • 🔒 Tu información está protegida
-                  </p>
-                </form>
-              </motion.div>
-              
-              {/* Info */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="space-y-8"
-              >
-                <div>
-                  <h3 className="text-2xl font-display font-bold text-white mb-4">
-                    ¿Por qué elegirnos?
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-6 h-6 text-alenia-primary flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Consulta 100% Gratuita</h4>
-                        <p className="text-alenia-light/80 text-sm">Analizamos tu negocio sin costo y te damos una propuesta personalizada</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-6 h-6 text-alenia-primary flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Resultados Garantizados</h4>
-                        <p className="text-alenia-light/80 text-sm">Solo cobramos cuando veas resultados reales en tu negocio</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-6 h-6 text-alenia-primary flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Soporte Continuo</h4>
-                        <p className="text-alenia-light/80 text-sm">Te acompañamos durante todo el proceso y después del lanzamiento</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-6 h-6 text-alenia-primary flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Tecnología de Vanguardia</h4>
-                        <p className="text-alenia-light/80 text-sm">Usamos las últimas herramientas de IA y automatización</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                
-                <div className="glass-effect rounded-xl p-6">
-                  <h4 className="font-semibold text-white mb-3">Información de Contacto</h4>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-center space-x-3 text-alenia-light/80">
-                      <MapPin className="w-4 h-4 text-alenia-primary" />
-                      <span>Córdoba, Argentina</span>
-                    </div>
-                    <div className="flex items-center space-x-3 text-alenia-light/80">
-                      <Clock className="w-4 h-4 text-alenia-primary" />
-                      <span>Lunes a Viernes: 9:00 - 18:00 (GMT-3)</span>
-                    </div>
-                    <div className="flex items-center space-x-3 text-alenia-light/80">
-                      <Zap className="w-4 h-4 text-alenia-primary" />
-                      <span>Respuesta promedio: < 4 horas</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="glass-effect rounded-xl p-6">
-                  <h4 className="font-semibold text-white mb-3">Casos de Éxito</h4>
-                  <div className="space-y-3 text-sm text-alenia-light/80">
-                    <div>
-                      <span className="text-alenia-primary font-medium">+150%</span> aumento promedio en leads
-                    </div>
-                    <div>
-                      <span className="text-alenia-primary font-medium">-70%</span> reducción en tiempo de gestión
-                    </div>
-                    <div>
-                      <span className="text-alenia-primary font-medium">+50</span> empresas transformadas
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </motion.div>
-  )
-}
 
-export default Contact
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Servicio de interés *
+                  </label>
+                  <select
+                    name="service"
+                    value={formData.service}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
+                  >
+                    <option value="">Selecciona un servicio</option>
+                    {services.map(service => (
+                      <option key={service} value={service}>{service}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Mensaje *
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows="4"
+                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none resize-none"
+                    placeholder="Cuéntanos sobre tu proyecto..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`w-full py-4 rounded-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
+                    isSubmitting 
+                      ? 'bg-slate-400 cursor-not-allowed' 
+                      : 'bg-green-500 hover:bg-green-600 text-white'
+                  }`}
+                >
+                  {isSubmitting ? (
+                    <>Enviando...</>
+                  ) : (
+                    <>
+                      Enviar mensaje
+                      <Send className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
+
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center gap-2"
+                  >
+                    <CheckCircle className="w-5 h-5" />
+                    ¡Mensaje enviado exitosamente! Te contactaremos pronto.
+                  </motion.div>
+                )}
+              </form>
+            </div>
+          </motion.div>
+
+          {/* Contact Info & FAQ */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="space-y-8"
+          >
+            {/* Quick Contact */}
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h3 className="text-2xl font-bold text-slate-900 mb-6">
+                Información de contacto
+              </h3>
+              <div className="space-y-4">
+                {contactInfo.map((info, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="p-3 bg-green-100 text-green-600 rounded-lg">
+                      {info.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium text-slate-900">{info.title}</h4>
+                      {info.action ? (
+                        <a 
+                          href={info.action}
+                          target={info.action.startsWith('http') ? '_blank' : undefined}
+                          rel={info.action.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          className="text-slate-600 hover:text-green-600 transition-colors"
+                        >
+                          {info.value}
+                        </a>
+                      ) : (
+                        <p className="text-slate-600">{info.value}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="mt-8 space-y-3">
+                <a
+                  href="https://wa.me/54XXXXXXXXXX"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
+                >
+                  <MessageSquare className="w-5 h-5" />
+                  Chatear por WhatsApp
+                </a>
+                <button className="w-full bg-slate-900 text-white font-bold py-3 px-6 rounded-lg hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+                  <Calendar className="w-5 h-5" />
+                  Agendar videollamada
+                </button>
+              </div>
+            </div>
+
+            {/* Response Time */}
+            <div className="bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">
+                Respuesta rápida garantizada
+              </h3>
+              <p className="mb-6 opacity-90">
+                Nos comprometemos a responder todas las consultas en menos de 24 horas hábiles.
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                  <span>Consultoría inicial gratuita</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                  <span>Propuesta personalizada en 48hs</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                  <span>Sin compromisos ni costos ocultos</span>
+                </div>
+              </div>
+            </div>
+
+            {/* FAQ Preview */}
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">
+                ¿Tienes preguntas?
+              </h3>
+              <p className="text-slate-600 mb-4">
+                Revisa nuestras preguntas frecuentes o agenda una llamada para resolver todas tus dudas.
+              </p>
+              <a 
+                href="#"
+                className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-700 transition-colors"
+              >
+                Ver preguntas frecuentes
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </main>
+  );
+}

@@ -120,7 +120,7 @@ const Footer = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-alenia-primary to-alenia-secondary text-alenia-dark px-4 py-2 rounded-r-lg text-sm font-medium"
+                  className="bg-brand-gradient glow-btn text-brand-secondary px-4 py-2 rounded-r-lg text-sm font-medium"
                 >
                   OK
                 </motion.button>
