@@ -1,159 +1,234 @@
 import { motion } from 'framer-motion';
-import BlogCard from '../components/blog/BlogCard';
+import { Link } from 'react-router-dom';
+import { Search, Tag, Calendar, Clock, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { blogPosts, categories } from '../data/blogData';
+import { Helmet } from 'react-helmet-async';
+import SmartImage from '../components/common/SmartImage';
 
-const blogPosts = [
-  {
-    id: 1,
-    title: 'Cómo la IA está revolucionando el marketing digital en 2025',
-    excerpt: 'Descubre las últimas tendencias en inteligencia artificial aplicadas al marketing. Desde chatbots hasta análisis predictivo, la IA está transformando la forma en que las empresas se conectan con sus clientes.',
-    date: '15 Jul 2025',
-    readTime: 5,
-    category: 'Inteligencia Artificial',
-    link: '#',
-    image: '/images/blog/ai-marketing.jpg'
-  },
-  {
-    id: 2,
-    title: 'Automatización de WhatsApp Business: Guía completa para empresas',
-    excerpt: 'Aprende a implementar chatbots inteligentes en WhatsApp para automatizar la atención al cliente, aumentar las ventas y mejorar la experiencia del usuario las 24 horas del día.',
-    date: '12 Jul 2025',
-    readTime: 8,
-    category: 'Automatización',
-    link: '#',
-    image: '/images/blog/whatsapp-automation.jpg'
-  },
-  {
-    id: 3,
-    title: 'Tendencias en desarrollo web 2025: Lo que tu empresa necesita saber',
-    excerpt: 'Las Progressive Web Apps, la arquitectura serverless y las experiencias inmersivas están definiendo el futuro del desarrollo web. Conoce las tecnologías clave para mantener tu negocio competitivo.',
-    date: '10 Jul 2025',
-    readTime: 6,
-    category: 'Desarrollo Web',
-    link: '#',
-    image: '/images/blog/web-trends.jpg'
-  },
-  {
-    id: 4,
-    title: 'Email Marketing con IA: Personalización a escala',
-    excerpt: 'Cómo utilizar la inteligencia artificial para crear campañas de email marketing hiperpersonalizadas que aumentan las tasas de apertura y conversión hasta en un 300%.',
-    date: '08 Jul 2025',
-    readTime: 7,
-    category: 'Email Marketing',
-    link: '#',
-    image: '/images/blog/email-ai.jpg'
-  },
-  {
-    id: 5,
-    title: 'Análisis predictivo: El futuro de la toma de decisiones empresariales',
-    excerpt: 'Implementa modelos de machine learning para predecir tendencias del mercado, comportamiento del cliente y optimizar tus estrategias de negocio con datos en tiempo real.',
-    date: '05 Jul 2025',
-    readTime: 10,
-    category: 'Análisis de Datos',
-    link: '#',
-    image: '/images/blog/predictive-analytics.jpg'
-  },
-  {
-    id: 6,
-    title: 'CRM personalizado vs genérico: ¿Cuál es mejor para tu empresa?',
-    excerpt: 'Analizamos las ventajas de implementar un CRM adaptado a las necesidades específicas de tu negocio versus las soluciones genéricas del mercado.',
-    date: '02 Jul 2025',
-    readTime: 6,
-    category: 'CRM',
-    link: '#',
-    image: '/images/blog/crm-comparison.jpg'
-  }
-];
+const BlogCard = ({ post }) => (
+    <Link to={`/blog/${post.slug}`} className="block bg-slate-800/30 rounded-3xl overflow-hidden group border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col shadow-xl hover:shadow-cyan-500/20 relative">
+        {/* Imagen con efecto hover mejorado */}
+        <div className="relative overflow-hidden">
+            <SmartImage 
+                src={post.image} 
+                alt={post.title} 
+                className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" 
+                width={640}
+                height={360}
+                imageSources={post.imageSources}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+            <div className="absolute top-4 left-4">
+                <span className="bg-gradient-to-r from-cyan-500 to-purple-500 px-3 py-1 rounded-full text-xs font-bold text-white shadow-lg">
+                    {post.category}
+                </span>
+            </div>
+        </div>
+        
+        {/* Contenido de la card */}
+        <div className="p-6 flex flex-col flex-grow">
+            <h3 className="text-xl font-bold text-white mb-4 flex-grow leading-tight group-hover:text-cyan-300 transition-colors">
+                {post.title}
+            </h3>
+            
+            <p className="text-slate-400 mb-6 text-sm leading-relaxed line-clamp-3">
+                {post.excerpt}
+            </p>
+            
+            {/* Meta información */}
+            <div className="flex items-center justify-between text-xs text-slate-500 mt-auto">
+                <div className="flex items-center gap-3">
+                    <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {post.date}
+                    </span>
+                    <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime} min
+                    </span>
+                </div>
+                <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+            </div>
+        </div>
+    </Link>
+);
 
 export default function Blog() {
+  const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredPosts = blogPosts.filter(post => {
+    const matchesCategory = selectedCategory === 'Todos' || post.category === selectedCategory;
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const featuredPost = blogPosts.find(post => post.featured);
+
   return (
-    <main className="min-h-screen bg-brand-primary box-shadow-brand py-20">
-      <div className="container mx-auto px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Blog de <span className="text-green-500">Marketing Digital</span>
+    <>
+    <Helmet>
+        <title>Blog - IA, Automatización y Desarrollo | Alen.ia</title>
+  <meta name="description" content="Contenido actualizado sobre IA, automatización, desarrollo web y estrategias digitales para hacer crecer tu negocio." />
+  <link rel="canonical" href="https://alenia.online/blog" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alenia.online/blog" />
+  <meta property="og:title" content="Blog - IA, Automatización y Desarrollo | Alen.ia" />
+  <meta property="og:description" content="Contenido actualizado sobre IA, automatización y desarrollo web para potenciar tu negocio." />
+  <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://alenia.online/blog" />
+  <meta property="twitter:title" content="Blog - IA, Automatización y Desarrollo | Alen.ia" />
+  <meta property="twitter:description" content="Contenido actualizado sobre IA, automatización y desarrollo web para potenciar tu negocio." />
+  <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+    </Helmet>
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20 relative overflow-hidden">
+      {/* Fondo animado */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 glow-btn">
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Blog de Alen.ia
+            </span>
           </h1>
-          <p className="text-xl text-white max-w-3xl mx-auto">
-            Contenido actualizado sobre IA, automatización y estrategias digitales para hacer crecer tu negocio
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Contenido sobre IA, automatización y desarrollo para potenciar tu negocio.
           </p>
         </motion.div>
 
-        {/* Featured Post */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-16"
-        >
-          <div className="bg-brand-gradient rounded-2xl p-8 md:p-12 text-white box-shadow-card border border-brand">
-            <span className="text-sm font-semibold uppercase tracking-wide opacity-90">
-              Artículo Destacado
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-4">
-              El impacto de la IA en las ventas B2B: Casos de éxito 2025
-            </h2>
-            <p className="text-lg opacity-90 mb-6 max-w-3xl">
-              Descubre cómo empresas líderes están utilizando inteligencia artificial para automatizar 
-              sus procesos de venta, cualificar leads y cerrar deals 3x más rápido.
-            </p>
-            <button className="bg-brand-accent btn-black-bold px-6 py-3 rounded-lg glow-btn box-shadow-card border border-brand hover:bg-brand-gradient transition-colors inline-flex items-center gap-2">
-              Leer artículo completo
-              <ArrowRight className="w-5 h-5" />
-            </button>
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="mb-12">
+          <div className="flex flex-col lg:flex-row gap-6 items-center">
+            {/* Barra de búsqueda mejorada */}
+            <div className="relative flex-grow w-full lg:w-auto">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Buscar artículos sobre IA, automatización, desarrollo..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-4 bg-slate-800/50 text-white rounded-2xl border border-slate-700/50 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 placeholder-slate-400"
+              />
+            </div>
+            
+            {/* Filtros de categoría mejorados */}
+            <div className="flex flex-wrap gap-3 justify-center">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
+                    selectedCategory === category 
+                      ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/25' 
+                      : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 hover:text-white border border-slate-700/50 hover:border-slate-600'
+                  }`}>
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
+        {featuredPost && (
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="mb-16">
+            <Link to={`/blog/${featuredPost.slug}`} className="block bg-slate-800/30 rounded-3xl p-8 md:p-12 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group shadow-2xl hover:shadow-cyan-500/20 relative overflow-hidden">
+                {/* Efecto de fondo */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="grid md:grid-cols-2 gap-8 items-center relative">
+                    <div>
+                        <div className="flex items-center gap-3 mb-6">
+                            <Tag className="w-6 h-6 text-cyan-400" />
+                            <span className="text-base font-bold uppercase tracking-wide bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Artículo Destacado</span>
+                        </div>
+                        
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 group-hover:bg-gradient-to-r group-hover:from-cyan-300 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 leading-tight">
+                            {featuredPost.title}
+                        </h2>
+                        
+                        <p className="text-lg text-slate-300 mb-8 leading-relaxed">
+                            {featuredPost.excerpt}
+                        </p>
+                        
+                        {/* Meta información */}
+                        <div className="flex items-center gap-6 text-sm text-slate-400 mb-8">
+                            <span className="flex items-center gap-2">
+                                <Calendar className="w-4 h-4" />
+                                {featuredPost.date}
+                            </span>
+                            <span className="flex items-center gap-2">
+                                <Clock className="w-4 h-4" />
+                                {featuredPost.readTime} min de lectura
+                            </span>
+                        </div>
+                        
+                        <div className="flex items-center gap-3 text-cyan-400 font-bold text-lg">
+                            <span>Leer artículo completo</span>
+                            <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                        </div>
+                    </div>
+                    
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                        <SmartImage 
+                            src={featuredPost.image} 
+                            alt={featuredPost.title} 
+                            className="relative w-full h-64 md:h-80 object-cover rounded-2xl shadow-2xl border border-slate-700/50 group-hover:scale-105 transition-transform duration-300" 
+                            width={1280}
+                            height={720}
+                            imageSources={featuredPost.imageSources}
+                        />
+                    </div>
+                </div>
+            </Link>
+          </motion.div>
+        )}
+
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          initial="hidden"
+          animate="show"
+        >
+          {filteredPosts.filter(p => !p.featured).map((post, index) => (
+            <motion.div 
+              key={post.id} 
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                show: { opacity: 1, y: 0 }
+              }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="group"
             >
-              <BlogCard {...post} />
+              <BlogCard post={post} />
             </motion.div>
           ))}
-        </div>
-
-        {/* Newsletter CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-20 bg-brand-primary rounded-2xl p-8 md:p-12 text-center box-shadow-card border border-brand"
-        >
-          <h3 className="text-3xl font-bold text-white mb-4">
-            No te pierdas ninguna actualización
-          </h3>
-          <p className="text-lg text-white mb-8 max-w-2xl mx-auto">
-            Suscríbete a nuestro newsletter y recibe las últimas tendencias en IA y marketing digital 
-            directamente en tu bandeja de entrada.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Tu email"
-              className="flex-1 px-6 py-3 rounded-lg bg-brand-primary text-white placeholder-brand-accent border border-brand focus:border-brand-accent focus:outline-none transition-colors"
-            />
-            <button
-              type="submit"
-              className="bg-brand-accent btn-black-bold px-8 py-3 rounded-lg glow-btn box-shadow-card border border-brand hover:bg-brand-gradient transition-colors"
-            >
-              Suscribirse
-            </button>
-          </form>
         </motion.div>
+
+        {filteredPosts.length === 0 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12 text-slate-400">
+            <h3 className="text-2xl font-bold text-white mb-4">No se encontraron artículos</h3>
+            <p>Intenta ajustar los filtros o términos de búsqueda.</p>
+          </motion.div>
+        )}
       </div>
     </main>
+    </>
   );
 }
-
-import { ArrowRight } from 'lucide-react';

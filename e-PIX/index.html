@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PicShop AI Studio - Editor de imágenes con inteligencia artificial para e-commerce" />
+    <meta name="keywords" content="AI, imagen, edición, e-commerce, Gemini, PicShop" />
+    <meta name="author" content="Alenia" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#f000b8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="PicShop" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PicShop AI Studio" />
+    <meta property="og:description" content="Editor de imágenes con IA para catálogos de e-commerce" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://picshop-1071804760043.us-central1.run.app" />
+  <meta property="og:image" content="/images/logotexto.png" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PicShop AI Studio" />
+    <meta name="twitter:description" content="Editor de imágenes con IA para e-commerce" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+    
+    <title>PicShop AI Studio</title>
+</head>
+  <body class="bg-cyber-dark text-cyber-text">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  
+    <!-- Service Worker Registration (solo en producción) -->
+  <script type="module">
+    // Evitar que el SW interfiera con el servidor de desarrollo (Vite @ localhost:5173)
+    if ('serviceWorker' in navigator) {
+      if (import.meta.env && import.meta.env.PROD) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered (prod):', registration);
+            })
+            .catch(err => {
+              console.log('SW registration failed:', err);
+            });
+        });
+      } else {
+        // En desarrollo, desregistrar cualquier SW previo para evitar cachés corruptas/módulos duplicados
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) {
+            reg.unregister().then(() => console.log('SW unregistered (dev)'));
+          }
+        });
+        // Limpieza básica de caches del SW previo (opcional, silenciosa)
+        if (window.caches && caches.keys) {
+          caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+        }
+      }
+    }
+  </script>
+</body>
+</html>

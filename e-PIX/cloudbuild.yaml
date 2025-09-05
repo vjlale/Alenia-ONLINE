@@ -1,0 +1,36 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '$_LOCATION-docker.pkg.dev/$PROJECT_ID/picshop/picshop:$_TAG', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '$_LOCATION-docker.pkg.dev/$PROJECT_ID/picshop/picshop:$_TAG']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        SA=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')-compute@developer.gserviceaccount.com
+        gcloud secrets add-iam-policy-binding GEMINI_API_KEY \
+          --member=serviceAccount:$$SA \
+          --role='roles/secretmanager.secretAccessor' || true
+        gcloud run deploy picshop \
+          --image=$_LOCATION-docker.pkg.dev/$PROJECT_ID/picshop/picshop:$_TAG \
+          --platform=managed \
+          --region=$_LOCATION \
+          --allow-unauthenticated \
+          --set-env-vars=NODE_ENV=production \
+          --service-account=$$SA \
+          --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest
+
+images:
+  - '$_LOCATION-docker.pkg.dev/$PROJECT_ID/picshop/picshop:$_TAG'
+
+
+substitutions:
+  _TAG: 'v1'
+  _LOCATION: 'us-central1'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+

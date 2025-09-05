@@ -2,11 +2,15 @@
 // Este script debe ejecutarse después de compilar con Vite
 // Uso: node post-build.js
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Rutas
-const distFolder = path.resolve(__dirname, 'alenia-website-hostinger/dist');
+const distFolder = path.resolve(__dirname, 'dist');
 const indexFile = path.join(distFolder, 'index.html');
 
 // Asegúrese de que la carpeta js exista en dist
@@ -37,7 +41,7 @@ if (fs.existsSync(sourceStaticFallback)) {
 }
 
 // Copia el archivo .htaccess
-const sourceHtaccess = path.resolve(__dirname, 'public/.htaccess');
+const sourceHtaccess = path.resolve(__dirname, '.htaccess');
 const destinationHtaccess = path.join(distFolder, '.htaccess');
 if (fs.existsSync(sourceHtaccess)) {
   fs.copyFileSync(sourceHtaccess, destinationHtaccess);

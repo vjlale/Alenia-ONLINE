@@ -1,7 +1,22 @@
 Options -MultiViews
 RewriteEngine On
+RewriteBase /
+
+# Forzar HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Forzar dominio sin www
+RewriteCond %{HTTP_HOST} ^www\.alenia\.online$ [NC]
+RewriteRule ^ https://alenia.online%{REQUEST_URI} [L,R=301]
+
+# SPA fallback: si no es un archivo o directorio real, sirve index.html
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [QSA,L]
+
+# Como respaldo, redirige errores 404 a index.html (para hosts que no respetan la regla anterior)
+ErrorDocument 404 /index.html
 
 # Configuración de compresión
 <IfModule mod_deflate.c>

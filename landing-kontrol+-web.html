@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KONTROL+ by Alen.iA - Descargá Gratis el Software de Gestión para tu Negocio</title>
+    <meta name="description" content="Controlá tu stock, ventas y precios con el software de gestión KONTROL+ 100% gratis de Alen.iA. La herramienta que usan las grandes empresas, ahora para tu emprendimiento.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+        :root {
+            --negro-profundo: #292947;
+            --purpura-tecnologico: #330060;
+            --verde-principal: #fbcd00;
+            --cyan-secundario: #00CCFF;
+            --rojo-principal: #ff0000;
+            --texto-principal: #FFFFFF;
+            --texto-secundario: rgba(255, 255, 255, 0.8);
+            --radio-borde: 12px;
+            --sombra-principal: 0 8px 32px rgba(0, 255, 136, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(175deg,#f00606 50%, #42424b 100%);
+            color: var(--texto-principal);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .logo-alenia {
+            width: 50px;
+            height: auto;
+        }
+        
+        .powered-by {
+            font-size: 0.9rem;
+            color: var(--texto-secundario);
+            font-weight: 600;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--texto-principal);
+        }
+        
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--verde-principal) 0%, var(--cyan-secundario) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--texto-secundario);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--rojo-principal);
+            color: var(--texto-principal);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 25px rgba(255, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(255, 0, 0, 0.4);
+        }
+        
+        .hero-image-container {
+            margin-top: 50px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 800px;
+            border-radius: var(--radio-borde);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: var(--radio-borde);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgb(235, 14, 14);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--texto-secundario);
+        }
+        
+        .form-section-wrapper {
+            background: linear-gradient(135deg, var(--rojo-principal) 0%, #a40000 100%);
+            padding: 60px 20px;
+            border-radius: var(--radio-borde);
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--negro-profundo);
+            padding: 40px;
+            border-radius: var(--radio-borde);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+        
+        .form-container h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .form-container p {
+            text-align: center;
+            color: var(--texto-secundario);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--texto-principal);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--verde-principal);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+        
+        .form-msg {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 600;
+            height: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            color: var(--texto-secundario);
+            margin-bottom: 15px;
+        }
+        
+        .social-links a {
+            color: var(--texto-secundario);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--verde-principal);
+        }
+
+    </style>
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <!-- Logo de Alen.iA -->
+            <img src="5-3.png" alt="Logo Alen.iA" class="logo-alenia">
+            <p class="powered-by">PRESENTA</p>
+            <!-- Logo adicional debajo de PRESENTA -->
+            <img src="7.png" alt="Logo adicional" class="logo-alenia" style="width: 180px; height: auto; margin-top: 10px;">
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1>El Software de Gestión que tu Negocio Necesita. <br><span class="highlight">100% Gratis.</span></h1>
+                <p>KONTROL+ es la herramienta de Alen.iA para que controles tu stock, proceses ventas y tomes decisiones inteligentes. Sin costos, sin límites, sin vueltas.</p>
+                <a href="#form-section" class="cta-button">DESCARGAR GRATIS AHORA</a>
+                <div class="hero-image-container">
+                    <!-- Es ideal reemplazar esta imagen por un GIF o video corto mostrando el software en acción -->
+                    <img src="https://i.imgur.com/5L832y9.png" alt="Captura de pantalla del software KONTROL+" class="hero-image">
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Dejá de perder plata. Empezá a ganar control.</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">💰</div>
+                        <h3>Ahorro Real</h3>
+                        <p>No pagues más de $100.000 por mes. Nuestro software es gratis para siempre. Invertí ese dinero en hacer crecer tu negocio.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📦</div>
+                        <h3>Control Total de Stock</h3>
+                        <p>Cargá productos masivamente desde un Excel, actualizá precios al instante y nunca más pierdas una venta por falta de stock.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">⚡</div>
+                        <h3>Ventas Profesionales</h3>
+                        <p>Procesá ventas con un carrito de compras moderno, múltiples formas de pago y cálculo automático de IVA. Simple y rápido.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="icon">🤖</div>
+                        <h3>Inteligencia Artificial</h3>
+                        <p>Recibí alertas de stock bajo y sugerencias inteligentes basadas en tus ventas para tomar mejores decisiones.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section-wrapper" id="form-section">
+                <div class="form-container">
+                    <h2>Descarga Inmediata y Gratuita</h2>
+                    <p>Completá tus datos y recibí el link de descarga al instante en tu correo.</p>
+                    <!-- 
+                      IMPORTANTE:
+                      El 'action' de este formulario apunta a un servicio de ejemplo.
+                      Debes reemplazar esta URL por tu propio webhook de n8n, Zapier, Make.com o tu backend
+                      para capturar los datos y enviar el email con el link de descarga.
+                    -->
+                    <form id="leadForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" autocomplete="on">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required placeholder="tu-correo@ejemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="rubro">Rubro de tu negocio</label>
+                            <select id="rubro" name="rubro" required>
+                                <option value="">Seleccioná una opción</option>
+                                <option value="Indumentaria y Moda">Indumentaria y Moda</option>
+                                <option value="Calzado y Accesorios">Calzado y Accesorios</option>
+                                <option value="Alimentos y Bebidas">Alimentos y Bebidas</option>
+                                <option value="Tecnología y Electrónica">Tecnología y Electrónica</option>
+                                <option value="Librería y Artística">Librería y Artística</option>
+                                <option value="Ferretería y Construcción">Ferretería y Construcción</option>
+                                <option value="Servicios Profesionales">Servicios Profesionales</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <button class="cta-button" type="submit" style="width: 100%;">QUIERO MI SOFTWARE GRATIS</button>
+                        <div class="form-msg" id="formMsg"></div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <img src="https://i.imgur.com/b50a2sV.png" alt="Logo Alen.iA" class="logo-alenia" style="width: 120px; margin-bottom: 20px;">
+            <p>KONTROL+ es un producto de Alen.iA - Resultados con Inteligencia.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/company/alenia-ar" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/alenia.ia" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/alenia.oficial" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('leadForm');
+        const formMsg = document.getElementById('formMsg');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!form.checkValidity()) {
+                formMsg.textContent = 'Por favor, completá todos los campos.';
+                formMsg.style.color = '#FFD700'; // Un color amarillo para advertencia
+                return;
+            }
+
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'PROCESANDO...';
+            formMsg.textContent = 'Enviando tus datos...';
+            formMsg.style.color = 'var(--texto-secundario)';
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Redirigir a una página de agradecimiento donde estará el link de descarga
+                    // y la presentación de los otros servicios de Alen.iA
+                    window.location.href = 'CARTA_PRESENTACION_GESTION_KONTROL.html'; 
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            formMsg.textContent = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            formMsg.textContent = 'Hubo un error al enviar el formulario. Intentalo de nuevo.';
+                        }
+                        throw new Error('Network response was not ok.');
+                    })
+                }
+            }).catch(error => {
+                formMsg.textContent = 'Oops! Hubo un problema con el envío. Por favor, intentá de nuevo más tarde.';
+                formMsg.style.color = 'var(--rojo-principal)';
+                submitButton.disabled = false;
+                submitButton.textContent = 'QUIERO MI SOFTWARE GRATIS';
+            });
+        });
+    </script>
+</body>
+</html>

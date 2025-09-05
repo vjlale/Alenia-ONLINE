@@ -1,347 +1,233 @@
 import { motion } from 'framer-motion';
-import { 
-  Mail, Phone, MapPin, Clock, MessageSquare, 
-  CheckCircle, ArrowRight, Send, Calendar
-} from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, ChevronDown, X } from 'lucide-react';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import emailJSService from '../services/emailJSService';
+
+const contactInfo = [
+  {
+    icon: <Mail className="w-6 h-6" />,
+    title: 'Email',
+    value: 'alenia.online@gmail.com',
+    action: 'mailto:alenia.online@gmail.com'
+  },
+  {
+    icon: <Phone className="w-6 h-6" />,
+    title: 'WhatsApp',
+    value: '+54 9 11 1234-5678',
+    action: 'https://wa.me/5491112345678'
+  },
+  {
+    icon: <MapPin className="w-6 h-6" />,
+    title: 'Ubicación',
+    value: 'Córdoba, Argentina',
+    action: null
+  },
+];
+
+const faqs = [
+    {
+        question: '¿Cuál es el primer paso para trabajar con Alen.ia?',
+        answer: 'El primer paso es completar nuestro formulario de contacto o agendar una videollamada gratuita. Nos pondremos en contacto contigo en menos de 24 horas para entender tus necesidades y proponerte una solución a medida.'
+    },
+    {
+        question: '¿En cuánto tiempo veré resultados?',
+        answer: 'El tiempo para ver resultados varía según el servicio. Para campañas de marketing, los resultados pueden ser visibles en pocas semanas. Para proyectos de desarrollo, los plazos se definen en la propuesta inicial. Siempre nos enfocamos en entregar valor lo más rápido posible.'
+    },
+    {
+        question: '¿Ofrecen soporte después de implementar una solución?',
+        answer: 'Sí. Todas nuestras soluciones incluyen un período de soporte para garantizar que todo funcione a la perfección. También ofrecemos planes de mantenimiento y soporte continuo para asegurar el éxito a largo plazo de tu proyecto.'
+    },
+    {
+        question: '¿Con qué tipo de empresas trabajan?',
+        answer: 'Trabajamos con una amplia variedad de clientes, desde startups y pymes hasta grandes empresas. Nuestra metodología se adapta a las necesidades y presupuesto de cada negocio, sin importar su tamaño.'
+    }
+];
+
+const FaqItem = ({ faq }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+        <div className="border-b border-gray-600 py-4">
+            <button onClick={() => setIsOpen(!isOpen)} className="w-full flex justify-between items-center text-left">
+                <span className="font-semibold text-white">{faq.question}</span>
+                <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                    <ChevronDown className={`w-5 h-5 text-cyan-400 transition-transform ${isOpen ? '' : ''}`} />
+                </motion.div>
+            </button>
+            <motion.div
+                initial={false}
+                animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, marginTop: isOpen ? '1rem' : '0' }}
+                className="overflow-hidden"
+            >
+                <p className="text-gray-400">{faq.answer}</p>
+            </motion.div>
+        </div>
+    );
+};
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-
-  const services = [
-    'Automatización WhatsApp',
-    'Desarrollo Web',
-    'Email Marketing',
-    'Análisis con IA',
-    'CRM Personalizado',
-    'Consultoría IA',
-    'Otro'
-  ];
-
-  const contactInfo = [
-    {
-      icon: <Mail className="w-6 h-6" />,
-      title: 'Email',
-      value: 'alenia.online@gmail.com',
-      action: 'mailto:alenia.online@gmail.com'
-    },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: 'WhatsApp',
-      value: '+54 9 XXX XXX-XXXX',
-      action: 'https://wa.me/54XXXXXXXXXX'
-    },
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      title: 'Ubicación',
-      value: 'Córdoba, Argentina',
-      action: null
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      title: 'Horario',
-      value: 'Lun - Vie: 9:00 - 18:00',
-      action: null
-    }
-  ];
+  const [showMap, setShowMap] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simular envío de formulario
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        service: '',
-        message: ''
-      });
+    try {
+      // Formatear datos para EmailJS (template general)
+      const emailData = {
+        nombre: formData.name,
+        email: formData.email,
+        telefono: 'No especificado',
+        empresa: 'No especificada',
+        descripcion: formData.message,
+        servicio_nombre: 'Contacto General',
+        categoria: 'contacto-general'
+      };
+
+      const result = await emailJSService.sendServiceForm(emailData, { categoria: 'contacto-general' });
       
-      // Limpiar mensaje de éxito después de 5 segundos
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        console.log('✅ Email de contacto enviado exitosamente');
+      } else {
+        setSubmitStatus('error');
+        console.error('❌ Error enviando email de contacto:', result.error);
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('❌ Error en envío de contacto:', error);
+    } finally {
+      setIsSubmitting(false);
       setTimeout(() => setSubmitStatus(null), 5000);
-    }, 2000);
+    }
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 py-20">
-      <div className="container mx-auto px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-            Hablemos de tu <span className="text-green-500">Proyecto</span>
-          </h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Estamos listos para ayudarte a transformar tu empresa con tecnología e inteligencia artificial
-          </p>
-        </motion.div>
+    <>
+      <Helmet>
+        <title>Contacto - Hablemos de tu Proyecto | Alen.ia</title>
+  <meta name="description" content="Contacta con Alen.ia para transformar tu negocio con soluciones de software, automatización e inteligencia artificial. Estamos en Córdoba, Argentina." />
+  <link rel="canonical" href="https://alenia.online/contacto" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alenia.online/contacto" />
+  <meta property="og:title" content="Contacto - Hablemos de tu Proyecto | Alen.ia" />
+  <meta property="og:description" content="Contacta con Alen.ia para transformar tu negocio con soluciones de software, automatización e inteligencia artificial." />
+  <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://alenia.online/contacto" />
+  <meta property="twitter:title" content="Contacto - Hablemos de tu Proyecto | Alen.ia" />
+  <meta property="twitter:description" content="Contacta con Alen.ia para transformar tu negocio con soluciones de software, automatización e inteligencia artificial." />
+  <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+      </Helmet>
+      <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20">
+        <div className="container mx-auto px-6">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 glow-btn">
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Hablemos de tu Proyecto
+              </span>
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Estamos listos para ayudarte a transformar tu empresa con tecnología e inteligencia artificial.
+            </p>
+          </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">
-                Envíanos un mensaje
-              </h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Nombre completo *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
-                      placeholder="Tu nombre"
-                    />
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            {/* Columna Izquierda: Formulario */}
+            <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="lg:col-span-3">
+              <div className="bg-brand-primary rounded-2xl p-8 border border-brand box-shadow-card glow-btn">
+                <h2 className="text-3xl font-bold text-white mb-6">Envíanos un Mensaje</h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Nombre *</label>
+                      <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="w-full p-3 rounded-xl bg-slate-700 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="Tu nombre completo" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
+                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full p-3 rounded-xl bg-slate-700 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="tu@email.com" />
+                    </div>
                   </div>
-                  
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
-                      placeholder="tu@email.com"
-                    />
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Mensaje *</label>
+                    <textarea name="message" value={formData.message} onChange={handleInputChange} required rows="5" className="w-full p-3 rounded-xl bg-slate-700 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none transition-colors resize-none" placeholder="Cuéntanos sobre tu idea o proyecto..."></textarea>
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Empresa
-                    </label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
-                      placeholder="Nombre de tu empresa"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Teléfono
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
-                      placeholder="+54 9 XXX XXX-XXXX"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Servicio de interés *
-                  </label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none"
-                  >
-                    <option value="">Selecciona un servicio</option>
-                    {services.map(service => (
-                      <option key={service} value={service}>{service}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Mensaje *
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows="4"
-                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none resize-none"
-                    placeholder="Cuéntanos sobre tu proyecto..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full py-4 rounded-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
-                    isSubmitting 
-                      ? 'bg-slate-400 cursor-not-allowed' 
-                      : 'bg-green-500 hover:bg-green-600 text-white'
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <>Enviando...</>
-                  ) : (
-                    <>
-                      Enviar mensaje
-                      <Send className="w-5 h-5" />
-                    </>
+                  <button type="submit" disabled={isSubmitting} className={`w-full py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 text-white ${isSubmitting ? 'bg-slate-600 cursor-not-allowed' : 'bg-cyan-600 hover:bg-cyan-500 shadow-lg shadow-cyan-500/20'}`}>
+                    {isSubmitting ? 'Enviando...' : <><Send className="w-5 h-5" /> Enviar Mensaje</>}
+                  </button>
+                  {submitStatus === 'success' && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-green-500/10 border border-green-500/30 text-green-300 px-4 py-3 rounded-lg flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5" /> ¡Mensaje enviado! Te contactaremos pronto.
+                    </motion.div>
                   )}
-                </button>
+                  {submitStatus === 'error' && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg flex items-center gap-2">
+                      <X className="w-5 h-5" /> Error al enviar. Inténtalo de nuevo.
+                    </motion.div>
+                  )}
+                </form>
+              </div>
+            </motion.div>
 
-                {submitStatus === 'success' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center gap-2"
-                  >
-                    <CheckCircle className="w-5 h-5" />
-                    ¡Mensaje enviado exitosamente! Te contactaremos pronto.
-                  </motion.div>
+            {/* Columna Derecha: Info & FAQ */}
+            <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="lg:col-span-2 space-y-8">
+              <div className="bg-brand-primary rounded-2xl p-8 border border-brand box-shadow-card glow-btn">
+                <h3 className="text-2xl font-bold text-white mb-6">Información de Contacto</h3>
+                <div className="space-y-4">
+                  {contactInfo.map((info, index) => (
+                    <a key={index} href={info.action || '#'} target={info.action?.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="flex items-center gap-4 group">
+                      <div className="p-3 bg-slate-700/50 text-cyan-400 rounded-xl transition-colors duration-300 group-hover:bg-cyan-500/20">
+                        {info.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-white">{info.title}</h4>
+                        <p className="text-slate-400 transition-colors duration-300 group-hover:text-cyan-300">{info.value}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-brand-primary rounded-2xl p-8 border border-brand box-shadow-card glow-btn">
+                <h3 className="text-2xl font-bold text-white mb-4">Preguntas Frecuentes</h3>
+                <div>
+                    {faqs.map((faq, i) => <FaqItem key={i} faq={faq} />)}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Mapa */}
+          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="mt-16">
+             <div className="aspect-w-16 aspect-h-9 bg-brand-primary rounded-2xl overflow-hidden border border-brand box-shadow-card glow-btn">
+                {!showMap ? (
+                  <button onClick={() => setShowMap(true)} className="w-full h-full flex items-center justify-center text-white bg-slate-800 hover:bg-slate-700 transition-colors">
+                    <MapPin className="w-6 h-6 mr-2" /> Cargar mapa
+                  </button>
+                ) : (
+                  <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108975.55248020249!2d-64.26438424335937!3d-31.39944999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432985f4d8f29c7%3A0x78d627e449d039a8!2sC%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1678886842373!5m2!1ses-419!2sar" 
+                      width="100%" 
+                      height="100%" 
+                      style={{ border:0 }} 
+                      allowFullScreen="" 
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade">
+                  </iframe>
                 )}
-              </form>
-            </div>
+             </div>
           </motion.div>
 
-          {/* Contact Info & FAQ */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="space-y-8"
-          >
-            {/* Quick Contact */}
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">
-                Información de contacto
-              </h3>
-              <div className="space-y-4">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="p-3 bg-green-100 text-green-600 rounded-lg">
-                      {info.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-medium text-slate-900">{info.title}</h4>
-                      {info.action ? (
-                        <a 
-                          href={info.action}
-                          target={info.action.startsWith('http') ? '_blank' : undefined}
-                          rel={info.action.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="text-slate-600 hover:text-green-600 transition-colors"
-                        >
-                          {info.value}
-                        </a>
-                      ) : (
-                        <p className="text-slate-600">{info.value}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="mt-8 space-y-3">
-                <a
-                  href="https://wa.me/54XXXXXXXXXX"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
-                >
-                  <MessageSquare className="w-5 h-5" />
-                  Chatear por WhatsApp
-                </a>
-                <button className="w-full bg-slate-900 text-white font-bold py-3 px-6 rounded-lg hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  Agendar videollamada
-                </button>
-              </div>
-            </div>
-
-            {/* Response Time */}
-            <div className="bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-4">
-                Respuesta rápida garantizada
-              </h3>
-              <p className="mb-6 opacity-90">
-                Nos comprometemos a responder todas las consultas en menos de 24 horas hábiles.
-              </p>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                  <span>Consultoría inicial gratuita</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                  <span>Propuesta personalizada en 48hs</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                  <span>Sin compromisos ni costos ocultos</span>
-                </div>
-              </div>
-            </div>
-
-            {/* FAQ Preview */}
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">
-                ¿Tienes preguntas?
-              </h3>
-              <p className="text-slate-600 mb-4">
-                Revisa nuestras preguntas frecuentes o agenda una llamada para resolver todas tus dudas.
-              </p>
-              <a 
-                href="#"
-                className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-700 transition-colors"
-              >
-                Ver preguntas frecuentes
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </motion.div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

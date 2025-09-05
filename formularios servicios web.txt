@@ -1,0 +1,144 @@
+1. Formulario para: Tu Negocio en Internet (Desarrollo Web & Apps)
+(Aparece al hacer clic en "Quiero mi Web Profesional")
+
+Título del Formulario:
+
+Estás a un paso de tener tu web profesional.
+Subtítulo:
+Completa tus datos y un experto te contactará para explicarte cómo funciona, sin compromiso.
+
+Campos del Formulario:
+
+Nombre: (Campo de texto)
+
+Email de Contacto: (Campo de email)
+
+Teléfono (Opcional): (Campo de teléfono)
+
+Si ya tienes una página web, déjanos el enlace aquí (Opcional):
+(Campo de texto)
+(Este campo nos ayuda a entender tu situación actual para darte una mejor recomendación).
+
+Texto del Botón de Envío:
+Solicitar mi Web Profesional
+
+Mensaje de Agradecimiento (Después de enviar):
+
+¡Gracias! Hemos recibido tu solicitud.
+Un experto de ALENIA te contactará en menos de 24 horas para conversar sobre tu proyecto.
+
+2. Formulario para: Tareas que se Hacen Solas (Automatización Inteligente)
+(Aparece al hacer clic en "Quiero mi Asistente Virtual")
+
+Título del Formulario:
+
+Empecemos a automatizar tu negocio.
+Subtítulo:
+Cuéntanos un poco más para que un experto te contacte con una solución a tu medida.
+
+Campos del Formulario:
+
+Nombre: (Campo de texto)
+
+Email de Contacto: (Campo de email)
+
+Teléfono (Opcional): (Campo de teléfono)
+
+Describe brevemente, ¿cuál es la tarea más repetitiva que te quita tiempo hoy?
+(Área de texto)
+(Esto nos ayudará a identificar dónde podemos ayudarte a ahorrar más tiempo).
+
+Texto del Botón de Envío:
+Quiero mi Asistente Virtual
+
+Mensaje de Agradecimiento (Después de enviar):
+
+¡Gracias! Hemos recibido tu solicitud.
+Un experto de ALENIA te contactará en menos de 24 horas para mostrarte cómo empezar a automatizar.
+
+3. Formulario para: Decisiones de Marketing Inteligentes (IA para Marketing)
+(Aparece al hacer clic en "Optimizar mis Anuncios")
+
+Título del Formulario:
+
+Optimicemos juntos tus anuncios.
+Subtítulo:
+Completa los datos y un experto analizará cómo podemos mejorar tus resultados de marketing.
+
+Campos del Formulario:
+
+Nombre: (Campo de texto)
+
+Email de Contacto: (Campo de email)
+
+Teléfono (Opcional): (Campo de teléfono)
+
+Actualmente, ¿cuál es tu principal objetivo de marketing?
+(Menú desplegable o campo de texto)
+Ejemplos: Conseguir más clientes, vender más online, que más gente conozca mi marca.
+
+Texto del Botón de Envío:
+Quiero Optimizar mis Anuncios
+
+Mensaje de Agradecimiento (Después de enviar):
+
+¡Gracias! Hemos recibido tu solicitud.
+Un experto de ALENIA te contactará en menos de 24 horas para hablar sobre tus metas.
+
+4. Formulario para: Contenido para tus Redes, Siempre (Generación de Contenido)
+(Aparece al hacer clic en "Generar mi Contenido")
+
+Título del Formulario:
+
+Deja el contenido de tus redes en nuestras manos.
+Subtítulo:
+Con estos datos, un experto te contactará para mostrarte cómo funciona y qué podemos crear para ti.
+
+Campos del Formulario:
+
+Nombre: (Campo de texto)
+
+Email de Contacto: (Campo de email)
+
+Teléfono (Opcional): (Campo de teléfono)
+
+¿En qué red social te gustaría mejorar tu presencia primero?
+(Campo de texto)
+Ejemplos: Instagram, Facebook, LinkedIn, etc.
+
+Texto del Botón de Envío:
+Solicitar Contenido
+
+Mensaje de Agradecimiento (Después de enviar):
+
+¡Gracias! Hemos recibido tu solicitud.
+Un experto de ALENIA te contactará en menos de 24 horas con ideas para tu marca.
+
+5. Formulario para: Vende Más en Marketplaces (Consultoría E-commerce)
+(Aparece al hacer clic en "Vender Más en MercadoLibre")
+
+Título del Formulario:
+
+Es hora de dominar los marketplaces.
+Subtítulo:
+Danos un poco de información y un experto te contactará para potenciar tus ventas online.
+
+Campos del Formulario:
+
+Nombre: (Campo de texto)
+
+Email de Contacto: (Campo de email)
+
+Teléfono (Opcional): (Campo de teléfono)
+
+Déjanos el enlace a tu tienda o a tu perfil de vendedor (Ej: MercadoLibre). (Opcional):
+(Campo de texto)
+(Esto nos permite analizar tu perfil antes de la llamada para darte mejores recomendaciones).
+
+Texto del Botón de Envío:
+Quiero Vender Más
+
+Mensaje de Agradecimiento (Después de enviar):
+
+¡Gracias! Hemos recibido tu solicitud.
+Un experto de ALENIA te contactará en menos de 24 horas para analizar cómo puedes vender más.

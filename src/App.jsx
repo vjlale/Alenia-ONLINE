@@ -2,35 +2,41 @@ import analyticsService from './services/analyticsService';
 import seoService from './services/seoService';
 import performanceService from './services/performanceService';
 import abTestingService from './services/abTestingService';
-import NotFound from './pages/NotFound';
-import AleniaGestionLanding from './pages/AleniaGestionLanding';
-import Automatizaciones from './pages/Automatizaciones';
-import GestionKontrolPlus from './pages/GestionKontrolPlus';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
-// ...existing code...
+import { useState, useEffect, lazy } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 import Header from './components/common/Header'
 import Footer from './components/common/Footer'
+import LoadingSpinner from './components/common/LoadingSpinner'
+import LazyLoadErrorBoundary from './components/common/LazyLoadErrorBoundary'
+import LazyRoute from './components/common/LazyRoute'
+import ScrollToTop from './components/common/ScrollToTop'
+
+// Componentes principales (no lazy para mejor UX inicial)
 import Home from './pages/Home'
-import Blog from './pages/Blog'
-// ...existing code...
-import Apps from './pages/Apps'
-import Services from './pages/Services'
 import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 
-
-import ABTestingDashboard from './components/admin/ABTestingDashboard';
-import ROICalculator from './components/apps/ROICalculator';
-import CompetitorAnalyzer from './components/apps/CompetitorAnalyzer';
-import HashtagGenerator from './components/apps/HashtagGenerator';
-import AutomationSimulator from './components/apps/AutomationSimulator';
+// Lazy loaded components para optimización de performance
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const Apps = lazy(() => import('./pages/Apps'));
+const Services = lazy(() => import('./pages/Services'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const SolucionLevels = lazy(() => import('./pages/SolucionLevels'));
+const Automatizaciones = lazy(() => import('./pages/Automatizaciones'));
+const KontrolPlusLanding = lazy(() => import('./pages/KontrolPlusLanding'));
+const ABTestingDashboard = lazy(() => import('./components/admin/ABTestingDashboard'));
+const ROICalculator = lazy(() => import('./components/apps/ROICalculator'));
+const CompetitorAnalyzer = lazy(() => import('./components/apps/CompetitorAnalyzer'));
+const HashtagGenerator = lazy(() => import('./components/apps/HashtagGenerator'));
+const AutomationSimulator = lazy(() => import('./components/apps/AutomationSimulator'));
+const SEOOptimizer = lazy(() => import('./components/apps/SEOOptimizer'));
+const PicShopEmbed = lazy(() => import('./components/apps/PicShopEmbed'));
 
 import './styles/globals.css'
-
-// ...existing code...
-// ...existing code...
-// ...existing code...
 
 // Componente para tracking de navegación
 function NavigationTracker() {
@@ -44,7 +50,7 @@ function NavigationTracker() {
     if (location.pathname === '/') {
       abTestingService.applyExperiment('hero_cta', '[data-hero-cta]');
       abTestingService.applyExperiment('newsletter_cta', '[data-newsletter-cta]');
-    } else if (location.pathname === '/servicios') {
+    } else if (location.pathname === '/soluciones') {
       abTestingService.applyExperiment('pricing_display', '[data-pricing]');
       abTestingService.applyExperiment('services_layout', '[data-services-layout]');
     }
@@ -72,6 +78,24 @@ function AppContent() {
       // Mostrar banner de cookies si no hay consent
       showCookieBanner();
     }
+
+    // Prefetch de rutas lazy críticas durante el idle time
+    const timer = setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          import('./pages/Blog');
+          import('./pages/Services');
+          import('./pages/Apps');
+        });
+      } else {
+        // Fallback para navegadores sin requestIdleCallback
+        import('./pages/Blog');
+        import('./pages/Services');
+        import('./pages/Apps');
+      }
+    }, 2000); // Esperar 2s después del montaje inicial
+
+    return () => clearTimeout(timer);
   }, []);
 
   const initializeServices = async () => {
@@ -155,27 +179,48 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-alenia-dark">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "ALENIA",
+            url: "https://alenia.online",
+            logo: "https://alenia.online/images/5-3.png",
+            sameAs: [
+              "https://www.instagram.com/alen.ia_/",
+              "https://www.linkedin.com/company/alen-ia/",
+              "https://github.com/vjlale"
+            ]
+          })}
+        </script>
+      </Helmet>
       <NavigationTracker />
+      <ScrollToTop />
       <Header />
       <AnimatePresence mode="wait">
         <Routes>
+          {/* Rutas principales (no lazy para mejor UX inicial) */}
           <Route path="/" element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/apps" element={<Apps />} />
-          <Route path="/apps/calculadora-roi" element={<ROICalculator />} />
-          <Route path="/apps/analizador-competencia" element={<CompetitorAnalyzer />} />
-          <Route path="/apps/generador-hashtags" element={<HashtagGenerator />} />
-          <Route path="/apps/simulador-automatizaciones" element={<AutomationSimulator />} />
-          <Route path="/apps/calculadora-roi" element={<ROICalculator />} />
-          <Route path="/apps/analizador-competencia" element={<CompetitorAnalyzer />} />
-          <Route path="/apps/generador-hashtags" element={<HashtagGenerator />} />
-          <Route path="/apps/simulador-automatizaciones" element={<AutomationSimulator />} />
-          <Route path="/servicios" element={<Services />} />
           <Route path="/contacto" element={<Contact />} />
-          <Route path="/admin/ab-testing" element={<ABTestingDashboard />} />
-          <Route path="/landing/gestion" element={<AleniaGestionLanding />} />
-          <Route path="/automatizaciones" element={<Automatizaciones />} />
-          <Route path="/gestion-kontrolplus" element={<GestionKontrolPlus />} />
+          
+          {/* Rutas con lazy loading optimizado */}
+          <Route path="/blog" element={<LazyRoute component={Blog} />} />
+          <Route path="/blog/:slug" element={<LazyRoute component={BlogPostPage} />} />
+          <Route path="/apps" element={<LazyRoute component={Apps} />} />
+          <Route path="/apps/calculadora-roi" element={<LazyRoute component={ROICalculator} />} />
+          <Route path="/apps/analizador-competencia" element={<LazyRoute component={CompetitorAnalyzer} />} />
+          <Route path="/apps/generador-hashtags" element={<LazyRoute component={HashtagGenerator} />} />
+          <Route path="/apps/simulador-automatizaciones" element={<LazyRoute component={AutomationSimulator} />} />
+          <Route path="/apps/optimizador-seo" element={<LazyRoute component={SEOOptimizer} />} />
+          <Route path="/apps/picshop" element={<LazyRoute component={PicShopEmbed} />} />
+
+          <Route path="/soluciones" element={<LazyRoute component={Services} />} />
+          <Route path="/soluciones/:categoria" element={<LazyRoute component={SolucionLevels} />} />
+          <Route path="/soluciones/detalle/:id" element={<LazyRoute component={ServiceDetail} />} />
+          <Route path="/admin/ab-testing" element={<LazyRoute component={ABTestingDashboard} showErrorDetails={true} />} />
+          <Route path="/automatizaciones" element={<LazyRoute component={Automatizaciones} />} />
+          <Route path="/kontrol-plus" element={<LazyRoute component={KontrolPlusLanding} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
@@ -194,15 +239,14 @@ function AppContent() {
   );
 }
 
-
 function App() {
-  // Para Hostinger, usar basename vacío o raíz
-  const basename = '';
   return (
-    <BrowserRouter basename={basename}>
-      <AppContent />
+    <BrowserRouter>
+      <HelmetProvider>
+        <AppContent />
+      </HelmetProvider>
     </BrowserRouter>
   );
 }
 
-export default App
+export default App;

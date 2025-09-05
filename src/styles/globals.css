@@ -1,3 +1,6 @@
+/* Importar configuración visual personalizada */
+@import './visual-config.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,7 +9,7 @@
 @layer base {
   body {
     font-family: 'Poppins', 'Inter', sans-serif;
-    background: #0a0a23;
+    background: #6000b9;
     color: #f8fafc;
     letter-spacing: 0.01em;
   }
@@ -18,7 +21,7 @@
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 24, 243, 0.2);
   }
   
   .glass-card {
@@ -43,13 +46,13 @@
     background: linear-gradient(135deg, #06baa8 0%, #be06af 100%);
   }
   .text-brand-accent {
-    color: #3800e1;
+    color: #00c6c6;
   }
   .text-brand-secondary {
     color: #000000;
   }
   .border-brand {
-    border: 1px solid #f8fbfb;
+    border: 0.25px solid #06f8f8;
   }
   .text-shadow-glow {
     text-shadow: 0 0 8px #00ffe7, 0 0 16px #ff00ea;

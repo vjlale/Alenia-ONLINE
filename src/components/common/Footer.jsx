@@ -16,24 +16,24 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'Inicio', href: '/' },
-    { name: 'Servicios', href: '/servicios' },
+    { name: 'Soluciones', href: '/soluciones' },
     { name: 'Apps Gratuitas', href: '/apps' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contacto', href: '/contacto' }
   ]
 
   const services = [
-    { name: 'Automatización WhatsApp', href: '/servicios#whatsapp' },
-    { name: 'Desarrollo Web', href: '/servicios#web' },
-    { name: 'Email Marketing', href: '/servicios#email' },
-    { name: 'Análisis con IA', href: '/servicios#analytics' },
-    { name: 'CRM Personalizado', href: '/servicios#crm' }
+    { name: 'Automatización WhatsApp', href: '/soluciones#whatsapp' },
+    { name: 'Desarrollo Web', href: '/soluciones#web' },
+    { name: 'Email Marketing', href: '/soluciones#email' },
+    { name: 'Análisis con IA', href: '/soluciones#analytics' },
+    { name: 'CRM Personalizado', href: '/soluciones#crm' }
   ]
 
   const social = [
     { name: 'GitHub', icon: Github, href: 'https://github.com/vjlale' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#' },
-    { name: 'Instagram', icon: Instagram, href: '#' }
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/alen-ia/' },
+  { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/alen.ia_/' }
   ]
 
   return (
@@ -42,13 +42,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-alenia-primary to-alenia-secondary rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-display font-bold gradient-text">
-                ALEN.iA
-              </span>
+            <Link to="/" className="flex items-center mb-4">
+              <img src="/images/5-3.png" alt="ALENIA Logo" className="h-10 w-auto" />
             </Link>
             <p className="text-alenia-light/70 mb-4 text-sm">
               Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.
@@ -56,6 +51,47 @@ const Footer = () => {
             <p className="text-alenia-primary font-medium text-sm">
               "Resultados con Inteligencia"
             </p>
+            <Link to="/kontrol-plus" className="mt-4 inline-block">
+              <motion.img 
+                src="/images/7.png" 
+                alt="KONTROL+ Logo" 
+                className="w-32 h-auto"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              />
+            </Link>
+
+            {/* Website link + brand image */}
+            <div className="mt-5 space-y-2">
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://alenia.online/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-alenia-primary hover:text-alenia-secondary transition-colors text-sm underline decoration-transparent hover:decoration-current"
+                >
+                  alenia.online
+                </a>
+                <span className="text-alenia-light/40">/</span>
+                <a
+                  href="https://www.alenia.online/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-alenia-light/70 hover:text-alenia-primary transition-colors text-xs"
+                >
+                  www.alenia.online
+                </a>
+              </div>
+              <a href="https://alenia.online/" target="_blank" rel="noopener noreferrer" aria-label="Ir a alenia.online">
+                <motion.img
+                  src="/images/Alenia1.png"
+                  alt="ALENIA Marca"
+                  className="h-10 w-auto opacity-90"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                />
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -78,7 +114,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-alenia-light font-semibold mb-4">Servicios</h3>
+            <h3 className="text-alenia-light font-semibold mb-4">Soluciones</h3>
             <ul className="space-y-2">
               {services.map((service) => (
                 <li key={service.name}>
@@ -135,6 +171,7 @@ const Footer = () => {
                   <motion.a
                     key={item.name}
                     href={item.href}
+                    aria-label={item.name}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}

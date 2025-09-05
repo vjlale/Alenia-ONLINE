@@ -195,4 +195,7 @@ body {
     .container { max-width: 1280px; }
   }
 
+/* Importar estilos específicos del blog */
+@import './blog.css';
+
 /* Resto de estilos globales mantenidos del archivo original */

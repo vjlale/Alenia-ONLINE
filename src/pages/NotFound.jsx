@@ -125,10 +125,10 @@ const NotFound = () => {
             <p className="text-alenia-light/60 mb-4">O explora estas secciones:</p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Link 
-                to="/servicios" 
+                to="/soluciones" 
                 className="text-alenia-primary hover:text-alenia-secondary transition-colors"
               >
-                Nuestros Servicios
+                Nuestras Soluciones
               </Link>
               <span className="text-alenia-light/30">•</span>
               <Link 

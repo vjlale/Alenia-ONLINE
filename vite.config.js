@@ -16,7 +16,18 @@ export default defineConfig({
           'router': ['react-router-dom'],
           'motion': ['framer-motion'],
           'icons': ['lucide-react'],
-          'charts': ['recharts']
+          'charts': ['recharts'],
+          // Separar componentes lazy en chunks específicos
+          'pages-core': ['./src/pages/Home', './src/pages/Contact', './src/pages/NotFound'],
+          'pages-services': ['./src/pages/Services', './src/pages/SolucionLevels', './src/pages/ServiceDetail'],
+          'pages-blog': ['./src/pages/Blog', './src/pages/BlogPostPage'],
+          'pages-apps': ['./src/pages/Apps'],
+          'components-apps': [
+            './src/components/apps/ROICalculator',
+            './src/components/apps/CompetitorAnalyzer',
+            './src/components/apps/HashtagGenerator',
+            './src/components/apps/AutomationSimulator'
+          ]
         },
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',

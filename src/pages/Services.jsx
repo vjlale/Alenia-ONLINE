@@ -1,291 +1,268 @@
 import { motion } from 'framer-motion';
-import { 
-  MessageSquare, Globe, Mail, Brain, Users, Lightbulb,
-  Zap, TrendingUp, Shield, Clock, CheckCircle, ArrowRight 
-} from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
+import { soluciones } from '../data/solucionesData';
+import ServiceFormModal from '../components/forms/ServiceFormModal';
 
-const services = [
-  {
-    id: 1,
-    name: 'Automatización WhatsApp',
-    icon: <MessageSquare className="w-8 h-8" />,
-    color: 'green',
-    description: 'Implementa bots inteligentes y flujos automatizados para atención al cliente y ventas 24/7.',
-    features: [
-      'Chatbots con IA conversacional',
-      'Integración con CRM y bases de datos',
-      'Flujos de venta automatizados',
-      'Respuestas instantáneas 24/7',
-      'Análisis de conversaciones'
-    ],
-    benefits: [
-      { metric: '80%', label: 'Reducción tiempo respuesta' },
-      { metric: '3x', label: 'Aumento en conversiones' },
-      { metric: '24/7', label: 'Disponibilidad total' }
-    ]
-  },
-  {
-    id: 2,
-    name: 'Desarrollo Web',
-    icon: <Globe className="w-8 h-8" />,
-    color: 'blue',
-    description: 'Sitios web modernos, rápidos y optimizados para conversión con las últimas tecnologías.',
-    features: [
-      'Diseño responsive y moderno',
-      'Optimización SEO avanzada',
-      'Velocidad de carga ultrarrápida',
-      'Integración con herramientas',
-      'Panel de administración intuitivo'
-    ],
-    benefits: [
-      { metric: '95%', label: 'Score de velocidad' },
-      { metric: '2s', label: 'Tiempo de carga' },
-      { metric: '+60%', label: 'Mejora en SEO' }
-    ]
-  },
-  {
-    id: 3,
-    name: 'Email Marketing',
-    icon: <Mail className="w-8 h-8" />,
-    color: 'purple',
-    description: 'Campañas de email automatizadas y personalizadas que convierten leads en clientes.',
-    features: [
-      'Segmentación inteligente',
-      'Automatización de campañas',
-      'A/B Testing integrado',
-      'Templates personalizados',
-      'Análisis de métricas en tiempo real'
-    ],
-    benefits: [
-      { metric: '45%', label: 'Tasa de apertura' },
-      { metric: '25%', label: 'Click-through rate' },
-      { metric: '5x', label: 'ROI promedio' }
-    ]
-  },
-  {
-    id: 4,
-    name: 'Análisis con IA',
-    icon: <Brain className="w-8 h-8" />,
-    color: 'orange',
-    description: 'Obtén insights profundos y predicciones precisas para tomar decisiones basadas en datos.',
-    features: [
-      'Dashboards interactivos',
-      'Predicciones de ventas',
-      'Análisis de comportamiento',
-      'Reportes automatizados',
-      'Alertas inteligentes'
-    ],
-    benefits: [
-      { metric: '40%', label: 'Mejora en decisiones' },
-      { metric: '90%', label: 'Precisión predictiva' },
-      { metric: '-8h', label: 'Ahorro semanal' }
-    ]
-  },
-  {
-    id: 5,
-    name: 'CRM Personalizado',
-    icon: <Users className="w-8 h-8" />,
-    color: 'indigo',
-    description: 'Sistema de gestión de clientes adaptado específicamente a los procesos de tu empresa.',
-    features: [
-      'Interfaz personalizada',
-      'Automatización de tareas',
-      'Pipeline de ventas visual',
-      'Integración con herramientas',
-      'App móvil incluida'
-    ],
-    benefits: [
-      { metric: '50%', label: 'Aumento productividad' },
-      { metric: '35%', label: 'Más ventas cerradas' },
-      { metric: '100%', label: 'Adopción del equipo' }
-    ]
-  },
-  {
-    id: 6,
-    name: 'Consultoría IA',
-    icon: <Lightbulb className="w-8 h-8" />,
-    color: 'pink',
-    description: 'Estrategia personalizada para implementar IA en tu empresa de forma efectiva y rentable.',
-    features: [
-      'Auditoría de procesos',
-      'Plan de implementación',
-      'Selección de herramientas',
-      'Capacitación del equipo',
-      'Soporte continuo'
-    ],
-    benefits: [
-      { metric: '70%', label: 'Procesos optimizados' },
-      { metric: '4x', label: 'Velocidad de adopción' },
-      { metric: '100%', label: 'Soporte garantizado' }
-    ]
-  }
-];
+function Services() {
+  const [selectedService, setSelectedService] = useState(null);
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
-const getColorClasses = (color) => {
-  const colors = {
-    green: 'text-green-500 bg-green-100',
-    blue: 'text-blue-500 bg-blue-100',
-    purple: 'text-purple-500 bg-purple-100',
-    orange: 'text-orange-500 bg-orange-100',
-    indigo: 'text-indigo-500 bg-indigo-100',
-    pink: 'text-pink-500 bg-pink-100'
+  const handleServiceFormSubmit = (formData) => {
+    console.log('Formulario de servicio enviado:', formData);
+    // Aquí conectarías con tu backend o servicio de emails
   };
-  return colors[color] || colors.green;
-};
 
-export default function Services() {
+  const openServiceForm = (servicio) => {
+    setSelectedService(servicio);
+    setIsFormModalOpen(true);
+  };
+
   return (
-    <main className="min-h-screen bg-brand-primary box-shadow-brand py-20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 py-20">
+      <Helmet>
+        <title>Nuestras Soluciones | ALENIA - Transformamos tu Negocio con IA</title>
+        <meta 
+          name="description" 
+          content="Descubre nuestras soluciones tecnológicas: Desarrollo Web, Automatización IA, Marketing Digital, Generación de Contenido y E-commerce. Elige el nivel perfecto para tu negocio." 
+        />
+  <link rel="canonical" href="https://alenia.online/soluciones" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alenia.online/soluciones" />
+  <meta property="og:title" content="Nuestras Soluciones | ALENIA" />
+  <meta property="og:description" content="Descubre nuestras soluciones tecnológicas para transformar tu negocio." />
+  <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://alenia.online/soluciones" />
+  <meta property="twitter:title" content="Nuestras Soluciones | ALENIA" />
+  <meta property="twitter:description" content="Descubre nuestras soluciones tecnológicas para transformar tu negocio." />
+  <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+      </Helmet>
+
       <div className="container mx-auto px-6">
-        {/* Header */}
-        <motion.div
+        {/* Header Section */}
+        <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-cyan-400 mb-6">
-            Nuestros <span className="text-green-500">Servicios</span>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-alenia-primary via-alenia-secondary to-alenia-accent bg-clip-text text-transparent">
+              Nuestras Soluciones
+            </span>
           </h1>
-          <p className="text-xl text-purple-400 max-w-3xl mx-auto">
-            Soluciones integrales de tecnología e IA para digitalizar y potenciar tu empresa
+          <p className="text-xl text-alenia-light/80 max-w-3xl mx-auto leading-relaxed">
+            Soluciones tecnológicas completas que transforman tu negocio y lo llevan al siguiente nivel.
+            Cada solución tiene 3 niveles diseñados para diferentes etapas de crecimiento.
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="space-y-20">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className={`${index % 2 === 0 ? '' : 'lg:flex-row-reverse'} flex flex-col lg:flex-row gap-12 items-center`}
-            >
-              {/* Content */}
-              <div className="flex-1">
-                <div className={`inline-flex p-4 rounded-2xl box-shadow-card border border-brand mb-6`}>
-                  {service.icon}
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-cyan-400 mb-4">
-                  {service.name}
-                </h2>
-                <p className="text-lg text-slate-300 mb-8">
-                  {service.description}
-                </p>
-                
-                {/* Features */}
-                <ul className="space-y-3 mb-8">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-white-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <button className="bg-slate-900 text-green-500 font-bold px-8 py-4 rounded-xl hover:bg-slate-800 transition-all duration-300 inline-flex items-center gap-2 group">
-                  Conocer más
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-
-              {/* Benefits Card */}
-              <div className="flex-1 lg:max-w-md">
-                <div className="bg-brand-primary rounded-2xl p-8 box-shadow-card border border-brand">
-                  <h3 className="text-xl font-bold text-purple-400 mb-6">
-                    Beneficios comprobados
-                  </h3>
-                  <div className="space-y-6">
-                    {service.benefits.map((benefit, idx) => (
-                      <div key={idx} className="flex items-center gap-4">
-                        <div className="flex-shrink-0">
-                          <div className={`text-3xl font-bold ${service.color === 'green' ? 'text-green-500' : 
-                            service.color === 'blue' ? 'text-blue-500' :
-                            service.color === 'purple' ? 'text-purple-500' :
-                            service.color === 'orange' ? 'text-orange-500' :
-                            service.color === 'indigo' ? 'text-indigo-500' :
-                            'text-pink-500'}`}>
-                            {benefit.metric}
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-white-700 font-medium">{benefit.label}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-8 pt-3 border-t border-brand">
-                    <div className="flex items-center gap-2 text-sm text-white-600">
-                      <Clock className="w-4 h-4" />
-                      <span>Implementación en 2-4 semanas</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+        {/* Solutions Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {soluciones.map((solucion, index) => (
+            <ServiceCard 
+              key={solucion.id}
+              servicio={solucion}
+              index={index}
+              onOpenForm={openServiceForm}
+            />
           ))}
         </div>
 
-        {/* Process Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 100 }}
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-32"
+          transition={{ delay: 0.6 }}
+          className="text-center mt-20"
         >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-purple-400 mb-4">
-              Nuestro proceso de trabajo
-            </h2>
-            <p className="text-lg text-white-600 max-w-2xl mx-auto">
-              Un enfoque probado que garantiza resultados excepcionales
+          <div className="bg-gradient-to-r from-alenia-primary/10 to-alenia-secondary/10 rounded-xl p-8 border border-alenia-primary/20 max-w-4xl mx-auto">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              ¿No estás seguro por dónde empezar?
+            </h3>
+            <p className="text-alenia-light/70 mb-6 text-lg">
+              Conversemos 15 minutos sin costo. Te ayudamos a encontrar 
+              la solución perfecta para tu situación específica.
             </p>
+            <Link
+              to="/contacto"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-alenia-primary to-alenia-secondary text-alenia-dark px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-alenia-primary/25 transition-all duration-300 transform hover:scale-105"
+            >
+              Solicitar Consulta Gratuita
+              <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
+        </motion.div>
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { step: '01', title: 'Análisis', desc: 'Evaluamos tus procesos y necesidades específicas' },
-              { step: '02', title: 'Estrategia', desc: 'Diseñamos una solución personalizada para tu empresa' },
-              { step: '03', title: 'Implementación', desc: 'Desarrollamos e integramos las herramientas necesarias' },
-              { step: '04', title: 'Optimización', desc: 'Mejoramos continuamente basándonos en resultados' }
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="text-5xl font-bold text-indigo-500 mb-4">{item.step}</div>
-                <h3 className="text-xl font-bold text-purple-400 mb-2">{item.title}</h3>
-                <p className="text-white-600">{item.desc}</p>
+      {/* Service Form Modal */}
+      <ServiceFormModal
+        isOpen={isFormModalOpen}
+        onClose={() => setIsFormModalOpen(false)}
+        servicio={selectedService}
+        onSubmit={handleServiceFormSubmit}
+      />
+    </div>
+  );
+}
+
+function ServiceCard({ servicio, index, onOpenForm }) {
+  const IconComponent = servicio.icon;
+
+  // Mapeo exacto de colores según las imágenes
+  const getServiceStyles = () => {
+    switch (servicio.color) {
+      case 'blue': // Soluciones Digitales - Cyan/Teal
+        return {
+          border: 'border-cyan-400',
+          glow: 'hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]',
+          iconBg: 'bg-slate-800',
+          iconColor: 'text-cyan-400',
+          titleColor: 'text-white',
+          subtitleColor: 'text-cyan-300',
+          button: 'bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-500 hover:to-cyan-600 text-black'
+        };
+      case 'green': // Automatización - Verde
+        return {
+          border: 'border-green-400',
+          glow: 'hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]',
+          iconBg: 'bg-slate-800',
+          iconColor: 'text-green-400',
+          titleColor: 'text-white',
+          subtitleColor: 'text-green-300',
+          button: 'bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black'
+        };
+      case 'purple': // Marketing Digital - Púrpura
+        return {
+          border: 'border-purple-400',
+          glow: 'hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]',
+          iconBg: 'bg-slate-800',
+          iconColor: 'text-purple-400',
+          titleColor: 'text-white',
+          subtitleColor: 'text-purple-300',
+          button: 'bg-gradient-to-r from-purple-400 to-purple-500 hover:from-purple-500 hover:to-purple-600 text-white'
+        };
+      case 'orange': // Consultoría IA - Naranja
+        return {
+          border: 'border-orange-400',
+          glow: 'hover:shadow-[0_0_30px_rgba(251,146,60,0.4)]',
+          iconBg: 'bg-slate-800',
+          iconColor: 'text-orange-400',
+          titleColor: 'text-white',
+          subtitleColor: 'text-orange-300',
+          button: 'bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-black'
+        };
+      case 'indigo': // Analytics - Azul/Índigo
+        return {
+          border: 'border-indigo-400',
+          glow: 'hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]',
+          iconBg: 'bg-slate-800',
+          iconColor: 'text-indigo-400',
+          titleColor: 'text-white',
+          subtitleColor: 'text-indigo-300',
+          button: 'bg-gradient-to-r from-indigo-400 to-indigo-500 hover:from-indigo-500 hover:to-indigo-600 text-white'
+        };
+      default:
+        return {
+          border: 'border-cyan-400',
+          glow: 'hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]',
+          iconBg: 'bg-slate-800',
+          iconColor: 'text-cyan-400',
+          titleColor: 'text-white',
+          subtitleColor: 'text-cyan-300',
+          button: 'bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-500 hover:to-cyan-600 text-black'
+        };
+    }
+  };
+
+  const styles = getServiceStyles();
+
+  const handleCTAClick = (e) => {
+    e.preventDefault();
+    onOpenForm(servicio);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: index * 0.1 }}
+      whileHover={{ y: -5 }}
+      className={`relative bg-slate-900/80 backdrop-blur-sm border-2 ${styles.border} ${styles.glow} rounded-2xl p-6 transition-all duration-300 group cursor-pointer`}
+    >
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Icon */}
+        <div className="flex justify-center mb-6">
+          <div className={`w-16 h-16 ${styles.iconBg} rounded-xl flex items-center justify-center border ${styles.border}`}>
+            <IconComponent className={`w-8 h-8 ${styles.iconColor}`} />
+          </div>
+        </div>
+
+        {/* Title and Subtitle */}
+        <h3 className={`text-2xl font-bold ${styles.titleColor} text-center mb-2`}>
+          {servicio.nombre}
+        </h3>
+        <p className={`text-lg font-semibold ${styles.subtitleColor} text-center mb-4`}>
+          {servicio.subtitulo}
+        </p>
+
+        {/* Description */}
+        <p className="text-gray-300 text-center mb-6 leading-relaxed">
+          {servicio.descripcion}
+        </p>
+
+        {/* Incluye */}
+        <div className="mb-8">
+          <h4 className="text-white font-semibold mb-4 text-sm">
+            Incluye:
+          </h4>
+          <div className="space-y-3">
+            {servicio.incluye.map((item, idx) => (
+              <div key={idx} className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-300 text-sm">{item}</span>
               </div>
             ))}
           </div>
-        </motion.section>
+        </div>
 
-        {/* CTA Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-32 bg-brand-gradient rounded-3xl p-12 text-center box-shadow-card border border-brand"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            ¿Listo para transformar tu empresa?
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Agenda una consultoría gratuita y descubre cómo podemos ayudarte a crecer con tecnología e IA
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-brand-accent text-brand-primary font-bold px-8 py-4 rounded-xl glow-btn box-shadow-card border border-brand hover:bg-brand-gradient transition-all duration-300">
-              Agendar consultoría gratuita
-            </button>
-            <button className="border-2 border-brand text-white font-bold px-8 py-4 rounded-xl hover:bg-brand-accent hover:text-brand-primary transition-all duration-300">
-              Ver casos de éxito
-            </button>
+        {/* Buttons */}
+        <div className="space-y-3">
+          {/* Main CTA - Direct Form */}
+          <button
+            onClick={handleCTAClick}
+            className={`w-full ${styles.button} py-3 px-6 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 group/btn`}
+          >
+            Solicitar Información
+            <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+          </button>
+
+          {/* Secondary CTA - Levels */}
+          {servicio.niveles && (
+            <Link
+              to={`/soluciones/${servicio.categoria}`}
+              className="w-full border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 text-sm"
+            >
+              Ver planes y precios
+            </Link>
+          )}
+        </div>
+
+        {/* Pricing Preview */}
+        {servicio.niveles && (
+          <div className="mt-4 text-center">
+            <p className="text-xs text-gray-500">
+              💬 Consulta gratuita incluida
+            </p>
           </div>
-        </motion.section>
+        )}
       </div>
-    </main>
+    </motion.div>
   );
 }
+
+export default Services;

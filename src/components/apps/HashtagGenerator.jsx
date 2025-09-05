@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Hash, Copy, Sparkles, TrendingUp, Target } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Hash, Copy, Sparkles, TrendingUp, Target, Check } from 'lucide-react';
 
 export default function HashtagGenerator() {
   const [topic, setTopic] = useState('');
@@ -30,33 +31,21 @@ export default function HashtagGenerator() {
     if (!topic || !industry) return;
     
     setLoading(true);
+    setHashtags([]);
     
     setTimeout(() => {
       const baseHashtags = hashtagDatabase[industry] || [];
-      const topicWords = topic.toLowerCase().split(' ');
+      const topicWords = topic.toLowerCase().split(' ').filter(w => w.length > 2);
       
       const generatedHashtags = [
         ...baseHashtags,
         ...topicWords.map(word => `#${word}`),
         `#${topic.replace(/\s+/g, '').toLowerCase()}`,
-        '#emprendimiento',
-        '#negocio',
-        '#exito',
-        '#argentina',
-        '#pyme',
-        '#innovacion',
-        '#crecimiento',
-        '#oportunidad',
-        '#resultados',
-        '#profesional',
-        '#calidad',
-        '#servicio',
-        '#cliente',
-        '#marca'
+        '#emprendimiento', '#negociosonline', '#éxito', '#argentina', '#pymesargentinas',
+        '#innovacion', '#crecimientoprofesional', '#marketingdecontenidos', '#estrategiadigital'
       ];
 
-      // Remover duplicados y limitar a 30
-      const uniqueHashtags = [...new Set(generatedHashtags)].slice(0, 30);
+      const uniqueHashtags = [...new Set(generatedHashtags)].sort(() => 0.5 - Math.random()).slice(0, 30);
       setHashtags(uniqueHashtags);
       setLoading(false);
     }, 1500);
@@ -80,57 +69,56 @@ export default function HashtagGenerator() {
   const categories = getHashtagsByCategory();
 
   return (
-    <div className="bg-brand-primary rounded-2xl p-8 box-shadow-card glow-btn border border-brand">
-      <div className="flex items-center gap-3 mb-6">
-        <Hash className="w-8 h-8 text-brand-accent" />
-        <h2 className="text-2xl font-bold text-brand-accent text-shadow-glow">Generador de Hashtags</h2>
+    <div className="bg-gradient-to-br from-slate-900 to-purple-900/70 rounded-2xl p-6 sm:p-8 border border-purple-700/50 shadow-2xl shadow-purple-500/10">
+      <div className="flex items-center gap-4 mb-4 sm:mb-6">
+        <div className="bg-purple-900/50 p-3 rounded-full border border-purple-700">
+          <Hash className="w-8 h-8 text-purple-400" />
+        </div>
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">Generador de Hashtags</h2>
+          <p className="text-purple-300 text-sm sm:text-base">Potencia tu alcance en redes sociales.</p>
+        </div>
       </div>
-      <p className="text-slate-300 mb-8">
-        Genera hashtags optimizados para tus publicaciones en redes sociales
-      </p>
 
       <div className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-brand-accent mb-2">
-            Tema o Producto
-          </label>
-          <div className="relative">
-            <Target className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-brand-accent" />
-            <input
-              type="text"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              placeholder="Ej: automatización con IA"
-            className="w-full pl-10 pr-4 py-3 border border-brand rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-black/30 text-slate-100 placeholder:text-slate-400"
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div>
+            <label className="block text-sm font-medium text-purple-300 mb-2">Tema o Palabra Clave</label>
+            <div className="relative">
+              <Target className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-purple-400/70" />
+              <input
+                type="text"
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                placeholder="Ej: Inteligencia Artificial"
+                className="w-full pl-10 pr-4 py-3 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-slate-900 text-white placeholder:text-slate-500 transition-all"
+              />
+            </div>
           </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-brand-accent mb-2">
-            Industria
-          </label>
-          <select
-            value={industry}
-            onChange={(e) => setIndustry(e.target.value)}
-            className="w-full px-4 py-3 border border-brand rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-black/30 text-slate-100"
-          >
-            <option value="">Selecciona una industria</option>
-            {industries.map((ind) => (
-              <option key={ind} value={ind}>{ind}</option>
-            ))}
-          </select>
+          <div>
+            <label className="block text-sm font-medium text-purple-300 mb-2">Industria</label>
+            <select
+              value={industry}
+              onChange={(e) => setIndustry(e.target.value)}
+              className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-slate-900 text-white transition-all"
+            >
+              <option value="">Selecciona una industria</option>
+              {industries.map((ind) => (
+                <option key={ind} value={ind}>{ind}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <button
           onClick={generateHashtags}
           disabled={!topic || !industry || loading}
-          className="w-full bg-brand-gradient glow-btn btn-black-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:bg-slate-700 disabled:text-slate-400"
+          className="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 disabled:bg-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-purple-600/20 hover:shadow-purple-500/40"
         >
           {loading ? (
             <>
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-              Generando...
+              <motion.div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></motion.div>
+              Generando Magia...
             </>
           ) : (
             <>
@@ -141,86 +129,58 @@ export default function HashtagGenerator() {
         </button>
 
         {hashtags.length > 0 && (
-          <div className="bg-black/40 rounded-lg p-6 border border-brand space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-slate-800/40 rounded-lg p-4 sm:p-6 border border-slate-700 space-y-6"
+          >
             <div className="flex items-center justify-between">
-              <h3 className="text-lg text-black-bold text-shadow-glow">
-                Hashtags Generados ({hashtags.length})
-              </h3>
+              <h3 className="text-lg font-bold text-white">Resultados ({hashtags.length})</h3>
               <button
                 onClick={copyToClipboard}
-                className="flex items-center gap-2 bg-brand-gradient glow-btn btn-black-bold px-4 py-2 rounded-lg transition-all duration-300"
+                className="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-purple-300 px-4 py-2 rounded-lg transition-all duration-300 text-sm"
               >
-                <Copy className="w-4 h-4" />
-                {copied ? 'Copiado!' : 'Copiar Todo'}
+                {copied ? <><Check className="w-4 h-4 text-green-400" /> Copiado</> : <><Copy className="w-4 h-4" /> Copiar Todos</>}
               </button>
             </div>
 
-            {/* Trending */}
-            <div>
-              <h4 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-red-500" />
-                Trending (Alta competencia)
-              </h4>
-            <div className="flex flex-wrap gap-2">
-                {categories.trending.map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="bg-brand-gradient text-brand-secondary px-3 py-1 rounded-full text-sm font-medium cursor-pointer hover:bg-brand-accent hover:text-black transition-colors"
-                    onClick={() => navigator.clipboard.writeText(tag)}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+            <div className="space-y-4">
+              <HashtagCategory title="Populares" icon={<TrendingUp />} tags={categories.trending} color="pink" />
+              <HashtagCategory title="De Nicho" icon={<Target />} tags={categories.niche} color="purple" />
+              <HashtagCategory title="Generales" icon={<Hash />} tags={categories.general} color="indigo" />
             </div>
-
-            {/* Niche */}
-            <div>
-              <h4 className="text-black-bold mb-3 flex items-center gap-2">
-                <Target className="w-5 h-5 text-orange-500" />
-                Nicho (Competencia media)
-              </h4>
-            <div className="flex flex-wrap gap-2">
-                {categories.niche.map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="bg-brand-gradient text-brand-accent px-3 py-1 rounded-full text-sm font-medium cursor-pointer hover:bg-brand-accent hover:text-black transition-colors"
-                    onClick={() => navigator.clipboard.writeText(tag)}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* General */}
-            <div>
-              <h4 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
-                <Hash className="w-5 h-5 text-green-500" />
-                Generales (Baja competencia)
-              </h4>
-            <div className="flex flex-wrap gap-2">
-                {categories.general.map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="bg-brand-gradient text-slate-100 px-3 py-1 rounded-full text-sm font-medium cursor-pointer hover:bg-brand-accent hover:text-black transition-colors"
-                    onClick={() => navigator.clipboard.writeText(tag)}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-brand-gradient border border-brand rounded-lg p-4">
-              <p className="text-sm text-brand-secondary">
-                <strong>💡 Tip:</strong> Usa una mezcla de hashtags trending, de nicho y generales. 
-                Haz clic en cualquier hashtag para copiarlo individualmente.
-              </p>
-            </div>
-          </div>
+          </motion.div>
         )}
       </div>
     </div>
   );
+}
+
+const HashtagCategory = ({ title, icon, tags, color }) => {
+  const colors = {
+    pink: "bg-pink-500/10 text-pink-400 hover:bg-pink-500/20",
+    purple: "bg-purple-500/10 text-purple-400 hover:bg-purple-500/20",
+    indigo: "bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20",
+  }
+  return (
+    <div>
+      <h4 className={`font-bold text-slate-300 mb-3 flex items-center gap-2 text-sm`}>
+        {icon} {title}
+      </h4>
+      <div className="flex flex-wrap gap-2">
+        {tags.map((tag, idx) => (
+          <motion.span
+            key={idx}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: idx * 0.05 }}
+            className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer transition-colors ${colors[color]}`}
+            onClick={() => navigator.clipboard.writeText(tag)}
+          >
+            {tag}
+          </motion.span>
+        ))}
+      </div>
+    </div>
+  )
 }

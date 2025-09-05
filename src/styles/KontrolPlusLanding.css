@@ -1,0 +1,427 @@
+/* Estilos para la Landing Page de Kontrol+ */
+.landing-body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.landing-body {
+    font-family: 'Segoe UI', 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #e5e7eb;
+    background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+    overflow-x: hidden;
+}
+
+/* Header */
+.landing-body .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1f2937 100%);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.landing-body .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.landing-body .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #4f46e5;
+    text-decoration: none;
+}
+
+.landing-body .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.landing-body .nav-menu a {
+    color: #e5e7eb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.landing-body .nav-menu a:hover {
+    color: #4f46e5;
+}
+
+/* Hero Section */
+.landing-body .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a 0%, #111827 50%, #1f2937 100%);
+    position: relative;
+    padding-top: 80px;
+}
+
+.landing-body .hero-content {
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.landing-body .hero h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.landing-body .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.landing-body .cta-button {
+    display: inline-block;
+    background: #4f46e5;
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+}
+
+.landing-body .cta-button:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(79, 70, 229, 0.4);
+}
+
+/* Features Grid */
+.landing-body .features {
+    padding: 6rem 0;
+    background: #111827;
+}
+
+.landing-body .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.landing-body .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #e5e7eb;
+}
+
+.landing-body .section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 4rem;
+    opacity: 0.8;
+}
+
+.landing-body .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.landing-body .feature-card {
+    background: #1f2937;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #374151;
+}
+
+.landing-body .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.landing-body .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.landing-body .feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #4f46e5;
+}
+
+/* Screen Showcase */
+.landing-body .screens {
+    padding: 6rem 0;
+    background: #0f172a;
+}
+
+.landing-body .screen-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6rem;
+    gap: 4rem;
+}
+
+.landing-body .screen-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.landing-body .screen-content {
+    flex: 1;
+}
+
+.landing-body .screen-image {
+    flex: 1;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.landing-body .screen-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.landing-body .screen-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #4f46e5;
+}
+
+.landing-body .screen-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.landing-body .feature-list {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.landing-body .feature-list li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.landing-body .feature-list li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+/* Benefits Section */
+.landing-body .benefits {
+    padding: 6rem 0;
+    background: #111827;
+}
+
+.landing-body .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.landing-body .benefit-item {
+    text-align: center;
+    padding: 2rem;
+}
+
+.landing-body .benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.landing-body .benefit-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #4f46e5;
+}
+
+/* CTA Section */
+.landing-body .cta-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #1f2937 0%, #0f172a 100%);
+    text-align: center;
+}
+
+.landing-body .cta-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.landing-body .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Footer */
+.landing-body .footer {
+    background: #0f172a;
+    padding: 3rem 0;
+    text-align: center;
+    border-top: 1px solid #374151;
+}
+
+.landing-body .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.landing-body .footer p {
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .landing-body .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .landing-body .screen-item {
+        flex-direction: column !important;
+        gap: 2rem;
+    }
+
+    .landing-body .nav-menu {
+        display: none;
+    }
+
+    .landing-body .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.landing-body .fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.landing-body .back-to-home-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    background: transparent;
+    color: #a5b4fc;
+    border: 2px solid #a5b4fc;
+    padding: 0.8rem 1.8rem;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.landing-body .back-to-home-button:hover {
+    background: #a5b4fc;
+    color: #111827;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(165, 180, 252, 0.2);
+}
+
+/* Variante para el botón en el header */
+.landing-body .header-back-button {
+    margin-top: 0;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.landing-body .header-back-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(165, 180, 252, 0.2);
+}
+
+.landing-body .header-back-button:focus-visible {
+    outline: 2px solid #a5b4fc;
+    outline-offset: 2px;
+}
+
+/* Lead Form (CTA) */
+.landing-body .lead-form {
+	max-width: 900px;
+	margin: 1.5rem auto 0;
+	text-align: left;
+}
+
+.landing-body .lead-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.landing-body .lead-input {
+	width: 100%;
+	background: #1f2937;
+	border: 1px solid #374151;
+	color: #e5e7eb;
+	padding: 0.85rem 1rem;
+	border-radius: 12px;
+	outline: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.landing-body .lead-input:focus {
+	border-color: #4f46e5;
+	box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+}
+
+.landing-body .lead-submit {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.landing-body .lead-error {
+	color: #fca5a5;
+	margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+	.landing-body .lead-grid {
+		grid-template-columns: 1fr;
+	}
+}

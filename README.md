@@ -1,170 +1,89 @@
-# 🚀 Alen.iA - Sitio Web Oficial
+# Alenia Website
 
-> **Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas**
+Este es el repositorio para el sitio web de Alenia, una aplicación web moderna construida con React, Vite y Tailwind CSS. El sitio está diseñado para mostrar los servicios de Alenia, que se centran en la automatización, la inteligencia artificial y el desarrollo web.
 
-[![Deploy Status](https://img.shields.io/badge/deploy-success-green)](https://alenia.online)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-enabled-blue)](https://vjlale.github.io/alenia-website)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+## Páginas
 
-## ✨ Características del Sitio
+El sitio web consta de las siguientes páginas:
 
-### 🎯 Landing Principal
-- Presentación de servicios de IA y automatización
-- Descarga directa de **ALENIA GESTIÓN** (app gratuita)
-- Calculadoras y herramientas interactivas
-- Formularios de contacto inteligentes
+*   **Home:** La página de inicio que presenta a Alenia, su propuesta de valor y un llamado a la acción para agendar una consultoría.
+*   **Blog:** Una sección con artículos sobre IA, automatización, desarrollo web y marketing digital. Incluye búsqueda, filtrado por categorías y una vista de detalle para cada publicación.
+*   **Apps:** Una colección de herramientas y aplicaciones interactivas, incluyendo **E-pix Editor (PicShop)** como app destacada, calculadora de ROI, analizador de competencia y generador de hashtags. Permite filtrar por categoría y dificultad. Las apps pueden ser internas o externas (se abren en nueva pestaña).
+*   **Servicios:** Una descripción detallada de los servicios ofrecidos por Alenia, incluyendo desarrollo de software, automatización de marketing y consultoría de IA.
+*   **Contacto:** Un formulario de contacto para que los visitantes se pongan en contacto con Alenia, junto con información de contacto y un mapa de ubicación.
 
-### 📝 Blog Integrado
-- Content marketing automatizado
-- SEO optimizado
-- Gestión de contenido dinámico
-- Newsletter integrado
+## Lógica y Funcionalidad
 
-### 🛠 Apps Demo
-- Calculadora de ROI para marketing digital
-- Analizador de competencia automático
-- Generador de hashtags por industria
-- Simulador de automatizaciones
+La aplicación utiliza **React Router DOM** para gestionar la navegación del lado del cliente, lo que permite transiciones de página fluidas sin recargar la página. El estado de los componentes se gestiona mediante **React Hooks** (`useState`, `useEffect`).
 
-### 🤖 Portal de Servicios
-- Automatizaciones con IA
-- Desarrollo web y apps
-- Marketing digital
-- Consultoría especializada
+La funcionalidad clave incluye:
 
-## 🛠 Stack Tecnológico
+*   **Enrutamiento dinámico:** `App.jsx` define todas las rutas de la aplicación, incluyendo rutas anidadas para las aplicaciones.
+*   **Componentes reutilizables:** El código se organiza en componentes reutilizables ubicados en el directorio `src/components`, como `Header`, `Footer`, `BlogCard` y `AppsStats`.
+*   **Formularios interactivos:** Los formularios de contacto y suscripción al boletín utilizan el estado de React para gestionar las entradas del usuario y los envíos de formularios.
+*   **Filtrado y búsqueda:** Las páginas de Blog y Apps implementan la funcionalidad de filtrado y búsqueda para ayudar a los usuarios a encontrar contenido relevante.
+*   **Sistema de apps híbrido:** Soporte para apps internas (misma pestaña) y externas (nueva pestaña) con redirección automática.
+*   **Carga de datos estáticos:** La información de publicaciones de blog, aplicaciones y servicios se carga desde arreglos de datos estáticos en el código fuente.
 
-- **Frontend**: React 18 + Vite
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Charts**: Recharts
-- **Icons**: Lucide React
-- **Hosting**: GitHub Pages
-- **Domain**: alenia.online (GoDaddy)
+## Estética y Diseño
 
-## 🚀 Instalación y Desarrollo
+El sitio web presenta un diseño moderno y profesional con un tema oscuro. La estética se define en `tailwind.config.js` y se aplica de forma coherente en toda la aplicación.
 
-```bash
-# Clonar repositorio
-git clone https://github.com/vjlale/alenia-website.git
-cd alenia-website
+### Paleta de Colores
 
-# Instalar dependencias
-npm install
+La paleta de colores se define en la sección `theme.extend.colors` de `tailwind.config.js`:
 
-# Ejecutar en desarrollo
-npm run dev
-
-# Build para producción
-npm run build
-
-# Deploy a GitHub Pages
-npm run deploy
-```
-
-## 📁 Estructura del Proyecto
-
-```
-alenia-website/
-├── src/
-│   ├── components/          # Componentes reutilizables
-│   │   ├── common/         # Header, Footer, Navigation
-│   │   ├── landing/        # Secciones del landing
-│   │   ├── blog/          # Componentes del blog
-│   │   └── apps/          # Apps demo y herramientas
-│   ├── pages/             # Páginas principales
-│   │   ├── Home.jsx       # Landing principal
-│   │   ├── Blog.jsx       # Blog de marketing
-│   │   ├── Services.jsx   # Portal de servicios
-│   │   └── Apps.jsx       # Apps y herramientas
-│   ├── data/              # Datos estáticos y configuración
-│   ├── hooks/             # Custom React hooks
-│   ├── utils/             # Funciones utilitarias
-│   └── styles/            # Estilos globales
-├── public/                # Assets estáticos
-│   ├── images/           # Imágenes y logos
-│   ├── downloads/        # App ALENIA GESTIÓN
-│   └── favicon.svg       # Favicon
-└── docs/                 # Documentación
-```
-
-## 🎨 Guía de Estilo
-
-### Colores Principales
-- **Primary**: `#00ff88` (Verde neón)
-- **Secondary**: `#0066ff` (Azul)
-- **Accent**: `#ff0066` (Magenta)
-- **Dark**: `#0a0a0a` (Negro)
-- **Light**: `#f8fafc` (Blanco)
+*   **Primario:** `#00ff88` (un verde brillante)
+*   **Secundario:** `#0066ff` (un azul vibrante)
+*   **Acento:** `#ff0066` (un rosa intenso)
+*   **Oscuro:** `#0a0a0a` (un negro profundo para los fondos)
+*   **Claro:** `#f8fafc` (un blanco roto para el texto y los elementos de la interfaz de usuario)
 
 ### Tipografía
-- **Principal**: Inter (Google Fonts)
-- **Display**: Poppins (Google Fonts)
 
-## 🌐 Configuración del Dominio
+Se utilizan dos fuentes principales, definidas en la sección `theme.extend.fontFamily`:
 
-### DNS Records (GoDaddy)
+*   **Sans-serif:** 'Inter' (para el cuerpo del texto)
+*   **Display:** 'Poppins' (para los encabezados y títulos)
+
+### Efectos y Animaciones
+
+El sitio web utiliza **Framer Motion** para animaciones sutiles y atractivas, mejorando la experiencia del usuario. Las animaciones personalizadas se definen en la sección `theme.extend.animation` de `tailwind.config.js`:
+
+*   **`gradient`:** Anima un fondo degradado.
+*   **`float`:** Crea un efecto de flotación sutil en los elementos.
+*   **`pulse-slow`:** Una animación de pulso lento para llamar la atención sobre los elementos.
+
+## Estructura del Proyecto
+
+El código fuente está organizado en el directorio `src` de la siguiente manera:
+
 ```
-Type    Name    Value
-A       @       185.199.108.153
-A       @       185.199.109.153
-A       @       185.199.110.153
-A       @       185.199.111.153
-CNAME   www     vjlale.github.io
+src/
+├── components/      # Componentes de interfaz de usuario reutilizables
+│   └── apps/        # Componentes específicos de apps interactivas
+├── data/            # Datos estáticos (ej. publicaciones de blog, servicios)
+├── hooks/           # Hooks de React personalizados
+├── pages/           # Componentes de página
+├── services/        # Servicios (ej. llamadas a la API)
+├── styles/          # Estilos globales y CSS
+├── utils/           # Funciones de utilidad
+├── App.jsx          # Componente principal de la aplicación y enrutamiento
+└── main.jsx         # Punto de entrada de la aplicación
 ```
 
-### GitHub Pages
-- **Source**: Deploy from branch `main`
-- **Custom domain**: `alenia.online`
-- **Enforce HTTPS**: ✅ Enabled
+## Documentación Adicional
 
-## 📊 Integración con el Ecosistema Alen.iA
+Para información más detallada sobre aspectos específicos del proyecto, consulta:
 
-### Apps Conectadas
-- **ALENIA GESTIÓN**: Sistema de gestión gratuito (desktop)
-- **CRM Digital**: Gestión de leads (web app)
-- **N8N Workflows**: Automatizaciones backend
-- **Email Marketing**: Secuencias automatizadas
+*   **[Sistema de Apps](APPS_SYSTEM_DOCUMENTATION.md):** Documentación completa del sistema de apps, incluyendo configuración, integración con PicShop y guías de desarrollo.
+*   **[Manual Técnico](MANUAL_TECNICO.md):** Documentación técnica detallada del proyecto, arquitectura y patrones de desarrollo.
+*   **[Configuración PicShop](PICSHOOP_SETUP.md):** Guía de configuración e integración de PicShop (E-pix Editor).
+*   **[Despliegue PicShop](PICSHOOP_DEPLOYMENT_README.md):** Instrucciones de despliegue de PicShop en Google Cloud Run.
+*   **[Optimización de Velocidad](OPTIMIZACION_VELOCIDAD.md):** Estrategias y técnicas de optimización implementadas.
 
-### Analytics y Tracking
-- Google Analytics 4
-- Meta Pixel
-- Hotjar (heatmaps)
-- Mailchimp (newsletter)
+## Estado del Proyecto
 
-## 🚀 Roadmap
-
-### Fase 1: Lanzamiento (Semana 1-2)
-- [x] Configuración inicial del repositorio
-- [ ] Landing page principal
-- [ ] Configuración DNS y GitHub Pages
-- [ ] Blog básico con primeros posts
-
-### Fase 2: Funcionalidades (Semana 3-4)
-- [ ] Apps demo interactivas
-- [ ] Portal de servicios completo
-- [ ] Integración con CRM
-- [ ] Formularios de contacto
-
-### Fase 3: Optimización (Semana 5-6)
-- [ ] SEO avanzado
-- [ ] Performance optimization
-- [ ] Analytics y tracking
-- [ ] A/B testing
-
-## 📞 Contacto y Soporte
-
-- **Website**: [alenia.online](https://alenia.online)
-- **Email**: contacto@alenia.online
-- **GitHub**: [@vjlale](https://github.com/vjlale)
-- **Issues**: [GitHub Issues](https://github.com/vjlale/alenia-website/issues)
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-**Desarrollado con ❤️ por el equipo de Alen.iA** 🚀
-
-*"Resultados con Inteligencia"*
+**Versión actual:** 2.0 (Diciembre 2024)
+**Estado:** ✅ Producción activa
+**Última actualización:** Integración mejorada de PicShop con sistema de apps híbrido

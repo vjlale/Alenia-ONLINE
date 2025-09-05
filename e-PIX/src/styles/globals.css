@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for PicShop AI Studio */
+:root {
+  --cyber-dark: #0a0a0a;
+  --cyber-bg: #1a1a1a;
+  --cyber-border: #333333;
+  --neon-pink: #f000b8;
+  --neon-cyan: #00f2ea;
+  --cyber-text: #e0e0e0;
+  --cyber-text-muted: #888888;
+}
+
+/* Ensure full-height layout and black background */
+html, body, #root {
+  height: 100%;
+  background-color: var(--cyber-dark);
+}
+
+/* Utility: cap container height when embed provides maxHeight */
+.embed-max-height {
+  max-height: var(--embed-max-height, none);
+}
+
+/* Custom animations */
+@keyframes gradient {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Custom utility classes */
+.animate-gradient {
+  animation: gradient 8s ease infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+/* Animated background stars */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  left: var(--star-x);
+  top: var(--star-y);
+  animation: twinkle 3s infinite ease-in-out;
+  animation-delay: var(--star-delay);
+}
+
+.star-small {
+  width: 1px;
+  height: 1px;
+}
+
+.star-medium {
+  width: 2px;
+  height: 2px;
+}
+
+.star-large {
+  width: 3px;
+  height: 3px;
+}
+
+/* Glassmorphism effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+
+/* Glow effects */
+.shadow-glow-pink {
+  box-shadow: 0 0 15px #f000b8;
+}
+
+.shadow-glow-pink-lg {
+  box-shadow: 0 0 25px #f000b8;
+}
+
+.shadow-glow-cyan {
+  box-shadow: 0 0 15px #00f2ea;
+}
+
+.shadow-glow-cyan-lg {
+  box-shadow: 0 0 25px #00f2ea;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cyber-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--neon-pink);
+  outline-offset: 2px;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

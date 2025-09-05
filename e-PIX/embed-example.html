@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PicShop Embed - Ejemplo de Integración</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f000b8, #00f2ea);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #f000b8, #00f2ea);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        input[type="number"] {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 80px;
+        }
+        
+        .embed-container {
+            position: relative;
+            height: 800px;
+            background: #000;
+        }
+        
+        .embed-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .status {
+            padding: 15px 20px;
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            margin: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .status.success {
+            background: #e8f5e8;
+            border-color: #4caf50;
+        }
+        
+        .status.error {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .events-log {
+            margin: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .events-log h3 {
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        
+        .event-item {
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid #007bff;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            position: relative;
+            width: 95%;
+            height: 95%;
+            margin: 2.5% auto;
+            background: #0a0a0a;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .control-group {
+                justify-content: space-between;
+            }
+            
+            .embed-container {
+                height: 600px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 PicShop AI Studio</h1>
+            <p>Ejemplo de Integración en tu Web</p>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <input type="checkbox" id="hideHeader">
+                <label for="hideHeader">Ocultar Header</label>
+            </div>
+            
+            <div class="control-group">
+                <input type="checkbox" id="compactMode">
+                <label for="compactMode">Modo Compacto</label>
+            </div>
+            
+            <div class="control-group">
+                <label for="maxHeight">Altura:</label>
+                <input type="number" id="maxHeight" value="800" min="400" max="1200">px
+            </div>
+            
+            <button class="btn" onclick="applyConfig()">Aplicar Configuración</button>
+            <button class="btn btn-secondary" onclick="openFullscreen()">Pantalla Completa</button>
+            <button class="btn btn-secondary" onclick="clearEvents()">Limpiar Log</button>
+        </div>
+        
+        <div id="status" class="status">
+            <strong>Estado:</strong> Cargando PicShop...
+        </div>
+        
+        <div class="embed-container">
+            <iframe 
+                id="picshop-iframe"
+                class="embed-iframe"
+                src="http://localhost:3000"
+                allowfullscreen>
+            </iframe>
+        </div>
+        
+        <div class="events-log">
+            <h3>📡 Log de Eventos</h3>
+            <div id="events-list">
+                <div class="event-item">Esperando eventos de PicShop...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para pantalla completa -->
+    <div id="fullscreen-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeFullscreen()">✕</button>
+            <iframe 
+                id="fullscreen-iframe"
+                src="http://localhost:3000"
+                width="100%" 
+                height="100%" 
+                frameborder="0">
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        const iframe = document.getElementById('picshop-iframe');
+        const fullscreenIframe = document.getElementById('fullscreen-iframe');
+        const statusDiv = document.getElementById('status');
+        const eventsList = document.getElementById('events-list');
+        
+        let eventCount = 0;
+        
+        // Configuración inicial
+        iframe.onload = function() {
+            updateStatus('PicShop cargado correctamente', 'success');
+            applyConfig();
+        };
+        
+        // Escuchar eventos de PicShop
+        window.addEventListener('message', function(event) {
+            // Verificar origen por seguridad (en producción)
+            // if (event.origin !== 'https://tu-dominio.com') return;
+            
+            if (event.data.type && event.data.type.startsWith('PICSHOP_')) {
+                logEvent(event.data);
+                handlePicShopEvent(event.data);
+            }
+        });
+        
+        function handlePicShopEvent(data) {
+            switch(data.type) {
+                case 'PICSHOP_READY':
+                    updateStatus(`PicShop v${data.version} listo para usar`, 'success');
+                    break;
+                    
+                case 'PICSHOP_GENERATION_STARTED':
+                    updateStatus('Generando imagen...', 'info');
+                    break;
+                    
+                case 'PICSHOP_GENERATION_SUCCESS':
+                    updateStatus('¡Imagen generada exitosamente!', 'success');
+                    break;
+                    
+                case 'PICSHOP_GENERATION_ERROR':
+                    updateStatus(`Error: ${data.data.error}`, 'error');
+                    break;
+                    
+                case 'PICSHOP_REQUEST_FULLSCREEN':
+                    openFullscreen();
+                    break;
+            }
+        }
+        
+        function applyConfig() {
+            const config = {
+                hideHeader: document.getElementById('hideHeader').checked,
+                compactMode: document.getElementById('compactMode').checked,
+                maxHeight: parseInt(document.getElementById('maxHeight').value),
+                allowFullscreen: true
+            };
+            
+            // Enviar configuración a ambos iframes
+            sendConfigToIframe(iframe, config);
+            sendConfigToIframe(fullscreenIframe, config);
+            
+            // Actualizar altura del contenedor
+            document.querySelector('.embed-container').style.height = config.maxHeight + 'px';
+            
+            logEvent({
+                type: 'CONFIG_APPLIED',
+                data: config,
+                timestamp: Date.now()
+            });
+        }
+        
+        function sendConfigToIframe(targetIframe, config) {
+            if (targetIframe.contentWindow) {
+                targetIframe.contentWindow.postMessage({
+                    type: 'PICSHOP_CONFIG',
+                    config: config
+                }, '*');
+            }
+        }
+        
+        function openFullscreen() {
+            document.getElementById('fullscreen-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Aplicar configuración al iframe de pantalla completa
+            setTimeout(() => {
+                const config = {
+                    hideHeader: false,
+                    compactMode: false,
+                    allowFullscreen: false
+                };
+                sendConfigToIframe(fullscreenIframe, config);
+            }, 500);
+        }
+        
+        function closeFullscreen() {
+            document.getElementById('fullscreen-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function updateStatus(message, type = 'info') {
+            statusDiv.innerHTML = `<strong>Estado:</strong> ${message}`;
+            statusDiv.className = `status ${type}`;
+        }
+        
+        function logEvent(eventData) {
+            eventCount++;
+            const timestamp = new Date().toLocaleTimeString();
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'event-item';
+            eventDiv.innerHTML = `
+                <strong>[${eventCount}] ${timestamp}</strong> - ${eventData.type}<br>
+                <small>${JSON.stringify(eventData.data || {}, null, 2)}</small>
+            `;
+            
+            eventsList.insertBefore(eventDiv, eventsList.firstChild);
+            
+            // Mantener solo los últimos 10 eventos
+            if (eventsList.children.length > 10) {
+                eventsList.removeChild(eventsList.lastChild);
+            }
+        }
+        
+        function clearEvents() {
+            eventsList.innerHTML = '<div class="event-item">Log limpiado - esperando nuevos eventos...</div>';
+            eventCount = 0;
+        }
+        
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+            }
+        });
+        
+        // Aplicar configuración inicial después de un momento
+        setTimeout(applyConfig, 1000);
+    </script>
+</body>
+</html>

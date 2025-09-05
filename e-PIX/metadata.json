@@ -1,0 +1,5 @@
+{
+  "name": "PicShop",
+  "description": "PicShop AI Studio: Edita imágenes de productos para catálogos de e-commerce usando IA. Sube un producto, proporciona una indicación y genera nuevas imágenes de estilo de vida o centradas en los beneficios. Luego puedes descargar o refinar los resultados.",
+  "requestFramePermissions": []
+}

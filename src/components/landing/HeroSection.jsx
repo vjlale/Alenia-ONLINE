@@ -10,15 +10,18 @@ export default function HeroSection() {
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
       
       <div className="relative container mx-auto px-6 py-20 flex flex-col items-center text-center">
-        {/* Badge */}
+        {/* Logo Principal */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 bg-green-400/10 border border-green-400/20 rounded-full px-4 py-2 text-green-400 text-sm font-medium mb-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-12"
         >
-          <Sparkles className="w-4 h-4" />
-          Resultados con Inteligencia
+          <img 
+            src="/images/5-3.png" 
+            alt="Alen.iA Logo" 
+            className="w-48 h-auto sm:w-64 md:w-80 lg:w-96 xl:w-[28rem] mx-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
+          />
         </motion.div>
 
         {/* Main Heading */}
@@ -60,7 +63,7 @@ export default function HeroSection() {
           
           <button className="group border-2 border-white/20 hover:border-green-400/50 text-white hover:text-green-400 font-bold px-8 py-4 rounded-xl transition-all duration-300 flex items-center gap-2 text-lg">
             <Target className="w-5 h-5" />
-            Ver Servicios
+            Ver Soluciones
           </button>
         </motion.div>
 
