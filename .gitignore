@@ -23,12 +23,16 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment files
+# Environment files (no subir secretos)
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+!**/.env.example
+!.env.*.example
+!**/.env.*.example
+
+# Cursor (local)
+.cursor/
 
 # Build files
 build/

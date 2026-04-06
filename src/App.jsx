@@ -13,6 +13,10 @@ import LoadingSpinner from './components/common/LoadingSpinner'
 import LazyLoadErrorBoundary from './components/common/LazyLoadErrorBoundary'
 import LazyRoute from './components/common/LazyRoute'
 import ScrollToTop from './components/common/ScrollToTop'
+import ScrollProgress from './components/common/ScrollProgress'
+import CursorFollower from './components/common/CursorFollower'
+import PageTransition from './components/common/PageTransition'
+import { BannerCursorProvider } from './contexts/BannerCursorContext'
 
 // Componentes principales (no lazy para mejor UX inicial)
 import Home from './pages/Home'
@@ -23,6 +27,7 @@ import NotFound from './pages/NotFound'
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const Apps = lazy(() => import('./pages/Apps'));
+const DesarrollosIA = lazy(() => import('./pages/DesarrollosIA'));
 const Services = lazy(() => import('./pages/Services'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const SolucionLevels = lazy(() => import('./pages/SolucionLevels'));
@@ -35,6 +40,7 @@ const HashtagGenerator = lazy(() => import('./components/apps/HashtagGenerator')
 const AutomationSimulator = lazy(() => import('./components/apps/AutomationSimulator'));
 const SEOOptimizer = lazy(() => import('./components/apps/SEOOptimizer'));
 const PicShopEmbed = lazy(() => import('./components/apps/PicShopEmbed'));
+const PlayPadelLanding = lazy(() => import('./pages/PlayPadelLanding'));
 
 import './styles/globals.css'
 
@@ -79,23 +85,48 @@ function AppContent() {
       showCookieBanner();
     }
 
-    // Prefetch de rutas lazy críticas durante el idle time
-    const timer = setTimeout(() => {
+    // Prefetch inteligente de rutas lazy críticas durante el idle time
+    const prefetchRoutes = () => {
+      const routes = [
+        () => import('./pages/Blog'),
+        () => import('./pages/Services'),
+        () => import('./pages/Apps'),
+        () => import('./pages/DesarrollosIA'),
+        () => import('./pages/Contact')
+      ];
+
       if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
-          import('./pages/Blog');
-          import('./pages/Services');
-          import('./pages/Apps');
-        });
+          routes.forEach(route => route().catch(() => {}));
+        }, { timeout: 2000 });
       } else {
-        // Fallback para navegadores sin requestIdleCallback
-        import('./pages/Blog');
-        import('./pages/Services');
-        import('./pages/Apps');
+        // Fallback: prefetch después de un delay
+        setTimeout(() => {
+          routes.forEach(route => route().catch(() => {}));
+        }, 2000);
       }
-    }, 2000); // Esperar 2s después del montaje inicial
+    };
 
-    return () => clearTimeout(timer);
+    // Prefetch cuando el usuario está inactivo
+    const timer = setTimeout(prefetchRoutes, 2000);
+
+    // Prefetch en hover de links de navegación
+    const handleLinkHover = (e) => {
+      if (e.target.tagName === 'A') {
+        const href = e.target.getAttribute('href');
+        if (href === '/blog') import('./pages/Blog').catch(() => {});
+        if (href === '/soluciones') import('./pages/Services').catch(() => {});
+        if (href === '/apps') import('./pages/Apps').catch(() => {});
+        if (href === '/contacto') import('./pages/Contact').catch(() => {});
+      }
+    };
+
+    document.addEventListener('mouseover', handleLinkHover, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('mouseover', handleLinkHover);
+    };
   }, []);
 
   const initializeServices = async () => {
@@ -178,7 +209,8 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-alenia-dark">
+    <BannerCursorProvider>
+    <div className="relative min-h-screen bg-alenia-dark">
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
@@ -187,6 +219,17 @@ function AppContent() {
             name: "ALENIA",
             url: "https://alenia.online",
             logo: "https://alenia.online/images/5-3.png",
+            description: "Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Córdoba",
+              addressCountry: "AR"
+            },
+            contactPoint: {
+              "@type": "ContactPoint",
+              email: "alenia.online@gmail.com",
+              contactType: "customer service"
+            },
             sameAs: [
               "https://www.instagram.com/alen.ia_/",
               "https://www.linkedin.com/company/alen-ia/",
@@ -197,8 +240,10 @@ function AppContent() {
       </Helmet>
       <NavigationTracker />
       <ScrollToTop />
+      <ScrollProgress />
+      <CursorFollower />
       <Header />
-      <AnimatePresence mode="wait">
+      <PageTransition>
         <Routes>
           {/* Rutas principales (no lazy para mejor UX inicial) */}
           <Route path="/" element={<Home />} />
@@ -208,6 +253,7 @@ function AppContent() {
           <Route path="/blog" element={<LazyRoute component={Blog} />} />
           <Route path="/blog/:slug" element={<LazyRoute component={BlogPostPage} />} />
           <Route path="/apps" element={<LazyRoute component={Apps} />} />
+          <Route path="/desarrollos-ia" element={<LazyRoute component={DesarrollosIA} />} />
           <Route path="/apps/calculadora-roi" element={<LazyRoute component={ROICalculator} />} />
           <Route path="/apps/analizador-competencia" element={<LazyRoute component={CompetitorAnalyzer} />} />
           <Route path="/apps/generador-hashtags" element={<LazyRoute component={HashtagGenerator} />} />
@@ -221,9 +267,10 @@ function AppContent() {
           <Route path="/admin/ab-testing" element={<LazyRoute component={ABTestingDashboard} showErrorDetails={true} />} />
           <Route path="/automatizaciones" element={<LazyRoute component={Automatizaciones} />} />
           <Route path="/kontrol-plus" element={<LazyRoute component={KontrolPlusLanding} />} />
+          <Route path="/play-padel" element={<LazyRoute component={PlayPadelLanding} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </AnimatePresence>
+      </PageTransition>
       <Footer />
       
       {/* Debug info en desarrollo */}
@@ -236,12 +283,13 @@ function AppContent() {
         </div>
       )}
     </div>
+    </BannerCursorProvider>
   );
 }
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_relativeSplatPath: true }}>
       <HelmetProvider>
         <AppContent />
       </HelmetProvider>

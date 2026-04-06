@@ -1,29 +1,64 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Download, Zap, Github, Linkedin, Instagram } from 'lucide-react'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const navigation = [
     { name: 'Inicio', href: '/' },
     { name: 'Soluciones', href: '/soluciones' },
     { name: 'Apps', href: '/apps' },
+    { name: 'Desarrollos IA', href: '/desarrollos-ia' },
     { name: 'Blog', href: '/blog' },
-    { name: 'KONTROL+', href: '/kontrol-plus', isLogo: true },
+    { name: 'KONTROL+', href: '/kontrol-plus', isLogo: true, logoPath: '/images/7.png' },
+    { name: 'Play Padel', href: '/play-padel', isLogo: true, logoPath: '/images/playpadel/Hx5ZXKZtwg4hQJbI.jpg' },
     { name: 'Contacto', href: '/contacto' }
   ]
 
   return (
-    <header className="sticky top-0 w-full z-50 glass-effect backdrop-blur-md bg-black/60 border-b border-brand">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.header
+        className={`sticky top-0 w-full z-50 glass-effect backdrop-blur-md border-b transition-all duration-300 ${
+          scrolled
+            ? 'bg-black/80 border-alenia-primary/30 shadow-glow-md'
+            : 'bg-black/60 border-brand'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <img src="/images/5-3.png" alt="ALENIA Logo" className="w-32 h-auto" />
-          </Link>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link 
+              to="/" 
+              className="flex items-center space-x-2"
+              aria-label="Ir a inicio - ALENIA"
+            >
+              <img 
+                src="/images/5-3.png" 
+                alt="ALENIA Logo" 
+                className="w-32 h-auto"
+                width="128"
+                height="84"
+              />
+            </Link>
+          </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -37,22 +72,37 @@ const Header = () => {
                       ? 'bg-black/30 text-shadow-glow'
                       : ''
                   }`}
-                  style={{ minWidth: 90 }}
+                  style={{ minWidth: 70, maxHeight: '48px' }}
                 >
-                  <img src="/images/7.png" alt="KONTROL+" className="w-16 h-auto" />
+                  <img src={item.logoPath || '/images/7.png'} alt={item.name} className="h-10 w-auto max-w-[70px] object-contain" />
                 </Link>
               ) : (
-                <Link
+                <motion.div
                   key={item.name}
-                  to={item.href}
-                  className={`text-base font-semibold transition-colors px-2 py-1 rounded hover:text-brand-accent hover:bg-black/20 ${
-                    location.pathname === item.href
-                      ? 'text-brand-accent bg-black/30 text-shadow-glow'
-                      : 'text-slate-100/80'
-                  }`}
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  {item.name}
-                </Link>
+                  <Link
+                    to={item.href}
+                    className={`relative text-base font-semibold transition-all duration-300 px-2 py-1 rounded group focus-ring ${
+                      location.pathname === item.href
+                        ? 'text-brand-accent bg-black/30 text-shadow-glow'
+                        : 'text-slate-100/80 hover:text-brand-accent hover:bg-black/20'
+                    }`}
+                    aria-current={location.pathname === item.href ? 'page' : undefined}
+                  >
+                    {item.name}
+                    {location.pathname === item.href && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-alenia-primary to-alenia-accent"
+                        layoutId="activeTab"
+                        transition={{ duration: 0.3 }}
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span className="absolute inset-0 rounded bg-alenia-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                  </Link>
+                </motion.div>
               )
             )}
           </div>
@@ -106,12 +156,37 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button
+            <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-brand-accent hover:text-brand-secondary"
+              className="text-brand-accent hover:text-brand-secondary focus-ring"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+              <AnimatePresence mode="wait">
+                {isMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="w-6 h-6" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="w-6 h-6" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
         </div>
       </nav>
@@ -123,9 +198,15 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-effect border-t border-brand bg-black/80"
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            className="md:hidden glass-advanced border-t border-alenia-primary/30 bg-black/90 backdrop-blur-xl"
           >
-            <div className="px-4 py-2 space-y-1">
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
+              className="px-4 py-2 space-y-1"
+            >
               {navigation.map((item) =>
                 item.isLogo ? (
                   <Link
@@ -133,23 +214,29 @@ const Header = () => {
                     to={item.href}
                     onClick={() => setIsMenuOpen(false)}
                     className="flex items-center px-3 py-2 rounded-md transition-transform hover:scale-105"
-                    style={{ minWidth: 90 }}
+                    style={{ minWidth: 70, maxHeight: '48px' }}
                   >
-                    <img src="/images/7.png" alt="KONTROL+" className="w-16 h-auto" />
+                    <img src={item.logoPath || '/images/7.png'} alt={item.name} className="h-10 w-auto max-w-[70px] object-contain" />
                   </Link>
                 ) : (
-                  <Link
+                  <motion.div
                     key={item.name}
-                    to={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`block px-3 py-2 text-base font-semibold rounded-md transition-colors ${
-                      location.pathname === item.href
-                        ? 'text-brand-accent bg-black/30 text-shadow-glow'
-                        : 'text-slate-100/80 hover:text-brand-accent hover:bg-black/20'
-                    }`}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 + (navigation.indexOf(item) * 0.05) }}
                   >
-                    {item.name}
-                  </Link>
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block px-3 py-2 text-base font-semibold rounded-md transition-all duration-300 ${
+                        location.pathname === item.href
+                          ? 'text-brand-accent bg-black/30 text-shadow-glow'
+                          : 'text-slate-100/80 hover:text-brand-accent hover:bg-black/20 hover:translate-x-2'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
                 )
               )}
               <a
@@ -190,11 +277,11 @@ const Header = () => {
                   <Instagram className="w-5 h-5" />
                 </a>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   )
 }
 

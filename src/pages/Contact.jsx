@@ -1,8 +1,10 @@
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle, ChevronDown, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, CheckCircle, ChevronDown, X, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import emailJSService from '../services/emailJSService';
+import ScrollReveal from '../components/common/ScrollReveal';
+import AnimatedGradient from '../components/common/AnimatedGradient';
 
 const contactInfo = [
   {
@@ -44,32 +46,54 @@ const faqs = [
     }
 ];
 
-const FaqItem = ({ faq }) => {
+const FaqItem = ({ faq, index }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="border-b border-gray-600 py-4">
-            <button onClick={() => setIsOpen(!isOpen)} className="w-full flex justify-between items-center text-left">
-                <span className="font-semibold text-white">{faq.question}</span>
-                <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    <ChevronDown className={`w-5 h-5 text-cyan-400 transition-transform ${isOpen ? '' : ''}`} />
-                </motion.div>
-            </button>
-            <motion.div
-                initial={false}
-                animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, marginTop: isOpen ? '1rem' : '0' }}
-                className="overflow-hidden"
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            className="border-b border-gray-600/50 py-4 group"
+        >
+            <motion.button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex justify-between items-center text-left focus-ring"
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.2 }}
             >
-                <p className="text-gray-400">{faq.answer}</p>
-            </motion.div>
-        </div>
+                <span className="font-semibold text-white group-hover:text-cyan-400 transition-colors">{faq.question}</span>
+                <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
+                >
+                    <ChevronDown className="w-5 h-5 text-cyan-400" />
+                </motion.div>
+            </motion.button>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                    >
+                        <p className="text-gray-400 pt-4 leading-relaxed">{faq.answer}</p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     );
 };
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', company: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [showMap, setShowMap] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 3;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -96,7 +120,8 @@ export default function Contact() {
       
       if (result.success) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+        setCurrentStep(1);
         console.log('✅ Email de contacto enviado exitosamente');
       } else {
         setSubmitStatus('error');
@@ -109,6 +134,24 @@ export default function Contact() {
       setIsSubmitting(false);
       setTimeout(() => setSubmitStatus(null), 5000);
     }
+  };
+
+  const nextStep = () => {
+    if (currentStep < totalSteps) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const canProceed = () => {
+    if (currentStep === 1) return formData.name && formData.email;
+    if (currentStep === 2) return formData.phone || formData.company;
+    return formData.message;
   };
 
   return (
@@ -130,83 +173,316 @@ export default function Contact() {
       </Helmet>
       <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20">
         <div className="container mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 glow-btn">
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Hablemos de tu Proyecto
-              </span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Estamos listos para ayudarte a transformar tu empresa con tecnología e inteligencia artificial.
-            </p>
-          </motion.div>
+          <ScrollReveal direction="up" delay={0.2}>
+            <div className="text-center mb-16">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold mb-6">
+                <AnimatedGradient className="bg-clip-text text-transparent">
+                  Hablemos de tu Proyecto
+                </AnimatedGradient>
+              </h1>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Estamos listos para ayudarte a transformar tu empresa con tecnología e inteligencia artificial.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-            {/* Columna Izquierda: Formulario */}
-            <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="lg:col-span-3">
-              <div className="bg-brand-primary rounded-2xl p-8 border border-brand box-shadow-card glow-btn">
+            {/* Columna Izquierda: Formulario Multi-step */}
+            <ScrollReveal direction="left" delay={0.3} className="lg:col-span-3">
+              <div className="glass-advanced rounded-2xl p-8 border border-alenia-primary/30 box-shadow-card-hover">
+                {/* Progress Bar */}
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-gray-400">Paso {currentStep} de {totalSteps}</span>
+                    <span className="text-sm text-gray-400">{Math.round((currentStep / totalSteps) * 100)}%</span>
+                  </div>
+                  <div className="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-cyan-400 to-purple-500"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(currentStep / totalSteps) * 100}%` }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
+                </div>
+
                 <h2 className="text-3xl font-bold text-white mb-6">Envíanos un Mensaje</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Nombre *</label>
-                      <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="w-full p-3 rounded-xl bg-slate-700 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="Tu nombre completo" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
-                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full p-3 rounded-xl bg-slate-700 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="tu@email.com" />
-                    </div>
+                  <AnimatePresence mode="wait">
+                    {/* Step 1: Información Básica */}
+                    {currentStep === 1 && (
+                      <motion.div
+                        key="step1"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="space-y-6"
+                      >
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="relative">
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              value={formData.name}
+                              onChange={handleInputChange}
+                              required
+                              className="w-full p-4 rounded-xl bg-slate-700/50 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 input-focus-effect transition-all duration-300 peer"
+                              placeholder=" "
+                              aria-required="true"
+                            />
+                            <label htmlFor="name" className="absolute left-4 top-4 text-gray-400 transition-all duration-300 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-cyan-400 peer-[&:not(:placeholder-shown)]:-top-2 peer-[&:not(:placeholder-shown)]:text-sm peer-[&:not(:placeholder-shown)]:text-cyan-400 bg-slate-700/50 px-2">
+                              Nombre *
+                            </label>
+                          </div>
+                          <div className="relative">
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleInputChange}
+                              required
+                              className="w-full p-4 rounded-xl bg-slate-700/50 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 input-focus-effect transition-all duration-300 peer"
+                              placeholder=" "
+                              aria-required="true"
+                              autoComplete="email"
+                            />
+                            <label htmlFor="email" className="absolute left-4 top-4 text-gray-400 transition-all duration-300 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-cyan-400 peer-[&:not(:placeholder-shown)]:-top-2 peer-[&:not(:placeholder-shown)]:text-sm peer-[&:not(:placeholder-shown)]:text-cyan-400 bg-slate-700/50 px-2">
+                              Email *
+                            </label>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Step 2: Información Adicional */}
+                    {currentStep === 2 && (
+                      <motion.div
+                        key="step2"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="space-y-6"
+                        role="tabpanel"
+                        aria-labelledby="step-2"
+                        id="step-2-panel"
+                      >
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="relative">
+                            <input
+                              type="tel"
+                              id="phone"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={handleInputChange}
+                              className="w-full p-4 rounded-xl bg-slate-700/50 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 input-focus-effect transition-all duration-300 peer"
+                              placeholder=" "
+                              autoComplete="tel"
+                            />
+                            <label htmlFor="phone" className="absolute left-4 top-4 text-gray-400 transition-all duration-300 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-cyan-400 peer-[&:not(:placeholder-shown)]:-top-2 peer-[&:not(:placeholder-shown)]:text-sm peer-[&:not(:placeholder-shown)]:text-cyan-400 bg-slate-700/50 px-2">
+                              Teléfono
+                            </label>
+                          </div>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              id="company"
+                              name="company"
+                              value={formData.company}
+                              onChange={handleInputChange}
+                              className="w-full p-4 rounded-xl bg-slate-700/50 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 input-focus-effect transition-all duration-300 peer"
+                              placeholder=" "
+                              autoComplete="organization"
+                            />
+                            <label htmlFor="company" className="absolute left-4 top-4 text-gray-400 transition-all duration-300 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-cyan-400 peer-[&:not(:placeholder-shown)]:-top-2 peer-[&:not(:placeholder-shown)]:text-sm peer-[&:not(:placeholder-shown)]:text-cyan-400 bg-slate-700/50 px-2">
+                              Empresa
+                            </label>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Step 3: Mensaje */}
+                    {currentStep === 3 && (
+                      <motion.div
+                        key="step3"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="space-y-6"
+                        role="tabpanel"
+                        aria-labelledby="step-3"
+                        id="step-3-panel"
+                      >
+                        <div className="relative">
+                          <textarea
+                            id="message"
+                            name="message"
+                            value={formData.message}
+                            onChange={handleInputChange}
+                            required
+                            rows="6"
+                            className="w-full p-4 rounded-xl bg-slate-700/50 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 input-focus-effect transition-all duration-300 resize-none peer"
+                            placeholder=" "
+                            aria-required="true"
+                          />
+                          <label htmlFor="message" className="absolute left-4 top-4 text-gray-400 transition-all duration-300 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-cyan-400 peer-[&:not(:placeholder-shown)]:-top-2 peer-[&:not(:placeholder-shown)]:text-sm peer-[&:not(:placeholder-shown)]:text-cyan-400 bg-slate-700/50 px-2">
+                            Mensaje *
+                          </label>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Navigation Buttons */}
+                  <div className="flex items-center justify-between gap-4" role="group" aria-label="Navegación del formulario">
+                    {currentStep > 1 && (
+                      <motion.button
+                        type="button"
+                        onClick={prevStep}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-700/50 text-white hover:bg-slate-600 transition-colors focus-ring"
+                        aria-label={`Ir al paso ${currentStep - 1}`}
+                      >
+                        <ArrowLeft className="w-5 h-5" aria-hidden="true" />
+                        Anterior
+                      </motion.button>
+                    )}
+                    <div className="flex-1" aria-hidden="true" />
+                    {currentStep < totalSteps ? (
+                      <motion.button
+                        type="button"
+                        onClick={nextStep}
+                        disabled={!canProceed()}
+                        whileHover={{ scale: canProceed() ? 1.05 : 1 }}
+                        whileTap={{ scale: canProceed() ? 0.95 : 1 }}
+                        className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all focus-ring ${
+                          canProceed()
+                            ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white glow-btn'
+                            : 'bg-slate-600 text-gray-400 cursor-not-allowed'
+                        }`}
+                        aria-label={`Ir al paso ${currentStep + 1}`}
+                        aria-disabled={!canProceed()}
+                      >
+                        Siguiente
+                        <ArrowRight className="w-5 h-5" aria-hidden="true" />
+                      </motion.button>
+                    ) : (
+                      <motion.button
+                        type="submit"
+                        disabled={isSubmitting || !canProceed()}
+                        whileHover={{ scale: !isSubmitting && canProceed() ? 1.05 : 1 }}
+                        whileTap={{ scale: !isSubmitting && canProceed() ? 0.95 : 1 }}
+                        className={`flex items-center gap-2 px-8 py-3 rounded-xl font-semibold transition-all focus-ring ${
+                          isSubmitting || !canProceed()
+                            ? 'bg-slate-600 cursor-not-allowed'
+                            : 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white glow-btn'
+                        }`}
+                        aria-label={isSubmitting ? 'Enviando formulario' : 'Enviar mensaje'}
+                        aria-busy={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="loading-spinner w-5 h-5 border-2 border-current border-t-transparent rounded-full" aria-hidden="true" />
+                            <span>Enviando...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-5 h-5" aria-hidden="true" />
+                            <span>Enviar Mensaje</span>
+                          </>
+                        )}
+                      </motion.button>
+                    )}
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Mensaje *</label>
-                    <textarea name="message" value={formData.message} onChange={handleInputChange} required rows="5" className="w-full p-3 rounded-xl bg-slate-700 border border-gray-600 text-white focus:border-cyan-400 focus:outline-none transition-colors resize-none" placeholder="Cuéntanos sobre tu idea o proyecto..."></textarea>
-                  </div>
-                  <button type="submit" disabled={isSubmitting} className={`w-full py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 text-white ${isSubmitting ? 'bg-slate-600 cursor-not-allowed' : 'bg-cyan-600 hover:bg-cyan-500 shadow-lg shadow-cyan-500/20'}`}>
-                    {isSubmitting ? 'Enviando...' : <><Send className="w-5 h-5" /> Enviar Mensaje</>}
-                  </button>
-                  {submitStatus === 'success' && (
-                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-green-500/10 border border-green-500/30 text-green-300 px-4 py-3 rounded-lg flex items-center gap-2">
-                      <CheckCircle className="w-5 h-5" /> ¡Mensaje enviado! Te contactaremos pronto.
-                    </motion.div>
-                  )}
-                  {submitStatus === 'error' && (
-                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg flex items-center gap-2">
-                      <X className="w-5 h-5" /> Error al enviar. Inténtalo de nuevo.
-                    </motion.div>
-                  )}
+
+                  {/* Status Messages */}
+                  <AnimatePresence>
+                    {submitStatus === 'success' && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        className="bg-green-500/10 border border-green-500/30 text-green-300 px-4 py-3 rounded-lg flex items-center gap-2 success-feedback"
+                        role="alert"
+                        aria-live="polite"
+                        aria-atomic="true"
+                      >
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                          aria-hidden="true"
+                        >
+                          <CheckCircle className="w-5 h-5" />
+                        </motion.div>
+                        <span>¡Mensaje enviado! Te contactaremos pronto.</span>
+                      </motion.div>
+                    )}
+                    {submitStatus === 'error' && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg flex items-center gap-2 error-feedback"
+                        role="alert"
+                        aria-live="assertive"
+                        aria-atomic="true"
+                      >
+                        <X className="w-5 h-5" aria-hidden="true" />
+                        <span>Error al enviar. Inténtalo de nuevo.</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </form>
               </div>
-            </motion.div>
+            </ScrollReveal>
 
             {/* Columna Derecha: Info & FAQ */}
-            <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="lg:col-span-2 space-y-8">
-              <div className="bg-brand-primary rounded-2xl p-8 border border-brand box-shadow-card glow-btn">
+            <ScrollReveal direction="right" delay={0.4} className="lg:col-span-2 space-y-8">
+              <div className="glass-advanced rounded-2xl p-8 border border-alenia-primary/30 box-shadow-card-hover">
                 <h3 className="text-2xl font-bold text-white mb-6">Información de Contacto</h3>
                 <div className="space-y-4">
                   {contactInfo.map((info, index) => (
-                    <a key={index} href={info.action || '#'} target={info.action?.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="flex items-center gap-4 group">
-                      <div className="p-3 bg-slate-700/50 text-cyan-400 rounded-xl transition-colors duration-300 group-hover:bg-cyan-500/20">
+                    <motion.a
+                      key={index}
+                      href={info.action || '#'}
+                      target={info.action?.startsWith('http') ? '_blank' : undefined}
+                      rel="noopener noreferrer"
+                      whileHover={{ x: 4, scale: 1.02 }}
+                      className="flex items-center gap-4 group glass-card-hover rounded-xl p-4 border border-white/10"
+                    >
+                      <motion.div
+                        className="p-3 bg-slate-700/50 text-cyan-400 rounded-xl transition-colors duration-300 group-hover:bg-cyan-500/20"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                      >
                         {info.icon}
-                      </div>
+                      </motion.div>
                       <div>
-                        <h4 className="font-semibold text-white">{info.title}</h4>
+                        <h4 className="font-semibold text-white group-hover:text-cyan-400 transition-colors">{info.title}</h4>
                         <p className="text-slate-400 transition-colors duration-300 group-hover:text-cyan-300">{info.value}</p>
                       </div>
-                    </a>
+                    </motion.a>
                   ))}
                 </div>
               </div>
-              <div className="bg-brand-primary rounded-2xl p-8 border border-brand box-shadow-card glow-btn">
+              <div className="glass-advanced rounded-2xl p-8 border border-alenia-primary/30 box-shadow-card-hover">
                 <h3 className="text-2xl font-bold text-white mb-4">Preguntas Frecuentes</h3>
                 <div>
-                    {faqs.map((faq, i) => <FaqItem key={i} faq={faq} />)}
+                    {faqs.map((faq, i) => <FaqItem key={i} faq={faq} index={i} />)}
                 </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
 
           {/* Mapa */}
-          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="mt-16">
+          <ScrollReveal direction="up" delay={0.6} className="mt-16">
              <div className="aspect-w-16 aspect-h-9 bg-brand-primary rounded-2xl overflow-hidden border border-brand box-shadow-card glow-btn">
                 {!showMap ? (
                   <button onClick={() => setShowMap(true)} className="w-full h-full flex items-center justify-center text-white bg-slate-800 hover:bg-slate-700 transition-colors">
@@ -224,7 +500,7 @@ export default function Contact() {
                   </iframe>
                 )}
              </div>
-          </motion.div>
+          </ScrollReveal>
 
         </div>
       </main>

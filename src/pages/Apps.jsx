@@ -1,9 +1,11 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Search, Filter, Zap, TrendingUp, Calculator, BarChart3, Hash, Bot, Star, Clock, Users, Palette } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AppsStats from '../components/apps/AppsStats';
 import { Helmet } from 'react-helmet-async';
+import ScrollReveal from '../components/common/ScrollReveal';
+import AnimatedGradient from '../components/common/AnimatedGradient';
 
 // Mapeo estático de colores para evitar purga de Tailwind en clases dinámicas
 const colorStyles = {
@@ -171,30 +173,32 @@ export default function Apps() {
       </Helmet>
       <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20">
       <div className="container mx-auto px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <Link 
-            to="/"
-            className="inline-flex items-center gap-2 text-sm text-gray-400 mb-6 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Volver al inicio</span>
-          </Link>
-          
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 glow-btn">
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Apps y Herramientas
-            </span>
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Soluciones digitales inteligentes para potenciar tu negocio y optimizar tus procesos
-          </p>
-        </motion.div>
+        {/* Header mejorado */}
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="text-center mb-16">
+            <motion.div
+              whileHover={{ x: -4 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Link 
+                to="/"
+                className="inline-flex items-center gap-2 text-sm text-gray-400 mb-6 hover:text-white transition-colors group"
+              >
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                <span>Volver al inicio</span>
+              </Link>
+            </motion.div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold mb-6">
+              <AnimatedGradient className="apps-hero-gradient bg-clip-text text-transparent">
+                Apps y Herramientas
+              </AnimatedGradient>
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Soluciones digitales inteligentes para potenciar tu negocio y optimizar tus procesos
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Apps Stats */}
         {/* Eliminado AppsStats */}
@@ -276,16 +280,18 @@ export default function Apps() {
           </motion.div>
         )}
 
-        {/* Apps Grid */}
+        {/* Apps Grid Interactivo */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredApps.filter(app => !app.featured).map((app, index) => (
-            <motion.div
-              key={app.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="bg-brand-primary rounded-2xl box-shadow-card glow-btn border border-brand transition-all duration-300 overflow-hidden group"
-            >
+            <ScrollReveal key={app.id} delay={index * 0.1} direction="up">
+              <motion.div
+                whileHover={{ 
+                  y: -12,
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
+                className="glass-card-hover rounded-2xl box-shadow-card-hover border border-alenia-primary/30 transition-all duration-300 overflow-hidden group card-hover-lift"
+              >
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${colorStyles[app.color] || ''}`}>
@@ -340,7 +346,8 @@ export default function Apps() {
                   )}
                 </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </ScrollReveal>
           ))}
         </div>
 

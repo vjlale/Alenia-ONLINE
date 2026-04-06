@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom'; // Importar Link
 import '../styles/KontrolPlusLanding.css';
-import crmService from '../services/crmService';
 import emailJSService from '../services/emailJSService';
 
 const KontrolPlusLanding = () => {
@@ -35,7 +34,7 @@ const KontrolPlusLanding = () => {
   const [submitStatus, setSubmitStatus] = useState(null);
     const [confirmVisible, setConfirmVisible] = useState(false);
     const [downloadOpened, setDownloadOpened] = useState(false);
-    const DOWNLOAD_URL = import.meta.env.VITE_KONTROL_DOWNLOAD_URL || 'https://github.com/vjlale/KONTROL-By-Alenia/releases/download/v3.0.0/KONTROL+_v3.0_Release.zip';
+    const DOWNLOAD_URL = 'https://github.com/vjlale/KONTROL-By-Alenia/releases/download/v3.0.0/ALENIA-GESTION-KONTROL+_v2.3.0_Complete.zip';
 
   const handleLeadChange = (e) => {
     const { name, value } = e.target;
@@ -47,30 +46,43 @@ const KontrolPlusLanding = () => {
         setSubmitStatus(null);
         setIsSubmitting(true);
         try {
-            // Intentamos registrar en el CRM, pero no bloqueamos la descarga si falla
-            try {
-                await crmService.createLead({ nombre: lead.nombre, email: lead.email, rubro: lead.rubro });
-            } catch (crmErr) {
-                // Registrar para diagnóstico pero continuar
-                console.warn('No se pudo registrar en CRM (continuando con descarga):', crmErr);
-            }
+            // Datos del formulario
+            const formData = {
+                nombre: lead.nombre,
+                email: lead.email,
+                rubro: lead.rubro,
+                servicio: 'ALEN.IA Gestión Kontrol+',
+                descripcion: 'Solicitud de descarga de ALEN.IA Gestión Kontrol+ v2.3.0',
+                categoria: 'contacto-general'
+            };
 
-            // Intentamos enviar también por EmailJS (si falla, lo registramos y seguimos)
+            // Intentamos enviar por EmailJS (opcional, no bloquea la descarga)
             try {
-                const emailData = {
-                    nombre: lead.nombre,
-                    email: lead.email,
-                    rubro: lead.rubro,
-                    servicio: 'ALEN.IA Gestión Kontrol+',
-                    descripcion: 'Solicitud de descarga de ALEN.IA Gestión Kontrol+ v3.0.0',
-                    categoria: 'contacto-general'
-                };
-                await emailJSService.sendServiceForm(emailData, { categoria: 'contacto-general' });
+                await emailJSService.sendServiceForm(formData, { categoria: 'contacto-general' });
             } catch (emailErr) {
                 console.warn('No se pudo enviar EmailJS (continuando con descarga):', emailErr);
             }
 
-            // Doble confirmación: intentamos abrir en nueva pestaña y mostramos panel con enlaces alternativos
+            // Enviamos los datos al webhook
+            try {
+                const response = await fetch('https://hook.eu2.make.com/14xmyfmrxptcfqjbi25gy7sllk5pkbyg', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    console.warn('El webhook respondió con un código de error:', response.status);
+                } else {
+                    console.log('Datos enviados exitosamente al webhook');
+                }
+            } catch (webhookErr) {
+                console.warn('No se pudo enviar al webhook (continuando con descarga):', webhookErr);
+            }
+
+            // Abrir descarga directamente
             const win = window.open(DOWNLOAD_URL, '_blank', 'noopener,noreferrer');
             setDownloadOpened(!!win);
             setConfirmVisible(true);
@@ -142,33 +154,33 @@ const KontrolPlusLanding = () => {
                     {/* Feature Cards */}
                     <div className="feature-card">
                         <div className="feature-icon">🛍️</div>
-                        <h3>Sistema de Ventas</h3>
-                        <p>Carrito de compras moderno con múltiples formas de pago, cálculo automático de IVA y sistema de ofertas integrado.</p>
+                        <h3>Sistema de Ventas Profesional</h3>
+                        <p>Carrito inteligente con 6 formas de pago, cálculo automático de IVA (21%), aplicación de ofertas automáticas y validación en tiempo real. Incluye búsqueda inteligente y control de stock automático.</p>
                     </div>
                     <div className="feature-card">
                         <div className="feature-icon">📦</div>
-                        <h3>Gestión de Inventario</h3>
-                        <p>Control completo de stock, carga masiva por CSV, categorización por marca/color/talle y alertas de stock bajo.</p>
+                        <h3>Gestión de Inventario Avanzada</h3>
+                        <p>Control completo de stock con categorización por marca/color/talle, carga masiva desde CSV, alertas visuales de stock bajo, edición masiva de precios y análisis de rotación de productos.</p>
                     </div>
                     <div className="feature-card">
                         <div className="feature-icon">📊</div>
-                        <h3>Reportes y Análisis</h3>
-                        <p>Reportes detallados por fechas, productos y formas de pago. Cierre de caja automático con exportación a CSV.</p>
+                        <h3>Reportes y Análisis Completos</h3>
+                        <p>Dashboard de ventas diarias, reportes avanzados por fechas/productos/marcas, análisis de rentabilidad, cierre de caja automático con exportación a CSV y gráficos de tendencias para toma de decisiones informadas.</p>
                     </div>
                     <div className="feature-card">
                         <div className="feature-icon">🤖</div>
-                        <h3>Inteligencia Artificial</h3>
-                        <p>Sugerencias de reposición, análisis de tendencias, alertas predictivas y optimización automática de precios.</p>
+                        <h3>Centro de Inteligencia Artificial</h3>
+                        <p>Algoritmos avanzados de IA para análisis predictivo de demanda, sugerencias inteligentes de reposición, optimización automática de precios, análisis de tendencias y alertas predictivas para maximizar tu rentabilidad.</p>
                     </div>
                     <div className="feature-card">
                         <div className="feature-icon">🎁</div>
-                        <h3>Sistema de Ofertas</h3>
-                        <p>Ofertas 3x2, 2x1, descuentos por porcentaje, precios especiales y aplicación automática en el carrito.</p>
+                        <h3>Sistema de Ofertas Inteligente</h3>
+                        <p>Gestión completa de promociones: ofertas por cantidad (3x2, 2x1, 4x3), descuentos por porcentaje, precios especiales temporales y aplicación automática en el carrito con análisis de efectividad.</p>
                     </div>
                     <div className="feature-card">
                         <div className="feature-icon">💾</div>
-                        <h3>Sin Internet Requerido</h3>
-                        <p>Funciona completamente offline. Tus datos siempre seguros y bajo tu control en tu propio equipo.</p>
+                        <h3>100% Offline y Seguro</h3>
+                        <p>Funciona completamente sin internet. Tus datos siempre seguros y bajo tu control en tu propio equipo. Respaldos automáticos, instalación instantánea y compatibilidad total con Windows 10/11.</p>
                     </div>
                 </div>
             </div>
@@ -180,17 +192,17 @@ const KontrolPlusLanding = () => {
                 <p className="section-subtitle">Descubre cada funcionalidad del software paso a paso</p>
                 
                 {/* Screen Items */}
-                <ScreenItem title="🏠 Pantalla Principal" description="La pantalla de inicio te da acceso rápido a todas las funciones principales del software con un diseño moderno y intuitivo." features={['Acceso directo a Nueva Venta', 'Consulta rápida de Ventas del Día', 'Entrada al Menú de Gestión']} imgSrc="/images/screenshot/PRINCIPAL.jpeg" alt="Pantalla Principal" />
-                <ScreenItem title="💰 Nueva Venta" description="Sistema completo de ventas con carrito de compras, autocompletado de productos y cálculos automáticos de totales e IVA." features={['Autocompletado inteligente', 'Carrito de compras dinámico', 'Cálculo automático de IVA']} imgSrc="/images/screenshot/NUEVA VENTA.jpeg" alt="Nueva Venta" reverse />
-                <ScreenItem title="📊 Ventas del Día" description="Resumen completo de todas las ventas del día actual con totales por forma de pago y opción de cierre de caja." features={['Lista detallada de ventas', 'Totales por forma de pago', 'Cierre de caja automático']} imgSrc="/images/screenshot/pantalla ventas del dia.png" alt="Ventas del Día" />
-                <ScreenItem title="⚙️ Menú de Gestión" description="Centro de control con todas las herramientas administrativas organizadas en categorías para fácil acceso." features={['Gestión de productos', 'Reportes avanzados', 'Sistema de ofertas']} imgSrc="/images/screenshot/PANTALLA MENU.png" alt="Menú de Gestión" reverse />
-                <ScreenItem title="📝 Alta de Producto" description="Formulario intuitivo para agregar nuevos productos con cálculo automático de precios y validación en tiempo real." features={['Cálculo automático de precios', 'Validación visual', 'Tooltips explicativos']} imgSrc="/images/screenshot/AGREGAR NUEVO PRODUCTO.jpeg" alt="Alta de Producto" />
-                <ScreenItem title="📋 Inventario" description="Vista completa del inventario con búsqueda avanzada, filtros, ordenamiento y acciones masivas sobre productos." features={['Búsqueda y filtros avanzados', 'Resaltado de stock bajo', 'Edición masiva']} imgSrc="/images/screenshot/INVENTARIO.jpeg" alt="Inventario" reverse />
-                <ScreenItem title="📂 Carga Masiva" description="Importación masiva de productos desde archivos CSV con validación automática y descarga de plantilla modelo." features={['Descarga de plantilla CSV', 'Validación automática de datos', 'Previsualización de importación']} imgSrc="/images/screenshot/REPORTES.jpeg" alt="Carga Masiva" />
-                <ScreenItem title="📈 Reportes Avanzados" description="Sistema completo de reportes con filtros por fechas, productos, formas de pago y exportación de resultados." features={['Filtros por rango de fechas', 'Análisis por producto', 'Exportación a CSV']} imgSrc="/images/screenshot/REPORTES.jpeg" alt="Reportes Avanzados" reverse />
-                <ScreenItem title="🎁 Gestión de Ofertas" description="Creación y administración de ofertas especiales con diferentes tipos de descuentos y promociones." features={['Ofertas por porcentaje', 'Promociones 3x2, 2x1', 'Aplicación automática']} imgSrc="/images/screenshot/OFERTAS.jpeg" alt="Gestión de Ofertas" />
-                <ScreenItem title="🤖 Centro de Inteligencia Artificial" description="Dashboard inteligente con análisis predictivos, sugerencias de reposición y optimización automática de precios." features={['Sugerencias de reposición', 'Análisis de tendencias', 'Optimización de precios por IA']} imgSrc="/images/screenshot/PANEL INTELIGENTE.jpeg" alt="Centro de IA" reverse />
-                <ScreenItem title="🔄 Sugerencias de Reposición IA" description="Algoritmos inteligentes que analizan patrones de venta para sugerir qué productos reponer y cuándo." features={['Análisis de patrones de venta', 'Cálculo de días de stock', 'Alertas automáticas']} imgSrc="/images/screenshot/pantalla IA.png" alt="Sugerencias de Reposición IA" />
+                <ScreenItem title="🏠 Pantalla Principal" description="Tu centro de control con acceso directo a todas las funcionalidades principales. Diseño moderno y profesional que te permite gestionar tu negocio de manera eficiente desde un solo lugar." features={['💰 Venta - Procesar nuevas ventas con Ctrl+V', '📊 Ventas del Día - Resumen completo de ingresos diarios', '🏦 Cierre de Caja - Generación automática de reportes CSV', '⚙️ Menú Gestión - Acceso a herramientas administrativas']} imgSrc="/images/screenshot/PRINCIPAL.jpeg" alt="Pantalla Principal" />
+                <ScreenItem title="💰 Nueva Venta" description="Sistema de ventas profesional con carrito inteligente, múltiples formas de pago y aplicación automática de ofertas. Validación en tiempo real y cálculos automáticos de IVA (21%) para mayor precisión." features={['🔍 Búsqueda inteligente con filtrado en tiempo real', '🛒 Carrito dinámico con validación automática de stock', '💳 6 formas de pago: Efectivo, Débito, Crédito, Transferencia, QR, Otros', '🎁 Aplicación automática de ofertas 3x2, 2x1 y descuentos', '🧮 Cálculo automático de IVA y totales', '✅ Validación visual con bordes verdes/rojos']} imgSrc="/images/screenshot/NUEVA VENTA.jpeg" alt="Nueva Venta" reverse />
+                <ScreenItem title="📊 Ventas del Día" description="Dashboard completo de ventas diarias con análisis detallado por forma de pago, productos más vendidos y control total de ingresos. Incluye generación automática de reportes CSV para contabilidad." features={['📋 Lista detallada de todas las ventas del día', '💰 Totales automáticos por forma de pago', '📈 Análisis de productos más vendidos', '📄 Generación automática de reportes CSV', '🏦 Cierre de caja con archivo de respaldo', '🔍 Filtros por producto, hora y método de pago']} imgSrc="/images/screenshot/pantalla ventas del dia.png" alt="Ventas del Día" />
+                <ScreenItem title="⚙️ Menú de Gestión" description="Centro de control administrativo con acceso organizado a todas las herramientas de gestión. Desde aquí puedes administrar productos, configurar ofertas, generar reportes y acceder al centro de inteligencia artificial." features={['📦 Gestión de Productos - Agregar, editar y eliminar productos', '📊 Reportes Avanzados - Análisis detallado por fechas y productos', '🎁 Sistema de Ofertas - Configurar promociones 3x2, 2x1 y descuentos', '🤖 Centro de IA - Sugerencias inteligentes y análisis predictivo', '📂 Carga Masiva - Importación masiva desde archivos CSV', '⚙️ Configuración - Ajustes del sistema y respaldos']} imgSrc="/images/screenshot/PANTALLA MENU.png" alt="Menú de Gestión" reverse />
+                <ScreenItem title="📝 Alta de Producto" description="Formulario profesional para agregar productos con cálculo automático de precios de venta y amigo. Incluye validación visual en tiempo real, tooltips explicativos y categorización completa por marca, color y talle." features={['🏷️ Categorización completa: Marca, Descripción, Color, Talle', '💰 Cálculo automático de precios de venta y amigo', '📊 Configuración de porcentajes de ganancia personalizables', '✅ Validación visual con bordes verdes/rojos', '💡 Tooltips explicativos para cada campo', '📦 Control de stock inicial al crear el producto']} imgSrc="/images/screenshot/AGREGAR NUEVO PRODUCTO.jpeg" alt="Alta de Producto" />
+                <ScreenItem title="📋 Inventario" description="Panel completo de gestión de inventario con búsqueda inteligente, filtros avanzados y control total del stock. Incluye alertas visuales para productos con stock bajo y herramientas de edición masiva." features={['🔍 Búsqueda inteligente por marca, descripción, color o talle', '📊 Vista tabular con información completa de cada producto', '⚠️ Resaltado automático de productos con stock bajo', '✏️ Edición masiva de precios y porcentajes', '📈 Análisis de rotación y rendimiento por producto', '🔄 Actualización en tiempo real del stock tras ventas']} imgSrc="/images/screenshot/INVENTARIO.jpeg" alt="Inventario" reverse />
+                <ScreenItem title="📂 Carga Masiva" description="Sistema de importación masiva que permite cargar cientos de productos desde archivos CSV en segundos. Incluye plantilla modelo, validación automática de datos y respaldo de seguridad antes de la importación." features={['📄 Descarga de plantilla CSV modelo con formato estándar', '✅ Validación automática de datos antes de la importación', '👁️ Previsualización de productos a importar', '💾 Respaldo automático de datos existentes', '📊 Reporte de productos importados exitosamente', '⚠️ Alertas de productos con datos incompletos o duplicados']} imgSrc="/images/screenshot/REPORTES.jpeg" alt="Carga Masiva" />
+                <ScreenItem title="📈 Reportes Avanzados" description="Sistema completo de análisis y reportes con filtros avanzados por fechas, productos, marcas y formas de pago. Incluye exportación a CSV para análisis externos y toma de decisiones informadas." features={['📅 Filtros por rango de fechas personalizable', '📊 Análisis detallado por producto, marca y categoría', '💰 Análisis de rentabilidad y márgenes de ganancia', '📄 Exportación a CSV para Excel y contabilidad', '📈 Gráficos de tendencias de ventas', '🔍 Búsqueda avanzada en historial de ventas']} imgSrc="/images/screenshot/REPORTES.jpeg" alt="Reportes Avanzados" reverse />
+                <ScreenItem title="🎁 Gestión de Ofertas" description="Sistema completo de gestión de ofertas y promociones con múltiples tipos de descuentos. Permite crear ofertas por cantidad, porcentaje y precios especiales que se aplican automáticamente en las ventas." features={['🎯 Ofertas por cantidad: 3x2, 2x1, 4x3, etc.', '📊 Ofertas por porcentaje: 10%, 20%, 50% de descuento', '💰 Precios especiales fijos para promociones temporales', '🔄 Aplicación automática en el carrito de compras', '⏰ Configuración de fechas de vigencia', '📈 Análisis de efectividad de ofertas']} imgSrc="/images/screenshot/OFERTAS.jpeg" alt="Gestión de Ofertas" />
+                <ScreenItem title="🤖 Centro de Inteligencia Artificial" description="Dashboard inteligente con análisis predictivos avanzados que utiliza algoritmos de IA para optimizar tu negocio. Incluye sugerencias de reposición, análisis de tendencias y optimización automática de precios basada en patrones de venta." features={['🔮 Análisis predictivo de demanda por producto', '📊 Sugerencias inteligentes de reposición de stock', '💰 Optimización automática de precios por IA', '📈 Análisis de tendencias y patrones de venta', '⚠️ Alertas inteligentes de productos con baja rotación', '🎯 Recomendaciones de ofertas basadas en stock']} imgSrc="/images/screenshot/PANEL INTELIGENTE.jpeg" alt="Centro de IA" reverse />
+                <ScreenItem title="🔄 Sugerencias de Reposición IA" description="Sistema inteligente de análisis de stock que utiliza algoritmos avanzados para predecir cuándo y qué productos necesitas reponer. Analiza patrones de venta históricos para optimizar tu inventario y evitar quedarte sin stock." features={['🧠 Análisis inteligente de patrones de venta históricos', '📊 Cálculo automático de días de stock restantes', '⚠️ Alertas automáticas de productos con stock crítico', '📈 Predicción de demanda basada en tendencias', '🎯 Sugerencias de cantidades óptimas de reposición', '📅 Planificación automática de compras futuras']} imgSrc="/images/screenshot/pantalla IA.png" alt="Sugerencias de Reposición IA" />
                 
             </div>
         </section>
@@ -202,18 +214,18 @@ const KontrolPlusLanding = () => {
                 <div className="benefits-grid">
                     <div className="benefit-item">
                         <div className="benefit-icon">⚡</div>
-                        <h3>Sin Instalación Compleja</h3>
-                        <p>Solo descarga y ejecuta. No requiere instalación ni configuraciones complicadas.</p>
+                        <h3>Instalación Instantánea</h3>
+                        <p>Descarga y ejecuta inmediatamente. Sin instaladores complejos, sin configuraciones complicadas. Tu negocio funcionando en menos de 2 minutos.</p>
                     </div>
                     <div className="benefit-item">
                         <div className="benefit-icon">🔒</div>
-                        <h3>Datos Seguros</h3>
-                        <p>Tus datos siempre bajo tu control. Funciona completamente offline en tu equipo.</p>
+                        <h3>Máxima Seguridad y Privacidad</h3>
+                        <p>Tus datos siempre bajo tu control. Funciona 100% offline, sin conexión a internet, sin nubes externas. Respaldos automáticos y control total de tu información.</p>
                     </div>
                     <div className="benefit-item">
                         <div className="benefit-icon">💰</div>
-                        <h3>Completamente Gratuito</h3>
-                        <p>Sin licencias, sin límites, sin costos ocultos. Software libre para tu negocio.</p>
+                        <h3>100% Gratuito y Sin Límites</h3>
+                        <p>Sin licencias, sin mensualidades, sin límites de productos o ventas. Software libre y gratuito para siempre. Incluye todas las funcionalidades avanzadas sin costo adicional.</p>
                     </div>
                 </div>
             </div>
@@ -316,9 +328,12 @@ const KontrolPlusLanding = () => {
                 <div style={{marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid #374151'}}>
                     <h3 style={{marginBottom: '1rem', color: '#4f46e5'}}>Requisitos del Sistema</h3>
                     <div style={{display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', textAlign: 'left'}}>
-                        <div><strong>🖥️ Sistema:</strong> Windows 10/11<br/><strong>💾 RAM:</strong> 4GB mínimo<br/><strong>💿 Espacio:</strong> 500MB libres</div>
-                        <div><strong>📱 Pantalla:</strong> 1280x720 mínimo<br/><strong>🌐 Internet:</strong> No requerido<br/><strong>📄 Licencia:</strong> Completamente gratuito</div>
+                        <div><strong>🖥️ Sistema:</strong> Windows 10/11 (64-bit)<br/><strong>💾 RAM:</strong> 4GB mínimo (8GB recomendado)<br/><strong>💿 Espacio:</strong> 500MB libres (SSD recomendado)</div>
+                        <div><strong>📱 Pantalla:</strong> 1280x720 mínimo (1920x1080 recomendado)<br/><strong>🌐 Internet:</strong> No requerido (100% offline)<br/><strong>📄 Licencia:</strong> Completamente gratuito y sin límites</div>
                     </div>
+                    <p style={{marginTop: '1rem', textAlign: 'center', opacity: 0.8, fontSize: '0.9em'}}>
+                        <strong>⚠️ Importante:</strong> Esta versión NO es compatible con sistemas de 32-bit. Asegúrate de tener Windows 10/11 de 64-bit.
+                    </p>
                 </div>
             </div>
         </section>

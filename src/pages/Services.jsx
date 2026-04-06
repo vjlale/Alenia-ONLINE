@@ -1,10 +1,12 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { soluciones } from '../data/solucionesData';
 import ServiceFormModal from '../components/forms/ServiceFormModal';
+import ScrollReveal from '../components/common/ScrollReveal';
+import AnimatedGradient from '../components/common/AnimatedGradient';
 
 function Services() {
   const [selectedService, setSelectedService] = useState(null);
@@ -42,25 +44,28 @@ function Services() {
       </Helmet>
 
       <div className="container mx-auto px-6">
-        {/* Header Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-alenia-primary via-alenia-secondary to-alenia-accent bg-clip-text text-transparent">
-              Nuestras Soluciones
-            </span>
-          </h1>
-          <p className="text-xl text-alenia-light/80 max-w-3xl mx-auto leading-relaxed">
-            Soluciones tecnológicas completas que transforman tu negocio y lo llevan al siguiente nivel.
-            Cada solución tiene 3 niveles diseñados para diferentes etapas de crecimiento.
-          </p>
-        </motion.div>
+        {/* Header Section con reveal */}
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold mb-6">
+              <AnimatedGradient
+                className="bg-clip-text text-transparent"
+                style={{
+                  background: 'linear-gradient(-45deg, rgba(0, 255, 136, 1) 0%, rgba(0, 102, 255, 1) 0%, rgba(255, 0, 102, 1) 100%, rgba(0, 255, 136, 1) 100%)',
+                  color: 'rgba(183, 167, 221, 1)'
+                }}
+              >
+                Nuestras Soluciones
+              </AnimatedGradient>
+            </h1>
+            <p className="text-xl text-alenia-light/80 max-w-3xl mx-auto leading-relaxed">
+              Soluciones tecnológicas completas que transforman tu negocio y lo llevan al siguiente nivel.
+              Cada solución tiene 3 niveles diseñados para diferentes etapas de crecimiento.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        {/* Solutions Grid */}
+        {/* Solutions Grid Interactivo */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {soluciones.map((solucion, index) => (
             <ServiceCard 
@@ -72,30 +77,37 @@ function Services() {
           ))}
         </div>
 
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="text-center mt-20"
-        >
-          <div className="bg-gradient-to-r from-alenia-primary/10 to-alenia-secondary/10 rounded-xl p-8 border border-alenia-primary/20 max-w-4xl mx-auto">
-            <h3 className="text-3xl font-bold text-white mb-4">
-              ¿No estás seguro por dónde empezar?
-            </h3>
-            <p className="text-alenia-light/70 mb-6 text-lg">
-              Conversemos 15 minutos sin costo. Te ayudamos a encontrar 
-              la solución perfecta para tu situación específica.
-            </p>
-            <Link
-              to="/contacto"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-alenia-primary to-alenia-secondary text-alenia-dark px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-alenia-primary/25 transition-all duration-300 transform hover:scale-105"
-            >
-              Solicitar Consulta Gratuita
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+        {/* Call to Action mejorado */}
+        <ScrollReveal delay={0.6} direction="up">
+          <div className="text-center mt-20">
+            <div className="glass-advanced bg-gradient-to-r from-alenia-primary/10 to-alenia-secondary/10 rounded-2xl p-8 md:p-12 border border-alenia-primary/30 max-w-4xl mx-auto relative overflow-hidden">
+              {/* Background gradient animado */}
+              <div className="absolute inset-0 bg-gradient-animated opacity-5 pointer-events-none" />
+              
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 relative z-10">
+                ¿No estás seguro por dónde empezar?
+              </h3>
+              <p className="text-alenia-light/70 mb-8 text-lg relative z-10">
+                Conversemos 15 minutos sin costo. Te ayudamos a encontrar 
+                la solución perfecta para tu situación específica.
+              </p>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                style={{ perspective: 1000 }}
+                className="relative z-10"
+              >
+                <Link
+                  to="/contacto"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-alenia-primary to-alenia-secondary text-alenia-dark px-8 py-4 rounded-xl font-semibold glow-btn transition-all duration-300 group"
+                >
+                  Solicitar Consulta Gratuita
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
 
       {/* Service Form Modal */}
@@ -111,6 +123,38 @@ function Services() {
 
 function ServiceCard({ servicio, index, onOpenForm }) {
   const IconComponent = servicio.icon;
+  const cardRef = useRef(null);
+  const [isFlipped, setIsFlipped] = useState(false);
+  
+  // 3D tilt effect
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const mouseXSpring = useSpring(x, { stiffness: 500, damping: 100 });
+  const mouseYSpring = useSpring(y, { stiffness: 500, damping: 100 });
+  
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7.5deg", "-7.5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7.5deg", "7.5deg"]);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   // Mapeo exacto de colores según las imágenes
   const getServiceStyles = () => {
@@ -186,13 +230,35 @@ function ServiceCard({ servicio, index, onOpenForm }) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      whileHover={{ y: -5 }}
-      className={`relative bg-slate-900/80 backdrop-blur-sm border-2 ${styles.border} ${styles.glow} rounded-2xl p-6 transition-all duration-300 group cursor-pointer`}
-    >
+    <ScrollReveal delay={index * 0.1} direction="up">
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: index * 0.1 }}
+        whileHover={{ 
+          y: -12,
+          scale: 1.02,
+          transition: { duration: 0.3 }
+        }}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+          perspective: 1000
+        }}
+        className={`relative glass-card-hover border-2 ${styles.border} ${styles.glow} rounded-2xl p-6 transition-all duration-300 group cursor-pointer card-hover-lift overflow-hidden`}
+      >
+        {/* Gradient overlay animado */}
+        <div className="absolute inset-0 bg-gradient-animated opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none" />
+        
+        {/* Glow effect en hover */}
+        <motion.div
+          className={`absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl ${styles.glow}`}
+          style={{ zIndex: -1 }}
+        />
       {/* Content */}
       <div className="relative z-10">
         {/* Icon */}
@@ -261,7 +327,8 @@ function ServiceCard({ servicio, index, onOpenForm }) {
           </div>
         )}
       </div>
-    </motion.div>
+      </motion.div>
+    </ScrollReveal>
   );
 }
 

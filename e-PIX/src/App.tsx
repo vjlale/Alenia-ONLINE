@@ -8,6 +8,7 @@ import { useInterval } from './hooks/useInterval';
 import { useEmbedMode } from './hooks/useEmbedMode';
 import { loadingMessages, promptIdeas, sceneOptions } from './constants';
 import { ImagePreviewModal } from './components/ImagePreviewModal';
+import { MaintenanceModal } from './components/MaintenanceModal';
 import { ImagePanel } from './components/ImagePanel';
 import AnimatedBackground from './components/AnimatedBackground';
 import logoTitle from './images/logotit.png';
@@ -21,7 +22,10 @@ const sceneIcons: { [key: string]: React.FC<{className?: string}> } = {
   Luxury: StarIcon,
 };
 
+const isMaintenance = import.meta.env.VITE_EPIX_MAINTENANCE === 'true';
+
 export default function App() {
+  const [maintenanceModalOpen, setMaintenanceModalOpen] = useState(true);
   const [sourceImage, setSourceImage] = useState<{ file: File; url: string } | null>(null);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [prompt, setPrompt] = useState<string>('');
@@ -266,12 +270,40 @@ export default function App() {
 
   const isLoading = status === 'loading';
 
+  if (isMaintenance) {
+    return (
+      <>
+        <AnimatedBackground />
+        {maintenanceModalOpen ? (
+          <MaintenanceModal onClose={() => setMaintenanceModalOpen(false)} />
+        ) : (
+          <div className="min-h-screen bg-cyber-dark text-cyber-text font-sans flex flex-col items-center justify-center p-4">
+            <Logo className="w-20 h-20 mx-auto mb-6" />
+            <h1 className="text-2xl font-bold mb-2 bg-gradient-to-r from-neon-pink to-neon-cyan bg-clip-text text-transparent">
+              E-pix en mantenimiento
+            </h1>
+            <p className="text-cyber-text-muted mb-6 text-center max-w-md">
+              Estamos actualizando la app. Te avisaremos cuando esté disponible.
+            </p>
+            <button
+              type="button"
+              onClick={() => setMaintenanceModalOpen(true)}
+              className="bg-neon-cyan text-black font-bold py-2 px-6 rounded-lg hover:shadow-glow-cyan transition-all"
+            >
+              Ver aviso
+            </button>
+          </div>
+        )}
+      </>
+    );
+  }
+
   // Clases dinámicas basadas en modo embed
   const containerClasses = isEmbedded 
     ? embedConfig.compactMode 
-      ? "h-full bg-cyber-dark text-cyber-text font-sans overflow-hidden relative"
-      : "min-h-full bg-cyber-dark text-cyber-text font-sans relative"
-    : "min-h-screen bg-cyber-dark text-cyber-text font-sans relative";
+      ? "h-full bg-cyber-dark text-cyber-text font-sans overflow-hidden"
+      : "min-h-full bg-cyber-dark text-cyber-text font-sans"
+    : "min-h-screen bg-cyber-dark text-cyber-text font-sans";
 
   const mainClasses = isEmbedded
     ? embedConfig.compactMode
@@ -281,13 +313,15 @@ export default function App() {
 
   const showHeader = !isEmbedded || !embedConfig.hideHeader;
 
-  // Nota: para evitar estilos inline, usamos una clase condicional cuando hay maxHeight en embed
-  const maxHeightClass = isEmbedded && embedConfig.maxHeight ? 'embed-max-height' : '';
-
   return (
-    <div className={`${containerClasses} ${maxHeightClass}`}>
+    <>
       <AnimatedBackground />
-      <main className={`${mainClasses} relative z-10`}>
+      <div
+        className={`${containerClasses} ${embedConfig.maxHeight ? 'custom-max-height' : ''}`}
+        data-max-height={embedConfig.maxHeight || undefined}
+        style={{ maxHeight: embedConfig.maxHeight || 'none' }}
+      >
+        <main className={mainClasses}>
         {showHeader && (
           <header className={`flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left ${isEmbedded ? 'mb-4' : 'mb-10'}`}>
             <Logo className={`${isEmbedded && embedConfig.compactMode ? 'w-12 h-12' : 'w-20 h-20'} flex-shrink-0`} />
@@ -363,8 +397,6 @@ export default function App() {
                     </h3>
                     <div className="relative">
                       <textarea
-                        id="prompt-input-mobile"
-                        name="prompt-mobile"
                         ref={promptInputRef}
                         value={prompt}
                         onChange={handlePromptChange}
@@ -622,7 +654,7 @@ export default function App() {
       {isModalOpen && generatedImage && (
         <ImagePreviewModal imageUrl={generatedImage} onClose={() => setIsModalOpen(false)} />
       )}
-
     </div>
+    </>
   );
 }

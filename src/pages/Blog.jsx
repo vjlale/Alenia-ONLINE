@@ -1,13 +1,60 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Search, Tag, Calendar, Clock, ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { blogPosts, categories } from '../data/blogData';
 import { Helmet } from 'react-helmet-async';
 import SmartImage from '../components/common/SmartImage';
+import ScrollReveal from '../components/common/ScrollReveal';
+import Card3D from '../components/common/3DCard';
 
-const BlogCard = ({ post }) => (
-    <Link to={`/blog/${post.slug}`} className="block bg-slate-800/30 rounded-3xl overflow-hidden group border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col shadow-xl hover:shadow-cyan-500/20 relative">
+const BlogCard = ({ post, index }) => {
+  const cardRef = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const mouseXSpring = useSpring(x, { stiffness: 500, damping: 100 });
+  const mouseYSpring = useSpring(y, { stiffness: 500, damping: 100 });
+  
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / rect.width - 0.5;
+    const yPct = mouseY / rect.height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 1000
+      }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+    >
+      <Link 
+        to={`/blog/${post.slug}`} 
+        className="block glass-card-hover rounded-3xl overflow-hidden group border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col shadow-xl hover:shadow-cyan-500/20 relative card-hover-lift"
+      >
         {/* Imagen con efecto hover mejorado */}
         <div className="relative overflow-hidden">
             <SmartImage 
@@ -51,8 +98,13 @@ const BlogCard = ({ post }) => (
                 <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
             </div>
         </div>
-    </Link>
-);
+        
+        {/* Gradient overlay en hover */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-cyan-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500 pointer-events-none" />
+      </Link>
+    </motion.div>
+  );
+};
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
@@ -93,16 +145,18 @@ export default function Blog() {
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 glow-btn">
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Blog de Alen.ia
-            </span>
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Contenido sobre IA, automatización y desarrollo para potenciar tu negocio.
-          </p>
-        </motion.div>
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold mb-6">
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
+                Blog de Alen.ia
+              </span>
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Contenido sobre IA, automatización y desarrollo para potenciar tu negocio.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="mb-12">
           <div className="flex flex-col lg:flex-row gap-6 items-center">
@@ -191,35 +245,12 @@ export default function Blog() {
           </motion.div>
         )}
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={{
-            hidden: { opacity: 0 },
-            show: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.1
-              }
-            }
-          }}
-          initial="hidden"
-          animate="show"
-        >
+        {/* Grid con masonry effect mejorado */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
           {filteredPosts.filter(p => !p.featured).map((post, index) => (
-            <motion.div 
-              key={post.id} 
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                show: { opacity: 1, y: 0 }
-              }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="group"
-            >
-              <BlogCard post={post} />
-            </motion.div>
+            <BlogCard key={post.id} post={post} index={index} />
           ))}
-        </motion.div>
+        </div>
 
         {filteredPosts.length === 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12 text-slate-400">

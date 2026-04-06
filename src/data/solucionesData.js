@@ -18,8 +18,8 @@ export const soluciones = [
     niveles: {
       elemental: {
         nombre: 'ELEMENTAL',
-        precio: 'Desde $299',
-        precioNumerico: 299,
+        precio: 'Desde $149',
+        precioNumerico: 149,
         objetivo: 'Presencia digital básica y funcional',
         descripcion: 'Ideal para emprendedores que necesitan estar online rápidamente',
         beneficios: [
@@ -43,8 +43,8 @@ export const soluciones = [
       },
       moderado: {
         nombre: 'MODERADO',
-        precio: 'Desde $599',
-        precioNumerico: 599,
+        precio: 'Desde $299',
+        precioNumerico: 299,
         objetivo: 'Web profesional con funcionalidades avanzadas',
         descripcion: 'Para negocios que buscan convertir visitantes en clientes de forma efectiva',
         beneficios: [
@@ -71,8 +71,8 @@ export const soluciones = [
       },
       visionario: {
         nombre: 'VISIONARIO',
-        precio: 'Desde $1,299',
-        precioNumerico: 1299,
+        precio: 'Desde $649',
+        precioNumerico: 649,
         objetivo: 'Ecosistema digital completo que escala tu negocio',
         descripcion: 'La solución definitiva para empresas que piensan en grande',
         beneficios: [
@@ -119,8 +119,8 @@ export const soluciones = [
     niveles: {
       elemental: {
         nombre: 'ELEMENTAL',
-        precio: 'Desde $199',
-        precioNumerico: 199,
+        precio: 'Desde $99',
+        precioNumerico: 99,
         objetivo: 'Automatización básica para empezar',
         descripcion: 'Perfecto para negocios que quieren dar sus primeros pasos en automatización',
         beneficios: [
@@ -144,8 +144,8 @@ export const soluciones = [
       },
       moderado: {
         nombre: 'MODERADO',
-        precio: 'Desde $399',
-        precioNumerico: 399,
+        precio: 'Desde $199',
+        precioNumerico: 199,
         objetivo: 'Automatización completa multicanal',
         descripcion: 'Ideal para empresas que buscan automatizar múltiples procesos',
         beneficios: [
@@ -172,8 +172,8 @@ export const soluciones = [
       },
       visionario: {
         nombre: 'VISIONARIO',
-        precio: 'Desde $799',
-        precioNumerico: 799,
+        precio: 'Desde $399',
+        precioNumerico: 399,
         objetivo: 'Ecosistema de automatización empresarial',
         descripcion: 'La solución completa para empresas que quieren liderar en eficiencia',
         beneficios: [
@@ -220,8 +220,8 @@ export const soluciones = [
     niveles: {
       elemental: {
         nombre: 'ELEMENTAL',
-        precio: 'Desde $249',
-        precioNumerico: 249,
+        precio: 'Desde $124',
+        precioNumerico: 124,
         objetivo: 'Marketing digital básico optimizado',
         descripcion: 'Ideal para emprendedores que quieren empezar con marketing inteligente',
         beneficios: [
@@ -245,8 +245,8 @@ export const soluciones = [
       },
       moderado: {
         nombre: 'MODERADO',
-        precio: 'Desde $449',
-        precioNumerico: 449,
+        precio: 'Desde $224',
+        precioNumerico: 224,
         objetivo: 'Estrategia integral de marketing con IA',
         descripcion: 'Para empresas que buscan resultados consistentes y escalables',
         beneficios: [
@@ -273,8 +273,8 @@ export const soluciones = [
       },
       visionario: {
         nombre: 'VISIONARIO',
-        precio: 'Desde $899',
-        precioNumerico: 899,
+        precio: 'Desde $449',
+        precioNumerico: 449,
         objetivo: 'Marketing omnicanal impulsado por IA',
         descripcion: 'La solución definitiva para empresas que quieren dominar su mercado',
         beneficios: [
@@ -321,86 +321,86 @@ export const soluciones = [
     niveles: {
       elemental: {
         nombre: 'ELEMENTAL',
-        precio: 'Desde $149',
-        precioNumerico: 149,
-        objetivo: 'Contenido básico para mantener presencia',
-        descripcion: 'Perfecto para emprendedores que necesitan contenido consistente',
+        precio: 'Desde $74',
+        precioNumerico: 74,
+        objetivo: 'Auditoría básica de oportunidades de IA',
+        descripcion: 'Perfecto para emprendedores que quieren identificar procesos automatizables',
         beneficios: [
-          '15 posts mensuales para 1 red social',
-          'Calendarios de contenido mensuales',
-          'Diseños básicos con tu branding',
-          'Hashtags optimizados incluidos',
-          'Programación automática de publicaciones',
-          'Revisión y ajustes incluidos'
+          'Análisis de procesos actuales de tu negocio',
+          'Identificación de 3-5 oportunidades de IA',
+          'Reporte con recomendaciones específicas',
+          'Estimación de ROI por cada oportunidad',
+          'Consulta estratégica de 2 horas',
+          'Plan de implementación básico'
         ],
         caracteristicas: [
-          '1 red social (Instagram o Facebook)',
-          '15 publicaciones/mes',
-          'Diseños simples incluidos',
-          'Setup en 1 semana',
+          'Análisis de 1 área del negocio',
+          'Reporte de oportunidades (5-10 páginas)',
+          '2 semanas de análisis',
           'Soporte técnico 30 días',
-          'Calendario editorial'
+          '1 sesión de seguimiento',
+          'Recursos educativos incluidos'
         ],
         destacado: false,
         formularioId: '4-elemental'
       },
       moderado: {
         nombre: 'MODERADO',
-        precio: 'Desde $299',
-        precioNumerico: 299,
-        objetivo: 'Estrategia completa de contenido multicanal',
-        descripcion: 'Para empresas que quieren destacar con contenido de calidad',
+        precio: 'Desde $149',
+        precioNumerico: 149,
+        objetivo: 'Implementación de soluciones IA personalizadas',
+        descripcion: 'Para empresas que quieren automatizar procesos clave con IA',
         beneficios: [
-          '30 posts mensuales para múltiples redes',
-          'Artículos de blog SEO optimizados',
-          'Diseños profesionales con IA',
-          'Videos cortos para reels y stories',
-          'Estrategia de contenido personalizada',
-          'Análisis de rendimiento incluido',
-          'Adaptación a tendencias actuales',
-          'Respuesta a comentarios automatizada'
+          'Implementación de 2-3 soluciones IA específicas',
+          'Capacitación completa del equipo',
+          'Automatización de procesos repetitivos',
+          'Dashboard personalizado para monitoreo',
+          'Integración con sistemas existentes',
+          'Optimización continua por 3 meses',
+          'Análisis de impacto y ROI',
+          'Soporte durante la implementación'
         ],
         caracteristicas: [
-          '3 redes sociales principales',
-          '30 publicaciones + 4 artículos/mes',
-          'Diseños premium y videos',
-          'Setup en 2 semanas',
+          'Análisis completo del negocio',
+          'Implementación de 2-3 soluciones IA',
+          '6-8 semanas de implementación',
           'Soporte técnico 90 días',
-          'Reportes de engagement'
+          'Capacitación del equipo incluida',
+          'Reportes mensuales de performance'
         ],
         destacado: true,
-        etiqueta: 'MÁS VENDIDO',
+        etiqueta: 'MÁS POPULAR',
         formularioId: '4-moderado'
       },
       visionario: {
         nombre: 'VISIONARIO',
-        precio: 'Desde $599',
-        precioNumerico: 599,
-        objetivo: 'Máquina de contenido empresarial',
-        descripcion: 'La solución definitiva para marcas que quieren liderar en contenido',
+        precio: 'Desde $299',
+        precioNumerico: 299,
+        objetivo: 'Transformación digital completa con IA estratégica',
+        descripcion: 'La solución definitiva para empresas que quieren liderar con IA',
         beneficios: [
-          'Contenido ilimitado para todos los canales',
-          'IA entrenada específicamente para tu marca',
-          'Producción de videos profesionales',
-          'Podcasts y contenido de audio',
-          'Estrategia de thought leadership',
-          'Colaboraciones e influencer marketing',
-          'Contenido interactivo y dinámico',
-          'Gestión completa de comunidad',
-          'Análisis avanzado de performance',
-          'Consultoría de marca mensual'
+          'Ecosistema completo de IA empresarial',
+          'IA personalizada entrenada para tu industria',
+          'Automatización de todos los procesos clave',
+          'Análisis predictivo y machine learning',
+          'Integración completa con todos los sistemas',
+          'Consultoría estratégica mensual',
+          'Desarrollo de IA propietaria',
+          'Expansión a nuevas oportunidades de mercado',
+          'ROI garantizado o reembolso',
+          'Soporte VIP dedicado 24/7'
         ],
         caracteristicas: [
-          'Todos los canales digitales',
-          'Contenido diario + artículos semanales',
-          'Videos y multimedia premium',
-          'Setup en 3 semanas',
+          'Transformación digital completa',
+          'IA propietaria desarrollada a medida',
+          'Implementación en 3-4 meses',
           'Soporte VIP 1 año completo',
-          'Estratega de contenido dedicado'
+          'Consultor estratégico dedicado',
+          'Garantía de resultados empresariales'
         ],
         destacado: false,
         premium: true,
-        etiqueta: 'PREMIUM',
+        etiqueta: 'ENTERPRISE',
         formularioId: '4-visionario'
       }
     }
@@ -423,82 +423,82 @@ export const soluciones = [
     niveles: {
       elemental: {
         nombre: 'ELEMENTAL',
-        precio: 'Desde $179',
-        precioNumerico: 179,
-        objetivo: 'Optimización básica de marketplace',
-        descripcion: 'Ideal para vendedores que quieren mejorar sus resultados iniciales',
+        precio: 'Desde $89',
+        precioNumerico: 89,
+        objetivo: 'Dashboard básico con métricas esenciales',
+        descripcion: 'Ideal para negocios que quieren entender sus datos principales',
         beneficios: [
-          'Optimización de hasta 20 publicaciones',
-          'Análisis básico de competencia',
-          'Mejora de títulos y descripciones',
-          'Configuración de precios competitivos',
-          'Guía de mejores prácticas',
-          'Soporte para dudas iniciales'
+          'Dashboard interactivo con métricas clave',
+          'Reportes automáticos semanales',
+          'Visualizaciones claras y fáciles de entender',
+          'Integración con 2-3 fuentes de datos',
+          'Alertas automáticas de cambios importantes',
+          'Capacitación básica en interpretación'
         ],
         caracteristicas: [
-          '1 marketplace (MercadoLibre)',
-          'Hasta 20 productos optimizados',
-          '2 semanas de optimización',
+          'Dashboard con 8-10 métricas principales',
+          'Integración con Excel, Google Sheets',
+          '2 semanas de configuración',
           'Soporte técnico 30 días',
-          'Manual de buenas prácticas',
-          'Reporte de mejoras'
+          'Manual de uso incluido',
+          'Reportes automáticos'
         ],
         destacado: false,
         formularioId: '5-elemental'
       },
       moderado: {
         nombre: 'MODERADO',
-        precio: 'Desde $379',
-        precioNumerico: 379,
-        objetivo: 'Gestión completa y automatizada',
-        descripcion: 'Para vendedores serios que buscan escalar sus operaciones',
+        precio: 'Desde $189',
+        precioNumerico: 189,
+        objetivo: 'Sistema completo de análisis con múltiples fuentes',
+        descripcion: 'Para empresas que buscan insights profundos de múltiples datos',
         beneficios: [
-          'Optimización completa de catálogo',
-          'Automatización de respuestas y gestión',
-          'Análisis profundo de competencia',
-          'Estrategia de pricing dinámico',
-          'Gestión de reputación y reviews',
-          'Campañas publicitarias optimizadas',
-          'Dashboard de control de ventas',
-          'Capacitación en mejores prácticas'
+          'Integración completa de múltiples fuentes de datos',
+          'Dashboards avanzados con drill-down',
+          'Análisis de tendencias y patrones',
+          'Reportes automatizados personalizados',
+          'Segmentación avanzada de datos',
+          'Alertas inteligentes predictivas',
+          'API para integraciones adicionales',
+          'Capacitación del equipo en análisis'
         ],
         caracteristicas: [
-          'Múltiples marketplaces',
-          'Catálogo completo optimizado',
+          'Integración con 5-8 fuentes de datos',
+          'Dashboards interactivos avanzados',
           '4 semanas de implementación',
           'Soporte técnico 90 días',
-          'Automatizaciones incluidas',
-          'Reportes de performance'
+          'Reportes automatizados',
+          'Training de herramientas incluido'
         ],
         destacado: true,
-        etiqueta: 'MÁS EFICAZ',
+        etiqueta: 'MÁS POPULAR',
         formularioId: '5-moderado'
       },
       visionario: {
         nombre: 'VISIONARIO',
-        precio: 'Desde $699',
-        precioNumerico: 699,
-        objetivo: 'Ecosistema e-commerce empresarial',
-        descripcion: 'La solución completa para empresas que quieren dominar el comercio digital',
+        precio: 'Desde $349',
+        precioNumerico: 349,
+        objetivo: 'Plataforma empresarial de BI con análisis predictivo',
+        descripcion: 'La solución definitiva para empresas data-driven',
         beneficios: [
-          'Presencia optimizada en todos los marketplaces',
-          'IA para optimización automática continua',
-          'Integración completa con inventario y logística',
-          'Análisis predictivo de demanda',
-          'Estrategia omnicanal completa',
-          'Gestión automatizada de campañas',
-          'Consultoría estratégica semanal',
-          'Expansión a nuevos mercados',
-          'API personalizada para integraciones',
-          'Garantía de aumento en ventas'
+          'Plataforma completa de Business Intelligence',
+          'Machine Learning para análisis predictivo',
+          'Integración con todos los sistemas empresariales',
+          'Data Lake personalizado para big data',
+          'Modelos predictivos automatizados',
+          'Consultoría estratégica con data scientist',
+          'Automatización de decisiones basadas en datos',
+          'Análisis de mercado y competencia',
+          'API avanzada para desarrollos personalizados',
+          'Garantía de insights accionables'
         ],
         caracteristicas: [
-          'Todos los marketplaces principales',
-          'Optimización continua automatizada',
-          '6 semanas de implementación',
+          'Integración ilimitada de fuentes de datos',
+          'BI avanzado con machine learning',
+          '6-8 semanas de implementación',
           'Soporte VIP 1 año completo',
-          'Consultor e-commerce dedicado',
-          'ROI garantizado'
+          'Data scientist dedicado',
+          'ROI medible garantizado'
         ],
         destacado: false,
         premium: true,

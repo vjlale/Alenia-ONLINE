@@ -1,0 +1,117 @@
+/* Optimizaciones Mobile-First 2026 */
+
+/* Touch targets mejorados */
+@media (max-width: 768px) {
+  /* Asegurar tamaño mínimo de 44px para elementos táctiles */
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"],
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Reducir animaciones complejas en móvil para mejor performance */
+  .parallax-layer,
+  .parallax-bg,
+  .parallax-text,
+  .parallax-image {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Optimizar glassmorphism en móvil */
+  .glass-effect,
+  .glass-card,
+  .glass-advanced {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Reducir efectos 3D en móvil */
+  [style*="rotateX"],
+  [style*="rotateY"],
+  [style*="perspective"] {
+    transform: none !important;
+  }
+
+  /* Mejorar scroll en móvil */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Safe area para iOS */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* Optimizar fuentes en móvil */
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+  }
+
+  h3 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Reducir espaciado en móvil */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Ajustar animaciones para tablets */
+  .parallax-layer {
+    transform: translateZ(-1px) scale(2) !important;
+  }
+
+  /* Optimizar grid layouts */
+  .grid {
+    gap: 1.5rem;
+  }
+}
+
+/* Reducir movimiento para usuarios que lo prefieren */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .parallax-layer,
+  .parallax-bg {
+    transform: none !important;
+  }
+}
+
+/* Optimizaciones de performance para móvil */
+@media (max-width: 768px) {
+  /* Desactivar will-change en móvil para ahorrar memoria */
+  .will-change-transform,
+  .will-change-opacity {
+    will-change: auto;
+  }
+
+  /* Reducir sombras complejas */
+  .box-shadow-brand,
+  .box-shadow-card-hover,
+  .glow-btn {
+    box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3) !important;
+  }
+}

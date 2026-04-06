@@ -9,25 +9,57 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info']
+      }
+    },
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor': ['react', 'react-dom'],
-          'router': ['react-router-dom'],
-          'motion': ['framer-motion'],
-          'icons': ['lucide-react'],
-          'charts': ['recharts'],
-          // Separar componentes lazy en chunks específicos
-          'pages-core': ['./src/pages/Home', './src/pages/Contact', './src/pages/NotFound'],
-          'pages-services': ['./src/pages/Services', './src/pages/SolucionLevels', './src/pages/ServiceDetail'],
-          'pages-blog': ['./src/pages/Blog', './src/pages/BlogPostPage'],
-          'pages-apps': ['./src/pages/Apps'],
-          'components-apps': [
-            './src/components/apps/ROICalculator',
-            './src/components/apps/CompetitorAnalyzer',
-            './src/components/apps/HashtagGenerator',
-            './src/components/apps/AutomationSimulator'
-          ]
+        manualChunks: (id) => {
+          // Vendor chunks
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('react-router')) {
+              return 'vendor-router';
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-motion';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('recharts')) {
+              return 'vendor-charts';
+            }
+            // Otros vendor
+            return 'vendor-other';
+          }
+          // Chunks por funcionalidad
+          if (id.includes('/pages/')) {
+            if (id.includes('Home') || id.includes('Contact') || id.includes('NotFound')) {
+              return 'pages-core';
+            }
+            if (id.includes('Services') || id.includes('SolucionLevels') || id.includes('ServiceDetail')) {
+              return 'pages-services';
+            }
+            if (id.includes('Blog')) {
+              return 'pages-blog';
+            }
+            if (id.includes('Apps')) {
+              return 'pages-apps';
+            }
+          }
+          if (id.includes('/components/apps/')) {
+            return 'components-apps';
+          }
+          if (id.includes('/components/common/')) {
+            return 'components-common';
+          }
         },
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -36,7 +68,9 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1000,
     emptyOutDir: true,
-    copyPublicDir: true
+    copyPublicDir: true,
+    cssCodeSplit: true,
+    reportCompressedSize: false
   },
   server: {
     port: 3001,

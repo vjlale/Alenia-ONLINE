@@ -1,48 +1,57 @@
 import React from 'react';
 
-interface Star {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  animationDelay: number;
-}
-
 const AnimatedBackground: React.FC = () => {
-  // Generar estrellas con posiciones aleatorias
-  const stars: Star[] = React.useMemo(() => {
-    const starArray: Star[] = [];
-    for (let i = 0; i < 100; i++) {
-      starArray.push({
-        id: i,
-        x: Math.random() * 100, // porcentaje del ancho
-        y: Math.random() * 100, // porcentaje del alto
-        size: Math.random() * 2 + 1, // tamaño entre 1-3px
-        animationDelay: Math.random() * 3, // delay aleatorio para animación
-      });
-    }
-    return starArray;
-  }, []);
+  // Generate stars and particles outside of useEffect and return statement
+  const stars = [...Array(100)].map((_, i) => {
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    const animationDelay = Math.random() * 3;
+    const animationDuration = 2 + Math.random() * 3;
+    return (
+      <div
+        key={`star-${i}`}
+        className="absolute w-1 h-1 bg-white rounded-full opacity-70 animate-pulse star"
+        style={{
+          left: `${left}%`,
+          top: `${top}%`,
+          animationDelay: `${animationDelay}s`,
+          animationDuration: `${animationDuration}s`,
+        }}
+      />
+    );
+  });
 
-  const getSizeClass = (size: number) => {
-    if (size < 1.5) return 'star-small';
-    if (size < 2.5) return 'star-medium';
-    return 'star-large';
-  };
+  const particles = [...Array(20)].map((_, i) => {
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    const duration = 4 + Math.random() * 4;
+    const delay = Math.random() * 4;
+    return (
+      <div
+        key={`particle-${i}`}
+        className="absolute w-2 h-2 bg-cyan-400/30 rounded-full blur-sm particle"
+        style={{
+          left: `${left}%`,
+          top: `${top}%`,
+          animation: `float ${duration}s ease-in-out infinite`,
+          animationDelay: `${delay}s`,
+        }}
+      />
+    );
+  });
 
   return (
-    <div className="animated-stars fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Reglas CSS dinámicas para posiciones y delays sin estilos inline en cada estrella */}
-      <style>{`
-        ${stars
-          .map(
-            (s, i) => `.animated-stars > .star:nth-child(${i + 1}){ left:${s.x}%; top:${s.y}%; animation-delay:${s.animationDelay}s; }`
-          )
-          .join('\n')}
-      `}</style>
-      {stars.map((star) => (
-        <div key={star.id} className={`star ${getSizeClass(star.size)}`} />
-      ))}
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-black">
+      {/* Estrellas animadas */}
+      {stars}
+
+      {/* Efecto de nebulosa sutil */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20 animate-gradient" />
+
+      {/* Partículas flotantes */}
+      <div className="absolute inset-0">
+        {particles}
+      </div>
     </div>
   );
 };

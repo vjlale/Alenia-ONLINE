@@ -1,4 +1,5 @@
 import React from 'react';
+import logoSrc from '../images/logo1.png';
 
 interface LogoProps {
   className?: string;
@@ -9,7 +10,7 @@ export const Logo: React.FC<LogoProps> = ({ className = '', showTitle = true }) 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <img 
-        src="/images/logo1.png" 
+        src={logoSrc} 
         alt="PicShop Logo" 
         className="w-8 h-8"
       />
