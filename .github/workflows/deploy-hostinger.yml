@@ -1,18 +1,17 @@
 # Despliegue automático a Hostinger al hacer push a la rama principal.
 #
 # Secretos en GitHub (Settings → Secrets and variables → Actions → New repository secret):
-#   HOSTINGER_FTP_HOST      → Servidor FTP (ej. ftp.tudominio.com o la IP que muestra hPanel)
+#   HOSTINGER_FTP_HOST      → SOLO hostname o IP (ej. ftp.tudominio.com). Sin ftp:// ni barras.
 #   HOSTINGER_FTP_USERNAME  → Usuario FTP
 #   HOSTINGER_FTP_PASSWORD  → Contraseña FTP
 #
 # Opcionales:
-#   HOSTINGER_FTP_REMOTE_DIR → Carpeta remota (ej. public_html/ o ./). Si no creás el secreto, se usa ./
+#   HOSTINGER_FTP_REMOTE_DIR → Carpeta remota (ej. public_html/). Sin el secreto se usa ./
 #
-# Dónde sacar los datos: hPanel → Archivos → Cuentas FTP (o Detalles FTP del dominio).
-# FTPS en puerto 21 es lo habitual en Hostinger. Si falla el deploy, probá protocol: ftp en el paso Deploy.
+# Si ves ENOTFOUND: el host no existe en DNS. En hPanel copiá el "FTP host" exacto; suele ser
+# ftp.tudominio.com o una IP, NO la URL web (https://...).
 #
-# Este workflow NO sustituye al de GitHub Pages (main.yml). Si solo usás Hostinger, podés desactivar
-# el job de Pages o borrar ese workflow.
+# Este workflow NO sustituye al de GitHub Pages (main.yml).
 
 name: Deploy to Hostinger (FTP)
 
@@ -45,15 +44,40 @@ jobs:
       - name: Build (Vite + post-build Hostinger)
         run: npm run build:hostinger
 
+      # Evita ENOTFOUND por espacios, saltos de línea o prefijo ftp:// en el secreto
+      - name: Normalizar host FTP y comprobar DNS
+        id: ftp
+        env:
+          RAW_HOST: ${{ secrets.HOSTINGER_FTP_HOST }}
+          RAW_DIR: ${{ secrets.HOSTINGER_FTP_REMOTE_DIR }}
+        run: |
+          set -e
+          trim() { printf '%s' "$1" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'; }
+          H=$(trim "$RAW_HOST")
+          H=$(printf '%s' "$H" | sed 's|^ftp://||I' | sed 's|^ftps://||I' | sed 's|/.*$||')
+          if [ -z "$H" ]; then
+            echo "::error::HOSTINGER_FTP_HOST está vacío. Creá el secreto con el servidor FTP de hPanel."
+            exit 1
+          fi
+          echo "Comprobando resolución DNS para: $H"
+          if ! getent hosts "$H" >/dev/null 2>&1; then
+            echo "::error::No se resuelve el host FTP '$H'. Revisá el secreto HOSTINGER_FTP_HOST: debe ser solo el nombre (ej. ftp.alenia.online) o la IP que muestra Hostinger, sin https:// ni rutas."
+            exit 1
+          fi
+          D=$(trim "$RAW_DIR")
+          if [ -z "$D" ]; then D="./"; fi
+          echo "host=$H" >> "$GITHUB_OUTPUT"
+          echo "remote_dir=$D" >> "$GITHUB_OUTPUT"
+
       - name: Deploy dist to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          server: ${{ secrets.HOSTINGER_FTP_HOST }}
+          server: ${{ steps.ftp.outputs.host }}
           username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           protocol: ftps
           port: 21
           local-dir: ./dist/
-          server-dir: ${{ secrets.HOSTINGER_FTP_REMOTE_DIR != '' && secrets.HOSTINGER_FTP_REMOTE_DIR || './' }}
+          server-dir: ${{ steps.ftp.outputs.remote_dir }}
           state-name: .ftp-deploy-sync-state.json
-          # dangerous-clean-slate: true  # Descomentá solo si querés borrar en el servidor lo que no esté en dist (riesgoso)
+          # dangerous-clean-slate: true
