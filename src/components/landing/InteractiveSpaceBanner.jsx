@@ -1,11 +1,17 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { useMouseInteraction } from '../../hooks/useMouseInteraction';
 import { Node } from '../../lib/Node';
 import { AnimationController } from '../../lib/AnimationController';
 import { CustomCursor } from './CustomCursor';
 import BannerInstructionsOverlay from './BannerInstructionsOverlay';
+import BannerExperienceIntroModal from './BannerExperienceIntroModal';
 import { useBannerCursorContext } from '../../contexts/BannerCursorContext';
+import {
+  BANNER_INTRO_SESSION_KEY,
+  HOME_CONTENT_ANCHOR_ID,
+  bannerExitInteractionLabel,
+} from '../../data/bannerExperienceCopy';
 
 const NODE_COLOR = 'hsl(180, 90%, 50%)';
 
@@ -25,7 +31,27 @@ export default function InteractiveSpaceBanner() {
   const animationFrameRef = useRef(null);
   const [isInitialized, setIsInitialized] = useState(false);
   const [containerReady, setContainerReady] = useState(false);
+  const [introDismissed, setIntroDismissed] = useState(() => {
+    try {
+      return sessionStorage.getItem(BANNER_INTRO_SESSION_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
   const { setPointerOverBanner } = useBannerCursorContext();
+
+  const dismissIntro = useCallback(() => {
+    try {
+      sessionStorage.setItem(BANNER_INTRO_SESSION_KEY, '1');
+    } catch {
+      /* ignore */
+    }
+    setIntroDismissed(true);
+  }, []);
+
+  const scrollToMainContent = useCallback(() => {
+    document.getElementById(HOME_CONTENT_ANCHOR_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
 
   useLayoutEffect(() => {
     if (sectionRef.current) setContainerReady(true);
@@ -97,10 +123,6 @@ export default function InteractiveSpaceBanner() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/47f399e6-1133-4f83-afea-d4f19f76c8aa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'InteractiveSpaceBanner.jsx:animateEffect',message:'loop started',data:{interactive,reduceMotion},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-    // #endregion
-
     const centralR = BANNER_CONFIG.centralNodeRadius;
     const attractR = BANNER_CONFIG.attractRadius;
     const attractStr = BANNER_CONFIG.attractStrength;
@@ -133,12 +155,6 @@ export default function InteractiveSpaceBanner() {
       const cp = centerActive ? centralNodePositionRef.current : null;
       const repelActive = interactive && !centerActive && isMouseActiveRef.current && mp;
 
-      // #region agent log
-      frameCount++;
-      if (frameCount % 90 === 0) {
-        fetch('http://127.0.0.1:7242/ingest/47f399e6-1133-4f83-afea-d4f19f76c8aa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'InteractiveSpaceBanner.jsx:animate',message:'frame sample',data:{centerActive,hasCp:!!cp,interactive,repelActive:!!repelActive},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-      }
-      // #endregion
       const intensity = touchIntensityRef.current ?? 1;
       const interactionRadius = intensity > 1 ? 150 * intensity : 120;
       const force = intensity > 1 ? intensity * 0.5 : 1;
@@ -241,7 +257,19 @@ export default function InteractiveSpaceBanner() {
         aria-label="Red de nodos interactiva con partículas luminosas que responden al movimiento del ratón o al tacto"
       />
       <CustomCursor isActive={isMouseActive} position={globalMousePosition} />
-      <BannerInstructionsOverlay />
+      <BannerExperienceIntroModal isOpen={!introDismissed} onDismiss={dismissIntro} />
+      {introDismissed && <BannerInstructionsOverlay />}
+      {introDismissed && (
+        <div className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 pointer-events-auto">
+          <button
+            type="button"
+            onClick={scrollToMainContent}
+            className="cursor-pointer rounded-full border border-cyan-400/70 bg-black/50 px-5 py-2.5 text-sm font-semibold text-cyan-100 font-inter backdrop-blur-md shadow-[0_0_24px_rgba(34,211,238,0.2)] transition-all hover:border-cyan-300 hover:bg-black/65 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          >
+            {bannerExitInteractionLabel}
+          </button>
+        </div>
+      )}
       <p className="sr-only">
         Red de nodos interactiva. Mantén pulsado y arrastra para crear un nodo central que atrae y conecta nodos. Dos dedos para hacer scroll.
       </p>

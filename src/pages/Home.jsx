@@ -96,8 +96,11 @@ export default function Home() {
       {/* Particle Background */}
       <ParticleBackground particleCount={30} />
       
-      {/* Hero Section Modernizado */}
-      <section className="relative min-h-screen flex items-center justify-center py-20 bg-transparent overflow-hidden">
+      {/* Hero Section Modernizado — ancla para salir del banner interactivo */}
+      <section
+        id="contenido-principal"
+        className="relative min-h-screen flex items-center justify-center py-20 bg-transparent overflow-hidden scroll-mt-4"
+      >
         {/* Parallax background layers */}
         <div className="absolute inset-0 parallax-container">
           <div className="parallax-layer parallax-layer-slow opacity-20">

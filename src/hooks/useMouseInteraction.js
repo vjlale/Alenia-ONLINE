@@ -28,10 +28,6 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     const el = containerRef.current;
     if (!el) return;
 
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/47f399e6-1133-4f83-afea-d4f19f76c8aa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useMouseInteraction.js:effect',message:'listeners attached',data:{tagName:el.tagName,containerReady},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H5'})}).catch(()=>{});
-    // #endregion
-
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     let lastTouchTime = 0;
 
@@ -60,13 +56,9 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleMouseDown = (e) => {
-      // #region agent log
       if (isTouchDevice) {
-        fetch('http://127.0.0.1:7242/ingest/47f399e6-1133-4f83-afea-d4f19f76c8aa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useMouseInteraction.js:handleMouseDown',message:'mousedown skipped isTouchDevice',data:{isTouchDevice},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H4'})}).catch(()=>{});
         return;
       }
-      fetch('http://127.0.0.1:7242/ingest/47f399e6-1133-4f83-afea-d4f19f76c8aa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useMouseInteraction.js:handleMouseDown',message:'mousedown ok',data:{clientX:e.clientX,clientY:e.clientY},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
-      // #endregion
       isMouseDownRef.current = true;
       const pos = getPos(e);
       activateCentral(pos);
@@ -109,13 +101,9 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleTouchStart = (e) => {
-      // #region agent log
       if (e.touches.length >= 2) {
-        fetch('http://127.0.0.1:7242/ingest/47f399e6-1133-4f83-afea-d4f19f76c8aa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useMouseInteraction.js:handleTouchStart',message:'touchstart 2 fingers skip',data:{touches:e.touches.length},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
         return;
       }
-      fetch('http://127.0.0.1:7242/ingest/47f399e6-1133-4f83-afea-d4f19f76c8aa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useMouseInteraction.js:handleTouchStart',message:'touchstart 1 finger',data:{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
-      // #endregion
       if (e.cancelable) e.preventDefault();
       const touch = e.touches[0];
       const position = getTouchPos(touch);

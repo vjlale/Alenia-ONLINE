@@ -40,6 +40,7 @@ Sitio web corporativo de Alenia que muestra servicios de automatización, IA y d
 - ✅ SEO optimizado con meta tags dinámicos
 - ✅ Analytics y A/B testing integrado
 - ✅ Responsive design mobile-first
+- ✅ Modal de introducción al banner de nodos (Home): textos editables en `src/data/bannerExperienceCopy.js`; persistencia por sesión con `sessionStorage` (`alenia_banner_intro_dismissed`); botón “Salir de esta interacción” desplaza a la sección con `id="contenido-principal"` en `Home.jsx`.
 
 ---
 
