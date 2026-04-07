@@ -1,1 +1,0 @@
-import{j as e}from"./vendor-react-43202e25.js";import"./vendor-other-4815c394.js";function r(){return e.jsxs("div",{style:{padding:32},children:[e.jsx("h1",{style:{fontSize:28,fontWeight:800,marginBottom:16},children:"Panel de A/B Testing"}),e.jsx("p",{children:"Este es un dashboard placeholder para experimentos y reportes de A/B Testing."})]})}export{r as default};
