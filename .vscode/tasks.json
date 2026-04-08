@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Hostinger: build + subir dist (FTP)",
+      "type": "npm",
+      "script": "deploy:hostinger",
+      "path": ".",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "group": { "kind": "build", "isDefault": false }
+    }
+  ]
+}

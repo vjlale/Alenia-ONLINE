@@ -804,18 +804,15 @@ jobs:
 ```
 
 ### **Hostinger Deployment**
+**Automático en Git:** workflow `.github/workflows/deploy-hostinger.yml` (FTP al pushear a `main`; secretos en GitHub).
+
+**Desde tu PC (sin navegador en hPanel):** copiá `.env.deploy.example` a `.env.deploy`, completá FTP, luego:
 ```bash
-# 1. Build para Hostinger
-npm run build:hostinger
-
-# 2. Subir archivos via FTP/Panel
-# - Subir contenido de dist/ a public_html/
-# - Configurar .htaccess para SPA routing
-
-# 3. Verificar funcionamiento
-# - Probar todas las rutas
-# - Verificar assets se cargan correctamente
+npm run deploy:hostinger
 ```
+Esto ejecuta `build:hostinger` y sube `dist/` por FTP. Opcional: `OPEN_SITE_AFTER_DEPLOY=1` en `.env.deploy` abre el sitio en el navegador tras subir. Solo subida (si ya construiste): `npm run deploy:hostinger:upload`.
+
+**Manual:** `npm run build:hostinger` y subir el contenido de `dist/` a `public_html/` (incluye `.htaccess` del post-build).
 
 ### **Configuración de Dominio**
 ```bash
