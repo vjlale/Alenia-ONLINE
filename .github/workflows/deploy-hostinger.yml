@@ -1,17 +1,17 @@
-# Despliegue automático a Hostinger al hacer push a la rama principal.
+# Deploy a Hostinger por FTP/FTPS al pushear a main.
 #
-# Secretos en GitHub (Settings → Secrets and variables → Actions → New repository secret):
-#   HOSTINGER_FTP_HOST      → SOLO hostname o IP (ej. ftp.tudominio.com). Sin ftp:// ni barras.
-#   HOSTINGER_FTP_USERNAME  → Usuario FTP
-#   HOSTINGER_FTP_PASSWORD  → Contraseña FTP
+# Secretos (Settings → Secrets → Actions):
+#   HOSTINGER_FTP_HOST, HOSTINGER_FTP_USERNAME, HOSTINGER_FTP_PASSWORD
+#   HOSTINGER_FTP_REMOTE_DIR (opcional)
 #
-# Opcionales:
-#   HOSTINGER_FTP_REMOTE_DIR → Carpeta remota (ej. public_html/). Sin el secreto se usa ./
+# Variables del repo (Settings → Variables → Actions), opcionales:
+#   HOSTINGER_FTP_PROTOCOL   → ftp | ftps | ftps-legacy  (por defecto: ftp — suele funcionar mejor en hosting compartido)
+#   HOSTINGER_FTP_PORT       → ej. 21 o 990 (ftps-legacy a veces usa 990)
 #
-# Si ves ENOTFOUND: el host no existe en DNS. En hPanel copiá el "FTP host" exacto; suele ser
-# ftp.tudominio.com o una IP, NO la URL web (https://...).
+# Carpeta remota: por defecto public_html/ (típico Hostinger). Si al conectar por FileZilla ya estás
+# dentro de public_html, creá el secreto HOSTINGER_FTP_REMOTE_DIR con valor ./
 #
-# Este workflow NO sustituye al de GitHub Pages (main.yml).
+# Si falla: probá Variable HOSTINGER_FTP_PROTOCOL=ftps y puerto 21, o ftps-legacy con puerto 990.
 
 name: Deploy to Hostinger (FTP)
 
@@ -28,6 +28,7 @@ concurrency:
 jobs:
   build-and-deploy-ftp:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,40 +45,70 @@ jobs:
       - name: Build (Vite + post-build Hostinger)
         run: npm run build:hostinger
 
-      # Evita ENOTFOUND por espacios, saltos de línea o prefijo ftp:// en el secreto
-      - name: Normalizar host FTP y comprobar DNS
+      - name: Preparar conexión FTP (host, ruta, protocolo)
         id: ftp
         env:
           RAW_HOST: ${{ secrets.HOSTINGER_FTP_HOST }}
           RAW_DIR: ${{ secrets.HOSTINGER_FTP_REMOTE_DIR }}
+          VAR_PROTO: ${{ vars.HOSTINGER_FTP_PROTOCOL }}
+          VAR_PORT: ${{ vars.HOSTINGER_FTP_PORT }}
         run: |
           set -e
           trim() { printf '%s' "$1" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'; }
+
           H=$(trim "$RAW_HOST")
           H=$(printf '%s' "$H" | sed 's|^ftp://||I' | sed 's|^ftps://||I' | sed 's|/.*$||')
           if [ -z "$H" ]; then
-            echo "::error::HOSTINGER_FTP_HOST está vacío. Creá el secreto con el servidor FTP de hPanel."
+            echo "::error::HOSTINGER_FTP_HOST vacío. Usá solo hostname o IP (sin https://)."
             exit 1
           fi
-          echo "Comprobando resolución DNS para: $H"
+          echo "DNS: $H"
           if ! getent hosts "$H" >/dev/null 2>&1; then
-            echo "::error::No se resuelve el host FTP '$H'. Revisá el secreto HOSTINGER_FTP_HOST: debe ser solo el nombre (ej. ftp.alenia.online) o la IP que muestra Hostinger, sin https:// ni rutas."
+            echo "::error::No se resuelve '$H'. Revisá el secreto HOSTINGER_FTP_HOST en GitHub."
             exit 1
           fi
+
           D=$(trim "$RAW_DIR")
-          if [ -z "$D" ]; then D="./"; fi
+          if [ -z "$D" ]; then
+            D="public_html/"
+          fi
+          case "$D" in
+            */) ;;
+            *) D="${D}/" ;;
+          esac
+
+          P=$(trim "$VAR_PROTO")
+          if [ -z "$P" ]; then P="ftp"; fi
+          case "$P" in
+            ftp|ftps|ftps-legacy) ;;
+            *)
+              echo "::error::Protocolo inválido: $P (usá ftp, ftps o ftps-legacy)"
+              exit 1
+              ;;
+          esac
+
+          PORT=$(trim "$VAR_PORT")
+          if [ -z "$PORT" ]; then
+            if [ "$P" = "ftps-legacy" ]; then PORT=990; else PORT=21; fi
+          fi
+
           echo "host=$H" >> "$GITHUB_OUTPUT"
           echo "remote_dir=$D" >> "$GITHUB_OUTPUT"
+          echo "protocol=$P" >> "$GITHUB_OUTPUT"
+          echo "port=$PORT" >> "$GITHUB_OUTPUT"
+          echo "Usando protocolo=$P puerto=$PORT ruta_remota=$D"
 
-      - name: Deploy dist to Hostinger via FTP
+      - name: Deploy dist to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ steps.ftp.outputs.host }}
           username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
+          protocol: ${{ steps.ftp.outputs.protocol }}
+          port: ${{ steps.ftp.outputs.port }}
           local-dir: ./dist/
           server-dir: ${{ steps.ftp.outputs.remote_dir }}
+          security: loose
+          timeout: 120000
+          log-level: standard
           state-name: .ftp-deploy-sync-state.json
-          # dangerous-clean-slate: true
