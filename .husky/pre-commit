@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Sin suite de tests; el build se valida en pre-push a main.
+exit 0

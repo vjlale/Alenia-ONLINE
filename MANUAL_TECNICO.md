@@ -804,7 +804,9 @@ jobs:
 ```
 
 ### **Hostinger Deployment**
-**Automático en Git:** workflow `.github/workflows/deploy-hostinger.yml` (FTP al pushear a `main`; secretos en GitHub).
+**Flujo definitivo:** checklist en [`.github/PRODUCCION.md`](.github/PRODUCCION.md). Push a `main` → Husky valida `npm run build` → Actions **Deploy to Hostinger (FTP)** sube `dist/` a `public_html/`. GitHub Pages quedó **solo manual** (no confundir con producción).
+
+**Automático en Git:** workflow `.github/workflows/deploy-hostinger.yml` (secretos en GitHub).
 
 **Desde tu PC (sin navegador en hPanel):** copiá `.env.deploy.example` a `.env.deploy`, completá FTP, luego:
 ```bash

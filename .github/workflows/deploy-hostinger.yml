@@ -1,4 +1,5 @@
 # Deploy a Hostinger por FTP/FTPS al pushear a main.
+# Checklist: .github/PRODUCCION.md
 #
 # Secretos (Settings → Secrets → Actions):
 #   HOSTINGER_FTP_HOST, HOSTINGER_FTP_USERNAME, HOSTINGER_FTP_PASSWORD

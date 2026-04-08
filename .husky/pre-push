@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+# Antes de push a main: build para no subir código roto.
+# Producción Hostinger: GitHub Actions "Deploy to Hostinger (FTP)" al llegar el push.
+# Omitir: SKIP_PREPUSH_BUILD=1 git push
+
+[ -n "$SKIP_PREPUSH_BUILD" ] && exit 0
+branch="$(git rev-parse --abbrev-ref HEAD)"
+[ "$branch" = "main" ] || exit 0
+
+echo "husky pre-push: npm run build (rama main)…"
+npm run build || {
+  echo "Falló el build. Corregí errores o usá: SKIP_PREPUSH_BUILD=1 git push"
+  exit 1
+}
