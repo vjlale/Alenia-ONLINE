@@ -1,4 +1,7 @@
-name: Deploy to GitHub Pages
+# Publica en GitHub Pages (URL tipo *.github.io). NO actualiza el hosting Hostinger.
+# Para alenia.online / producción Hostinger usá el workflow "Deploy to Hostinger (FTP)".
+
+name: GitHub Pages (no actualiza Hostinger)
 
 on:
   push:
@@ -6,25 +9,29 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-github-pages:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Aviso — producción Hostinger es otro workflow
+        run: |
+          echo "::notice title=GitHub Pages::Este job solo publica en GitHub Pages. Para actualizar tu web en Hostinger, el workflow debe ser 'Deploy to Hostinger (FTP)' (pestaña Actions)."
+
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

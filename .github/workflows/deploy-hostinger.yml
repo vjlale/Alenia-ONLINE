@@ -30,6 +30,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - name: Este workflow actualiza Hostinger (FTP)
+        run: |
+          echo "::notice title=Hostinger::Subiendo dist/ por FTP a la carpeta configurada (por defecto public_html/)."
+
       - name: Checkout
         uses: actions/checkout@v4
 
