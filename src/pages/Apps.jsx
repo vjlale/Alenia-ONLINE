@@ -1,396 +1,404 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Search, Filter, Zap, TrendingUp, Calculator, BarChart3, Hash, Bot, Star, Clock, Users, Palette } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AppsStats from '../components/apps/AppsStats';
 import { Helmet } from 'react-helmet-async';
+import {
+  ArrowLeft,
+  Sparkles,
+  Rocket,
+  ChevronDown,
+  Zap,
+  TrendingUp,
+  Calculator,
+  BarChart3,
+  Hash,
+  Bot,
+  Palette,
+  Camera,
+  ArrowRight,
+} from 'lucide-react';
+
 import ScrollReveal from '../components/common/ScrollReveal';
 import AnimatedGradient from '../components/common/AnimatedGradient';
+import StartupAppCard from '../components/apps/StartupAppCard';
+import ToolCard from '../components/apps/ToolCard';
+import { startupApps } from '../data/startupApps';
+import {
+  BRAND_OG_IMAGE,
+  BRAND_OG_IMAGE_WIDTH,
+  BRAND_OG_IMAGE_HEIGHT,
+} from '../config/brandAssets';
 
-// Mapeo estático de colores para evitar purga de Tailwind en clases dinámicas
-const colorStyles = {
-  green: 'bg-green-500/10 text-green-300 ring-1 ring-green-400/20',
-  blue: 'bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/20',
-  purple: 'bg-purple-500/10 text-purple-300 ring-1 ring-purple-400/20',
-  orange: 'bg-orange-500/10 text-orange-300 ring-1 ring-orange-400/20',
-  teal: 'bg-teal-500/10 text-teal-300 ring-1 ring-teal-400/20',
-  yellow: 'bg-yellow-500/10 text-yellow-300 ring-1 ring-yellow-400/20',
-};
-
-const apps = [
+/**
+ * Herramientas gratuitas con IA (secundarias).
+ * Declaradas acá a propósito: antes eran el contenido principal de /apps,
+ * ahora quedan relegadas a una sección secundaria mientras las apps de la
+ * startup toman el protagonismo.
+ */
+const tools = [
   {
-    id: 1,
+    id: 'e-pix',
     name: 'E-pix Editor',
-    description: 'Editor de imágenes con IA avanzada. Crea, edita y mejora tus imágenes con herramientas de inteligencia artificial.',
-    category: 'Inteligencia Artificial',
-    difficulty: 'Intermedio',
-    timeToComplete: '10 min',
-    rating: 4.9,
-    users: '5.2k',
-    icon: <Palette className="w-8 h-8" />,
+    description:
+      'Editor de imágenes con IA avanzada. Crea, edita y mejora imágenes con modelos generativos.',
+    icon: <Palette className="h-5 w-5" />,
     color: 'purple',
-    features: ['Edición con IA', 'Generación de imágenes', 'Filtros inteligentes', 'Herramientas creativas'],
     link: 'https://e-pix.alenia.online',
-    featured: true,
-    external: true
-  },
-  {
-    id: 2,
-    name: 'Calculadora de ROI',
-    description: 'Calcula el retorno de inversión de tus campañas y proyectos con precisión matemática.',
-    category: 'Análisis',
-    difficulty: 'Fácil',
-    timeToComplete: '5 min',
-    rating: 4.8,
-    users: '2.5k',
-    icon: <Calculator className="w-8 h-8" />,
-    color: 'green',
-    features: ['Cálculos automáticos', 'Reportes detallados', 'Comparativas'],
-    link: '/apps/calculadora-roi'
-  },
-  {
-    id: 3,
-    name: 'Analizador de Competencia',
-    description: 'Compara tu negocio con la competencia usando inteligencia artificial avanzada.',
-    category: 'Inteligencia Artificial',
-    difficulty: 'Intermedio',
-    timeToComplete: '15 min',
+    external: true,
     rating: 4.9,
-    users: '1.8k',
-    icon: <BarChart3 className="w-8 h-8" />,
-    color: 'blue',
-    features: ['Análisis de mercado', 'Benchmarking', 'Recomendaciones IA'],
-    link: '/apps/analizador-competencia'
+    timeToComplete: '10 min',
+    users: '5.2k',
   },
   {
-    id: 4,
-    name: 'Generador de Hashtags',
-    description: 'Obtén hashtags relevantes y optimizados para maximizar el alcance de tus publicaciones.',
-    category: 'Marketing',
-    difficulty: 'Fácil',
-    timeToComplete: '3 min',
-    rating: 4.7,
-    users: '3.2k',
-    icon: <Hash className="w-8 h-8" />,
-    color: 'purple',
-    features: ['Hashtags trending', 'Análisis de popularidad', 'Categorización'],
-    link: '/apps/generador-hashtags'
-  },
-  {
-    id: 5,
-    name: 'Simulador de Automatizaciones',
-    description: 'Visualiza y prueba automatizaciones para optimizar los procesos de tu empresa.',
-    category: 'Automatización',
-    difficulty: 'Avanzado',
-    timeToComplete: '20 min',
-    rating: 4.6,
-    users: '950',
-    icon: <Bot className="w-8 h-8" />,
-    color: 'orange',
-    features: ['Simulaciones 3D', 'Flujos personalizados', 'Métricas en tiempo real'],
-    link: '/apps/simulador-automatizaciones'
-  },
-  {
-    id: 6,
-    name: 'Optimizador de SEO',
-    description: 'Mejora el posicionamiento de tu sitio web con análisis SEO inteligente.',
-    category: 'SEO',
-    difficulty: 'Intermedio',
-    timeToComplete: '12 min',
-    rating: 4.5,
-    users: '1.5k',
-    icon: <TrendingUp className="w-8 h-8" />,
+    id: 'picshop',
+    name: 'PicShop',
+    description: 'Transformá tus productos en fichas listas para publicar en tu tienda online.',
+    icon: <Camera className="h-5 w-5" />,
     color: 'teal',
-    features: ['Análisis de palabras clave', 'Auditoría técnica', 'Sugerencias de mejora'],
-    link: '/apps/optimizador-seo'
+    link: '/apps/picshop',
+    rating: 4.7,
+    timeToComplete: '5 min',
+    users: '1.1k',
   },
   {
-    id: 7,
-    name: 'Gestor de Campañas',
-    description: 'Crea y gestiona campañas de marketing multicanal desde una sola plataforma.',
-    category: 'Marketing',
-    difficulty: 'Intermedio',
-    timeToComplete: '18 min',
-    rating: 4.4,
-    users: '1.2k',
-    icon: <Zap className="w-8 h-8" />,
-    color: 'yellow',
-    features: ['Multiplataforma', 'Analytics integrado', 'Automatización'],
-    link: '/apps/gestor-campanas'
-  }
-];
-
-const categories = [
-  'Todas',
-  'Análisis',
-  'Inteligencia Artificial',
-  'Marketing',
-  'Automatización',
-  'SEO'
-];
-
-const difficulties = [
-  'Todas',
-  'Fácil',
-  'Intermedio',
-  'Avanzado'
+    id: 'roi',
+    name: 'Calculadora de ROI',
+    description:
+      'Calculá el retorno de inversión de tus campañas y proyectos con precisión matemática.',
+    icon: <Calculator className="h-5 w-5" />,
+    color: 'green',
+    link: '/apps/calculadora-roi',
+    rating: 4.8,
+    timeToComplete: '5 min',
+    users: '2.5k',
+  },
+  {
+    id: 'competencia',
+    name: 'Analizador de Competencia',
+    description: 'Compará tu negocio con la competencia usando inteligencia artificial.',
+    icon: <BarChart3 className="h-5 w-5" />,
+    color: 'blue',
+    link: '/apps/analizador-competencia',
+    rating: 4.9,
+    timeToComplete: '15 min',
+    users: '1.8k',
+  },
+  {
+    id: 'hashtags',
+    name: 'Generador de Hashtags',
+    description: 'Obtené hashtags optimizados para maximizar el alcance de tus publicaciones.',
+    icon: <Hash className="h-5 w-5" />,
+    color: 'purple',
+    link: '/apps/generador-hashtags',
+    rating: 4.7,
+    timeToComplete: '3 min',
+    users: '3.2k',
+  },
+  {
+    id: 'automatizaciones',
+    name: 'Simulador de Automatizaciones',
+    description: 'Visualizá y probá automatizaciones para optimizar los procesos de tu empresa.',
+    icon: <Bot className="h-5 w-5" />,
+    color: 'orange',
+    link: '/apps/simulador-automatizaciones',
+    rating: 4.6,
+    timeToComplete: '20 min',
+    users: '950',
+  },
+  {
+    id: 'seo',
+    name: 'Optimizador de SEO',
+    description: 'Mejorá el posicionamiento de tu sitio web con análisis SEO inteligente.',
+    icon: <TrendingUp className="h-5 w-5" />,
+    color: 'teal',
+    link: '/apps/optimizador-seo',
+    rating: 4.5,
+    timeToComplete: '12 min',
+    users: '1.5k',
+  },
 ];
 
 export default function Apps() {
-  const [selectedCategory, setSelectedCategory] = useState('Todas');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('Todas');
-  const [searchTerm, setSearchTerm] = useState('');
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 400], [0, 120]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
-  const filteredApps = apps.filter(app => {
-    const matchesCategory = selectedCategory === 'Todas' || app.category === selectedCategory;
-    const matchesDifficulty = selectedDifficulty === 'Todas' || app.difficulty === selectedDifficulty;
-    const matchesSearch = app.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         app.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesDifficulty && matchesSearch;
-  });
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
-  const featuredApp = apps.find(app => app.featured);
+  useEffect(() => {
+    const handleMove = (e) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100,
+      });
+    };
+    window.addEventListener('mousemove', handleMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, []);
+
+  const totalApps = startupApps.length;
+  const inProduction = startupApps.filter((a) => a.status === 'En producción').length;
 
   return (
     <>
       <Helmet>
-        <title>Apps con IA gratuitas e interactivas | Alen.ia</title>
-        <meta name="description" content="Explora nuestras apps gratuitas con IA: Calculadora de ROI, Analizador de Competencia, Generador de Hashtags y más." />
+        <title>Apps de la startup Alen.iA — Nuestras apps en producción</title>
+        <meta
+          name="description"
+          content="Conocé las apps desarrolladas por la startup Alen.iA. Match Padel y próximos lanzamientos: productos digitales reales, pensados para escalar."
+        />
         <link rel="canonical" href="https://alenia.online/apps" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://alenia.online/apps" />
-        <meta property="og:title" content="Apps con IA gratuitas e interactivas | Alen.ia" />
-        <meta property="og:description" content="Herramientas prácticas con IA para análisis, marketing y automatización." />
-        <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
-        <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:title" content="Apps de la startup Alen.iA" />
+        <meta
+          property="og:description"
+          content="Nuestras apps en producción. Match Padel y próximos lanzamientos."
+        />
+        <meta property="og:image" content={BRAND_OG_IMAGE} />
+        <meta property="og:image:alt" content="ALENIA - Apps de la startup" />
+        <meta property="og:image:width" content={String(BRAND_OG_IMAGE_WIDTH)} />
+        <meta property="og:image:height" content={String(BRAND_OG_IMAGE_HEIGHT)} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://alenia.online/apps" />
-        <meta property="twitter:title" content="Apps con IA gratuitas e interactivas | Alen.ia" />
-        <meta property="twitter:description" content="Herramientas prácticas con IA para análisis, marketing y automatización." />
-        <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+        <meta property="twitter:title" content="Apps de la startup Alen.iA" />
+        <meta
+          property="twitter:description"
+          content="Match Padel y próximas apps: productos digitales reales."
+        />
+        <meta property="twitter:image" content={BRAND_OG_IMAGE} />
       </Helmet>
-      <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20">
-      <div className="container mx-auto px-6">
-        {/* Header mejorado */}
-        <ScrollReveal direction="up" delay={0.2}>
-          <div className="text-center mb-16">
+
+      <main className="relative min-h-screen overflow-hidden bg-alenia-dark">
+        {/* Background animado: gradiente que sigue al cursor */}
+        <div
+          className="pointer-events-none fixed inset-0 opacity-30"
+          style={{
+            background: `radial-gradient(800px circle at ${mousePos.x}% ${mousePos.y}%, rgba(0,255,136,0.08), transparent 50%)`,
+          }}
+        />
+
+        {/* Grid de fondo */}
+        <div
+          className="pointer-events-none fixed inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        {/* ======================== HERO ======================== */}
+        <section className="relative min-h-[85vh] pt-28 pb-16">
+          <motion.div
+            style={{ y: heroY, opacity: heroOpacity }}
+            className="container mx-auto max-w-6xl px-6"
+          >
+            {/* Breadcrumb */}
             <motion.div
-              whileHover={{ x: -4 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <Link 
+              <Link
                 to="/"
-                className="inline-flex items-center gap-2 text-sm text-gray-400 mb-6 hover:text-white transition-colors group"
+                className="group mb-10 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
               >
-                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                <span>Volver al inicio</span>
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                Volver al inicio
               </Link>
             </motion.div>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold mb-6">
-              <AnimatedGradient className="apps-hero-gradient bg-clip-text text-transparent">
-                Apps y Herramientas
-              </AnimatedGradient>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Soluciones digitales inteligentes para potenciar tu negocio y optimizar tus procesos
-            </p>
-          </div>
-        </ScrollReveal>
 
-        {/* Apps Stats */}
-        {/* Eliminado AppsStats */}
-        
-        {/* Search and Filters */}
-        {/* Eliminado buscador y filtros */}
-        
-        {/* Featured App */}
-        {featuredApp && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-16"
-          >
-            <div className="bg-brand-primary rounded-2xl p-6 sm:p-8 md:p-12 box-shadow-card glow-btn border border-brand text-white">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="bg-green-500 px-3 py-1 rounded-full text-xs font-medium">
-                  Destacada
-                </span>
-                <div className="flex items-center gap-1 text-sm">
-                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                  <span>{featuredApp.rating}</span>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row items-start gap-6">
-                <div className="flex-shrink-0">
-                  <div className={`w-16 h-16 rounded-xl flex items-center justify-center ${colorStyles[featuredApp.color] || ''}`}>
-                    {featuredApp.icon}
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-cyan-400">{featuredApp.name}</h2>
-                  <p className="text-base sm:text-lg text-slate-300 mb-6 max-w-2xl">
-                    {featuredApp.description}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-3 sm:gap-6 mb-6 text-sm">
-                    <span className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      {featuredApp.timeToComplete}
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <Users className="w-4 h-4" />
-                      {featuredApp.users} usuarios
-                    </span>
-                    <span className="bg-white/20 px-3 py-1 rounded-full text-xs">
-                      {featuredApp.difficulty}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {featuredApp.features.map((feature, index) => (
-                      <span key={index} className="bg-white/10 px-3 py-1 rounded-full text-sm">
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                  {featuredApp.external ? (
-                    <a 
-                      href={featuredApp.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors inline-flex items-center gap-2 w-full sm:w-auto justify-center"
-                    >
-                      Probar herramienta
-                      <Zap className="w-5 h-5" />
-                    </a>
-                  ) : (
-                    <Link 
-                      to={featuredApp.link}
-                      className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors inline-flex items-center gap-2 w-full sm:w-auto justify-center"
-                    >
-                      Probar herramienta
-                      <Zap className="w-5 h-5" />
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="mb-8 inline-flex items-center gap-2 rounded-full border border-alenia-primary/30 bg-alenia-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-alenia-primary"
+            >
+              <Rocket className="h-3.5 w-3.5" />
+              Startup Alen.iA
+            </motion.div>
 
-        {/* Apps Grid Interactivo */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredApps.filter(app => !app.featured).map((app, index) => (
-            <ScrollReveal key={app.id} delay={index * 0.1} direction="up">
+            {/* Título */}
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            >
+              Nuestras{' '}
+              <AnimatedGradient className="apps-hero-gradient">Apps</AnimatedGradient>
+              <br />
+              <span className="text-white/80">en producción.</span>
+            </motion.h1>
+
+            {/* Subtítulo */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.45 }}
+              className="mt-8 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
+            >
+              Productos digitales reales desarrollados por nuestra startup. Software que
+              resolvemos, lanzamos y hacemos crecer. Empezá por{' '}
+              <span className="font-semibold text-white">Match Padel</span>.
+            </motion.p>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-12 grid max-w-2xl grid-cols-3 gap-4"
+            >
+              <StatCard value={totalApps} label="Apps en el catálogo" />
+              <StatCard value={inProduction} label="En producción" />
+              <StatCard value="+" label="Más apps próximamente" asterisk />
+            </motion.div>
+
+            {/* Indicador de scroll */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+              className="mt-20 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/40"
+            >
               <motion.div
-                whileHover={{ 
-                  y: -12,
-                  scale: 1.02,
-                  transition: { duration: 0.3 }
-                }}
-                className="glass-card-hover rounded-2xl box-shadow-card-hover border border-alenia-primary/30 transition-all duration-300 overflow-hidden group card-hover-lift"
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
               >
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${colorStyles[app.color] || ''}`}>
-                    {app.icon}
-                  </div>
-                  <div className="flex items-center gap-1 text-sm text-gray-500">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span>{app.rating}</span>
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-cyan-400 mb-3 group-hover:text-green-400 transition-colors">
-                  {app.name}
-                </h3>
-                <p className="text-slate-300 mb-4 line-clamp-3">
-                  {app.description}
-                </p>
-                <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-sm text-slate-400 mb-4">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    {app.timeToComplete}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Users className="w-4 h-4" />
-                    {app.users}
-                  </span>
-                </div>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    app.difficulty === 'Fácil' ? 'bg-green-600 text-white' :
-                    app.difficulty === 'Intermedio' ? 'bg-yellow-600 text-white' :
-                    app.difficulty === 'Avanzado' ? 'bg-red-600 text-white' :
-                    'bg-red-100 text-red-700'
-                  }`}>
-                    {app.difficulty}
-                  </span>
-                  {app.external ? (
-                    <a 
-                      href={app.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-purple-500 hover:bg-purple-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors text-sm w-full sm:w-auto text-center"
-                    >
-                      Probar
-                    </a>
-                  ) : (
-                    <Link 
-                      to={app.link}
-                      className="bg-purple-500 hover:bg-purple-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors text-sm w-full sm:w-auto text-center"
-                    >
-                      Probar
-                    </Link>
-                  )}
-                </div>
-              </div>
+                <ChevronDown className="h-4 w-4" />
               </motion.div>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        {/* No Results */}
-        {filteredApps.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-12"
-          >
-            <div className="text-white">
-              <h3 className="text-2xl font-bold mb-4">No se encontraron herramientas</h3>
-              <p className="text-lg opacity-80">
-                Intenta ajustar los filtros o términos de búsqueda
-              </p>
-            </div>
+              Desplazate para explorar
+            </motion.div>
           </motion.div>
-        )}
+        </section>
 
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-20 bg-brand-gradient rounded-2xl p-8 md:p-12 text-center box-shadow-card border border-brand"
-        >
-          <h3 className="text-3xl font-bold text-white mb-4">
-            ¿Necesitas una herramienta personalizada?
-          </h3>
-          <p className="text-lg text-white mb-8 max-w-2xl mx-auto">
-            Nuestro equipo puede desarrollar herramientas específicas para las necesidades únicas de tu empresa.
-          </p>
-          <Link 
-            to="/contacto"
-            className="bg-brand-accent btn-black-bold px-8 py-3 rounded-lg glow-btn box-shadow-card border border-brand hover:bg-brand-gradient transition-colors inline-flex items-center gap-2"
-          >
-            Solicitar herramienta personalizada
-            <Zap className="w-5 h-5" />
-          </Link>
-        </motion.div>
-      </div>
-    </main>
+        {/* ======================== STARTUP APPS (PRINCIPAL) ======================== */}
+        <section className="relative py-24">
+          <div className="container mx-auto max-w-7xl px-6">
+            <ScrollReveal direction="up">
+              <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
+                <div className="max-w-2xl">
+                  <div className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-alenia-primary">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Productos de la startup
+                  </div>
+                  <h2 className="font-display text-4xl font-extrabold leading-tight text-white md:text-5xl">
+                    Apps que desarrollamos y operamos nosotros mismos
+                  </h2>
+                </div>
+                <p className="max-w-md text-base text-white/50">
+                  Cada tarjeta abre la fanpage oficial de la app. Hacé click en cualquier
+                  parte para conocerla a fondo.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+              {startupApps.map((app, index) => (
+                <StartupAppCard key={app.id} app={app} index={index} />
+              ))}
+            </div>
+
+            {/* Nota al pie: más apps ya desarrolladas por sumar */}
+            {startupApps.length < 3 && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mt-12 text-center text-sm text-white/40"
+              >
+                Estamos sumando más apps al catálogo — todas ya desarrolladas, listas
+                para mostrarte.
+              </motion.p>
+            )}
+          </div>
+        </section>
+
+        {/* ============== HERRAMIENTAS GRATUITAS CON IA (SECUNDARIA) ============== */}
+        <section className="relative border-t border-white/5 bg-black/30 py-24">
+          <div className="container mx-auto max-w-7xl px-6">
+            <ScrollReveal direction="up">
+              <div className="mb-12 max-w-3xl">
+                <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/40">
+                  <Zap className="h-3.5 w-3.5" />
+                  Bonus · Herramientas gratuitas
+                </div>
+                <h2 className="font-display text-3xl font-bold leading-tight text-white/90 md:text-4xl">
+                  Mini-apps con IA, gratis y listas para usar
+                </h2>
+                <p className="mt-4 text-base text-white/50">
+                  Pequeñas herramientas que liberamos para la comunidad. ROI, hashtags,
+                  SEO, análisis de competencia y más.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {tools.map((tool, index) => (
+                <ToolCard key={tool.id} tool={tool} index={index} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ======================== CTA FINAL ======================== */}
+        <section className="relative py-24">
+          <div className="container mx-auto max-w-4xl px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8 }}
+              className="relative overflow-hidden rounded-3xl border border-alenia-primary/20 bg-gradient-to-br from-alenia-primary/10 via-slate-900 to-slate-950 p-10 md:p-16"
+            >
+              {/* Glow decorativo */}
+              <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-alenia-primary/20 blur-3xl" />
+              <div className="absolute -left-20 -bottom-20 h-60 w-60 rounded-full bg-alenia-secondary/20 blur-3xl" />
+
+              <div className="relative flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-xl space-y-4">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    ¿Tenés una idea?
+                  </div>
+                  <h3 className="font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+                    Construyamos tu próxima app juntos
+                  </h3>
+                  <p className="text-base text-white/60">
+                    Diseñamos, desarrollamos y escalamos productos digitales end-to-end.
+                    Contanos tu proyecto y armamos la hoja de ruta.
+                  </p>
+                </div>
+                <Link
+                  to="/contacto"
+                  className="group inline-flex items-center gap-3 rounded-full bg-alenia-primary px-8 py-4 text-base font-semibold text-black shadow-glow-md transition-all hover:shadow-glow-lg"
+                >
+                  Agenda una demo
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </main>
     </>
+  );
+}
+
+function StatCard({ value, label, asterisk = false }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm">
+      <div className="font-display text-3xl font-extrabold text-white md:text-4xl">
+        {value}
+        {asterisk && <span className="text-alenia-primary">∞</span>}
+      </div>
+      <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
+        {label}
+      </div>
+    </div>
   );
 }

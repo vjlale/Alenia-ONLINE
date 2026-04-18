@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { brandPaths } from '../../config/brandAssets'
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { 
@@ -25,18 +26,20 @@ const Footer = () => {
   const quickLinks = [
     { name: 'Inicio', href: '/' },
     { name: 'Soluciones', href: '/soluciones' },
-    { name: 'Apps Gratuitas', href: '/apps' },
-    { name: 'Desarrollos IA', href: '/desarrollos-ia' },
+    { name: 'Apps', href: '/apps' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contacto', href: '/contacto' }
   ]
 
   const services = [
-    { name: 'Automatización WhatsApp', href: '/soluciones#whatsapp' },
-    { name: 'Desarrollo Web', href: '/soluciones#web' },
-    { name: 'Email Marketing', href: '/soluciones#email' },
-    { name: 'Análisis con IA', href: '/soluciones#analytics' },
-    { name: 'CRM Personalizado', href: '/soluciones#crm' }
+    { name: 'ALENIA HUB', href: '/soluciones/hub' },
+    { name: 'Desarrollo Web', href: '/soluciones/desarrollo-web' },
+    { name: 'Desarrollo de Apps', href: '/soluciones/desarrollo-apps' },
+    { name: 'Marketing con IA', href: '/soluciones/marketing-ia' },
+    { name: 'Agente de WhatsApp', href: '/soluciones/automatizacion' },
+    { name: 'Consultoría IA', href: '/soluciones/consultoria-ia' },
+    { name: 'Análisis de Datos', href: '/soluciones/analisis-datos' },
+    { name: 'CiberSeguridad', href: '/soluciones/ciberseguridad' },
   ]
 
   const social = [
@@ -95,7 +98,7 @@ const Footer = () => {
           <motion.div variants={itemVariants} className="lg:col-span-1">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link to="/" className="flex items-center mb-4">
-                <img src="/images/5-3.png" alt="ALENIA Logo" className="h-10 w-auto" />
+                <img src={brandPaths.lockupFull} alt="ALENIA" className="h-10 w-auto max-w-[240px] object-contain object-left" width={240} height={120} />
               </Link>
             </motion.div>
             <p className="text-alenia-light/70 mb-4 text-sm">
@@ -137,9 +140,11 @@ const Footer = () => {
               </div>
               <a href="https://alenia.online/" target="_blank" rel="noopener noreferrer" aria-label="Ir a alenia.online">
                 <motion.img
-                  src="/images/Alenia1.png"
-                  alt="ALENIA Marca"
-                  className="h-10 w-auto opacity-90"
+                  src={brandPaths.lockupText}
+                  alt="ALENIA"
+                  className="h-10 w-auto max-w-[220px] object-contain opacity-90"
+                  width={220}
+                  height={55}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 />
@@ -174,13 +179,13 @@ const Footer = () => {
               {services.map((service) => (
                 <li key={service.name}>
                   <motion.div whileHover={{ x: 4 }}>
-                    <a
-                      href={service.href}
+                    <Link
+                      to={service.href}
                       className="text-alenia-light/70 hover:text-alenia-primary transition-colors text-sm flex items-center group"
                     >
                       <ArrowRight className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1" />
                       {service.name}
-                    </a>
+                    </Link>
                   </motion.div>
                 </li>
               ))}

@@ -2,12 +2,13 @@ import analyticsService from './services/analyticsService';
 import seoService from './services/seoService';
 import performanceService from './services/performanceService';
 import abTestingService from './services/abTestingService';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion';
 import { useState, useEffect, lazy } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Helmet } from 'react-helmet-async';
 import Header from './components/common/Header'
+import BrandIntroSplash from './components/common/BrandIntroSplash'
 import Footer from './components/common/Footer'
 import LoadingSpinner from './components/common/LoadingSpinner'
 import LazyLoadErrorBoundary from './components/common/LazyLoadErrorBoundary'
@@ -27,10 +28,11 @@ import NotFound from './pages/NotFound'
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const Apps = lazy(() => import('./pages/Apps'));
-const DesarrollosIA = lazy(() => import('./pages/DesarrollosIA'));
 const Services = lazy(() => import('./pages/Services'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
-const SolucionLevels = lazy(() => import('./pages/SolucionLevels'));
+const SolucionesHub = lazy(() => import('./pages/SolucionesHub'));
+const SolucionesDigitales = lazy(() => import('./pages/SolucionesDigitales'));
+const SolucionDetail = lazy(() => import('./pages/SolucionDetail'));
 const Automatizaciones = lazy(() => import('./pages/Automatizaciones'));
 const KontrolPlusLanding = lazy(() => import('./pages/KontrolPlusLanding'));
 const ABTestingDashboard = lazy(() => import('./components/admin/ABTestingDashboard'));
@@ -43,6 +45,7 @@ const PicShopEmbed = lazy(() => import('./components/apps/PicShopEmbed'));
 const PlayPadelLanding = lazy(() => import('./pages/PlayPadelLanding'));
 
 import './styles/globals.css'
+import { BRAND_ASSETS } from './config/brandAssets'
 
 // Componente para tracking de navegación
 function NavigationTracker() {
@@ -91,7 +94,6 @@ function AppContent() {
         () => import('./pages/Blog'),
         () => import('./pages/Services'),
         () => import('./pages/Apps'),
-        () => import('./pages/DesarrollosIA'),
         () => import('./pages/Contact')
       ];
 
@@ -218,7 +220,7 @@ function AppContent() {
             "@type": "Organization",
             name: "ALENIA",
             url: "https://alenia.online",
-            logo: "https://alenia.online/images/5-3.png",
+            logo: BRAND_ASSETS.symbol,
             description: "Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.",
             address: {
               "@type": "PostalAddress",
@@ -238,6 +240,7 @@ function AppContent() {
           })}
         </script>
       </Helmet>
+      <BrandIntroSplash />
       <NavigationTracker />
       <ScrollToTop />
       <ScrollProgress />
@@ -253,7 +256,7 @@ function AppContent() {
           <Route path="/blog" element={<LazyRoute component={Blog} />} />
           <Route path="/blog/:slug" element={<LazyRoute component={BlogPostPage} />} />
           <Route path="/apps" element={<LazyRoute component={Apps} />} />
-          <Route path="/desarrollos-ia" element={<LazyRoute component={DesarrollosIA} />} />
+          <Route path="/desarrollos-ia" element={<Navigate to="/apps" replace />} />
           <Route path="/apps/calculadora-roi" element={<LazyRoute component={ROICalculator} />} />
           <Route path="/apps/analizador-competencia" element={<LazyRoute component={CompetitorAnalyzer} />} />
           <Route path="/apps/generador-hashtags" element={<LazyRoute component={HashtagGenerator} />} />
@@ -262,7 +265,9 @@ function AppContent() {
           <Route path="/apps/picshop" element={<LazyRoute component={PicShopEmbed} />} />
 
           <Route path="/soluciones" element={<LazyRoute component={Services} />} />
-          <Route path="/soluciones/:categoria" element={<LazyRoute component={SolucionLevels} />} />
+          <Route path="/soluciones/hub" element={<LazyRoute component={SolucionesHub} />} />
+          <Route path="/soluciones/digitales" element={<Navigate to="/soluciones" replace />} />
+          <Route path="/soluciones/:categoria" element={<LazyRoute component={SolucionDetail} />} />
           <Route path="/soluciones/detalle/:id" element={<LazyRoute component={ServiceDetail} />} />
           <Route path="/admin/ab-testing" element={<LazyRoute component={ABTestingDashboard} showErrorDetails={true} />} />
           <Route path="/automatizaciones" element={<LazyRoute component={Automatizaciones} />} />
