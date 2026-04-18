@@ -49,6 +49,7 @@ export default function StartupAppCard({ app, index = 0 }) {
     stack = [],
     highlights = [],
     logo,
+    logoWide,
     screenshot,
     gallery = [],
     mockupType = 'phone',
@@ -228,8 +229,8 @@ export default function StartupAppCard({ app, index = 0 }) {
           <div
             className={`relative flex items-center justify-center overflow-hidden ${
               featured
-                ? 'lg:w-[48%] lg:min-h-[560px] min-h-[380px] py-12 px-6 lg:px-10'
-                : 'min-h-[300px] py-10 px-6'
+                ? 'lg:w-[48%] lg:min-h-[560px] min-h-[280px] py-8 px-4 sm:min-h-[360px] sm:py-12 sm:px-6 lg:px-10'
+                : 'min-h-[260px] py-8 px-4 sm:min-h-[300px] sm:py-10 sm:px-6'
             }`}
             style={{
               background: `radial-gradient(circle at 50% 30%, ${accentColor}20, transparent 60%), linear-gradient(160deg, ${accentColorSoft}18 0%, transparent 70%)`,
@@ -297,7 +298,7 @@ export default function StartupAppCard({ app, index = 0 }) {
             {/* Status badge flotante */}
             {status && (
               <div
-                className="absolute left-6 top-6 flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-3 py-1.5 text-xs font-medium text-white/90 backdrop-blur-md"
+                className="absolute left-3 top-3 flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-3 py-1.5 text-[11px] font-medium text-white/90 backdrop-blur-md sm:left-6 sm:top-6 sm:text-xs"
                 style={{ transform: 'translateZ(30px)' }}
               >
                 <span className="relative flex h-2 w-2">
@@ -317,7 +318,7 @@ export default function StartupAppCard({ app, index = 0 }) {
             {/* Pricing badge flotante */}
             {pricingLabel && (
               <div
-                className={`absolute right-6 top-6 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider backdrop-blur-md ${pricingBadgeClass}`}
+                className={`absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider backdrop-blur-md sm:right-6 sm:top-6 sm:text-[11px] ${pricingBadgeClass}`}
                 style={{ transform: 'translateZ(30px)' }}
               >
                 <CreditCard className="h-3 w-3" />
@@ -328,60 +329,55 @@ export default function StartupAppCard({ app, index = 0 }) {
 
           {/* === Panel de contenido === */}
           <div
-            className={`relative flex flex-1 flex-col gap-6 p-8 ${
+            className={`relative flex flex-1 flex-col gap-5 p-6 sm:gap-6 sm:p-8 ${
               featured ? 'lg:p-12' : ''
             }`}
           >
-            {/* Header: logo + categoría */}
-            <header className="flex flex-wrap items-center gap-4">
-              {logo && (
-                <motion.div
-                  className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 p-2 backdrop-blur-sm"
-                  whileHover={{ rotate: [0, -5, 5, 0] }}
-                  transition={{ duration: 0.6 }}
+            {/* Header: badges (categoría + destacada) */}
+            <header className="flex flex-wrap items-center gap-2">
+              {category && (
+                <span
+                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-wider sm:text-xs"
+                  style={{
+                    borderColor: `${accentColor}66`,
+                    backgroundColor: `${accentColor}14`,
+                    color: accentColor,
+                  }}
                 >
-                  <img
-                    src={logo}
-                    alt={`Logo ${name}`}
-                    className="h-full w-full object-contain"
-                    loading="lazy"
-                  />
-                </motion.div>
+                  <Sparkles className="h-3 w-3" />
+                  {category}
+                </span>
               )}
-              <div className="flex flex-wrap items-center gap-2">
-                {category && (
-                  <span
-                    className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider"
-                    style={{
-                      borderColor: `${accentColor}66`,
-                      backgroundColor: `${accentColor}14`,
-                      color: accentColor,
-                    }}
-                  >
-                    <Sparkles className="h-3 w-3" />
-                    {category}
-                  </span>
-                )}
-                {featured && (
-                  <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-300">
-                    Destacada
-                  </span>
-                )}
-              </div>
+              {featured && (
+                <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-amber-300 sm:text-xs">
+                  Destacada
+                </span>
+              )}
             </header>
 
-            {/* Título + tagline */}
-            <div className="space-y-2">
-              <h2
-                className={`font-display font-extrabold tracking-tight text-white ${
-                  featured ? 'text-4xl lg:text-5xl' : 'text-3xl'
-                }`}
-              >
-                {name}
-              </h2>
+            {/* Logo grande (reemplaza al título) + tagline */}
+            <div className="space-y-3">
+              <h2 className="sr-only">{name}</h2>
+              {(logoWide || logo) && (
+                <motion.img
+                  src={logoWide || logo}
+                  alt={`Logo ${name}`}
+                  className={`block h-auto w-auto max-w-full object-contain ${
+                    featured
+                      ? 'max-h-16 sm:max-h-20 lg:max-h-24'
+                      : 'max-h-14 sm:max-h-16'
+                  }`}
+                  style={{ maxWidth: featured ? '320px' : '260px' }}
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ duration: 0.35 }}
+                  loading="lazy"
+                />
+              )}
               {tagline && (
                 <p
-                  className={`font-medium ${featured ? 'text-lg' : 'text-base'}`}
+                  className={`font-medium ${
+                    featured ? 'text-base sm:text-lg' : 'text-sm sm:text-base'
+                  }`}
                   style={{ color: accentColor }}
                 >
                   {tagline}
@@ -390,7 +386,9 @@ export default function StartupAppCard({ app, index = 0 }) {
             </div>
 
             {/* Descripción */}
-            <p className="text-base leading-relaxed text-white/70">{description}</p>
+            <p className="text-sm leading-relaxed text-white/70 sm:text-base">
+              {description}
+            </p>
 
             {/* Highlights (revelado escalonado en hover) */}
             {highlights.length > 0 && (

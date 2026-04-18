@@ -113,7 +113,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
           role="dialog"
           aria-modal="true"
           aria-labelledby="app-modal-title"
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-4 sm:p-6 lg:p-10"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-2 sm:p-6 lg:p-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -159,7 +159,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
               type="button"
               onClick={onClose}
               aria-label="Cerrar modal"
-              className="absolute right-5 top-5 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white/80 backdrop-blur-md transition hover:bg-black/80 hover:text-white"
+              className="absolute right-3 top-3 z-30 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white/80 backdrop-blur-md transition hover:bg-black/80 hover:text-white sm:right-5 sm:top-5 sm:h-10 sm:w-10"
             >
               <X className="h-5 w-5" />
             </button>
@@ -192,29 +192,29 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
                 }}
               />
 
-              <div className="relative z-10 flex flex-col items-center gap-6 px-8 py-14 text-center sm:px-12 sm:py-16 lg:px-16 lg:py-20">
+              <div className="relative z-10 flex flex-col items-center gap-4 px-5 pb-10 pt-12 text-center sm:gap-6 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
                 {/* Logo wide o logo + nombre */}
                 {logoWide ? (
                   <motion.img
                     src={logoWide}
                     alt={`${name} logo`}
-                    className="max-h-32 w-auto object-contain drop-shadow-[0_0_30px_rgba(0,0,0,0.8)]"
+                    className="max-h-20 w-auto max-w-full object-contain drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] sm:max-h-28 lg:max-h-32"
                     initial={{ opacity: 0, y: -10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                   />
                 ) : (
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     {logo && (
                       <img
                         src={logo}
                         alt={`${name} logo`}
-                        className="h-16 w-16 rounded-2xl border border-white/15 bg-white/5 p-2"
+                        className="h-12 w-12 rounded-2xl border border-white/15 bg-white/5 p-2 sm:h-16 sm:w-16"
                       />
                     )}
                     <h2
                       id="app-modal-title"
-                      className="font-display text-5xl font-black tracking-tight text-white"
+                      className="font-display text-3xl font-black tracking-tight text-white sm:text-5xl"
                     >
                       {name}
                     </h2>
@@ -224,7 +224,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
                 {/* Tagline */}
                 {tagline && (
                   <motion.p
-                    className="max-w-2xl font-display text-xl font-semibold leading-tight sm:text-2xl"
+                    className="max-w-2xl font-display text-base font-semibold leading-tight sm:text-xl md:text-2xl"
                     style={{ color: accentColor }}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -243,7 +243,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
                 >
                   {category && (
                     <span
-                      className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider"
+                      className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider sm:px-3 sm:text-xs"
                       style={{
                         borderColor: `${accentColor}66`,
                         backgroundColor: `${accentColor}14`,
@@ -256,7 +256,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
                   )}
                   {pricingLabel && (
                     <span
-                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider ${
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider sm:px-3 sm:text-xs ${
                         pricing === 'paid'
                           ? 'border-amber-400/40 bg-amber-400/10 text-amber-300'
                           : pricing === 'freemium'
@@ -272,7 +272,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
                     (p) => (
                       <span
                         key={p}
-                        className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-white/80"
+                        className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[10px] font-medium text-white/80 sm:px-3 sm:text-xs"
                       >
                         <Smartphone className="h-3 w-3 opacity-60" />
                         {p}
@@ -284,11 +284,11 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
             </div>
 
             {/* ========== BODY ========== */}
-            <div className="relative px-6 pb-10 pt-2 sm:px-10 lg:px-14">
+            <div className="relative px-4 pb-8 pt-2 sm:px-10 sm:pb-10 lg:px-14">
               {/* Intro text */}
               {(intro || description) && (
                 <motion.p
-                  className="mx-auto mb-10 max-w-3xl text-center text-base leading-relaxed text-white/75 sm:text-lg"
+                  className="mx-auto mb-8 max-w-3xl text-center text-sm leading-relaxed text-white/75 sm:mb-10 sm:text-base md:text-lg"
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.35 }}
@@ -299,11 +299,11 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
 
               {/* Gallery con selector */}
               {shots.length > 0 && (
-                <div className="mb-12">
+                <div className="mb-8 sm:mb-12">
                   <div
-                    className="relative flex items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/80 p-3 sm:p-4"
+                    className="relative flex items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/80 p-2 sm:p-4"
                     style={{
-                      minHeight: '320px',
+                      minHeight: '220px',
                       maxHeight: '70vh',
                       background: `radial-gradient(circle at 50% 50%, ${accentColor}10, rgba(0,0,0,0.85) 70%)`,
                     }}
@@ -313,7 +313,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
                         key={currentShot}
                         src={currentShot}
                         alt={`${name} screenshot ${activeShot + 1}`}
-                        className="max-h-[65vh] w-auto max-w-full rounded-lg object-contain"
+                        className="max-h-[55vh] w-auto max-w-full rounded-lg object-contain sm:max-h-[65vh]"
                         initial={{ opacity: 0, scale: 1.02 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
@@ -375,8 +375,8 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
 
               {/* Features grid */}
               {features.length > 0 && (
-                <section className="mb-12">
-                  <h3 className="mb-6 text-center font-display text-2xl font-bold text-white sm:text-3xl">
+                <section className="mb-8 sm:mb-12">
+                  <h3 className="mb-5 text-center font-display text-xl font-bold text-white sm:mb-6 sm:text-2xl md:text-3xl">
                     ¿Qué hace{' '}
                     <span style={{ color: accentColor }}>{name}</span>?
                   </h3>
@@ -421,11 +421,11 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
 
               {/* Use cases */}
               {useCases.length > 0 && (
-                <section className="mb-12">
-                  <h3 className="mb-6 text-center font-display text-2xl font-bold text-white sm:text-3xl">
+                <section className="mb-8 sm:mb-12">
+                  <h3 className="mb-5 text-center font-display text-xl font-bold text-white sm:mb-6 sm:text-2xl md:text-3xl">
                     ¿Para quién es?
                   </h3>
-                  <div className="grid gap-4 sm:grid-cols-3">
+                  <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
                     {useCases.map((u) => (
                       <div
                         key={u.title}
@@ -457,7 +457,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
               {/* Price note */}
               {priceNote && (
                 <div
-                  className="mb-10 rounded-2xl border px-5 py-4 text-center text-sm"
+                  className="mb-8 rounded-2xl border px-4 py-3 text-center text-xs sm:mb-10 sm:px-5 sm:py-4 sm:text-sm"
                   style={{
                     borderColor: `${accentColor}33`,
                     backgroundColor: `${accentColor}0a`,
@@ -479,7 +479,7 @@ export default function AppDetailsModal({ app, isOpen, onClose }) {
                     href={appUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-black transition-transform"
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-black transition-transform sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                     style={{
                       background: `linear-gradient(135deg, ${accentColor} 0%, ${accentColorSoft} 100%)`,
                       boxShadow: `0 10px 40px ${accentColor}55, 0 0 80px ${accentColor}33`,

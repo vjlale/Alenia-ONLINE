@@ -175,10 +175,10 @@ export default function Apps() {
         />
 
         {/* ======================== HERO ======================== */}
-        <section className="relative min-h-[85vh] pt-28 pb-16">
+        <section className="relative min-h-[60vh] pt-20 pb-10 sm:min-h-[75vh] sm:pt-28 sm:pb-16">
           <motion.div
             style={{ y: heroY, opacity: heroOpacity }}
-            className="container mx-auto max-w-6xl px-6"
+            className="container mx-auto max-w-6xl px-5 sm:px-6"
           >
             {/* Breadcrumb */}
             <motion.div
@@ -188,7 +188,7 @@ export default function Apps() {
             >
               <Link
                 to="/"
-                className="group mb-10 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
+                className="group mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white sm:mb-10"
               >
                 <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 Volver al inicio
@@ -200,7 +200,7 @@ export default function Apps() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-alenia-primary/30 bg-alenia-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-alenia-primary"
+              className="mb-5 inline-flex items-center gap-2 rounded-full border border-alenia-primary/30 bg-alenia-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-alenia-primary sm:mb-8 sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-[0.25em]"
             >
               <Rocket className="h-3.5 w-3.5" />
               Startup Alen.iA
@@ -211,7 +211,7 @@ export default function Apps() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+              className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem]"
             >
               Nuestras{' '}
               <AnimatedGradient className="apps-hero-gradient">Apps</AnimatedGradient>
@@ -222,7 +222,7 @@ export default function Apps() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.45 }}
-              className="mt-8 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
+              className="mt-5 max-w-2xl text-base leading-relaxed text-white/60 sm:mt-8 sm:text-lg md:text-xl"
             >
               Productos digitales reales desarrollados por nuestra startup. Software que
               resolvemos, lanzamos y hacemos crecer.
@@ -233,7 +233,7 @@ export default function Apps() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-12 grid max-w-2xl grid-cols-3 gap-4"
+              className="mt-8 grid max-w-2xl grid-cols-3 gap-3 sm:mt-12 sm:gap-4"
             >
               <StatCard value={totalApps} label="Apps en el catálogo" />
               <StatCard value={inProduction} label="En producción" />
@@ -245,7 +245,7 @@ export default function Apps() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.6 }}
-              className="mt-20 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/40"
+              className="mt-10 hidden items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/40 sm:mt-20 sm:flex"
             >
               <motion.div
                 animate={{ y: [0, 6, 0] }}
@@ -259,9 +259,9 @@ export default function Apps() {
         </section>
 
         {/* ======================== STARTUP APPS (PRINCIPAL) ======================== */}
-        <section className="relative pb-24 pt-8">
-          <div className="container mx-auto max-w-7xl px-6">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <section className="relative pb-16 pt-4 sm:pb-24 sm:pt-8">
+          <div className="container mx-auto max-w-7xl px-5 sm:px-6">
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
               {startupApps.map((app, index) => (
                 <StartupAppCard key={app.id} app={app} index={index} />
               ))}
@@ -284,18 +284,18 @@ export default function Apps() {
         </section>
 
         {/* ============== HERRAMIENTAS GRATUITAS CON IA (SECUNDARIA) ============== */}
-        <section className="relative border-t border-white/5 bg-black/30 py-24">
-          <div className="container mx-auto max-w-7xl px-6">
+        <section className="relative border-t border-white/5 bg-black/30 py-16 sm:py-24">
+          <div className="container mx-auto max-w-7xl px-5 sm:px-6">
             <ScrollReveal direction="up">
-              <div className="mb-12 max-w-3xl">
-                <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/40">
+              <div className="mb-8 max-w-3xl sm:mb-12">
+                <div className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40 sm:text-xs sm:tracking-[0.3em]">
                   <Zap className="h-3.5 w-3.5" />
                   Bonus · Herramientas gratuitas
                 </div>
-                <h2 className="font-display text-3xl font-bold leading-tight text-white/90 md:text-4xl">
+                <h2 className="font-display text-2xl font-bold leading-tight text-white/90 sm:text-3xl md:text-4xl">
                   Mini-apps con IA, gratis y listas para usar
                 </h2>
-                <p className="mt-4 text-base text-white/50">
+                <p className="mt-3 text-sm text-white/50 sm:mt-4 sm:text-base">
                   Pequeñas herramientas que liberamos para la comunidad. ROI, hashtags,
                   SEO, análisis de competencia y más.
                 </p>
@@ -311,36 +311,36 @@ export default function Apps() {
         </section>
 
         {/* ======================== CTA FINAL ======================== */}
-        <section className="relative py-24">
-          <div className="container mx-auto max-w-4xl px-6">
+        <section className="relative py-16 sm:py-24">
+          <div className="container mx-auto max-w-4xl px-5 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8 }}
-              className="relative overflow-hidden rounded-3xl border border-alenia-primary/20 bg-gradient-to-br from-alenia-primary/10 via-slate-900 to-slate-950 p-10 md:p-16"
+              className="relative overflow-hidden rounded-3xl border border-alenia-primary/20 bg-gradient-to-br from-alenia-primary/10 via-slate-900 to-slate-950 p-6 sm:p-10 md:p-16"
             >
               {/* Glow decorativo */}
               <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-alenia-primary/20 blur-3xl" />
               <div className="absolute -left-20 -bottom-20 h-60 w-60 rounded-full bg-alenia-secondary/20 blur-3xl" />
 
-              <div className="relative flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-                <div className="max-w-xl space-y-4">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+              <div className="relative flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-8">
+                <div className="max-w-xl space-y-3 sm:space-y-4">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70 sm:text-xs">
                     <Sparkles className="h-3.5 w-3.5" />
                     ¿Tenés una idea?
                   </div>
-                  <h3 className="font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+                  <h3 className="font-display text-2xl font-extrabold leading-tight text-white sm:text-3xl md:text-4xl">
                     Construyamos tu próxima app juntos
                   </h3>
-                  <p className="text-base text-white/60">
+                  <p className="text-sm text-white/60 sm:text-base">
                     Diseñamos, desarrollamos y escalamos productos digitales end-to-end.
                     Contanos tu proyecto y armamos la hoja de ruta.
                   </p>
                 </div>
                 <Link
                   to="/contacto"
-                  className="group inline-flex items-center gap-3 rounded-full bg-alenia-primary px-8 py-4 text-base font-semibold text-black shadow-glow-md transition-all hover:shadow-glow-lg"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-alenia-primary px-6 py-3 text-sm font-semibold text-black shadow-glow-md transition-all hover:shadow-glow-lg sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                 >
                   Agenda una demo
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -356,12 +356,12 @@ export default function Apps() {
 
 function StatCard({ value, label, asterisk = false }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm">
-      <div className="font-display text-3xl font-extrabold text-white md:text-4xl">
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-sm sm:p-4">
+      <div className="font-display text-2xl font-extrabold text-white sm:text-3xl md:text-4xl">
         {value}
         {asterisk && <span className="text-alenia-primary">∞</span>}
       </div>
-      <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
+      <div className="mt-1 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/40 sm:text-[10px] sm:tracking-[0.2em]">
         {label}
       </div>
     </div>

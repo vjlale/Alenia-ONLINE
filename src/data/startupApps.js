@@ -20,7 +20,7 @@ export const startupApps = [
     description:
       'Encontrá rivales de tu nivel, organizá partidos, sumate a desafíos, seguí tu ranking ELO y reservá canchas. Todo en una sola app pensada por y para la comunidad del pádel. Ya disponible en web — próximamente en Play Store y App Store.',
     category: 'Deporte · Social',
-    status: 'En producción',
+    status: null,
     pricing: 'free',
     platforms: ['Web'],
     upcomingPlatforms: ['iOS', 'Android'],
@@ -69,6 +69,7 @@ export const startupApps = [
       'Descarga masiva ZIP',
     ],
     logo: '/images/e-pix/logo.png',
+    logoWide: '/images/e-pix/logo-completo.png',
     screenshot: '/images/e-pix/hero.png',
     gallery: [
       '/images/e-pix/hero.png',
@@ -169,6 +170,7 @@ export const startupApps = [
       'Spout / NDI',
     ],
     logo: '/images/i-streem/icon.png',
+    logoWide: '/images/i-streem/logo.png',
     screenshot: '/images/i-streem/modo-estudio.png',
     gallery: [
       '/images/i-streem/modo-estudio.png',

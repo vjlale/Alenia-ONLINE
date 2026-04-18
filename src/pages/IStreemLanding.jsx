@@ -235,10 +235,10 @@ export default function IStreemLanding() {
         />
 
         {/* ======================== HERO ======================== */}
-        <section className="relative min-h-[90vh] pt-28 pb-16">
+        <section className="relative min-h-[70vh] pt-20 pb-10 sm:min-h-[90vh] sm:pt-28 sm:pb-16">
           <motion.div
             style={{ y: heroY, opacity: heroOpacity }}
-            className="container mx-auto max-w-6xl px-6"
+            className="container mx-auto max-w-6xl px-5 sm:px-6"
           >
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -247,7 +247,7 @@ export default function IStreemLanding() {
             >
               <Link
                 to="/apps"
-                className="group mb-10 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
+                className="group mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white sm:mb-10"
               >
                 <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 Volver a Apps
@@ -259,12 +259,12 @@ export default function IStreemLanding() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className="mb-8 flex items-center"
+              className="mb-6 flex items-center sm:mb-8"
             >
               <img
                 src="/images/i-streem/logo.png"
                 alt="i-Streem"
-                className="h-20 w-auto sm:h-24"
+                className="h-14 w-auto sm:h-20 lg:h-24"
                 style={{ filter: `drop-shadow(0 0 24px ${ACCENT}33)` }}
               />
             </motion.div>
@@ -274,7 +274,7 @@ export default function IStreemLanding() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em]"
+              className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] sm:mb-8 sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-[0.25em]"
               style={{
                 borderColor: `${ACCENT}66`,
                 backgroundColor: `${ACCENT}14`,
@@ -299,7 +299,7 @@ export default function IStreemLanding() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+              className="font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem]"
             >
               iPhone →{' '}
               <span
@@ -318,7 +318,7 @@ export default function IStreemLanding() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.45 }}
-              className="mt-8 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
+              className="mt-5 max-w-2xl text-base leading-relaxed text-white/60 sm:mt-8 sm:text-lg md:text-xl"
             >
               Streaming WebRTC profesional con baja latencia, control de bitrate y
               multi-viewer.{' '}
@@ -334,13 +334,13 @@ export default function IStreemLanding() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-10 flex flex-wrap items-center gap-4"
+              className="mt-6 flex flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
             >
               <motion.a
                 href={APP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-black transition-transform"
+                className="group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-black transition-transform sm:px-8 sm:py-4 sm:text-base"
                 style={{
                   background: `linear-gradient(135deg, ${ACCENT} 0%, ${ACCENT_SOFT} 100%)`,
                   boxShadow: `0 10px 40px ${ACCENT}55, 0 0 80px ${ACCENT}33`,
@@ -356,7 +356,7 @@ export default function IStreemLanding() {
                 href={`${APP_URL}/resolume-guide`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-7 py-4 text-base font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.08]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.08] sm:px-7 sm:py-4 sm:text-base"
               >
                 <BookOpen className="h-5 w-5" style={{ color: ORANGE }} />
                 Ver guía Resolume
@@ -368,7 +368,7 @@ export default function IStreemLanding() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="mt-14 grid max-w-2xl grid-cols-3 gap-4"
+              className="mt-8 grid max-w-2xl grid-cols-3 gap-3 sm:mt-14 sm:gap-4"
             >
               <HeroStat icon={Clock} value="< 200ms" label="Latencia típica" />
               <HeroStat icon={Eye} value="Multi" label="Viewer simultáneo" />
@@ -378,17 +378,17 @@ export default function IStreemLanding() {
         </section>
 
         {/* ======================== CÓMO FUNCIONA (FLUJO) ======================== */}
-        <section className="relative border-t border-white/5 py-24">
-          <div className="container mx-auto max-w-6xl px-6">
-            <div className="mb-14 text-center">
+        <section className="relative border-t border-white/5 py-16 sm:py-24">
+          <div className="container mx-auto max-w-6xl px-5 sm:px-6">
+            <div className="mb-10 text-center sm:mb-14">
               <div
-                className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em]"
+                className="mb-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] sm:mb-4 sm:text-xs sm:tracking-[0.3em]"
                 style={{ color: ACCENT }}
               >
                 <Sparkles className="h-3.5 w-3.5" />
                 Cómo funciona
               </div>
-              <h2 className="font-display text-4xl font-extrabold leading-tight text-white md:text-5xl">
+              <h2 className="font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
                 Del <span style={{ color: ORANGE }}>iPhone</span> al{' '}
                 <span style={{ color: ACCENT }}>proyector</span>, sin escalas técnicas
               </h2>
@@ -440,26 +440,26 @@ export default function IStreemLanding() {
         </section>
 
         {/* ======================== FEATURES INTERACTIVAS ======================== */}
-        <section className="relative py-24">
-          <div className="container mx-auto max-w-7xl px-6">
-            <div className="mb-16 max-w-3xl">
+        <section className="relative py-16 sm:py-24">
+          <div className="container mx-auto max-w-7xl px-5 sm:px-6">
+            <div className="mb-10 max-w-3xl sm:mb-16">
               <div
-                className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em]"
+                className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] sm:mb-4 sm:text-xs sm:tracking-[0.3em]"
                 style={{ color: ACCENT }}
               >
                 <Activity className="h-3.5 w-3.5" />
                 Todo lo que hace i-Streem
               </div>
-              <h2 className="font-display text-4xl font-extrabold leading-tight text-white md:text-5xl">
+              <h2 className="font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
                 Cinco modos. Un solo stream.
               </h2>
-              <p className="mt-5 text-base text-white/55">
+              <p className="mt-4 text-sm text-white/55 sm:mt-5 sm:text-base">
                 Cada pantalla de la app resuelve una necesidad específica del flujo
                 broadcast. Click en cualquier feature para verla en acción.
               </p>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[380px_1fr]">
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[380px_1fr]">
               {/* Feature selector */}
               <div className="space-y-3">
                 {features.map((f) => {
@@ -615,9 +615,9 @@ export default function IStreemLanding() {
         </section>
 
         {/* ======================== HEALTH CHECK HIGHLIGHT ======================== */}
-        <section className="relative border-t border-white/5 bg-black/40 py-24">
-          <div className="container mx-auto max-w-6xl px-6">
-            <div className="grid items-center gap-12 lg:grid-cols-2">
+        <section className="relative border-t border-white/5 bg-black/40 py-16 sm:py-24">
+          <div className="container mx-auto max-w-6xl px-5 sm:px-6">
+            <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -625,17 +625,17 @@ export default function IStreemLanding() {
                 transition={{ duration: 0.7 }}
               >
                 <div
-                  className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em]"
+                  className="mb-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] sm:mb-4 sm:text-xs sm:tracking-[0.3em]"
                   style={{ color: ORANGE }}
                 >
                   <ShieldCheck className="h-3.5 w-3.5" />
                   La feature que más nos orgullece
                 </div>
-                <h2 className="font-display text-4xl font-extrabold leading-tight text-white md:text-5xl">
+                <h2 className="font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
                   Health Check:<br />
                   <span style={{ color: ACCENT }}>no improvisar</span> en vivo.
                 </h2>
-                <p className="mt-5 text-base leading-relaxed text-white/65">
+                <p className="mt-4 text-sm leading-relaxed text-white/65 sm:mt-5 sm:text-base">
                   Antes de cada show, corré el diagnóstico desde la red del venue. En
                   segundos sabés si los servidores ICE están OK, si hay IP pública
                   detectable, si TURN relay funciona y si el signaling responde. Si algo
@@ -681,21 +681,21 @@ export default function IStreemLanding() {
         </section>
 
         {/* ======================== RESOLUME FLOW ======================== */}
-        <section className="relative py-24">
-          <div className="container mx-auto max-w-6xl px-6">
-            <div className="mb-14 text-center">
+        <section className="relative py-16 sm:py-24">
+          <div className="container mx-auto max-w-6xl px-5 sm:px-6">
+            <div className="mb-10 text-center sm:mb-14">
               <div
-                className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em]"
+                className="mb-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] sm:mb-4 sm:text-xs sm:tracking-[0.3em]"
                 style={{ color: ORANGE }}
               >
                 <Tv className="h-3.5 w-3.5" />
                 Integración VJ
               </div>
-              <h2 className="font-display text-4xl font-extrabold leading-tight text-white md:text-5xl">
+              <h2 className="font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
                 Listo para entrar a Resolume en{' '}
                 <span style={{ color: ACCENT }}>minutos</span>.
               </h2>
-              <p className="mx-auto mt-5 max-w-2xl text-base text-white/55">
+              <p className="mx-auto mt-4 max-w-2xl text-sm text-white/55 sm:mt-5 sm:text-base">
                 Guía paso a paso incluida en la app: desde instalar OBS hasta ver tu señal
                 como capa en Resolume Arena/Avenue. Incluye método rápido con Browser Source
                 (sin capturar ventanas) y flujo completo con Spout/NDI.
@@ -735,23 +735,23 @@ export default function IStreemLanding() {
         </section>
 
         {/* ======================== CASOS DE USO ======================== */}
-        <section className="relative border-t border-white/5 bg-black/30 py-24">
-          <div className="container mx-auto max-w-6xl px-6">
-            <div className="mb-14 max-w-3xl">
+        <section className="relative border-t border-white/5 bg-black/30 py-16 sm:py-24">
+          <div className="container mx-auto max-w-6xl px-5 sm:px-6">
+            <div className="mb-10 max-w-3xl sm:mb-14">
               <div
-                className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em]"
+                className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] sm:mb-4 sm:text-xs sm:tracking-[0.3em]"
                 style={{ color: ACCENT }}
               >
                 <Sparkles className="h-3.5 w-3.5" />
                 ¿Para quién es?
               </div>
-              <h2 className="font-display text-4xl font-extrabold leading-tight text-white md:text-5xl">
+              <h2 className="font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
                 Pensada para producciones{' '}
                 <span style={{ color: ACCENT }}>reales</span>.
               </h2>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
               {useCases.map((u, i) => (
                 <motion.div
                   key={u.title}
@@ -759,7 +759,7 @@ export default function IStreemLanding() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition hover:border-white/25 hover:bg-white/[0.05]"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/25 hover:bg-white/[0.05] sm:p-7"
                 >
                   <div
                     className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-10 blur-2xl transition group-hover:opacity-30"
@@ -777,17 +777,17 @@ export default function IStreemLanding() {
         </section>
 
         {/* ======================== STACK ======================== */}
-        <section className="relative py-20">
-          <div className="container mx-auto max-w-5xl px-6">
-            <div className="mb-10 text-center">
+        <section className="relative py-14 sm:py-20">
+          <div className="container mx-auto max-w-5xl px-5 sm:px-6">
+            <div className="mb-8 text-center sm:mb-10">
               <div
-                className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em]"
+                className="mb-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] sm:text-xs sm:tracking-[0.3em]"
                 style={{ color: ACCENT }}
               >
                 <Cpu className="h-3.5 w-3.5" />
                 Stack tecnológico
               </div>
-              <h2 className="font-display text-3xl font-bold text-white md:text-4xl">
+              <h2 className="font-display text-2xl font-bold text-white sm:text-3xl md:text-4xl">
                 Construida con estándares abiertos
               </h2>
             </div>
@@ -809,14 +809,14 @@ export default function IStreemLanding() {
         </section>
 
         {/* ======================== CTA FINAL ======================== */}
-        <section className="relative py-28">
-          <div className="container mx-auto max-w-4xl px-6">
+        <section className="relative py-16 sm:py-28">
+          <div className="container mx-auto max-w-4xl px-5 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8 }}
-              className="relative overflow-hidden rounded-3xl border p-10 md:p-16"
+              className="relative overflow-hidden rounded-3xl border p-6 sm:p-10 md:p-16"
               style={{
                 borderColor: `${ACCENT}33`,
                 background: `linear-gradient(135deg, ${ACCENT}10 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.9) 100%)`,
@@ -835,23 +835,23 @@ export default function IStreemLanding() {
                 <img
                   src="/images/i-streem/icon.png"
                   alt="i-Streem"
-                  className="mx-auto mb-6 h-20 w-20"
+                  className="mx-auto mb-5 h-16 w-16 sm:mb-6 sm:h-20 sm:w-20"
                   style={{ filter: `drop-shadow(0 0 30px ${ACCENT}66)` }}
                 />
-                <h3 className="font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+                <h3 className="font-display text-2xl font-extrabold leading-tight text-white sm:text-3xl md:text-4xl">
                   El próximo show empieza con{' '}
                   <span style={{ color: ACCENT }}>un código de 4 dígitos</span>.
                 </h3>
-                <p className="mx-auto mt-5 max-w-xl text-base text-white/60">
+                <p className="mx-auto mt-4 max-w-xl text-sm text-white/60 sm:mt-5 sm:text-base">
                   Abrí i-Streem desde tu iPhone, mandá el código al VJ y listo: tu cámara
                   ya es una capa de video en Resolume.
                 </p>
-                <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                   <motion.a
                     href={APP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-black transition-transform"
+                    className="group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-black transition-transform sm:px-8 sm:py-4 sm:text-base"
                     style={{
                       background: `linear-gradient(135deg, ${ACCENT} 0%, ${ACCENT_SOFT} 100%)`,
                       boxShadow: `0 10px 40px ${ACCENT}55, 0 0 80px ${ACCENT}33`,
@@ -865,7 +865,7 @@ export default function IStreemLanding() {
                   </motion.a>
                   <Link
                     to="/contacto"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-7 py-4 text-base font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.08]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.08] sm:px-7 sm:py-4 sm:text-base"
                   >
                     Hablar con Alen.iA
                     <ArrowUpRight className="h-4 w-4" />
