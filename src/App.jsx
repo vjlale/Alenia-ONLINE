@@ -43,6 +43,7 @@ const AutomationSimulator = lazy(() => import('./components/apps/AutomationSimul
 const SEOOptimizer = lazy(() => import('./components/apps/SEOOptimizer'));
 const PicShopEmbed = lazy(() => import('./components/apps/PicShopEmbed'));
 const PlayPadelLanding = lazy(() => import('./pages/PlayPadelLanding'));
+const IStreemLanding = lazy(() => import('./pages/IStreemLanding'));
 
 import './styles/globals.css'
 import { BRAND_ASSETS } from './config/brandAssets'
@@ -273,6 +274,7 @@ function AppContent() {
           <Route path="/automatizaciones" element={<LazyRoute component={Automatizaciones} />} />
           <Route path="/kontrol-plus" element={<LazyRoute component={KontrolPlusLanding} />} />
           <Route path="/play-padel" element={<LazyRoute component={PlayPadelLanding} />} />
+          <Route path="/apps/i-streem" element={<LazyRoute component={IStreemLanding} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </PageTransition>

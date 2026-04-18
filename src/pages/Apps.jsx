@@ -13,7 +13,6 @@ import {
   BarChart3,
   Hash,
   Bot,
-  Palette,
   Camera,
   ArrowRight,
 } from 'lucide-react';
@@ -36,19 +35,6 @@ import {
  * startup toman el protagonismo.
  */
 const tools = [
-  {
-    id: 'e-pix',
-    name: 'E-pix Editor',
-    description:
-      'Editor de imágenes con IA avanzada. Crea, edita y mejora imágenes con modelos generativos.',
-    icon: <Palette className="h-5 w-5" />,
-    color: 'purple',
-    link: 'https://e-pix.alenia.online',
-    external: true,
-    rating: 4.9,
-    timeToComplete: '10 min',
-    users: '5.2k',
-  },
   {
     id: 'picshop',
     name: 'PicShop',
@@ -145,7 +131,7 @@ export default function Apps() {
         <title>Apps de la startup Alen.iA — Nuestras apps en producción</title>
         <meta
           name="description"
-          content="Conocé las apps desarrolladas por la startup Alen.iA. Match Padel y próximos lanzamientos: productos digitales reales, pensados para escalar."
+          content="Conocé las apps desarrolladas por la startup Alen.iA. Match Padel, E-pix, i-Streem y próximos lanzamientos: productos digitales reales, pensados para escalar."
         />
         <link rel="canonical" href="https://alenia.online/apps" />
         <meta property="og:type" content="website" />
@@ -153,7 +139,7 @@ export default function Apps() {
         <meta property="og:title" content="Apps de la startup Alen.iA" />
         <meta
           property="og:description"
-          content="Nuestras apps en producción. Match Padel y próximos lanzamientos."
+          content="Nuestras apps en producción. Match Padel, E-pix, i-Streem y próximos lanzamientos."
         />
         <meta property="og:image" content={BRAND_OG_IMAGE} />
         <meta property="og:image:alt" content="ALENIA - Apps de la startup" />
@@ -164,7 +150,7 @@ export default function Apps() {
         <meta property="twitter:title" content="Apps de la startup Alen.iA" />
         <meta
           property="twitter:description"
-          content="Match Padel y próximas apps: productos digitales reales."
+          content="Match Padel, E-pix, i-Streem y próximas apps: productos digitales reales."
         />
         <meta property="twitter:image" content={BRAND_OG_IMAGE} />
       </Helmet>
@@ -229,8 +215,6 @@ export default function Apps() {
             >
               Nuestras{' '}
               <AnimatedGradient className="apps-hero-gradient">Apps</AnimatedGradient>
-              <br />
-              <span className="text-white/80">en producción.</span>
             </motion.h1>
 
             {/* Subtítulo */}
@@ -241,8 +225,7 @@ export default function Apps() {
               className="mt-8 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
             >
               Productos digitales reales desarrollados por nuestra startup. Software que
-              resolvemos, lanzamos y hacemos crecer. Empezá por{' '}
-              <span className="font-semibold text-white">Match Padel</span>.
+              resolvemos, lanzamos y hacemos crecer.
             </motion.p>
 
             {/* Stats */}
@@ -276,26 +259,8 @@ export default function Apps() {
         </section>
 
         {/* ======================== STARTUP APPS (PRINCIPAL) ======================== */}
-        <section className="relative py-24">
+        <section className="relative pb-24 pt-8">
           <div className="container mx-auto max-w-7xl px-6">
-            <ScrollReveal direction="up">
-              <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
-                <div className="max-w-2xl">
-                  <div className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-alenia-primary">
-                    <Sparkles className="h-3.5 w-3.5" />
-                    Productos de la startup
-                  </div>
-                  <h2 className="font-display text-4xl font-extrabold leading-tight text-white md:text-5xl">
-                    Apps que desarrollamos y operamos nosotros mismos
-                  </h2>
-                </div>
-                <p className="max-w-md text-base text-white/50">
-                  Cada tarjeta abre la fanpage oficial de la app. Hacé click en cualquier
-                  parte para conocerla a fondo.
-                </p>
-              </div>
-            </ScrollReveal>
-
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {startupApps.map((app, index) => (
                 <StartupAppCard key={app.id} app={app} index={index} />
