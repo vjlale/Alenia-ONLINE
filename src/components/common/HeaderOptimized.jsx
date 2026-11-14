@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Download, Zap } from 'lucide-react'
+import { BRAND_LOGOS } from '../../config/brand'
 
 // Definir rutas lazy para prefetching
 const lazyRoutes = {
@@ -40,7 +41,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img src="/images/5-3.png" alt="ALENIA Logo" className="w-32 h-auto" />
+            <img src={BRAND_LOGOS.lockupFull} alt="ALENIA" className="h-10 w-auto max-w-[220px] object-contain object-left" />
           </Link>
 
           {/* Desktop Navigation */}

@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import emailJSService from '../services/emailJSService';
 import ScrollReveal from '../components/common/ScrollReveal';
 import AnimatedGradient from '../components/common/AnimatedGradient';
+import { OG_IMAGE } from '../config/brand'
 
 const contactInfo = [
   {
@@ -164,12 +165,12 @@ export default function Contact() {
   <meta property="og:url" content="https://alenia.online/contacto" />
   <meta property="og:title" content="Contacto - Hablemos de tu Proyecto | Alen.ia" />
   <meta property="og:description" content="Contacta con Alen.ia para transformar tu negocio con soluciones de software, automatización e inteligencia artificial." />
-  <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="og:image" content={OG_IMAGE} />
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://alenia.online/contacto" />
   <meta property="twitter:title" content="Contacto - Hablemos de tu Proyecto | Alen.ia" />
   <meta property="twitter:description" content="Contacta con Alen.ia para transformar tu negocio con soluciones de software, automatización e inteligencia artificial." />
-  <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="twitter:image" content={OG_IMAGE} />
       </Helmet>
       <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20">
         <div className="container mx-auto px-6">

@@ -1,3 +1,4 @@
+import { BRAND_LOGOS } from '../config/brand'
 // Servicio SEO dummy
 const seoService = {
   preloadCriticalResources() {
@@ -9,7 +10,7 @@ const seoService = {
     preloadLink.as = 'image';
     // Asumimos que esta es la imagen LCP. Idealmente, esto sería dinámico.
     // Usaremos la versión de mayor resolución como candidata para precarga.
-    preloadLink.href = '/images/5-3.png'; // Cambiar a .webp si se migran las imágenes
+    preloadLink.href = BRAND_LOGOS.lockupFull;
     
     document.head.appendChild(preloadLink);
 

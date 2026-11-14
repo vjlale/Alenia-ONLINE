@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { appsCatalog, catalogFilters } from '../data/appsCatalog';
 import analyticsService from '../services/analyticsService';
 import AppCatalogCard from '../components/apps/AppCatalogCard';
+import { OG_IMAGE } from '../config/brand'
 
 const structuredData = (apps) => ({
   '@context': 'https://schema.org',
@@ -107,7 +108,7 @@ export default function DesarrollosIA() {
           property="og:description"
           content="Explora los desarrollos de inteligencia artificial y software a medida creados para clientes y productos propios de ALENIA."
         />
-        <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+        <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:image:alt" content="ALENIA - Desarrollos IA" />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://alenia.online/desarrollos-ia" />
@@ -116,7 +117,7 @@ export default function DesarrollosIA() {
           property="twitter:description"
           content="Soluciones inteligentes, automatizaciones y productos con IA desarrollados por ALENIA."
         />
-        <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+        <meta property="twitter:image" content={OG_IMAGE} />
         <script type="application/ld+json">{JSON.stringify(structuredData(appsCatalog))}</script>
       </Helmet>
 

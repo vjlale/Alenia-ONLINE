@@ -1,0 +1,10 @@
+# Imágenes y binarios: nunca convertir finales de línea
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.rar binary

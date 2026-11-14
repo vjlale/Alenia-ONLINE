@@ -22,6 +22,7 @@ import {
   UserPlus
 } from 'lucide-react';
 import '../styles/PlayPadelLanding.css';
+import { BRAND_LOGOS } from '../config/brand'
 
 const PlayPadelLanding = () => {
   const [activeTab, setActiveTab] = useState('jugadores');
@@ -146,7 +147,7 @@ const PlayPadelLanding = () => {
             >
               Build By
             </span>
-            <img src="/images/5-3.png" alt="Alen.iA" style={{ minWidth: '40px', maxWidth: '100px', maxHeight: '40px', height: '100%', width: 'fit-content', filter: 'drop-shadow(0 0 10px hsl(var(--pp-primary) / 0.8))' }} />
+            <img src={BRAND_LOGOS.symbol} alt="ALENIA" style={{ minWidth: '40px', maxWidth: '100px', maxHeight: '40px', height: '100%', width: 'fit-content', filter: 'drop-shadow(0 0 10px hsl(var(--pp-primary) / 0.8))' }} />
           </div>
         </section>
 
@@ -514,11 +515,15 @@ const PlayPadelLanding = () => {
                   Build By
                 </span>
                 <img 
-                  src="/images/5-3.png" 
-                  alt="Alen.iA Logo" 
-                  style={{ 
-                    width: 'fit-content', 
-                    height: '48px', 
+                  src={BRAND_LOGOS.lockupFull}
+                  alt="ALENIA"
+                  width={216}
+                  height={108}
+                  style={{
+                    width: 'fit-content',
+                    maxWidth: 'min(280px, 42vw)',
+                    height: '48px',
+                    objectFit: 'contain',
                     filter: 'drop-shadow(0 0 15px hsl(var(--pp-primary) / 0.8))',
                     position: 'absolute',
                     left: '283px',

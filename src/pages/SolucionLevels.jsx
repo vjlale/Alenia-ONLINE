@@ -8,6 +8,7 @@ import { soluciones } from '../data/solucionesData';
 import Breadcrumbs from '../components/common/Breadcrumbs';
 import LevelCard from '../components/common/LevelCard';
 import ServiceFormModal from '../components/forms/ServiceFormModal';
+import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand'
 
 const SolucionLevels = () => {
   const { categoria } = useParams();
@@ -73,15 +74,15 @@ const SolucionLevels = () => {
   <meta property="og:url" content={`https://alenia.online/soluciones/${solucion.categoria}`} />
   <meta property="og:title" content={`${solucion.nombre} - Niveles de Servicio | ALENIA`} />
   <meta property="og:description" content={`Elige el nivel perfecto de ${solucion.nombre}: Elemental, Moderado o Visionario.`} />
-  <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="og:image" content={OG_IMAGE} />
   <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+  <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={`https://alenia.online/soluciones/${solucion.categoria}`} />
   <meta property="twitter:title" content={`${solucion.nombre} - Niveles de Servicio | ALENIA`} />
   <meta property="twitter:description" content={`Elige el nivel perfecto de ${solucion.nombre}: Elemental, Moderado o Visionario.`} />
-  <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="twitter:image" content={OG_IMAGE} />
       </Helmet>
 
       <div className="min-h-screen pt-20 bg-alenia-dark text-white overflow-x-hidden">

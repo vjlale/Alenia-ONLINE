@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Download, Zap, Github, Linkedin, Instagram } from 'lucide-react'
+import { BRAND_LOGOS } from '../../config/brand'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -50,12 +51,19 @@ const Header = () => {
               className="flex items-center space-x-2"
               aria-label="Ir a inicio - ALENIA"
             >
-              <img 
-                src="/images/5-3.png" 
-                alt="ALENIA Logo" 
-                className="w-32 h-auto"
-                width="128"
-                height="84"
+              <img
+                src={BRAND_LOGOS.lockupFull}
+                alt="ALENIA"
+                className="hidden min-[400px]:block h-10 w-auto max-w-[220px] object-contain object-left"
+                width="220"
+                height="110"
+              />
+              <img
+                src={BRAND_LOGOS.lockupText}
+                alt="ALENIA"
+                className="min-[400px]:hidden h-9 w-auto max-w-[200px] object-contain object-left"
+                width="200"
+                height="50"
               />
             </Link>
           </motion.div>

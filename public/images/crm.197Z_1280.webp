@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/logos-alenia/3.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/images/logos-alenia/3.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alen.iA - Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas. Transformamos negocios tradicionales en empresas digitales eficientes." />
+  <link rel="canonical" href="https://alenia.online/" />
+    <meta name="keywords" content="IA, inteligencia artificial, automatización, desarrollo web, marketing digital, CRM, Argentina" />
+    <meta name="author" content="Alen.iA" />
+    
+    <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ALENIA" />
+    <meta property="og:url" content="https://alenia.online/" />
+    <meta property="og:title" content="Alen.iA - Resultados con Inteligencia" />
+  <meta property="og:description" content="Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas." />
+  <meta property="og:image" content="https://alenia.online/images/logos-alenia/lockup-full.png?v=3" />
+  <meta property="og:image:secure_url" content="https://alenia.online/images/logos-alenia/lockup-full.png?v=3" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="540" />
+  <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
+    
+    <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://alenia.online/" />
+    <meta property="twitter:title" content="Alen.iA - Resultados con Inteligencia" />
+  <meta property="twitter:description" content="Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas." />
+  <meta property="twitter:image" content="https://alenia.online/images/logos-alenia/lockup-full.png?v=3" />
+  <meta property="twitter:image:alt" content="ALENIA - Resultados con Inteligencia" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    
+    
+    <!-- Estilos mínimos para mostrar algo mientras carga React -->
+    <style>
+      body { 
+        margin: 0; 
+        font-family: 'Poppins', 'Inter', sans-serif;
+        background: #0a0a0a;
+        color: #f8fafc;
+      }
+      .loading-indicator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .loading-brand-wrap {
+        position: relative;
+        width: min(200px, 48vw);
+        aspect-ratio: 1080 / 1350;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .loading-brand-wrap img {
+        width: 100%;
+        height: auto;
+        -o-object-fit: contain;
+           object-fit: contain;
+        animation: brandPulse 1.4s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(0, 229, 209, 0.4)) drop-shadow(0 0 32px rgba(106, 48, 180, 0.35));
+      }
+      @keyframes brandPulse {
+        0%, 100% { transform: scale(0.96); opacity: 0.92; }
+        50% { transform: scale(1); opacity: 1; }
+      }
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(0, 229, 209, 0.25);
+        border-radius: 50%;
+        border-top-color: #00e5d1;
+        animation: spin 0.85s linear infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      .loading-indicator p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: rgba(248, 250, 252, 0.65);
+      }
+    </style>
+    
+    <title>Alen.iA - Resultados con Inteligencia</title>
+    <script type="module" crossorigin src="/assets/index-43febeea.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-other-e8d90046.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-react-feda3856.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-motion-9e9c085d.js">
+    <link rel="modulepreload" crossorigin href="/assets/components-common-155e8b2a.js">
+    <link rel="modulepreload" crossorigin href="/assets/pages-blog-b6fd07ac.js">
+    <link rel="modulepreload" crossorigin href="/assets/pages-core-54c5810c.js">
+    <link rel="stylesheet" href="/assets/index-b6ffbc94.css">
+  </head>
+  <body>
+    <!-- Contenido de carga inicial mientras React inicializa -->
+    <div id="root">
+      <div class="loading-indicator">
+        <div class="loading-brand-wrap" aria-hidden="true">
+          <img src="/images/logos-alenia/3.png" alt="" width="108" height="135" decoding="async" />
+        </div>
+        <div class="loading-spinner" role="status" aria-label="Cargando"></div>
+        <p>Cargando experiencia interactiva...</p>
+      </div>
+    </div>
+    
+    
+    
+    <!-- Analytics placeholder -->
+    <!-- Google Analytics -->
+    <!-- Meta Pixel -->
+    
+  </body>
+</html>

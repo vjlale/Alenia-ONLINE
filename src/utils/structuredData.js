@@ -1,3 +1,4 @@
+import { BRAND_LOGOS_ABSOLUTE } from '../config/brand'
 /**
  * Utilidades para generar structured data (JSON-LD) para SEO
  */
@@ -7,7 +8,7 @@ export const generateOrganizationSchema = () => ({
   "@type": "Organization",
   "name": "ALENIA",
   "url": "https://alenia.online",
-  "logo": "https://alenia.online/images/5-3.png",
+  "logo": BRAND_LOGOS_ABSOLUTE.symbol,
   "description": "Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.",
   "foundingDate": "2020",
   "address": {
@@ -58,7 +59,7 @@ export const generateArticleSchema = (post) => ({
     "name": "ALENIA",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://alenia.online/images/5-3.png"
+      "url": BRAND_LOGOS_ABSOLUTE.symbol
     }
   }
 });

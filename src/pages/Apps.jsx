@@ -6,6 +6,7 @@ import AppsStats from '../components/apps/AppsStats';
 import { Helmet } from 'react-helmet-async';
 import ScrollReveal from '../components/common/ScrollReveal';
 import AnimatedGradient from '../components/common/AnimatedGradient';
+import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand'
 
 // Mapeo estático de colores para evitar purga de Tailwind en clases dinámicas
 const colorStyles = {
@@ -161,15 +162,15 @@ export default function Apps() {
         <meta property="og:url" content="https://alenia.online/apps" />
         <meta property="og:title" content="Apps con IA gratuitas e interactivas | Alen.ia" />
         <meta property="og:description" content="Herramientas prácticas con IA para análisis, marketing y automatización." />
-        <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+        <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+        <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://alenia.online/apps" />
         <meta property="twitter:title" content="Apps con IA gratuitas e interactivas | Alen.ia" />
         <meta property="twitter:description" content="Herramientas prácticas con IA para análisis, marketing y automatización." />
-        <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+        <meta property="twitter:image" content={OG_IMAGE} />
       </Helmet>
       <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20">
       <div className="container mx-auto px-6">

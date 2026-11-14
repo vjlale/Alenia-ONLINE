@@ -43,6 +43,7 @@ const PicShopEmbed = lazy(() => import('./components/apps/PicShopEmbed'));
 const PlayPadelLanding = lazy(() => import('./pages/PlayPadelLanding'));
 
 import './styles/globals.css'
+import { BRAND_LOGOS_ABSOLUTE } from './config/brand'
 
 // Componente para tracking de navegación
 function NavigationTracker() {
@@ -218,7 +219,7 @@ function AppContent() {
             "@type": "Organization",
             name: "ALENIA",
             url: "https://alenia.online",
-            logo: "https://alenia.online/images/5-3.png",
+            logo: BRAND_LOGOS_ABSOLUTE.symbol,
             description: "Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.",
             address: {
               "@type": "PostalAddress",

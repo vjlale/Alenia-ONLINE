@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
+import { BRAND_LOGOS } from '../../config/brand'
 import { 
   Mail, 
   Phone, 
@@ -95,7 +96,13 @@ const Footer = () => {
           <motion.div variants={itemVariants} className="lg:col-span-1">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link to="/" className="flex items-center mb-4">
-                <img src="/images/5-3.png" alt="ALENIA Logo" className="h-10 w-auto" />
+                <img
+                  src={BRAND_LOGOS.lockupFull}
+                  alt="ALENIA"
+                  className="h-10 w-auto max-w-[240px] object-contain object-left"
+                  width="240"
+                  height="120"
+                />
               </Link>
             </motion.div>
             <p className="text-alenia-light/70 mb-4 text-sm">
@@ -137,9 +144,11 @@ const Footer = () => {
               </div>
               <a href="https://alenia.online/" target="_blank" rel="noopener noreferrer" aria-label="Ir a alenia.online">
                 <motion.img
-                  src="/images/Alenia1.png"
-                  alt="ALENIA Marca"
-                  className="h-10 w-auto opacity-90"
+                  src={BRAND_LOGOS.lockupText}
+                  alt="ALENIA"
+                  className="h-10 w-auto max-w-[220px] object-contain opacity-90"
+                  width="220"
+                  height="55"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 />

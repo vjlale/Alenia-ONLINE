@@ -7,6 +7,7 @@ import { soluciones } from '../data/solucionesData';
 import ServiceFormModal from '../components/forms/ServiceFormModal';
 import ScrollReveal from '../components/common/ScrollReveal';
 import AnimatedGradient from '../components/common/AnimatedGradient';
+import { OG_IMAGE } from '../config/brand'
 
 function Services() {
   const [selectedService, setSelectedService] = useState(null);
@@ -35,12 +36,12 @@ function Services() {
   <meta property="og:url" content="https://alenia.online/soluciones" />
   <meta property="og:title" content="Nuestras Soluciones | ALENIA" />
   <meta property="og:description" content="Descubre nuestras soluciones tecnológicas para transformar tu negocio." />
-  <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="og:image" content={OG_IMAGE} />
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://alenia.online/soluciones" />
   <meta property="twitter:title" content="Nuestras Soluciones | ALENIA" />
   <meta property="twitter:description" content="Descubre nuestras soluciones tecnológicas para transformar tu negocio." />
-  <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="twitter:image" content={OG_IMAGE} />
       </Helmet>
 
       <div className="container mx-auto px-6">

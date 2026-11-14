@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet-async';
 import SmartImage from '../components/common/SmartImage';
 import ScrollReveal from '../components/common/ScrollReveal';
 import Card3D from '../components/common/3DCard';
+import { OG_IMAGE } from '../config/brand'
 
 const BlogCard = ({ post, index }) => {
   const cardRef = useRef(null);
@@ -129,12 +130,12 @@ export default function Blog() {
   <meta property="og:url" content="https://alenia.online/blog" />
   <meta property="og:title" content="Blog - IA, Automatización y Desarrollo | Alen.ia" />
   <meta property="og:description" content="Contenido actualizado sobre IA, automatización y desarrollo web para potenciar tu negocio." />
-  <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="og:image" content={OG_IMAGE} />
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://alenia.online/blog" />
   <meta property="twitter:title" content="Blog - IA, Automatización y Desarrollo | Alen.ia" />
   <meta property="twitter:description" content="Contenido actualizado sobre IA, automatización y desarrollo web para potenciar tu negocio." />
-  <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+  <meta property="twitter:image" content={OG_IMAGE} />
     </Helmet>
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20 relative overflow-hidden">
       {/* Fondo animado */}

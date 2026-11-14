@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, Sparkles, Zap, Target } from 'lucide-react';
+import { BRAND_LOGOS } from '../../config/brand'
 
 export default function HeroSection() {
   return (
@@ -18,8 +19,8 @@ export default function HeroSection() {
           className="mb-12"
         >
           <img 
-            src="/images/5-3.png" 
-            alt="Alen.iA Logo" 
+            src={BRAND_LOGOS.lockupFull}
+            alt="ALENIA"
             className="w-48 h-auto sm:w-64 md:w-80 lg:w-96 xl:w-[28rem] mx-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
           />
         </motion.div>

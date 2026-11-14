@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { soluciones, formularios } from '../data/solucionesData';
 import { ArrowLeft, Check } from 'lucide-react';
 import { useState } from 'react';
+import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand'
 
 // El mismo formulario que usábamos antes, ahora dentro de esta página
 function ContactForm({ config }) {
@@ -82,15 +83,15 @@ export default function ServiceDetail() {
                 <meta property="og:url" content={`https://alenia.online/soluciones/detalle/${id}`} />
                 <meta property="og:title" content={`${nombre} - ${subtitulo} | Alen.ia`} />
                 <meta property="og:description" content={descripcion} />
-                <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+                <meta property="og:image" content={OG_IMAGE} />
                 <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
-                <meta property="og:image:width" content="1200" />
-                <meta property="og:image:height" content="630" />
+                <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+                <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content={`https://alenia.online/soluciones/detalle/${id}`} />
                 <meta property="twitter:title" content={`${nombre} - ${subtitulo} | Alen.ia`} />
                 <meta property="twitter:description" content={descripcion} />
-                <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+                <meta property="twitter:image" content={OG_IMAGE} />
             </Helmet>
             <div className="container mx-auto px-6">
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>

@@ -10,6 +10,7 @@ import ParticleBackground from '../components/common/ParticleBackground';
 import NodeNetworkBackground from '../components/common/NodeNetworkBackground';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { Helmet } from 'react-helmet-async';
+import { BRAND_LOGOS, OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand'
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -78,15 +79,15 @@ export default function Home() {
         <meta property="og:url" content="https://alenia.online/" />
         <meta property="og:title" content="Alen.iA - Resultados con Inteligencia" />
         <meta property="og:description" content="Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas." />
-  <meta property="og:image" content="https://alenia.online/images/Alenia1.png?v=2" />
+  <meta property="og:image" content={OG_IMAGE} />
   <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+  <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://alenia.online/" />
         <meta property="twitter:title" content="Alen.iA - Resultados con Inteligencia" />
         <meta property="twitter:description" content="Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas." />
-  <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png?v=2" />
+  <meta property="twitter:image" content={OG_IMAGE} />
   <meta property="twitter:image:alt" content="ALENIA - Resultados con Inteligencia" />
       </Helmet>
       
@@ -125,11 +126,11 @@ export default function Home() {
                   transition={{ duration: 0.5 }}
                 >
                   <SmartImage 
-                    src="/images/5-3.png" 
-                    alt="Alen.iA Logo" 
+                    src={BRAND_LOGOS.lockupFull}
+                    alt="ALENIA"
                     className="w-50 h-auto sm:w-52 md:w-64 lg:w-72 mx-auto object-contain drop-shadow-2xl cursor-pointer"
-                    width={968}
-                    height={632}
+                    width={1080}
+                    height={540}
                     priority={true}
                   />
                 </motion.div>

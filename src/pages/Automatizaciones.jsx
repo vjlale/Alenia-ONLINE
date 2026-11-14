@@ -1,5 +1,6 @@
 // Página de Automatizaciones
 import { Helmet } from 'react-helmet-async';
+import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand'
 
 export default function Automatizaciones() {
   return (
@@ -12,15 +13,15 @@ export default function Automatizaciones() {
         <meta property="og:url" content="https://alenia.online/automatizaciones" />
         <meta property="og:title" content="Automatizaciones Inteligentes para tu Negocio | Alen.ia" />
         <meta property="og:description" content="Automatiza tareas clave, integra sistemas y gana eficiencia con ALENIA." />
-        <meta property="og:image" content="https://alenia.online/images/Alenia1.png" />
+        <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+        <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://alenia.online/automatizaciones" />
         <meta property="twitter:title" content="Automatizaciones Inteligentes para tu Negocio | Alen.ia" />
         <meta property="twitter:description" content="Automatiza tareas clave, integra sistemas y gana eficiencia con ALENIA." />
-        <meta property="twitter:image" content="https://alenia.online/images/Alenia1.png" />
+        <meta property="twitter:image" content={OG_IMAGE} />
       </Helmet>
       <main className="font-inter min-h-screen bg-slate-900 box-shadow-brand">
       <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Automatizaciones</h1>
