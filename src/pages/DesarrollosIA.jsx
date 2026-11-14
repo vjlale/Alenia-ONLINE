@@ -46,7 +46,7 @@ const heroHighlights = [
   {
     icon: Target,
     title: 'Casos a medida',
-    description: 'Desarrollos creados para sectores clave: salud, retail, logística, marketing y más.'
+    description: 'Desarrollos creados para sectores clave: salud, retail, logística, operación de máquinas y más.'
   }
 ];
 
@@ -98,7 +98,7 @@ export default function DesarrollosIA() {
         <title>DESARROLLOS IA | ALENIA</title>
         <meta
           name="description"
-          content="Catálogo de desarrollos IA creados por ALENIA: soluciones personalizadas y productos listos para escalar en salud, retail, marketing y más."
+          content="Catálogo de desarrollos IA creados por ALENIA: soluciones personalizadas y productos listos para escalar en salud, retail, logística y más."
         />
         <link rel="canonical" href="https://alenia.online/desarrollos-ia" />
         <meta property="og:type" content="website" />

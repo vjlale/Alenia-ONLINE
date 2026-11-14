@@ -45,7 +45,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl leading-relaxed"
         >
-          Automatización inteligente, desarrollo web moderno y marketing digital 
+          Automatización de máquinas con hardware y software, apps y desarrollo web 
           para llevar tu negocio al siguiente nivel
         </motion.p>
 
@@ -88,8 +88,8 @@ export default function HeroSection() {
             },
             {
               icon: <Sparkles className="w-8 h-8 text-purple-400" />,
-              title: "Marketing Digital",
-              desc: "Estrategias de contenido y SEO automatizado"
+              title: "Apps y webs",
+              desc: "Apps, paneles y webs a medida"
             }
           ].map((feature, index) => (
             <motion.div

@@ -28,9 +28,9 @@ const SolucionLevels = () => {
     // Aquí conectarías con tu backend o servicio de emails
   };
 
-  const IconComponent = solucion.icon;
+  const IconComponent = solucion?.icon;
 
-  if (!solucion) {
+  if (!solucion || !solucion.niveles) {
     return (
       <div className="min-h-screen pt-20 bg-alenia-dark text-white">
         <div className="container mx-auto px-6 text-center py-20">
@@ -133,7 +133,7 @@ const SolucionLevels = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-alenia-primary" />
-                <span className="text-alenia-light/70">+500 proyectos</span>
+                <span className="text-alenia-light/70">Soporte humano</span>
               </div>
               <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-alenia-primary" />

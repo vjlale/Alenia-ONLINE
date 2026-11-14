@@ -5,9 +5,6 @@ import { X, Send, Star, Check, ArrowRight } from 'lucide-react';
 // Formularios específicos por servicio
 import DesarrolloWebForm from './specific/DesarrolloWebForm';
 import AutomatizacionForm from './specific/AutomatizacionForm';
-import MarketingDigitalForm from './specific/MarketingDigitalForm';
-import ConsultoriaIAForm from './specific/ConsultoriaIAForm';
-import AnalyticsForm from './specific/AnalyticsForm';
 
 // Servicio de EmailJS
 import emailJSService from '../../services/emailJSService';
@@ -65,12 +62,6 @@ const ServiceFormModal = ({ isOpen, onClose, servicio, nivel = null, onSubmit })
         return <DesarrolloWebForm onSubmit={handleSubmit} nivel={nivel} />;
       case 'automatizacion':
         return <AutomatizacionForm onSubmit={handleSubmit} nivel={nivel} />;
-      case 'marketing-digital':
-        return <MarketingDigitalForm onSubmit={handleSubmit} nivel={nivel} />;
-      case 'consultoria-ia':
-        return <ConsultoriaIAForm onSubmit={handleSubmit} nivel={nivel} />;
-      case 'analytics':
-        return <AnalyticsForm onSubmit={handleSubmit} nivel={nivel} />;
       default:
         return <DesarrolloWebForm onSubmit={handleSubmit} nivel={nivel} />;
     }

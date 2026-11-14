@@ -52,7 +52,7 @@ export default function ROICalculator() {
         </div>
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Calculadora de ROI</h2>
-          <p className="text-blue-300 text-sm sm:text-base">Estima el retorno de tu inversión.</p>
+          <p className="text-blue-300 text-sm sm:text-base">Estimá el retorno de tu inversión.</p>
         </div>
       </div>
 
@@ -132,7 +132,7 @@ export default function ROICalculator() {
           ) : (
             <div className="text-slate-500">
               <Calculator size={48} className="mx-auto mb-4"/>
-              <p>Ingresa los datos para ver el resultado.</p>
+              <p>Ingresá los datos para ver el resultado.</p>
             </div>
           )}
         </div>
@@ -141,7 +141,7 @@ export default function ROICalculator() {
       <div className="mt-6 bg-blue-900/30 border border-blue-800/50 rounded-lg p-3 sm:p-4 flex items-start sm:items-center gap-3 text-sm text-blue-200">
         <Info className="w-5 h-5 flex-shrink-0" />
         <p>
-          <strong>Interpretación:</strong> Un ROI del 100% significa que has duplicado tu inversión inicial. Un ROI negativo indica una pérdida.
+          <strong>Interpretación:</strong> Un ROI del 100% significa que duplicaste tu inversión inicial. Un ROI negativo indica una pérdida.
         </p>
       </div>
     </div>

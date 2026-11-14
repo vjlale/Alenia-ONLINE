@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, Play, MessageCircle, Mail, Calendar, CheckCircle, ArrowRight, RefreshCw, BarChart2 } from 'lucide-react';
+import { Zap, Play, MessageCircle, Mail, Calendar, CheckCircle, ArrowRight, RefreshCw, BarChart2, QrCode, CreditCard, Cpu, DoorOpen } from 'lucide-react';
 
 export default function AutomationSimulator() {
   const [selectedFlow, setSelectedFlow] = useState('');
@@ -9,55 +9,55 @@ export default function AutomationSimulator() {
   const [isRunning, setIsRunning] = useState(false);
 
   const automationFlows = {
-    'whatsapp-leads': {
-      name: 'Captura de Leads por WhatsApp',
-      description: 'Automatiza la captura y seguimiento de leads via WhatsApp.',
+    'lavado-qr': {
+      name: 'Lavado con QR en una lavandería sin personal',
+      description: 'El cliente paga desde el celular y la lavadora arranca sola.',
       steps: [
-        { icon: MessageCircle, title: 'Mensaje Inicial', desc: 'Un nuevo lead inicia la conversación.' },
-        { icon: Zap, title: 'Respuesta Automática', desc: 'El bot responde y califica al lead.' },
-        { icon: Calendar, title: 'Agendamiento', desc: 'Se propone una cita o llamada.' },
-        { icon: Mail, title: 'Notificación al Equipo', desc: 'Alerta a ventas sobre el nuevo lead.' },
-        { icon: CheckCircle, title: 'Seguimiento', desc: 'El lead entra en un flujo de nutrición.' }
+        { icon: QrCode, title: 'Escanea el QR', desc: 'El cliente escanea el QR de la máquina con su celular.' },
+        { icon: CreditCard, title: 'Paga', desc: 'Paga con Mercado Pago o con su saldo.' },
+        { icon: Cpu, title: 'La máquina arranca', desc: 'Al confirmarse el pago, la placa activa la lavadora.' },
+        { icon: MessageCircle, title: 'Aviso al cliente', desc: 'Recibe un aviso cuando termina el ciclo.' },
+        { icon: BarChart2, title: 'Registro en el panel', desc: 'La venta y el estado de la máquina quedan en el panel.' }
       ],
       metrics: {
-        'Tiempo Respuesta': '< 1 min',
-        'Tasa Conversión': '+25%',
-        'Ahorro Tiempo': '5h/sem',
-        'Calidad Lead': 'Alta'
+        'Cobro': 'Digital',
+        'Activación': 'Automática',
+        'Personal en caja': 'No hace falta',
+        'Control': 'En tiempo real'
       }
     },
-    'email-nurturing': {
-      name: 'Nutrición de Leads por Email',
-      description: 'Secuencia de emails para convertir suscriptores en clientes.',
+    'vending-credito': {
+      name: 'Compra en una máquina vending',
+      description: 'Saldo cargado desde la app y código para marcar en la expendedora.',
       steps: [
-        { icon: Mail, title: 'Suscripción', desc: 'Usuario se registra al newsletter.' },
-        { icon: Zap, title: 'Email Bienvenida', desc: 'Envío inmediato con información de valor.' },
-        { icon: Calendar, title: 'Secuencia Programada', desc: 'Serie de 3-5 emails automáticos.' },
-        { icon: CheckCircle, title: 'Análisis de Interés', desc: 'Se trackean clicks y aperturas.' },
-        { icon: MessageCircle, title: 'Oferta Personalizada', desc: 'Envío de oferta según comportamiento.' }
+        { icon: CreditCard, title: 'Carga de saldo', desc: 'El cliente carga saldo desde la app o el tótem.' },
+        { icon: QrCode, title: 'Elige el producto', desc: 'Selecciona qué quiere comprar.' },
+        { icon: Zap, title: 'Código de compra', desc: 'La app muestra el código para marcar en la máquina.' },
+        { icon: CheckCircle, title: 'Entrega', desc: 'La expendedora entrega el producto.' },
+        { icon: BarChart2, title: 'Stock y caja', desc: 'Ventas y stock se actualizan en el panel.' }
       ],
       metrics: {
-        'Tasa Apertura': '48%',
-        'Click-Through': '15%',
-        'Conversión': '10%',
-        'Ahorro Tiempo': '8h/sem'
+        'Pago': 'Sin efectivo',
+        'Saldo': 'En la app',
+        'Ventas': 'Registradas',
+        'Stock': 'Actualizado'
       }
     },
-    'social-posting': {
-      name: 'Publicación en Redes Sociales',
-      description: 'Programa y publica contenido en todas tus redes sociales.',
+    'acceso-qr': {
+      name: 'Acceso al local con QR',
+      description: 'La puerta abre sola para clientes habilitados, sin llaves ni personal.',
       steps: [
-        { icon: Calendar, title: 'Calendario Contenido', desc: 'Planificación mensual de posts.' },
-        { icon: Zap, title: 'Publicación Automática', desc: 'Posteo en horarios de mayor audiencia.' },
-        { icon: BarChart2, title: 'Monitoreo', desc: 'Análisis de engagement y alcance.' },
-        { icon: MessageCircle, title: 'Respuestas IA', desc: 'Bot gestiona comentarios frecuentes.' },
-        { icon: Mail, title: 'Reporte Semanal', desc: 'Informe de rendimiento enviado al equipo.' }
+        { icon: QrCode, title: 'QR en el celular', desc: 'El cliente muestra su QR en la entrada.' },
+        { icon: CheckCircle, title: 'Validación', desc: 'El sistema verifica que esté habilitado.' },
+        { icon: DoorOpen, title: 'Apertura', desc: 'La cerradura se abre automáticamente.' },
+        { icon: Calendar, title: 'Registro', desc: 'Queda registrado quién entró y a qué hora.' },
+        { icon: Mail, title: 'Alertas', desc: 'Si algo falla, el dueño recibe una alerta.' }
       ],
       metrics: {
-        'Alcance': '+150%',
-        'Engagement': '+75%',
-        'Consistencia': '100%',
-        'Ahorro Tiempo': '10h/sem'
+        'Apertura': 'Con QR',
+        'Llaves': 'No hacen falta',
+        'Registro': 'De cada ingreso',
+        'Horario': 'Puede ser 24/7'
       }
     }
   };
@@ -105,7 +105,7 @@ export default function AutomationSimulator() {
         </div>
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Simulador de Automatización</h2>
-          <p className="text-cyan-300 text-sm sm:text-base">Visualiza el poder de la automatización en acción.</p>
+          <p className="text-cyan-300 text-sm sm:text-base">Visualizá el poder de la automatización en acción.</p>
         </div>
       </div>
 
@@ -113,9 +113,9 @@ export default function AutomationSimulator() {
         {!simulation ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-slate-800/40 p-4 sm:p-6 rounded-lg border border-slate-700 space-y-4">
             <div>
-              <label className="block text-sm font-medium text-cyan-300 mb-2">1. Elige un Flujo</label>
+              <label className="block text-sm font-medium text-cyan-300 mb-2">1. Elegí un flujo</label>
               <select value={selectedFlow} onChange={(e) => setSelectedFlow(e.target.value)} className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent bg-slate-900 text-white transition-all">
-                <option value="">Selecciona una simulación...</option>
+                <option value="">Seleccioná una simulación...</option>
                 {Object.entries(automationFlows).map(([key, flow]) => (
                   <option key={key} value={key}>{flow.name}</option>
                 ))}

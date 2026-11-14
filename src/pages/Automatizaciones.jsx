@@ -29,7 +29,7 @@ export default function Automatizaciones() {
       <section className="max-w-2xl mx-auto bg-brand-primary rounded-xl box-shadow-card border border-brand p-8">
         <h2 className="text-xl font-bold text-white mb-3">¿Qué puedes automatizar?</h2>
         <ul className="text-gray-600 text-lg leading-relaxed list-disc pl-5">
-          <li>✔️ Respuestas automáticas en WhatsApp y redes sociales</li>
+          <li>✔️ Respuestas automáticas en WhatsApp</li>
           <li>✔️ Envío de emails y recordatorios</li>
           <li>✔️ Procesos de ventas y seguimiento de clientes</li>
           <li>✔️ Reportes y análisis automáticos</li>

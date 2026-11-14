@@ -2,7 +2,7 @@ import analyticsService from './services/analyticsService';
 import seoService from './services/seoService';
 import performanceService from './services/performanceService';
 import abTestingService from './services/abTestingService';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion';
 import { useState, useEffect, lazy } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
@@ -35,12 +35,13 @@ const Automatizaciones = lazy(() => import('./pages/Automatizaciones'));
 const KontrolPlusLanding = lazy(() => import('./pages/KontrolPlusLanding'));
 const ABTestingDashboard = lazy(() => import('./components/admin/ABTestingDashboard'));
 const ROICalculator = lazy(() => import('./components/apps/ROICalculator'));
-const CompetitorAnalyzer = lazy(() => import('./components/apps/CompetitorAnalyzer'));
-const HashtagGenerator = lazy(() => import('./components/apps/HashtagGenerator'));
 const AutomationSimulator = lazy(() => import('./components/apps/AutomationSimulator'));
-const SEOOptimizer = lazy(() => import('./components/apps/SEOOptimizer'));
 const PicShopEmbed = lazy(() => import('./components/apps/PicShopEmbed'));
 const PlayPadelLanding = lazy(() => import('./pages/PlayPadelLanding'));
+const IStreemLanding = lazy(() => import('./pages/IStreemLanding'));
+const SolucionesHub = lazy(() => import('./pages/SolucionesHub'));
+const SolucionesDigitales = lazy(() => import('./pages/SolucionesDigitales'));
+const LaiaHistoria = lazy(() => import('./pages/LaiaHistoria'));
 
 import './styles/globals.css'
 import { BRAND_LOGOS_ABSOLUTE } from './config/brand'
@@ -256,19 +257,31 @@ function AppContent() {
           <Route path="/apps" element={<LazyRoute component={Apps} />} />
           <Route path="/desarrollos-ia" element={<LazyRoute component={DesarrollosIA} />} />
           <Route path="/apps/calculadora-roi" element={<LazyRoute component={ROICalculator} />} />
-          <Route path="/apps/analizador-competencia" element={<LazyRoute component={CompetitorAnalyzer} />} />
-          <Route path="/apps/generador-hashtags" element={<LazyRoute component={HashtagGenerator} />} />
           <Route path="/apps/simulador-automatizaciones" element={<LazyRoute component={AutomationSimulator} />} />
-          <Route path="/apps/optimizador-seo" element={<LazyRoute component={SEOOptimizer} />} />
+          {/* Herramientas de marketing retiradas: redirigen al catálogo */}
+          <Route path="/apps/analizador-competencia" element={<Navigate to="/apps" replace />} />
+          <Route path="/apps/generador-hashtags" element={<Navigate to="/apps" replace />} />
+          <Route path="/apps/optimizador-seo" element={<Navigate to="/apps" replace />} />
           <Route path="/apps/picshop" element={<LazyRoute component={PicShopEmbed} />} />
 
           <Route path="/soluciones" element={<LazyRoute component={Services} />} />
+          <Route path="/soluciones/hub" element={<LazyRoute component={SolucionesHub} />} />
+          <Route path="/soluciones/digitales" element={<LazyRoute component={SolucionesDigitales} />} />
+          <Route path="/soluciones/desarrollo-apps" element={<Navigate to="/soluciones/digitales" replace />} />
+          {/* Servicios retirados: redirigen a soluciones */}
+          <Route path="/soluciones/marketing-ia" element={<Navigate to="/soluciones" replace />} />
+          <Route path="/soluciones/consultoria-ia" element={<Navigate to="/soluciones" replace />} />
+          <Route path="/soluciones/analisis-datos" element={<Navigate to="/soluciones" replace />} />
+          <Route path="/soluciones/ciberseguridad" element={<Navigate to="/soluciones" replace />} />
           <Route path="/soluciones/:categoria" element={<LazyRoute component={SolucionLevels} />} />
           <Route path="/soluciones/detalle/:id" element={<LazyRoute component={ServiceDetail} />} />
           <Route path="/admin/ab-testing" element={<LazyRoute component={ABTestingDashboard} showErrorDetails={true} />} />
           <Route path="/automatizaciones" element={<LazyRoute component={Automatizaciones} />} />
           <Route path="/kontrol-plus" element={<LazyRoute component={KontrolPlusLanding} />} />
           <Route path="/play-padel" element={<LazyRoute component={PlayPadelLanding} />} />
+          <Route path="/apps/i-streem" element={<LazyRoute component={IStreemLanding} />} />
+          <Route path="/casos/laia" element={<LazyRoute component={LaiaHistoria} />} />
+          <Route path="/laia" element={<Navigate to="/casos/laia" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </PageTransition>

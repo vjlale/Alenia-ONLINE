@@ -35,7 +35,7 @@ const faqs = [
     },
     {
         question: '¿En cuánto tiempo veré resultados?',
-        answer: 'El tiempo para ver resultados varía según el servicio. Para campañas de marketing, los resultados pueden ser visibles en pocas semanas. Para proyectos de desarrollo, los plazos se definen en la propuesta inicial. Siempre nos enfocamos en entregar valor lo más rápido posible.'
+        answer: 'Depende del proyecto. Para conectar máquinas primero evaluamos tus equipos y hacemos una prueba en el local; para apps y webs, los plazos se definen en la propuesta inicial. Siempre nos enfocamos en entregar valor lo más rápido posible.'
     },
     {
         question: '¿Ofrecen soporte después de implementar una solución?',

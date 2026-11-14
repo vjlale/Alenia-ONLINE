@@ -23,65 +23,62 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
   const [errors, setErrors] = useState({});
 
   const tiposNegocio = [
-    { value: 'servicios-profesionales', label: 'Servicios Profesionales', icon: '🏢' },
-    { value: 'retail', label: 'Retail/Comercio', icon: '🛍️' },
-    { value: 'restaurante', label: 'Restaurante/Comida', icon: '🍽️' },
-    { value: 'salud-belleza', label: 'Salud y Belleza', icon: '💅' },
-    { value: 'educacion', label: 'Educación/Coaching', icon: '📚' },
-    { value: 'inmobiliaria', label: 'Bienes Raíces', icon: '🏠' },
-    { value: 'consultoria', label: 'Consultoría', icon: '💼' },
+    { value: 'lavanderia', label: 'Lavandería self-service', icon: '🧺' },
+    { value: 'vending', label: 'Máquinas vending', icon: '🥤' },
+    { value: 'accesos-gimnasio', label: 'Accesos / Gimnasio', icon: '🚪' },
+    { value: 'lavadero-cochera', label: 'Lavadero de autos / Cochera', icon: '🚗' },
+    { value: 'juegos', label: 'Juegos / Entretenimiento', icon: '🎮' },
+    { value: 'comercio', label: 'Comercio o local físico', icon: '🏪' },
+    { value: 'industria', label: 'Industria / Producción', icon: '🏭' },
     { value: 'otro', label: 'Otro', icon: '📝' }
   ];
 
   const problemasComunes = [
-    'Responder mensajes repetitivos en WhatsApp',
-    'Seguimiento manual de clientes potenciales',
-    'Agendar citas manualmente',
-    'Envío manual de recordatorios',
-    'Clasificar y responder emails',
-    'Generar reportes manualmente',
-    'Actualizar bases de datos',
-    'Procesar pedidos repetitivos'
+    'Necesito personal solo para cobrar o activar las máquinas',
+    'Cobro en efectivo o con fichas y quiero pagos digitales',
+    'No sé en tiempo real qué máquina está andando o falla',
+    'Quiero abrir el local sin personal (24/7)',
+    'Controlar el acceso de clientes con QR',
+    'Cerrar la caja y sacar reportes me lleva tiempo',
+    'Quiero una app o un tótem con mi marca',
+    'Tengo varios locales y no los puedo controlar juntos'
   ];
 
   const procesosAutomatizables = [
-    { value: 'whatsapp-bot', label: 'Chatbot para WhatsApp', descripcion: 'Respuestas automáticas 24/7' },
-    { value: 'email-seguimiento', label: 'Email Marketing', descripcion: 'Secuencias automáticas' },
-    { value: 'agenda-citas', label: 'Agendamiento', descripcion: 'Reservas automáticas' },
-    { value: 'crm-automatico', label: 'CRM Inteligente', descripcion: 'Gestión de contactos' },
-    { value: 'inventario', label: 'Control de Inventario', descripcion: 'Alertas automáticas' },
-    { value: 'facturacion', label: 'Facturación', descripcion: 'Cobros automáticos' },
-    { value: 'reportes', label: 'Reportes', descripcion: 'Análisis automático' },
-    { value: 'redes-sociales', label: 'Redes Sociales', descripción: 'Publicación automática' }
+    { value: 'activacion-maquinas', label: 'Activación de máquinas', descripcion: 'Arrancan solas al pagar o escanear un QR' },
+    { value: 'cobros-digitales', label: 'Cobros e ingresos', descripcion: 'Mercado Pago, saldo y crédito' },
+    { value: 'control-accesos', label: 'Control de accesos', descripcion: 'Puertas y cerraduras con QR' },
+    { value: 'panel-control', label: 'Panel en tiempo real', descripcion: 'Estado, ventas y alertas de cada equipo' },
+    { value: 'app-marca', label: 'App con tu marca', descripcion: 'Para tus clientes, iOS y Android' },
+    { value: 'totem', label: 'Tótem táctil', descripcion: 'Autoservicio en el local' },
+    { value: 'asistente-ia', label: 'Asistente IA de soporte', descripcion: 'Atiende a tus clientes 24/7' },
+    { value: 'software-gestion', label: 'Software de gestión', descripcion: 'Stock, caja y reportes' }
   ];
 
   const volumenesOperacion = [
-    { value: '1-50', label: '1-50 por mes', descripcion: 'Pequeño negocio' },
-    { value: '51-200', label: '51-200 por mes', descripcion: 'Negocio en crecimiento' },
-    { value: '201-500', label: '201-500 por mes', descripcion: 'Empresa mediana' },
-    { value: '500+', label: '500+ por mes', descripcion: 'Empresa grande' }
+    { value: '1-5', label: '1 a 5 equipos', descripcion: 'Un local chico' },
+    { value: '6-15', label: '6 a 15 equipos', descripcion: 'Un local grande' },
+    { value: '16-50', label: '16 a 50 equipos', descripcion: 'Varios locales' },
+    { value: '50+', label: 'Más de 50', descripcion: 'Red o franquicia' }
   ];
 
   const plataformasDisponnibles = [
-    'WhatsApp Business',
-    'Instagram',
-    'Facebook Messenger',
-    'Email/Gmail',
-    'Google Sheets',
-    'WordPress',
-    'Shopify',
-    'Calendly',
-    'Zoom',
-    'Slack',
-    'Zapier',
-    'Otras'
+    'Efectivo / monedero',
+    'Fichas o tarjetas',
+    'Mercado Pago',
+    'Posnet / Point',
+    'Placa o controlador del fabricante',
+    'Wi-Fi en el local',
+    'Software de gestión propio',
+    'Ninguno todavía',
+    'Otros'
   ];
 
   const presupuestos = [
-    { value: '199-399', label: '$199 - $399', descripcion: 'Automatización básica' },
-    { value: '400-799', label: '$400 - $799', descripcion: 'Automatización completa' },
-    { value: '800-1499', label: '$800 - $1,499', descripcion: 'Sistema avanzado' },
-    { value: '1500+', label: '$1,500+', descripcion: 'Empresa/Múltiples procesos' }
+    { value: 'evaluar', label: 'Quiero que lo evalúen', descripcion: 'Primero ver qué se puede conectar' },
+    { value: 'piloto', label: 'Prueba piloto', descripcion: 'Empezar con pocos equipos' },
+    { value: 'local-completo', label: 'Un local completo', descripcion: 'Todos los equipos de un local' },
+    { value: 'red', label: 'Varios locales', descripcion: 'Red, cadena o franquicia' }
   ];
 
   const handleInputChange = (e) => {
@@ -115,10 +112,10 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
     if (!formData.email.trim()) newErrors.email = 'El email es requerido';
     if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email inválido';
     if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es requerido';
-    if (!formData.tipoNegocio) newErrors.tipoNegocio = 'Selecciona tu tipo de negocio';
-    if (!formData.problemaPrincipal) newErrors.problemaPrincipal = 'Selecciona tu problema principal';
-    if (formData.procesosAutomatizar.length === 0) newErrors.procesosAutomatizar = 'Selecciona al menos un proceso';
-    if (!formData.descripcionSituacion.trim()) newErrors.descripcionSituacion = 'Describe tu situación actual';
+    if (!formData.tipoNegocio) newErrors.tipoNegocio = 'Elegí tu tipo de negocio';
+    if (!formData.problemaPrincipal) newErrors.problemaPrincipal = 'Elegí qué querés resolver';
+    if (formData.procesosAutomatizar.length === 0) newErrors.procesosAutomatizar = 'Elegí al menos una opción';
+    if (!formData.descripcionSituacion.trim()) newErrors.descripcionSituacion = 'Contanos un poco de tus máquinas';
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -175,7 +172,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
             value={formData.telefono}
             onChange={handleInputChange}
             className={`w-full px-4 py-3 bg-slate-800 border ${errors.telefono ? 'border-red-400' : 'border-gray-600'} rounded-lg text-white placeholder-gray-400 focus:border-green-400 focus:outline-none transition-colors`}
-            placeholder="+1 123 456 7890"
+            placeholder="+54 9 351 123 4567"
           />
           {errors.telefono && <p className="text-red-400 text-xs mt-1">{errors.telefono}</p>}
         </div>
@@ -198,7 +195,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
       {/* Tipo de Negocio */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-3">
-          ¿Qué tipo de negocio tienes? *
+          ¿Qué tipo de negocio tenés? *
         </label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {tiposNegocio.map((tipo) => (
@@ -230,7 +227,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
       {/* Problema Principal */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-3">
-          ¿Cuál es tu problema principal? *
+          ¿Qué querés resolver primero? *
         </label>
         <div className="space-y-2">
           {problemasComunes.map((problema) => (
@@ -262,7 +259,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
       {/* Procesos a Automatizar */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-3">
-          ¿Qué procesos quieres automatizar? *
+          ¿Qué querés conectar o automatizar? *
         </label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {procesosAutomatizables.map((proceso) => (
@@ -297,7 +294,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
       {/* Volumen de Operación */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-3">
-          ¿Cuántos clientes/contactos manejas por mes?
+          ¿Cuántas máquinas o equipos operás?
         </label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {volumenesOperacion.map((volumen) => (
@@ -329,7 +326,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
       {/* Plataformas Actuales */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-3">
-          ¿Qué plataformas usas actualmente?
+          ¿Cómo cobrás y qué tenés hoy?
         </label>
         <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
           {plataformasDisponnibles.map((plataforma) => (
@@ -357,7 +354,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
       {/* Presupuesto */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-3">
-          ¿Cuál es tu presupuesto para automatización?
+          ¿Cómo te gustaría empezar?
         </label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {presupuestos.map((presupuesto) => (
@@ -393,7 +390,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
       {/* Situación Actual */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-2">
-          Describe tu situación actual *
+          Contanos marca y modelo de tus máquinas y qué necesitás *
         </label>
         <textarea
           name="descripcionSituacion"
@@ -401,7 +398,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
           onChange={handleInputChange}
           rows={4}
           className={`w-full px-4 py-3 bg-slate-800 border ${errors.descripcionSituacion ? 'border-red-400' : 'border-gray-600'} rounded-lg text-white placeholder-gray-400 focus:border-green-400 focus:outline-none transition-colors resize-none`}
-          placeholder="Cuéntanos qué tareas repetitivas consumen más tiempo, qué problemas enfrentas con clientes, cuántas horas al día dedicas a tareas manuales..."
+          placeholder="Ej.: 6 lavadoras Electrolux y 2 secadoras, cobramos en efectivo, queremos abrir 24/7 y cobrar con Mercado Pago..."
         />
         {errors.descripcionSituacion && <p className="text-red-400 text-xs mt-1">{errors.descripcionSituacion}</p>}
       </div>
@@ -413,12 +410,12 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
         whileTap={{ scale: 0.98 }}
         className="w-full bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
       >
-        Solicitar Automatización Personalizada
+        Pedir evaluación de mis equipos
         <ArrowRight className="w-5 h-5" />
       </motion.button>
 
       <p className="text-center text-gray-400 text-sm">
-        ⚡ Ahorra hasta 15 horas semanales • Consulta gratuita incluida
+        Evaluamos tus equipos sin costo • La compatibilidad depende de marca, modelo y controlador
       </p>
     </form>
   );

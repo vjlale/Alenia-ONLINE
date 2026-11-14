@@ -1,17 +1,121 @@
-import { Globe, Zap, BarChart3, MessageSquare, Cpu } from 'lucide-react';
+import { Globe, Cpu, Smartphone } from 'lucide-react';
 
 export const soluciones = [
+  {
+    id: 2,
+    nombre: 'Automatización de máquinas',
+    categoria: 'automatizacion',
+    subtitulo: 'ALENIA HUB · Hardware + software',
+    descripcion: 'Conectamos tus máquinas con pagos, app y un panel de control: el cliente paga y la máquina arranca sola.',
+    descripcionGeneral: 'De la máquina al negocio conectado. Integramos tus equipos físicos (lavadoras, vending, puertas, molinetes) con cobros digitales, una app o tótem con tu marca y un panel para ver todo en tiempo real. Es lo que hicimos en LaIA, una lavandería self-service que funciona 24/7 sin personal.',
+    incluye: [
+      'Activación de máquinas con QR o pago digital.',
+      'Cobros con Mercado Pago, saldo y crédito.',
+      'Panel en tiempo real: estado, ventas, caja y alertas.'
+    ],
+    icon: Cpu,
+    color: 'green',
+    link: '/soluciones/hub',
+    linkLabel: 'Conocer ALENIA HUB',
+    destacado: true,
+    niveles: {
+      elemental: {
+        nombre: 'ELEMENTAL',
+        precio: 'A cotizar',
+        precioNumerico: 0,
+        objetivo: 'Conectar tus primeras máquinas',
+        descripcion: 'Para dar el primer paso: cobrar digital y activar equipos sin personal',
+        beneficios: [
+          'Evaluación de tus equipos (marca, modelo y controlador)',
+          'Placa IoT y conexión de las máquinas elegidas',
+          'Cobro con QR de Mercado Pago',
+          'La máquina arranca sola al confirmarse el pago',
+          'Panel web básico con estado y ventas',
+          'Pruebas en el local antes de abrir al público'
+        ],
+        caracteristicas: [
+          'Prueba piloto con pocos equipos',
+          'Instalación en el local',
+          'Capacitación de uso',
+          'Soporte técnico 30 días',
+          'Funciona con Wi-Fi del local',
+          'Escalable a todo el local'
+        ],
+        destacado: false,
+        formularioId: '2-elemental'
+      },
+      moderado: {
+        nombre: 'MODERADO',
+        precio: 'A cotizar',
+        precioNumerico: 0,
+        objetivo: 'Un local completo funcionando solo',
+        descripcion: 'Para operar todo el local sin depender de que haya alguien cobrando',
+        beneficios: [
+          'Todas las máquinas del local conectadas',
+          'Cobros con Mercado Pago, saldo y crédito',
+          'App o web de autoservicio con tu marca',
+          'Control de acceso con QR en la puerta',
+          'Panel en tiempo real con alertas de fallas',
+          'Cierre de caja y reportes automáticos',
+          'Integración con vending en modo crédito',
+          'Monitoreo remoto desde el celular'
+        ],
+        caracteristicas: [
+          'Local completo',
+          'Instalación y puesta en marcha',
+          'Pruebas en campo',
+          'Soporte técnico 90 días',
+          'Ajustes según el uso real',
+          'Capacitación del equipo'
+        ],
+        destacado: true,
+        etiqueta: 'MÁS ELEGIDO',
+        formularioId: '2-moderado'
+      },
+      visionario: {
+        nombre: 'VISIONARIO',
+        precio: 'A cotizar',
+        precioNumerico: 0,
+        objetivo: 'Ecosistema propio para tu red de locales',
+        descripcion: 'Para cadenas, franquicias y operadores con varios locales',
+        beneficios: [
+          'App móvil propia (iOS y Android) con tu marca',
+          'Tótem táctil de autoservicio en cada local',
+          'Panel central para todos tus locales',
+          'Asistente IA que atiende a tus clientes 24/7',
+          'Saldo, promociones y fidelización',
+          'Integración con placas o APIs del fabricante',
+          'Roles para dueños, encargados y técnicos',
+          'Reportes por local y por máquina',
+          'Preparado para sumar nuevos locales o franquicias',
+          'Acompañamiento en la expansión'
+        ],
+        caracteristicas: [
+          'Varios locales',
+          'Desarrollo a medida',
+          'Implementación por etapas',
+          'Soporte prioritario 1 año',
+          'Mejoras continuas',
+          'Manual de operación'
+        ],
+        destacado: false,
+        premium: true,
+        etiqueta: 'PREMIUM',
+        formularioId: '2-visionario'
+      }
+    }
+  },
   {
     id: 1,
     nombre: 'Desarrollo Web',
     categoria: 'desarrollo-web',
-    subtitulo: 'Desarrollo Web & Apps',
-    descripcion: 'Creamos webs, apps y software a medida que solucionan problemas reales de tu negocio.',
+    subtitulo: 'Webs que presentan y venden',
+    descripcion: 'Webs modernas, catálogos y tiendas online para presentar tu negocio y recibir consultas.',
     descripcionGeneral: 'Desde landing pages hasta ecosistemas digitales completos, te ayudamos a establecer y hacer crecer tu presencia online con soluciones que realmente convierten visitantes en clientes.',
     incluye: [
       'Catálogos y tiendas online que venden 24/7.',
-      'Apps personalizadas para optimizar tu gestión.',
-      'Software a medida para escalar tus operaciones.'
+      'Landing pages y sitios institucionales modernos.',
+      'Formularios y WhatsApp integrados para recibir consultas.'
     ],
     icon: Globe,
     color: 'blue',
@@ -103,419 +207,28 @@ export const soluciones = [
     }
   },
   {
-    id: 2,
-    nombre: 'Automatización',
-    categoria: 'automatizacion',
-    subtitulo: 'Trabaja Menos, Logra Más',
-    descripcion: 'Implementamos asistentes virtuales y automatizamos tareas para que no pierdas ni un solo cliente.',
-    descripcionGeneral: 'Libera tiempo valioso automatizando tareas repetitivas con IA. Desde chatbots inteligentes hasta flujos de trabajo completos, te ayudamos a ser más productivo mientras mejoras la experiencia de tus clientes.',
-    incluye: [
-      'Asistente virtual para WhatsApp, Instagram y Facebook.',
-      'Seguimiento automático de clientes por email.',
-      'Sistema de agendamiento de turnos y citas.'
-    ],
-    icon: Zap,
-    color: 'green',
-    niveles: {
-      elemental: {
-        nombre: 'ELEMENTAL',
-        precio: 'Desde $99',
-        precioNumerico: 99,
-        objetivo: 'Automatización básica para empezar',
-        descripcion: 'Perfecto para negocios que quieren dar sus primeros pasos en automatización',
-        beneficios: [
-          'Chatbot básico para WhatsApp Business',
-          'Respuestas automáticas configuradas',
-          'Formulario de contacto inteligente',
-          'Notificaciones automáticas por email',
-          'Configuración inicial incluida',
-          'Tutorial de uso completo'
-        ],
-        caracteristicas: [
-          'Hasta 100 conversaciones/mes',
-          '10 respuestas automáticas',
-          '2 semanas de implementación',
-          'Soporte técnico 30 días',
-          'Manual de uso incluido',
-          'Integración con WhatsApp'
-        ],
-        destacado: false,
-        formularioId: '2-elemental'
-      },
-      moderado: {
-        nombre: 'MODERADO',
-        precio: 'Desde $199',
-        precioNumerico: 199,
-        objetivo: 'Automatización completa multicanal',
-        descripcion: 'Ideal para empresas que buscan automatizar múltiples procesos',
-        beneficios: [
-          'Asistente IA para WhatsApp, Instagram y Facebook',
-          'Sistema de citas automático integrado',
-          'Seguimiento de leads por email y SMS',
-          'Dashboard de control centralizado',
-          'Integraciones con CRM existente',
-          'Flujos de trabajo personalizados',
-          'Reportes de conversiones automáticos',
-          'Capacitación del equipo incluida'
-        ],
-        caracteristicas: [
-          'Hasta 500 conversaciones/mes',
-          'Múltiples canales integrados',
-          '4 semanas de implementación',
-          'Soporte técnico 90 días',
-          'Entrenamientos incluidos',
-          'Optimización continua'
-        ],
-        destacado: true,
-        etiqueta: 'MÁS POPULAR',
-        formularioId: '2-moderado'
-      },
-      visionario: {
-        nombre: 'VISIONARIO',
-        precio: 'Desde $399',
-        precioNumerico: 399,
-        objetivo: 'Ecosistema de automatización empresarial',
-        descripcion: 'La solución completa para empresas que quieren liderar en eficiencia',
-        beneficios: [
-          'IA conversacional avanzada con aprendizaje',
-          'Automatización completa del funnel de ventas',
-          'Integración con todos los sistemas existentes',
-          'Análisis predictivo de comportamiento',
-          'Automatización de procesos internos',
-          'API personalizada para integraciones',
-          'Consultoría estratégica mensual',
-          'Soporte prioritario 24/7',
-          'Actualizaciones y mejoras continuas',
-          'ROI garantizado o reembolso'
-        ],
-        caracteristicas: [
-          'Conversaciones ilimitadas',
-          'IA personalizada y entrenable',
-          '8 semanas de implementación',
-          'Soporte VIP 1 año completo',
-          'Consultoría estratégica incluida',
-          'Garantía de resultados'
-        ],
-        destacado: false,
-        premium: true,
-        etiqueta: 'PREMIUM',
-        formularioId: '2-visionario'
-      }
-    }
-  },
-  {
     id: 3,
-    nombre: 'Marketing Digital',
-    categoria: 'marketing-ia',
-    subtitulo: 'Marketing que Entiende',
-    descripcion: 'Usamos IA para que tus anuncios lleguen a las personas correctas y optimices tu inversión.',
-    descripcionGeneral: 'Potencia tu marketing con inteligencia artificial que entiende a tu audiencia. Optimizamos campañas, generamos contenido y analizamos datos para maximizar tu ROI y acelerar el crecimiento de tu negocio.',
+    nombre: 'Apps y software a medida',
+    categoria: 'desarrollo-apps',
+    subtitulo: 'Apps, paneles y programas',
+    descripcion: 'Aplicaciones iOS y Android, paneles de control y software de gestión pensados para tu operación.',
+    descripcionGeneral: 'Desarrollamos apps para tus clientes, paneles para tu equipo y programas de gestión (ventas, stock, caja) que se adaptan a cómo trabajás.',
     incluye: [
-      'Análisis de mercado para entender a tus clientes.',
-      'Optimización de campañas para mayor retorno.',
-      'Generación de contenido que posiciona en Google.'
+      'Apps iOS y Android con tu marca.',
+      'Paneles de administración y reportes.',
+      'Software de gestión de ventas y stock.'
     ],
-    icon: MessageSquare,
-    color: 'purple',
-    niveles: {
-      elemental: {
-        nombre: 'ELEMENTAL',
-        precio: 'Desde $124',
-        precioNumerico: 124,
-        objetivo: 'Marketing digital básico optimizado',
-        descripcion: 'Ideal para emprendedores que quieren empezar con marketing inteligente',
-        beneficios: [
-          'Análisis básico de tu audiencia actual',
-          'Optimización de 1 campaña publicitaria',
-          'Creación de 10 posts para redes sociales',
-          'Configuración de Google Analytics',
-          'Reporte mensual de resultados',
-          'Consultoría inicial de estrategia'
-        ],
-        caracteristicas: [
-          '1 red social gestionada',
-          'Presupuesto hasta $500/mes',
-          '3 semanas de setup',
-          'Soporte técnico 30 días',
-          'Reportes mensuales',
-          'Optimización básica'
-        ],
-        destacado: false,
-        formularioId: '3-elemental'
-      },
-      moderado: {
-        nombre: 'MODERADO',
-        precio: 'Desde $224',
-        precioNumerico: 224,
-        objetivo: 'Estrategia integral de marketing con IA',
-        descripcion: 'Para empresas que buscan resultados consistentes y escalables',
-        beneficios: [
-          'Análisis completo de mercado y competencia',
-          'Gestión de múltiples campañas optimizadas',
-          'Generación de contenido automatizada',
-          'Segmentación avanzada con IA',
-          'A/B testing continuo de anuncios',
-          'Landing pages optimizadas',
-          'Email marketing automatizado',
-          'Dashboard de resultados en tiempo real'
-        ],
-        caracteristicas: [
-          '3 redes sociales gestionadas',
-          'Presupuesto hasta $2000/mes',
-          '4 semanas de implementación',
-          'Soporte técnico 90 días',
-          'Reportes semanales',
-          'Optimización continua'
-        ],
-        destacado: true,
-        etiqueta: 'RECOMENDADO',
-        formularioId: '3-moderado'
-      },
-      visionario: {
-        nombre: 'VISIONARIO',
-        precio: 'Desde $449',
-        precioNumerico: 449,
-        objetivo: 'Marketing omnicanal impulsado por IA',
-        descripcion: 'La solución definitiva para empresas que quieren dominar su mercado',
-        beneficios: [
-          'IA personalizada para tu industria específica',
-          'Campañas automatizadas en todos los canales',
-          'Predicción de tendencias y comportamientos',
-          'Personalización dinámica de contenido',
-          'Integración completa con CRM y sistemas',
-          'Optimización automática 24/7',
-          'Consultoría estratégica semanal',
-          'Acceso a herramientas premium de IA',
-          'Análisis predictivo de ROI',
-          'Soporte dedicado y prioritario'
-        ],
-        caracteristicas: [
-          'Canales ilimitados',
-          'Presupuesto ilimitado',
-          '6 semanas de implementación',
-          'Soporte VIP 1 año completo',
-          'Estratega dedicado',
-          'Resultados garantizados'
-        ],
-        destacado: false,
-        premium: true,
-        etiqueta: 'ENTERPRISE',
-        formularioId: '3-visionario'
-      }
-    }
-  },
-  {
-    id: 4,
-    nombre: 'Consultoría en IA',
-    categoria: 'consultoria-ia',
-    subtitulo: 'IA Estratégica para tu Negocio',
-    descripcion: 'Te ayudamos a integrar inteligencia artificial de manera estratégica en tu empresa.',
-    descripcionGeneral: 'Implementamos estrategias de IA personalizadas para tu industria. Desde automatización de procesos hasta análisis predictivo, te ayudamos a aprovechar el poder de la inteligencia artificial para optimizar operaciones y acelerar el crecimiento.',
-    incluye: [
-      'Análisis de oportunidades de IA en tu negocio.',
-      'Implementación de soluciones IA personalizadas.',
-      'Capacitación del equipo en herramientas de IA.'
-    ],
-    icon: Cpu,
+    icon: Smartphone,
     color: 'orange',
-    niveles: {
-      elemental: {
-        nombre: 'ELEMENTAL',
-        precio: 'Desde $74',
-        precioNumerico: 74,
-        objetivo: 'Auditoría básica de oportunidades de IA',
-        descripcion: 'Perfecto para emprendedores que quieren identificar procesos automatizables',
-        beneficios: [
-          'Análisis de procesos actuales de tu negocio',
-          'Identificación de 3-5 oportunidades de IA',
-          'Reporte con recomendaciones específicas',
-          'Estimación de ROI por cada oportunidad',
-          'Consulta estratégica de 2 horas',
-          'Plan de implementación básico'
-        ],
-        caracteristicas: [
-          'Análisis de 1 área del negocio',
-          'Reporte de oportunidades (5-10 páginas)',
-          '2 semanas de análisis',
-          'Soporte técnico 30 días',
-          '1 sesión de seguimiento',
-          'Recursos educativos incluidos'
-        ],
-        destacado: false,
-        formularioId: '4-elemental'
-      },
-      moderado: {
-        nombre: 'MODERADO',
-        precio: 'Desde $149',
-        precioNumerico: 149,
-        objetivo: 'Implementación de soluciones IA personalizadas',
-        descripcion: 'Para empresas que quieren automatizar procesos clave con IA',
-        beneficios: [
-          'Implementación de 2-3 soluciones IA específicas',
-          'Capacitación completa del equipo',
-          'Automatización de procesos repetitivos',
-          'Dashboard personalizado para monitoreo',
-          'Integración con sistemas existentes',
-          'Optimización continua por 3 meses',
-          'Análisis de impacto y ROI',
-          'Soporte durante la implementación'
-        ],
-        caracteristicas: [
-          'Análisis completo del negocio',
-          'Implementación de 2-3 soluciones IA',
-          '6-8 semanas de implementación',
-          'Soporte técnico 90 días',
-          'Capacitación del equipo incluida',
-          'Reportes mensuales de performance'
-        ],
-        destacado: true,
-        etiqueta: 'MÁS POPULAR',
-        formularioId: '4-moderado'
-      },
-      visionario: {
-        nombre: 'VISIONARIO',
-        precio: 'Desde $299',
-        precioNumerico: 299,
-        objetivo: 'Transformación digital completa con IA estratégica',
-        descripcion: 'La solución definitiva para empresas que quieren liderar con IA',
-        beneficios: [
-          'Ecosistema completo de IA empresarial',
-          'IA personalizada entrenada para tu industria',
-          'Automatización de todos los procesos clave',
-          'Análisis predictivo y machine learning',
-          'Integración completa con todos los sistemas',
-          'Consultoría estratégica mensual',
-          'Desarrollo de IA propietaria',
-          'Expansión a nuevas oportunidades de mercado',
-          'ROI garantizado o reembolso',
-          'Soporte VIP dedicado 24/7'
-        ],
-        caracteristicas: [
-          'Transformación digital completa',
-          'IA propietaria desarrollada a medida',
-          'Implementación en 3-4 meses',
-          'Soporte VIP 1 año completo',
-          'Consultor estratégico dedicado',
-          'Garantía de resultados empresariales'
-        ],
-        destacado: false,
-        premium: true,
-        etiqueta: 'ENTERPRISE',
-        formularioId: '4-visionario'
-      }
-    }
-  },
-  {
-    id: 5,
-    nombre: 'Análisis de Datos',
-    categoria: 'analisis-datos',
-    subtitulo: 'Decisiones Basadas en Datos',
-    descripcion: 'Convertimos tus datos en insights accionables para tomar mejores decisiones de negocio.',
-    descripcionGeneral: 'Transformamos datos complejos en información clara y accionable. Implementamos dashboards, análisis predictivo y reportes automatizados que te ayudan a entender tu negocio y tomar decisiones estratégicas basadas en evidencia.',
-    incluye: [
-      'Dashboards interactivos y reportes en tiempo real.',
-      'Análisis predictivo para planificación estratégica.',
-      'Integración de múltiples fuentes de datos.'
-    ],
-    icon: BarChart3,
-    color: 'indigo',
-    color: 'indigo',
-    niveles: {
-      elemental: {
-        nombre: 'ELEMENTAL',
-        precio: 'Desde $89',
-        precioNumerico: 89,
-        objetivo: 'Dashboard básico con métricas esenciales',
-        descripcion: 'Ideal para negocios que quieren entender sus datos principales',
-        beneficios: [
-          'Dashboard interactivo con métricas clave',
-          'Reportes automáticos semanales',
-          'Visualizaciones claras y fáciles de entender',
-          'Integración con 2-3 fuentes de datos',
-          'Alertas automáticas de cambios importantes',
-          'Capacitación básica en interpretación'
-        ],
-        caracteristicas: [
-          'Dashboard con 8-10 métricas principales',
-          'Integración con Excel, Google Sheets',
-          '2 semanas de configuración',
-          'Soporte técnico 30 días',
-          'Manual de uso incluido',
-          'Reportes automáticos'
-        ],
-        destacado: false,
-        formularioId: '5-elemental'
-      },
-      moderado: {
-        nombre: 'MODERADO',
-        precio: 'Desde $189',
-        precioNumerico: 189,
-        objetivo: 'Sistema completo de análisis con múltiples fuentes',
-        descripcion: 'Para empresas que buscan insights profundos de múltiples datos',
-        beneficios: [
-          'Integración completa de múltiples fuentes de datos',
-          'Dashboards avanzados con drill-down',
-          'Análisis de tendencias y patrones',
-          'Reportes automatizados personalizados',
-          'Segmentación avanzada de datos',
-          'Alertas inteligentes predictivas',
-          'API para integraciones adicionales',
-          'Capacitación del equipo en análisis'
-        ],
-        caracteristicas: [
-          'Integración con 5-8 fuentes de datos',
-          'Dashboards interactivos avanzados',
-          '4 semanas de implementación',
-          'Soporte técnico 90 días',
-          'Reportes automatizados',
-          'Training de herramientas incluido'
-        ],
-        destacado: true,
-        etiqueta: 'MÁS POPULAR',
-        formularioId: '5-moderado'
-      },
-      visionario: {
-        nombre: 'VISIONARIO',
-        precio: 'Desde $349',
-        precioNumerico: 349,
-        objetivo: 'Plataforma empresarial de BI con análisis predictivo',
-        descripcion: 'La solución definitiva para empresas data-driven',
-        beneficios: [
-          'Plataforma completa de Business Intelligence',
-          'Machine Learning para análisis predictivo',
-          'Integración con todos los sistemas empresariales',
-          'Data Lake personalizado para big data',
-          'Modelos predictivos automatizados',
-          'Consultoría estratégica con data scientist',
-          'Automatización de decisiones basadas en datos',
-          'Análisis de mercado y competencia',
-          'API avanzada para desarrollos personalizados',
-          'Garantía de insights accionables'
-        ],
-        caracteristicas: [
-          'Integración ilimitada de fuentes de datos',
-          'BI avanzado con machine learning',
-          '6-8 semanas de implementación',
-          'Soporte VIP 1 año completo',
-          'Data scientist dedicado',
-          'ROI medible garantizado'
-        ],
-        destacado: false,
-        premium: true,
-        etiqueta: 'ENTERPRISE',
-        formularioId: '5-visionario'
-      }
-    }
+    link: '/soluciones/digitales',
+    linkLabel: 'Ver apps y webs'
   }
 ];
 
 export const formularios = {
   // Formularios originales (mantener para compatibilidad)
   1: { titulo: 'Estás a un paso de tener tu web profesional.', subtitulo: 'Completa tus datos y un experto te contactará para explicarte cómo funciona, sin compromiso.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: 'Si ya tienes una página web, déjanos el enlace aquí (Opcional)', name: 'web', type: 'text', required: false, help: 'Este campo nos ayuda a entender tu situación actual para darte una mejor recomendación.' } ], textoBoton: 'Solicitar mi Web Profesional', agradecimiento: '¡Gracias! Hemos recibido tu solicitud.\nUn experto de ALENIA te contactará en menos de 24 horas para conversar sobre tu proyecto.' },
-  2: { titulo: 'Empecemos a automatizar tu negocio.', subtitulo: 'Cuéntanos un poco más para que un experto te contacte con una solución a tu medida.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: 'Describe brevemente, ¿cuál es la tarea más repetitiva que te quita tiempo hoy?', name: 'tarea', type: 'textarea', required: false, help: 'Esto nos ayudará a identificar dónde podemos ayudarte a ahorrar más tiempo.' } ], textoBoton: 'Quiero mi Asistente Virtual', agradecimiento: '¡Gracias! Hemos recibido tu solicitud.\nUn experto de ALENIA te contactará en menos de 24 horas para mostrarte cómo empezar a automatizar.' },
-  3: { titulo: 'Optimicemos juntos tus anuncios.', subtitulo: 'Completa los datos y un experto analizará cómo podemos mejorar tus resultados de marketing.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: 'Actualmente, ¿cuál es tu principal objetivo de marketing?', name: 'objetivo', type: 'text', required: false, help: 'Ejemplos: Conseguir más clientes, vender más online, que más gente conozca mi marca.' } ], textoBoton: 'Quiero Optimizar mis Anuncios', agradecimiento: '¡Gracias! Hemos recibido tu solicitud.\nUn experto de ALENIA te contactará en menos de 24 horas para hablar sobre tus metas.' },
-  4: { titulo: 'Deja el contenido de tus redes en nuestras manos.', subtitulo: 'Con estos datos, un experto te contactará para mostrarte cómo funciona y qué podemos crear para ti.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: '¿En qué red social te gustaría mejorar tu presencia primero?', name: 'red', type: 'text', required: false, help: 'Ejemplos: Instagram, Facebook, LinkedIn, etc.' } ], textoBoton: 'Solicitar Contenido', agradecimiento: '¡Gracias! Hemos recibido tu solicitud.\nUn experto de ALENIA te contactará en menos de 24 horas con ideas para tu marca.' },
-  5: { titulo: 'Es hora de dominar los marketplaces.', subtitulo: 'Danos un poco de información y un experto te contactará para potenciar tus ventas online.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: 'Déjanos el enlace a tu tienda o a tu perfil de vendedor (Ej: MercadoLibre). (Opcional)', name: 'perfil', type: 'text', required: false, help: 'Esto nos permite analizar tu perfil antes de la llamada para darte mejores recomendaciones.' } ], textoBoton: 'Quiero Vender Más', agradecimiento: '¡Gracias! Hemos recibido tu solicitud.\nUn experto de ALENIA te contactará en menos de 24 horas para analizar cómo puedes vender más.' },
+  2: { titulo: 'Contanos qué máquinas tenés.', subtitulo: 'Con estos datos evaluamos tus equipos y te proponemos cómo conectarlos.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: 'Marca y modelo de tus máquinas, cuántas operás y qué querés conectar', name: 'tarea', type: 'textarea', required: false, help: 'La compatibilidad depende de la marca, el modelo y el controlador.' } ], textoBoton: 'Pedir evaluación', agradecimiento: '¡Gracias! Recibimos tu consulta.\nUn especialista de ALENIA te va a contactar para evaluar tus equipos.' },
   'cta-final': { titulo: '¡Estás a un paso de transformar tu negocio!', subtitulo: 'Completa tus datos y accede a todas nuestras herramientas de forma gratuita.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false } ], textoBoton: 'Obtener Acceso Inmediato Gratuito', agradecimiento: '¡Gracias! Hemos recibido tu solicitud.\nEn breve recibirás acceso a nuestras herramientas.' },
 
   // Formularios específicos por nivel
@@ -563,190 +276,48 @@ export const formularios = {
     agradecimiento: '¡Perfecto! Crearemos un ecosistema digital que transformará tu negocio.\nUn consultor senior de ALENIA te contactará en 24 horas para una sesión estratégica completa.'
   },
 
-  // Automatización Inteligente
+  // Automatización de máquinas (ALENIA HUB)
   '2-elemental': {
-    titulo: 'Automatiza lo básico - Nivel ELEMENTAL',
-    subtitulo: 'Un chatbot inteligente para WhatsApp que nunca duerme.',
+    titulo: 'Conectemos tus primeras máquinas - Nivel ELEMENTAL',
+    subtitulo: 'Cobro digital y activación automática para empezar con pocos equipos.',
     campos: [
       { label: 'Nombre', name: 'nombre', type: 'text', required: true },
       { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
       { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false },
-      { label: '¿Qué tipo de negocio tienes?', name: 'negocio', type: 'text', required: true },
-      { label: '¿Cuántas consultas recibes por WhatsApp al día?', name: 'volumen', type: 'select', options: ['Menos de 10', '10-30', '30-50', 'Más de 50'], required: true },
-      { label: '¿Cuáles son las 3 preguntas más frecuentes de tus clientes?', name: 'preguntas', type: 'textarea', required: true }
+      { label: '¿Qué tipo de negocio tenés?', name: 'negocio', type: 'text', required: true, help: 'Ej.: lavandería, vending, gimnasio, lavadero de autos.' },
+      { label: '¿Cuántas máquinas querés conectar primero?', name: 'volumen', type: 'select', options: ['1 a 3', '4 a 10', 'Más de 10', 'No sé todavía'], required: true },
+      { label: 'Marca y modelo de las máquinas', name: 'equipos', type: 'textarea', required: true, help: 'La compatibilidad depende de la marca, el modelo y el controlador.' }
     ],
-    textoBoton: 'Quiero mi Chatbot',
-    agradecimiento: '¡Genial! Tu asistente virtual estará listo pronto.\nUn experto de ALENIA te contactará en 24 horas para configurar tu chatbot personalizado.'
+    textoBoton: 'Pedir evaluación',
+    agradecimiento: '¡Gracias! Recibimos los datos de tus equipos.\nUn especialista de ALENIA te va a contactar para revisar qué se puede conectar.'
   },
   '2-moderado': {
-    titulo: 'Automatización completa - Nivel MODERADO',
-    subtitulo: 'Asistente IA multicanal que gestiona todo tu embudo de ventas.',
+    titulo: 'Tu local funcionando solo - Nivel MODERADO',
+    subtitulo: 'Todas las máquinas conectadas, cobros digitales, accesos con QR y panel en tiempo real.',
     campos: [
       { label: 'Nombre', name: 'nombre', type: 'text', required: true },
       { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
       { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false },
-      { label: '¿En qué canales necesitas automatización?', name: 'canales', type: 'select', options: ['WhatsApp + Instagram', 'WhatsApp + Facebook', 'Todos los canales', 'Tengo dudas'], required: true },
-      { label: '¿Usas algún CRM actualmente?', name: 'crm', type: 'select', options: ['No uso CRM', 'Excel/Hojas de cálculo', 'HubSpot', 'Otro CRM'], required: true },
-      { label: '¿Cuál es tu mayor desafío con clientes actuales?', name: 'desafio', type: 'textarea', required: true }
+      { label: '¿Cómo cobrás hoy?', name: 'cobro', type: 'select', options: ['Efectivo o monedero', 'Fichas o tarjetas', 'Mercado Pago / posnet', 'Combinado'], required: true },
+      { label: '¿Querés abrir el local sin personal?', name: 'sin_personal', type: 'select', options: ['Sí, 24/7', 'Algunos horarios', 'No, pero quiero controlar mejor'], required: true },
+      { label: 'Contanos qué máquinas tenés y qué querés conectar', name: 'desafio', type: 'textarea', required: true }
     ],
-    textoBoton: 'Automatizar mi Embudo',
-    agradecimiento: '¡Excelente! Nunca más perderás un cliente potencial.\nUn experto de ALENIA te contactará en 24 horas para diseñar tu sistema de automatización completo.'
+    textoBoton: 'Quiero mi local conectado',
+    agradecimiento: '¡Excelente! Vamos a armar una propuesta para tu local.\nUn especialista de ALENIA te va a contactar para coordinar la evaluación de tus equipos.'
   },
   '2-visionario': {
-    titulo: 'IA Empresarial - Nivel VISIONARIO',
-    subtitulo: 'Inteligencia artificial que aprende y optimiza tu negocio 24/7.',
+    titulo: 'Ecosistema para tu red de locales - Nivel VISIONARIO',
+    subtitulo: 'App y tótem con tu marca, panel central y asistente IA para todos tus locales.',
     campos: [
       { label: 'Nombre', name: 'nombre', type: 'text', required: true },
       { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
       { label: 'Teléfono', name: 'telefono', type: 'tel', required: true },
-      { label: 'Empresa/Organización', name: 'empresa', type: 'text', required: true },
-      { label: '¿Cuántos empleados tiene tu empresa?', name: 'empleados', type: 'select', options: ['1-5', '6-20', '21-50', 'Más de 50'], required: true },
-      { label: '¿Qué procesos internos consumen más tiempo?', name: 'procesos', type: 'textarea', required: true },
-      { label: '¿Tienes equipo técnico interno?', name: 'equipo_tecnico', type: 'select', options: ['Sí, tengo equipo', 'Tengo algo de conocimiento', 'No, necesito soporte completo'], required: true }
+      { label: 'Empresa / Marca', name: 'empresa', type: 'text', required: true },
+      { label: '¿Cuántos locales operás o planeás abrir?', name: 'locales', type: 'select', options: ['1 a 3', '4 a 10', 'Más de 10', 'Franquicia en armado'], required: true },
+      { label: 'Describí tus equipos y lo que te imaginás para tu marca', name: 'vision', type: 'textarea', required: true },
+      { label: '¿Qué sistemas tenés que integrar?', name: 'integraciones', type: 'textarea', required: false, help: 'Ej.: placas del fabricante, facturación, software de gestión.' }
     ],
-    textoBoton: 'Solicitar Auditoría IA',
-    agradecimiento: '¡Perfecto! Transformaremos tu empresa con IA empresarial.\nUn consultor en IA de ALENIA te contactará en 24 horas para una auditoría completa de oportunidades.'
-  },
-
-  // Marketing Digital con IA
-  '3-elemental': {
-    titulo: 'Marketing inteligente básico - Nivel ELEMENTAL',
-    subtitulo: 'Campañas optimizadas que realmente convierten.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false },
-      { label: '¿En qué red social quieres enfocarte?', name: 'red_principal', type: 'select', options: ['Instagram', 'Facebook', 'LinkedIn', 'No estoy seguro'], required: true },
-      { label: '¿Cuál es tu presupuesto mensual para publicidad?', name: 'presupuesto_ads', type: 'select', options: ['$100-$300', '$300-$500', '$500-$1000', 'Más de $1000'], required: true },
-      { label: '¿Cuál es tu principal objetivo?', name: 'objetivo', type: 'select', options: ['Conseguir más clientes', 'Vender productos online', 'Aumentar reconocimiento de marca', 'Generar leads'], required: true }
-    ],
-    textoBoton: 'Optimizar mis Anuncios',
-    agradecimiento: '¡Perfecto! Tus anuncios van a rendir mucho mejor.\nUn especialista en marketing de ALENIA te contactará en 24 horas para optimizar tus campañas.'
-  },
-  '3-moderado': {
-    titulo: 'Estrategia integral con IA - Nivel MODERADO',
-    subtitulo: 'Marketing omnicanal que escala con inteligencia artificial.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false },
-      { label: '¿En qué redes sociales tienes presencia?', name: 'redes_actuales', type: 'textarea', required: true },
-      { label: '¿Tienes equipo de marketing interno?', name: 'equipo_marketing', type: 'select', options: ['Sí, tengo equipo', 'Solo yo', 'Contrato freelancers', 'No tengo equipo'], required: true },
-      { label: '¿Cuál es tu ticket promedio de venta?', name: 'ticket_promedio', type: 'select', options: ['Menos de $50', '$50-$200', '$200-$500', 'Más de $500'], required: true },
-      { label: '¿Qué herramientas de marketing usas?', name: 'herramientas', type: 'textarea', required: false }
-    ],
-    textoBoton: 'Escalar mi Marketing',
-    agradecimiento: '¡Excelente! Tu marketing será imparable con IA.\nUn estratega digital de ALENIA te contactará en 24 horas para diseñar tu estrategia omnicanal.'
-  },
-  '3-visionario': {
-    titulo: 'Dominio total del mercado - Nivel VISIONARIO',
-    subtitulo: 'IA predictiva que anticipa tendencias y optimiza todo automáticamente.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono', name: 'telefono', type: 'tel', required: true },
-      { label: 'Empresa/Organización', name: 'empresa', type: 'text', required: true },
-      { label: '¿Cuáles son tus ingresos mensuales aproximados?', name: 'ingresos', type: 'select', options: ['$5k-$20k', '$20k-$50k', '$50k-$100k', 'Más de $100k'], required: true },
-      { label: '¿En qué mercados quieres expandirte?', name: 'expansion', type: 'textarea', required: true },
-      { label: '¿Cuál es tu mayor competidor?', name: 'competencia', type: 'text', required: false },
-      { label: 'Presupuesto mensual total de marketing', name: 'presupuesto_total', type: 'select', options: ['$2k-$5k', '$5k-$10k', '$10k-$20k', 'Más de $20k'], required: true }
-    ],
-    textoBoton: 'Dominar mi Mercado',
-    agradecimiento: '¡Perfecto! Vas a liderar tu industria con IA.\nUn consultor estratégico de ALENIA te contactará en 24 horas para planificar tu dominio total del mercado.'
-  },
-
-  // Generación de Contenido
-  '4-elemental': {
-    titulo: 'Contenido constante - Nivel ELEMENTAL',
-    subtitulo: 'Nunca más te quedes sin ideas para publicar.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false },
-      { label: '¿Para qué red social necesitas contenido?', name: 'red_social', type: 'select', options: ['Instagram', 'Facebook', 'LinkedIn', 'TikTok'], required: true },
-      { label: '¿Qué tipo de negocio promocionas?', name: 'tipo_negocio', type: 'text', required: true },
-      { label: '¿Tienes fotos/videos de tu negocio?', name: 'material_visual', type: 'select', options: ['Sí, tengo bastante', 'Tengo pocas', 'No tengo nada', 'No estoy seguro'], required: true }
-    ],
-    textoBoton: 'Generar mi Contenido',
-    agradecimiento: '¡Genial! Tu feed siempre estará activo y atractivo.\nUn creador de contenido de ALENIA te contactará en 24 horas para comenzar a generar tu contenido.'
-  },
-  '4-moderado': {
-    titulo: 'Contenido estratégico - Nivel MODERADO',
-    subtitulo: 'Contenido que educa, entretiene y convierte en múltiples plataformas.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false },
-      { label: '¿En qué redes sociales quieres estar presente?', name: 'redes_multiples', type: 'textarea', required: true },
-      { label: '¿Tienes blog en tu sitio web?', name: 'blog', type: 'select', options: ['Sí y lo actualizo', 'Sí pero está abandonado', 'No tengo blog', 'No tengo sitio web'], required: true },
-      { label: '¿Cuál es tu expertise o de qué eres experto?', name: 'expertise', type: 'textarea', required: true },
-      { label: '¿Participas en videos o prefieres solo texto/imágenes?', name: 'videos', type: 'select', options: ['Me gusta aparecer en videos', 'Solo ocasionalmente', 'Prefiero no salir', 'No estoy seguro'], required: true }
-    ],
-    textoBoton: 'Crear mi Estrategia',
-    agradecimiento: '¡Excelente! Serás una autoridad en tu industria.\nUn estratega de contenido de ALENIA te contactará en 24 horas para diseñar tu plan editorial completo.'
-  },
-  '4-visionario': {
-    titulo: 'Liderazgo de pensamiento - Nivel VISIONARIO',
-    subtitulo: 'Conviértete en la voz líder de tu industria con contenido de clase mundial.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono', name: 'telefono', type: 'tel', required: true },
-      { label: 'Empresa/Marca Personal', name: 'marca', type: 'text', required: true },
-      { label: '¿Cuál es tu visión de liderazgo en tu industria?', name: 'vision_liderazgo', type: 'textarea', required: true },
-      { label: '¿Tienes experiencia con podcasts, webinars o conferencias?', name: 'experiencia_multimedia', type: 'select', options: ['Sí, soy experimentado', 'Algo de experiencia', 'Principiante pero motivado', 'Nunca he hecho'], required: true },
-      { label: '¿Con qué influencers o líderes te gustaría colaborar?', name: 'colaboraciones', type: 'textarea', required: false },
-      { label: '¿Cuál es tu presupuesto mensual para contenido premium?', name: 'presupuesto_contenido', type: 'select', options: ['$600-$1000', '$1000-$2000', '$2000-$5000', 'Más de $5000'], required: true }
-    ],
-    textoBoton: 'Liderar mi Industria',
-    agradecimiento: '¡Perfecto! Te convertiremos en el líder de tu industria.\nUn director creativo de ALENIA te contactará en 24 horas para planificar tu estrategia de thought leadership.'
-  },
-
-  // E-commerce
-  '5-elemental': {
-    titulo: 'Optimización básica - Nivel ELEMENTAL',
-    subtitulo: 'Mejora tus ventas en marketplace con optimizaciones probadas.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false },
-      { label: '¿En qué marketplace vendes?', name: 'marketplace', type: 'select', options: ['MercadoLibre', 'Amazon', 'Shopify', 'Otro'], required: true },
-      { label: '¿Cuántos productos tienes publicados?', name: 'cantidad_productos', type: 'select', options: ['1-10', '11-50', '51-100', 'Más de 100'], required: true },
-      { label: 'Enlace a tu tienda (opcional)', name: 'enlace_tienda', type: 'text', required: false, help: 'Esto nos ayuda a hacer un análisis previo' }
-    ],
-    textoBoton: 'Optimizar mis Ventas',
-    agradecimiento: '¡Perfecto! Tus productos van a destacar sobre la competencia.\nUn especialista en e-commerce de ALENIA te contactará en 24 horas para optimizar tu tienda.'
-  },
-  '5-moderado': {
-    titulo: 'Gestión automatizada - Nivel MODERADO',
-    subtitulo: 'Automatización completa de tu operación e-commerce.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false },
-      { label: '¿En qué marketplaces vendes?', name: 'marketplaces_multiples', type: 'textarea', required: true },
-      { label: '¿Cuáles son tus ventas mensuales aproximadas?', name: 'ventas_mensuales', type: 'select', options: ['Menos de $1k', '$1k-$5k', '$5k-$20k', 'Más de $20k'], required: true },
-      { label: '¿Cómo manejas el inventario actualmente?', name: 'inventario', type: 'select', options: ['Excel/manual', 'Sistema básico', 'Sistema avanzado', 'No tengo control'], required: true },
-      { label: '¿Cuál es tu mayor problema operativo?', name: 'problema_operativo', type: 'textarea', required: true }
-    ],
-    textoBoton: 'Automatizar mi E-commerce',
-    agradecimiento: '¡Excelente! Tu negocio online funcionará como relojería.\nUn especialista en automatización e-commerce de ALENIA te contactará en 24 horas para optimizar toda tu operación.'
-  },
-  '5-visionario': {
-    titulo: 'Imperio e-commerce - Nivel VISIONARIO',
-    subtitulo: 'Domina todos los canales de venta con IA y automatización empresarial.',
-    campos: [
-      { label: 'Nombre', name: 'nombre', type: 'text', required: true },
-      { label: 'Email de Contacto', name: 'email', type: 'email', required: true },
-      { label: 'Teléfono', name: 'telefono', type: 'tel', required: true },
-      { label: 'Empresa', name: 'empresa', type: 'text', required: true },
-      { label: '¿Cuáles son tus ingresos mensuales actuales?', name: 'ingresos_actuales', type: 'select', options: ['$10k-$50k', '$50k-$100k', '$100k-$500k', 'Más de $500k'], required: true },
-      { label: '¿En qué mercados/países quieres expandirte?', name: 'expansion_geografica', type: 'textarea', required: true },
-      { label: '¿Tienes equipo e-commerce actualmente?', name: 'equipo_ecommerce', type: 'select', options: ['Sí, equipo completo', 'Tengo algunas personas', 'Solo yo', 'Necesito armar equipo'], required: true },
-      { label: '¿Qué sistemas ya tienes integrados?', name: 'sistemas_actuales', type: 'textarea', required: false, help: 'ERP, CRM, sistema de facturación, etc.' },
-      { label: 'Presupuesto de inversión en crecimiento', name: 'presupuesto_inversion', type: 'select', options: ['$5k-$20k', '$20k-$50k', '$50k-$100k', 'Más de $100k'], required: true }
-    ],
-    textoBoton: 'Construir mi Imperio',
-    agradecimiento: '¡Perfecto! Construiremos un imperio e-commerce imparable.\nUn consultor estratégico de ALENIA te contactará en 24 horas para diseñar tu plan de expansión total.'
+    textoBoton: 'Solicitar reunión',
+    agradecimiento: '¡Perfecto! Vamos a diseñar el ecosistema para tu red.\nUn especialista de ALENIA te va a contactar para una primera reunión.'
   }
 }

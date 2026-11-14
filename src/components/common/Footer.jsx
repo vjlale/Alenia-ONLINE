@@ -33,11 +33,11 @@ const Footer = () => {
   ]
 
   const services = [
-    { name: 'Automatización WhatsApp', href: '/soluciones#whatsapp' },
-    { name: 'Desarrollo Web', href: '/soluciones#web' },
-    { name: 'Email Marketing', href: '/soluciones#email' },
-    { name: 'Análisis con IA', href: '/soluciones#analytics' },
-    { name: 'CRM Personalizado', href: '/soluciones#crm' }
+    { name: 'Automatización de máquinas', href: '/soluciones/hub' },
+    { name: 'Cobros y accesos con QR', href: '/soluciones/hub' },
+    { name: 'Apps y software a medida', href: '/soluciones/digitales' },
+    { name: 'Desarrollo Web', href: '/soluciones/desarrollo-web' },
+    { name: 'Caso real: LaIA', href: '/casos/laia' }
   ]
 
   const social = [
@@ -111,15 +111,15 @@ const Footer = () => {
             <p className="text-alenia-primary font-medium text-sm">
               "Resultados con Inteligencia"
             </p>
-            <Link to="/kontrol-plus" className="mt-4 inline-block">
+            <a href="https://kontrolpro.app/" target="_blank" rel="noopener noreferrer" className="mt-4 inline-block" aria-label="Kontrol Pro">
               <motion.img 
-                src="/images/7.png" 
-                alt="KONTROL+ Logo" 
-                className="w-32 h-auto"
+                src="/images/kontrol-pro/logo.png" 
+                alt="Kontrol Pro" 
+                className="w-16 h-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               />
-            </Link>
+            </a>
 
             {/* Website link + brand image */}
             <div className="mt-5 space-y-2">

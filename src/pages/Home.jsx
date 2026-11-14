@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Zap, Settings, X, ChevronDown, LayoutGrid, Target } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, Settings, X, ChevronDown, LayoutGrid, Target, Cpu, CreditCard, DoorOpen, LayoutDashboard } from 'lucide-react';
 import { useState } from 'react';
 import emailJSService from '../services/emailJSService';
 import SmartImage from '../components/common/SmartImage';
@@ -73,12 +73,12 @@ export default function Home() {
     <main className="relative font-inter bg-brand-primary box-shadow-brand">
       <Helmet>
         <title>Alen.iA - Resultados con Inteligencia</title>
-        <meta name="description" content="Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas." />
+        <meta name="description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
         <link rel="canonical" href="https://alenia.online/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://alenia.online/" />
         <meta property="og:title" content="Alen.iA - Resultados con Inteligencia" />
-        <meta property="og:description" content="Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas." />
+        <meta property="og:description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
   <meta property="og:image" content={OG_IMAGE} />
   <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
   <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
@@ -86,7 +86,7 @@ export default function Home() {
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://alenia.online/" />
         <meta property="twitter:title" content="Alen.iA - Resultados con Inteligencia" />
-        <meta property="twitter:description" content="Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas." />
+        <meta property="twitter:description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
   <meta property="twitter:image" content={OG_IMAGE} />
   <meta property="twitter:image:alt" content="ALENIA - Resultados con Inteligencia" />
       </Helmet>
@@ -156,11 +156,11 @@ export default function Home() {
                     style={{ perspective: 1000 }}
                   >
                     <Link 
-                      to="/kontrol-plus" 
+                      to="/apps" 
                       className="group relative bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-bold px-8 py-4 rounded-xl overflow-hidden glow-btn flex items-center gap-2 justify-center transform-gpu"
                     >
                       <span className="relative z-10 flex items-center gap-2">
-                        Apps con IA GRATIS
+                        Ver nuestras apps
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -242,6 +242,45 @@ export default function Home() {
               <p className="text-white/90 text-lg max-w-2xl mx-auto">
                 Venimos a cambiar las reglas del juego. No más facturas mensuales que se acumulan. Tecnología que trabaja por vos, no al revés.
               </p>
+            </div>
+          </motion.section>
+
+          {/* ALENIA HUB – Automatización de máquinas */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="glass-advanced rounded-2xl p-8 md:p-10 border border-green-400/30 overflow-hidden">
+              <span className="text-xs uppercase tracking-widest font-bold text-green-300">ALENIA HUB</span>
+              <h2 className="mt-2 text-3xl md:text-4xl font-bold text-white mb-4">
+                De la máquina al negocio conectado
+              </h2>
+              <p className="text-white/90 text-lg mb-8">
+                Conectamos tus máquinas con pagos, app y un panel de control. El cliente paga desde el celular, la máquina arranca sola y vos controlás todo en tiempo real. Ya funciona en LaIA, una lavandería self-service abierta 24/7 sin personal.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {[
+                  { icon: Cpu, text: 'Activación de máquinas con QR o pago' },
+                  { icon: CreditCard, text: 'Cobros con Mercado Pago, saldo y crédito' },
+                  { icon: DoorOpen, text: 'Accesos y puertas que abren con QR' },
+                  { icon: LayoutDashboard, text: 'Panel con estado, ventas y alertas' }
+                ].map((item) => (
+                  <div key={item.text} className="flex items-center gap-3 text-white/90">
+                    <item.icon className="w-5 h-5 text-green-400 flex-shrink-0" />
+                    <span>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+              <Link
+                to="/soluciones/hub"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black px-6 py-3 rounded-xl font-semibold transition-all"
+              >
+                Conocer ALENIA HUB
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </motion.section>
 
