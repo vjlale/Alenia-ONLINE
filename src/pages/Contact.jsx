@@ -15,6 +15,12 @@ const contactInfo = [
     action: 'mailto:alenia.online@gmail.com'
   },
   {
+    icon: <Phone className="w-6 h-6" />,
+    title: 'WhatsApp',
+    value: '+54 9 351 687-5178',
+    action: 'https://wa.me/5493516875178?text=' + encodeURIComponent('Hola ALENIA, quiero hacer una consulta.')
+  },
+  {
     icon: <MapPin className="w-6 h-6" />,
     title: 'Ubicación',
     value: 'Córdoba, Argentina',
