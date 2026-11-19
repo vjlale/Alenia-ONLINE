@@ -397,18 +397,20 @@ export default function SolucionesHub() {
               Relevamos tus equipos, los conectamos, armamos el software y lo ponemos en marcha con vos.
             </p>
           </ScrollReveal>
-          <div className="relative max-w-4xl mx-auto">
-            <div
-              className="absolute left-[1.125rem] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500/50 via-cyan-500/30 to-transparent md:-translate-x-1/2"
+          <ol className="relative max-w-5xl mx-auto space-y-8 md:space-y-0">
+            {/* Línea vertical: a la izquierda en celular, al centro en pantallas grandes */}
+            <span
+              className="absolute left-5 md:left-1/2 top-2 bottom-2 w-px -translate-x-1/2 bg-gradient-to-b from-emerald-500/60 via-cyan-500/30 to-transparent"
               aria-hidden
             />
-            <ul className="space-y-12">
-              {PHASES.map((phase, index) => (
-                <ScrollReveal key={phase.step} delay={0.08 * index} direction="up">
-                  <li className="relative flex flex-col md:flex-row gap-6 md:gap-10 md:items-start md:odd:flex-row-reverse">
-                    <div className="flex md:w-1/2 md:justify-center shrink-0">
+            {PHASES.map((phase, index) => {
+              const onRight = index % 2 === 1
+              return (
+                <li key={phase.step} className={`relative ${index > 0 ? 'md:-mt-24' : ''}`}>
+                  <ScrollReveal delay={0.08 * index} direction="up">
+                    <div className="grid grid-cols-[2.5rem_1fr] gap-4 md:grid-cols-[1fr_4rem_1fr] md:gap-6 items-start">
                       <motion.div
-                        className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 border-2 border-emerald-400 text-emerald-300 font-bold text-sm shadow-[0_0_20px_rgba(52,211,153,0.35)]"
+                        className="relative z-10 col-start-1 row-start-1 md:col-start-2 justify-self-center mt-5 flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 border-2 border-emerald-400 text-emerald-300 font-bold text-sm shadow-[0_0_20px_rgba(52,211,153,0.35)]"
                         initial={{ scale: 0.8, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         viewport={{ once: true }}
@@ -416,34 +418,41 @@ export default function SolucionesHub() {
                       >
                         {phase.step}
                       </motion.div>
-                    </div>
-                    <div className="md:w-1/2 pl-14 md:pl-0 glass-advanced rounded-2xl p-6 border border-white/10">
-                      <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                        <Layers className="w-5 h-5 text-cyan-400 shrink-0" />
-                        {phase.title}
-                      </h3>
-                      <p className="text-alenia-light/80 leading-relaxed">{phase.body}</p>
-                      {phase.bullets && (
-                        <ul className="mt-4 space-y-2">
-                          {phase.bullets.map((bullet) => (
-                            <li key={bullet} className="flex items-start gap-2 text-sm text-alenia-light/75">
-                              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                              {bullet}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                      {phase.highlight && (
-                        <p className="mt-4 text-sm font-medium text-cyan-300/90 border-l-2 border-cyan-400 pl-3">
-                          {phase.highlight}
+                      <article
+                        className={`col-start-2 row-start-1 ${
+                          onRight ? 'md:col-start-3' : 'md:col-start-1'
+                        } glass-advanced rounded-2xl p-6 md:p-7 border border-white/10 hover:border-emerald-400/30 transition-colors`}
+                      >
+                        <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
+                          Fase {phase.step}
                         </p>
-                      )}
+                        <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                          <Layers className="w-5 h-5 text-cyan-400 shrink-0" />
+                          {phase.title}
+                        </h3>
+                        <p className="text-alenia-light/80 leading-relaxed">{phase.body}</p>
+                        {phase.bullets && (
+                          <ul className="mt-4 space-y-2">
+                            {phase.bullets.map((bullet) => (
+                              <li key={bullet} className="flex items-start gap-2 text-sm text-alenia-light/75">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                                {bullet}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {phase.highlight && (
+                          <p className="mt-4 text-sm font-medium text-cyan-300/90 border-l-2 border-cyan-400 pl-3">
+                            {phase.highlight}
+                          </p>
+                        )}
+                      </article>
                     </div>
-                  </li>
-                </ScrollReveal>
-              ))}
-            </ul>
-          </div>
+                  </ScrollReveal>
+                </li>
+              )
+            })}
+          </ol>
         </section>
 
         {/* Rubros */}

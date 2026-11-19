@@ -295,3 +295,22 @@
     will-change: auto;
   }
 }
+
+/* Títulos con texto en degradé (background-clip: text).
+   Con un interlineado muy justo (leading-none, text-5xl/6xl, etc.) el navegador
+   recorta las colas de g, q, p, y y los acentos de las mayúsculas, y el título
+   parece "cortado". Le damos aire al renglón y un margen abajo al degradé. */
+:is(h1, h2, h3, h4):has(.bg-clip-text, .text-gradient-animated, [style*="background-clip: text"]),
+.bg-clip-text,
+.text-gradient-animated,
+[style*="background-clip: text"] {
+  line-height: 1.2;
+}
+
+.bg-clip-text,
+.text-gradient-animated,
+[style*="background-clip: text"] {
+  padding-bottom: 0.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
