@@ -177,7 +177,7 @@ const PlayPadelLanding = () => {
                 icon={<Trophy className="w-12 h-12" />}
                 title="Puntos y ranking"
                 description="Ganá puntos por cada victoria y mantené rachas ganadoras. Competí en rankings individuales y de dobles para mostrar tu nivel."
-                highlights={['+5 pts por jugar', '+25 pts por victoria en dobles', 'Puntos extra por rachas']}
+                highlights={['+10 pts por jugar', '+25 pts por victoria en dobles', 'Puntos extra por rachas']}
               />
 
               <FeatureCard

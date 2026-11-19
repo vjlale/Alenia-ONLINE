@@ -74,9 +74,9 @@ export default function Home() {
       <Helmet>
         <title>Alen.iA - Resultados con Inteligencia</title>
         <meta name="description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
-        <link rel="canonical" href="https://alenia.online/" />
+        <link rel="canonical" href="https://aleniahub.com/" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://alenia.online/" />
+        <meta property="og:url" content="https://aleniahub.com/" />
         <meta property="og:title" content="Alen.iA - Resultados con Inteligencia" />
         <meta property="og:description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
   <meta property="og:image" content={OG_IMAGE} />
@@ -84,7 +84,7 @@ export default function Home() {
   <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
   <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://alenia.online/" />
+        <meta property="twitter:url" content="https://aleniahub.com/" />
         <meta property="twitter:title" content="Alen.iA - Resultados con Inteligencia" />
         <meta property="twitter:description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
   <meta property="twitter:image" content={OG_IMAGE} />
