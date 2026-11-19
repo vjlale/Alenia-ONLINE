@@ -15,12 +15,6 @@ const contactInfo = [
     action: 'mailto:alenia.online@gmail.com'
   },
   {
-    icon: <Phone className="w-6 h-6" />,
-    title: 'WhatsApp',
-    value: '+54 9 11 1234-5678',
-    action: 'https://wa.me/5491112345678'
-  },
-  {
     icon: <MapPin className="w-6 h-6" />,
     title: 'Ubicación',
     value: 'Córdoba, Argentina',
@@ -177,12 +171,15 @@ export default function Contact() {
           <ScrollReveal direction="up" delay={0.2}>
             <div className="text-center mb-16">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold mb-6">
-                <AnimatedGradient className="bg-clip-text text-transparent">
-                  Hablemos de tu Proyecto
+                <AnimatedGradient
+                  style={{ backgroundImage: 'linear-gradient(-45deg, #00ff88 0%, #00ccff 50%, #c77dff 100%)' }}
+                >
+                  Hablemos de tu proyecto
                 </AnimatedGradient>
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Estamos listos para ayudarte a transformar tu empresa con tecnología e inteligencia artificial.
+                Contanos qué querés conectar o construir: máquinas, cobros, una app o una web. Te respondemos con
+                los próximos pasos.
               </p>
             </div>
           </ScrollReveal>

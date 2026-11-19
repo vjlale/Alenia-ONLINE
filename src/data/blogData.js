@@ -3,16 +3,12 @@ export const blogPosts = [
     id: 1,
     slug: 'kontrol-plus-sistema-gestion-gratuito',
     title: 'KONTROL+: El sistema que reemplaza software de $150 por mes (¡gratis para siempre!)',
-    excerpt: 'Dejá de pagar fortunas por sistemas complicados. KONTROL+ es tu solución de gestión completa, gratuita y lista para usar en 10 minutos. Sin trucos, sin mensualidades.',
+    excerpt: 'Dejá de pagar fortunas por sistemas complicados. KONTROL+ para escritorio es una solución de gestión completa, gratuita y lista para usar en 10 minutos. Para la versión con asistente por WhatsApp, mirá Kontrol Pro.',
     date: '20 Jul 2025',
     readTime: 6,
     category: 'Sistemas de Gestión',
-    image: '/images/casos de exito.165Z.png',
-    imageSources: [
-      { src: '/images/casos de exito.165Z_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/casos de exito.165Z_1280.webp', type: 'image/webp' }
-    ],
-    featured: true,
+    image: '/images/blog/casos-de-exito.jpg',
+    featured: false,
     content: `
 **¿Cansado de pagar $150 dólares por mes por un software que apenas usás?** 
 
@@ -132,11 +128,7 @@ No te prometemos magia, te prometemos que en una semana vas a tener la informaci
     date: '18 Jul 2025',
     readTime: 8,
     category: 'Automatización',
-    image: '/images/automatizacion wsp.png',
-    imageSources: [
-      { src: '/images/automatizacion wsp_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/automatizacion wsp_1280.webp', type: 'image/webp' }
-    ],
+    image: '/images/blog/automatizacion-wsp.jpg',
     content: `
 Imaginate esto: Son las 2 de la mañana, vos estás durmiendo, pero tu negocio sigue funcionando. Un cliente te escribe por WhatsApp preguntando por un producto, tu asistente virtual le responde al instante, le muestra el catálogo, procesa el pedido y hasta programa la entrega. 
 
@@ -230,12 +222,8 @@ No te vamos a vender humo. Te vamos a mostrar exactamente cómo funciona con tu 
     date: '15 Jul 2025',
     readTime: 10,
     category: 'Desarrollo Web',
-    image: '/images/desarrollo web 2025.795Z.png',
-    imageSources: [
-      { src: '/images/desarrollo web 2025.795Z_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/desarrollo web 2025.795Z_1280.webp', type: 'image/webp' }
-    ],
-    featured: true,
+    image: '/images/blog/desarrollo-web-2025.jpg',
+    featured: false,
     content: `
 # Progressive Web Apps: La Tecnología que Revoluciona la Experiencia Digital
 
@@ -449,11 +437,7 @@ Mientras algunas empresas siguen con webs lentas y experiencias frustrantes, otr
     date: '12 Jul 2025',
     readTime: 9,
     category: 'Marketing Digital',
-    image: '/images/marketing.png',
-    imageSources: [
-      { src: '/images/marketing_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/marketing_1280.webp', type: 'image/webp' }
-    ],
+    image: '/images/blog/marketing.jpg',
     content: `
 **🚀 La inteligencia artificial (IA) ha revolucionado el marketing digital**, permitiendo personalizar mensajes, segmentar audiencias y optimizar campañas en tiempo real. 
 
@@ -531,11 +515,7 @@ Pruebas de creatividades generadas por IA + test de incrementality
     date: '10 Jul 2025',
     readTime: 12,
     category: 'Inteligencia Artificial',
-    image: '/images/analisis predictivo.png',
-    imageSources: [
-      { src: '/images/analisis predictivo_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/analisis predictivo_1280.webp', type: 'image/webp' }
-    ],
+    image: '/images/blog/analisis-predictivo.jpg',
     content: `
 **🔮 El análisis predictivo utiliza modelos de machine learning** para anticipar tendencias, comportamientos y resultados futuros. 
 
@@ -614,11 +594,7 @@ MLOps, monitoreo de drift y retraining automático
     date: '08 Jul 2025',
     readTime: 6,
     category: 'CRM',
-    image: '/images/crm.197Z.png',
-    imageSources: [
-      { src: '/images/crm.197Z_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/crm.197Z_1280.webp', type: 'image/webp' }
-    ],
+    image: '/images/blog/crm.jpg',
     content: `
 **Todas las semanas nos preguntan lo mismo:** *"¿Me conviene un CRM como Salesforce o mejor uno hecho a medida?"*
 
@@ -790,11 +766,7 @@ No existe el CRM perfecto. Existe el CRM correcto para tu momento y tu negocio.
     date: '05 Jul 2025',
     readTime: 8,
     category: 'Email Marketing',
-    image: '/images/email marketing.png',
-    imageSources: [
-      { src: '/images/email marketing_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/email marketing_1280.webp', type: 'image/webp' }
-    ],
+    image: '/images/blog/email-marketing.jpg',
     content: `
 **📧 El email marketing sigue siendo una de las herramientas más efectivas** para conectar con clientes. 
 
@@ -885,11 +857,7 @@ Pruebas A/B de creatividades con IA
     date: '02 Jul 2025',
     readTime: 6,
     category: 'Desarrollo Web',
-    image: '/images/desarrollo web.png',
-    imageSources: [
-      { src: '/images/desarrollo web_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/desarrollo web_1280.webp', type: 'image/webp' }
-    ],
+    image: '/images/blog/desarrollo-web.jpg',
     content: `
 **¿Tu web carga lento? ¿Se ve mal en móviles? ¿Los clientes se van antes de comprar?**
 
@@ -1044,11 +1012,8 @@ Las empresas que mejor la están pasando online no es porque gastan más en mark
     date: '30 Jun 2025',
     readTime: 11,
     category: 'Automatización',
-    image: '/images/casos de exito.165Z.png',
-    imageSources: [
-      { src: '/images/casos de exito.165Z_640.webp', type: 'image/webp', media: '(max-width: 640px)' },
-      { src: '/images/casos de exito.165Z_1280.webp', type: 'image/webp' }
-    ],
+    image: '/images/blog/casos-de-exito.jpg',
+    featured: true,
     content: `
 **¿Cuántas horas por semana perdés haciendo tareas que podrían hacerse automáticamente?**
 

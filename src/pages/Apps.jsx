@@ -922,7 +922,7 @@ export default function Apps() {
                 </div>
                 <Link
                   to="/contacto"
-                  className="group inline-flex items-center gap-3 rounded-full bg-alenia-primary px-8 py-4 text-base font-semibold text-black shadow-glow-md transition-all hover:shadow-glow-lg"
+                  className="group inline-flex shrink-0 items-center gap-3 whitespace-nowrap rounded-full bg-gradient-to-r from-[#7b2cbf] to-[#c77dff] px-8 py-4 text-base font-semibold text-white shadow-[0_0_24px_rgba(199,125,255,0.35)] transition-all hover:shadow-[0_0_36px_rgba(199,125,255,0.55)]"
                 >
                   Agendá una demo
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />

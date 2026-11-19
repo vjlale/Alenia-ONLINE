@@ -201,12 +201,12 @@ const Footer = () => {
             <h3 className="text-alenia-light font-semibold mb-4">Contacto</h3>
             <div className="space-y-3 mb-6">
               <motion.a
-                href="mailto:contacto@alenia.online"
+                href="mailto:alenia.online@gmail.com"
                 className="flex items-center space-x-2 text-sm text-alenia-light/70 hover:text-alenia-primary transition-colors group"
                 whileHover={{ x: 4 }}
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                <span>contacto@alenia.online</span>
+                <span>alenia.online@gmail.com</span>
               </motion.a>
               <div className="flex items-center space-x-2 text-sm text-alenia-light/70">
                 <MapPin className="w-4 h-4" />

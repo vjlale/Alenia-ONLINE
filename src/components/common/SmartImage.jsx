@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import Skeleton from './Skeleton';
 
 /**
@@ -32,22 +31,17 @@ export default function SmartImage({
 }) {
   const [isLoaded, setIsLoaded] = useState(priority);
   const [hasError, setHasError] = useState(false);
-  const { ref, isIntersecting } = useIntersectionObserver({
-    threshold: 0.1,
-    rootMargin: '50px',
-    triggerOnce: true
-  });
-
-  const shouldLoad = priority || isIntersecting;
+  // La carga diferida la hace el navegador (loading="lazy"). Antes dependía de un
+  // IntersectionObserver propio que en algunas tarjetas nunca se disparaba y las
+  // imágenes quedaban para siempre en el esqueleto gris.
+  const ref = useRef(null);
+  const shouldLoad = true;
 
   useEffect(() => {
-    if (shouldLoad && !isLoaded) {
-      const img = new Image();
-      img.onload = () => setIsLoaded(true);
-      img.onerror = () => setHasError(true);
-      img.src = src;
-    }
-  }, [shouldLoad, src, isLoaded]);
+    // Si la imagen ya estaba en caché, onLoad puede haberse disparado antes de montar.
+    const img = ref.current?.querySelector('img');
+    if (img && img.complete && img.naturalWidth > 0) setIsLoaded(true);
+  }, [src]);
 
   const imgProps = {
     src,

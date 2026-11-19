@@ -1,367 +1,528 @@
-import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom'; // Importar Link
-import '../styles/KontrolPlusLanding.css';
-import emailJSService from '../services/emailJSService';
+// Kontrol+ — programa gratuito de ventas y stock para Windows.
+// Rehecho con el manual de marca de ALENIA (fondos #100F1C / #1A1A2E, bordes
+// #3A3A5A, Poppins + Inter, íconos de línea, voseo) para que se vea como parte
+// del sitio y no como una página aparte.
+import { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import {
+  ArrowRight,
+  BarChart3,
+  CheckCircle2,
+  Cpu,
+  Download,
+  HardDrive,
+  Lock,
+  Monitor,
+  Package,
+  ShoppingCart,
+  Sparkles,
+  Tag,
+  Wallet,
+  WifiOff,
+  Zap,
+} from 'lucide-react'
+import ScrollReveal from '../components/common/ScrollReveal'
+import emailJSService from '../services/emailJSService'
 
-const KontrolPlusLanding = () => {
-  useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
+const DOWNLOAD_URL =
+  'https://github.com/vjlale/KONTROL-By-Alenia/releases/download/v3.0.0/ALENIA-GESTION-KONTROL+_v2.3.0_Complete.zip'
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+const FEATURES = [
+  {
+    icon: ShoppingCart,
+    title: 'Ventas rápidas',
+    body: 'Carrito con 6 formas de pago, IVA calculado solo y ofertas que se aplican automáticamente al cobrar.',
+  },
+  {
+    icon: Package,
+    title: 'Stock al día',
+    body: 'Productos por marca, color y talle, carga masiva desde una planilla y aviso cuando algo se está por acabar.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Reportes y cierre de caja',
+    body: 'Ventas del día, reportes por fecha o producto y cierre de caja que se exporta a planilla para tu contador.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Sugerencias inteligentes',
+    body: 'Te dice qué reponer y qué productos rotan poco, según lo que venden en tu negocio.',
+  },
+  {
+    icon: Tag,
+    title: 'Ofertas y promociones',
+    body: '3x2, 2x1, descuentos por porcentaje o precios especiales con fecha de inicio y fin.',
+  },
+  {
+    icon: WifiOff,
+    title: 'Funciona sin internet',
+    body: 'Todo queda en tu computadora, con respaldos automáticos. Si se corta internet, seguís vendiendo.',
+  },
+]
 
-    document.querySelectorAll('.screen-item, .feature-card, .benefit-item').forEach(el => {
-        observer.observe(el);
-    });
-  }, []);
+const SCREENS = [
+  {
+    id: 'principal',
+    label: 'Inicio',
+    img: '/images/screenshot/PRINCIPAL-v2.jpeg',
+    title: 'Todo a un clic',
+    body: 'Desde la pantalla principal entrás a vender, ver las ventas del día o administrar el negocio.',
+    points: ['Nueva venta con un atajo de teclado', 'Resumen del día siempre a mano', 'Menú de gestión separado del mostrador'],
+  },
+  {
+    id: 'venta',
+    label: 'Nueva venta',
+    img: '/images/screenshot/NUEVA VENTA.jpeg',
+    title: 'Cobrar en segundos',
+    body: 'Buscás el producto, lo sumás al carrito y elegís cómo paga el cliente. El sistema valida el stock.',
+    points: ['Efectivo, débito, crédito, transferencia, QR y otros', 'Ofertas aplicadas solas', 'IVA y total calculados'],
+  },
+  {
+    id: 'dia',
+    label: 'Ventas del día',
+    img: '/images/screenshot/pantalla ventas del dia.png',
+    title: 'Cómo viene el día',
+    body: 'Cada venta con su forma de pago, los gastos del día y el cierre de caja con su archivo de respaldo.',
+    points: ['Totales por forma de pago', 'Registro de gastos y pagos', 'Cierre de caja exportable'],
+  },
+  {
+    id: 'menu',
+    label: 'Menú',
+    img: '/images/screenshot/PANTALLA MENU-v2.png',
+    title: 'La trastienda ordenada',
+    body: 'Productos, carga masiva, reportes, ofertas, usuarios y el panel inteligente, en un solo menú.',
+    points: ['Usuarios con su propio acceso', 'Carga masiva desde planilla', 'Acceso directo al panel inteligente'],
+  },
+  {
+    id: 'alta',
+    label: 'Alta de producto',
+    img: '/images/screenshot/AGREGAR NUEVO PRODUCTO-v2.jpeg',
+    title: 'Precios calculados solos',
+    body: 'Cargás el costo y el porcentaje de ganancia, y el sistema arma el precio de venta y el precio amigo.',
+    points: ['Marca, descripción, color y talle', 'Precio de venta y precio amigo', 'Stock inicial al crear el producto'],
+  },
+  {
+    id: 'inventario',
+    label: 'Inventario',
+    img: '/images/screenshot/INVENTARIO-v2.jpeg',
+    title: 'Encontrá cualquier producto',
+    body: 'Buscás por marca, descripción, color o talle, y los productos con poco stock aparecen resaltados.',
+    points: ['Búsqueda al instante', 'Stock bajo resaltado', 'Cambio de precios en lote'],
+  },
+  {
+    id: 'reportes',
+    label: 'Reportes',
+    img: '/images/screenshot/REPORTES-v2.jpeg',
+    title: 'Decidí con números',
+    body: 'Filtrás por fechas, productos, marcas o formas de pago y exportás todo a planilla.',
+    points: ['Rango de fechas a elección', 'Rentabilidad por producto', 'Exportación para tu contador'],
+  },
+  {
+    id: 'ofertas',
+    label: 'Ofertas',
+    img: '/images/screenshot/OFERTAS-v2.jpeg',
+    title: 'Promos sin cuentas a mano',
+    body: 'Armás la promoción una vez y se aplica sola en cada venta mientras esté vigente.',
+    points: ['3x2, 2x1, 4x3', 'Descuentos por porcentaje', 'Fechas de vigencia'],
+  },
+  {
+    id: 'panel',
+    label: 'Panel inteligente',
+    img: '/images/screenshot/PANEL INTELIGENTE.jpeg',
+    title: 'Sugerencias según tus ventas',
+    body: 'Mira lo que vendiste y te sugiere qué reponer, cuánto y qué productos conviene mover con una oferta.',
+    points: ['Días de stock que te quedan', 'Productos con poca rotación', 'Cantidades sugeridas para reponer'],
+  },
+]
 
-  const [lead, setLead] = useState({ nombre: '', email: '', rubro: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-    const [confirmVisible, setConfirmVisible] = useState(false);
-    const [downloadOpened, setDownloadOpened] = useState(false);
-    const DOWNLOAD_URL = 'https://github.com/vjlale/KONTROL-By-Alenia/releases/download/v3.0.0/ALENIA-GESTION-KONTROL+_v2.3.0_Complete.zip';
+const BENEFITS = [
+  {
+    icon: Zap,
+    title: 'Lo instalás y vendés',
+    body: 'Descargás, abrís y en pocos minutos estás cobrando. Sin configuraciones complicadas.',
+  },
+  {
+    icon: Lock,
+    title: 'Tus datos son tuyos',
+    body: 'Todo queda guardado en tu computadora, no en una nube de terceros, con respaldos automáticos.',
+  },
+  {
+    icon: Wallet,
+    title: 'Gratis, sin límites',
+    body: 'Sin cuotas mensuales ni límites de productos o ventas. Todas las funciones incluidas.',
+  },
+]
+
+const REQUIREMENTS = [
+  { icon: Monitor, label: 'Sistema', value: 'Windows 10 u 11 de 64 bits' },
+  { icon: Cpu, label: 'Memoria', value: '4 GB (8 GB recomendado)' },
+  { icon: HardDrive, label: 'Espacio', value: '500 MB libres' },
+  { icon: WifiOff, label: 'Internet', value: 'No hace falta' },
+]
+
+const card = 'rounded-2xl border border-[#3A3A5A] bg-[#1A1A2E]'
+const primaryBtn =
+  'inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#7b2cbf] to-[#c77dff] px-7 py-3.5 font-semibold text-white shadow-[0_0_24px_rgba(199,125,255,0.3)] transition-shadow hover:shadow-[0_0_36px_rgba(199,125,255,0.55)] disabled:opacity-60'
+const secondaryBtn =
+  'inline-flex items-center justify-center gap-2 rounded-xl border border-[#00ff88] px-7 py-3.5 font-semibold text-[#00ff88] transition-colors hover:bg-[#00ff88]/10'
+
+function SectionTitle({ eyebrow, title, body }) {
+  return (
+    <div className="mx-auto mb-12 max-w-2xl text-center">
+      {eyebrow && <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#c77dff]">{eyebrow}</p>}
+      <h2 className="font-display text-3xl font-bold text-[#F1F5F9] md:text-4xl">{title}</h2>
+      {body && <p className="mt-3 text-slate-400">{body}</p>}
+    </div>
+  )
+}
+
+function ScreensViewer() {
+  const [active, setActive] = useState(SCREENS[0].id)
+  const screen = SCREENS.find((s) => s.id === active)
+  return (
+    <div className="grid gap-8 lg:grid-cols-[220px_1fr]">
+      <div className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0" role="tablist">
+        {SCREENS.map((s) => (
+          <button
+            key={s.id}
+            type="button"
+            role="tab"
+            aria-selected={s.id === active}
+            onClick={() => setActive(s.id)}
+            className={`shrink-0 whitespace-nowrap rounded-xl border px-4 py-2.5 text-left text-sm font-semibold transition-colors ${
+              s.id === active
+                ? 'border-[#c77dff] bg-[#7b2cbf]/20 text-white'
+                : 'border-[#3A3A5A] text-slate-400 hover:text-white'
+            }`}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={screen.id}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className={`${card} overflow-hidden`}
+        >
+          <img src={screen.img} alt={`Kontrol+ — ${screen.label}`} className="w-full border-b border-[#3A3A5A]" loading="lazy" />
+          <div className="grid gap-6 p-6 md:grid-cols-[1fr_auto] md:p-8">
+            <div>
+              <h3 className="font-display text-2xl font-bold text-[#F1F5F9]">{screen.title}</h3>
+              <p className="mt-2 text-slate-400">{screen.body}</p>
+            </div>
+            <ul className="space-y-2">
+              {screen.points.map((p) => (
+                <li key={p} className="flex items-start gap-2 text-sm text-slate-300">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00ff88]" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+}
+
+export default function KontrolPlusLanding() {
+  const [lead, setLead] = useState({ nombre: '', email: '', rubro: '' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
+  const [confirmVisible, setConfirmVisible] = useState(false)
+  const [downloadOpened, setDownloadOpened] = useState(false)
 
   const handleLeadChange = (e) => {
-    const { name, value } = e.target;
-    setLead(prev => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setLead((prev) => ({ ...prev, [name]: value }))
+  }
 
-    const handleLeadSubmit = async (e) => {
-        e.preventDefault();
-        setSubmitStatus(null);
-        setIsSubmitting(true);
-        try {
-            // Datos del formulario
-            const formData = {
-                nombre: lead.nombre,
-                email: lead.email,
-                rubro: lead.rubro,
-                servicio: 'ALEN.IA Gestión Kontrol+',
-                descripcion: 'Solicitud de descarga de ALEN.IA Gestión Kontrol+ v2.3.0',
-                categoria: 'contacto-general'
-            };
+  const handleLeadSubmit = async (e) => {
+    e.preventDefault()
+    setSubmitStatus(null)
+    setIsSubmitting(true)
+    try {
+      const formData = {
+        nombre: lead.nombre,
+        email: lead.email,
+        rubro: lead.rubro,
+        servicio: 'ALEN.IA Gestión Kontrol+',
+        descripcion: 'Solicitud de descarga de ALEN.IA Gestión Kontrol+ v2.3.0',
+        categoria: 'contacto-general',
+      }
 
-            // Intentamos enviar por EmailJS (opcional, no bloquea la descarga)
-            try {
-                await emailJSService.sendServiceForm(formData, { categoria: 'contacto-general' });
-            } catch (emailErr) {
-                console.warn('No se pudo enviar EmailJS (continuando con descarga):', emailErr);
-            }
+      // EmailJS es opcional: si falla, la descarga sigue igual.
+      try {
+        await emailJSService.sendServiceForm(formData, { categoria: 'contacto-general' })
+      } catch (emailErr) {
+        console.warn('No se pudo enviar EmailJS (continuando con descarga):', emailErr)
+      }
 
-            // Enviamos los datos al webhook
-            try {
-                const response = await fetch('https://hook.eu2.make.com/14xmyfmrxptcfqjbi25gy7sllk5pkbyg', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
+      try {
+        const response = await fetch('https://hook.eu2.make.com/14xmyfmrxptcfqjbi25gy7sllk5pkbyg', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        })
+        if (!response.ok) console.warn('El webhook respondió con un código de error:', response.status)
+      } catch (webhookErr) {
+        console.warn('No se pudo enviar al webhook (continuando con descarga):', webhookErr)
+      }
 
-                if (!response.ok) {
-                    console.warn('El webhook respondió con un código de error:', response.status);
-                } else {
-                    console.log('Datos enviados exitosamente al webhook');
-                }
-            } catch (webhookErr) {
-                console.warn('No se pudo enviar al webhook (continuando con descarga):', webhookErr);
-            }
+      const win = window.open(DOWNLOAD_URL, '_blank', 'noopener,noreferrer')
+      setDownloadOpened(!!win)
+      setConfirmVisible(true)
+      setSubmitStatus('success')
+    } catch (err) {
+      console.error('Error inesperado durante el proceso de descarga:', err)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
-            // Abrir descarga directamente
-            const win = window.open(DOWNLOAD_URL, '_blank', 'noopener,noreferrer');
-            setDownloadOpened(!!win);
-            setConfirmVisible(true);
-            setSubmitStatus('success');
-        } catch (err) {
-            console.error('Error inesperado durante el proceso de descarga:', err);
-            setSubmitStatus('error');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+  const input =
+    'w-full rounded-xl border border-[#3A3A5A] bg-[#100F1C] px-4 py-3 text-[#F1F5F9] placeholder:text-slate-500 outline-none focus:border-[#c77dff] focus:ring-1 focus:ring-[#c77dff]'
 
   return (
     <>
       <Helmet>
-    <title>ALEN.IA Gestión Kontrol+ — Software de Gestión Inteligente</title>
-    <link rel="canonical" href="https://alenia.online/kontrol-plus" />
-    <meta name="description" content="Software inteligente para controlar ventas y stock. Funciona offline, con reportes, ofertas y análisis con IA. Gratis para Windows 10/11." />
-    {/* Open Graph */}
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ALENIA" />
-    <meta property="og:url" content="https://alenia.online/kontrol-plus" />
-    <meta property="og:title" content="ALEN.IA Gestión Kontrol+ — Software de Gestión Inteligente" />
-    <meta property="og:description" content="Gestioná ventas y stock con un software moderno que funciona offline. Reportes, ofertas y análisis con IA. Descarga gratuita." />
-    <meta property="og:image" content="https://alenia.online/images/7.png?v=2" />
-    <meta property="og:image:secure_url" content="https://alenia.online/images/7.png?v=2" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="ALENIA - Gestión Kontrol+" />
-    {/* Twitter */}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://alenia.online/kontrol-plus" />
-    <meta name="twitter:title" content="ALEN.IA Gestión Kontrol+ — Software de Gestión Inteligente" />
-    <meta name="twitter:description" content="Gestioná ventas y stock con un software moderno que funciona offline. Reportes, ofertas y análisis con IA. Descarga gratuita." />
-    <meta name="twitter:image" content="https://alenia.online/images/7.png?v=2" />
-    <meta name="twitter:image:alt" content="ALENIA - Gestión Kontrol+" />
+        <title>Kontrol+ | Programa gratis de ventas y stock para Windows | ALENIA</title>
+        <link rel="canonical" href="https://alenia.online/kontrol-plus" />
+        <meta
+          name="description"
+          content="Kontrol+ es un programa gratuito para controlar ventas y stock. Funciona sin internet, con reportes, ofertas y sugerencias de reposición. Para Windows 10/11."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="ALENIA" />
+        <meta property="og:url" content="https://alenia.online/kontrol-plus" />
+        <meta property="og:title" content="Kontrol+ | Programa gratis de ventas y stock para Windows" />
+        <meta
+          property="og:description"
+          content="Gestioná ventas y stock con un programa que funciona sin internet. Reportes, ofertas y sugerencias de reposición. Descarga gratuita."
+        />
+        <meta property="og:image" content="https://alenia.online/images/7.png?v=2" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Kontrol+ | Programa gratis de ventas y stock para Windows" />
+        <meta name="twitter:image" content="https://alenia.online/images/7.png?v=2" />
       </Helmet>
-      
-      <div className="landing-body">
-        <header className="header">
-            <div className="nav-container">
-                <Link to="/" className="back-to-home-button header-back-button" aria-label="Volver al Inicio">Volver al Inicio</Link>
-                <nav>
-                    <ul className="nav-menu">
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#funcionalidades">Funcionalidades</a></li>
-                        <li><a href="#pantallas">Pantallas</a></li>
-                        <li><a href="#beneficios">Beneficios</a></li>
-                        <li><a href="#descargar">Descargar</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
 
-        <section id="inicio" className="hero">
-            <div className="hero-content fade-in-up">
-                <img src="/images/7.png" alt="Logo KONTROL+" style={{ maxWidth: '400px', margin: '0 auto 1.5rem' }} />
-                <p>Software Inteligente para el control de VENTAS Y STOCK.</p>
-                <a href="#descargar" className="cta-button">🚀 Descargar Gratis</a>
-            </div>
-        </section>
-
-        <section id="funcionalidades" className="features">
-            <div className="container">
-                <h2 className="section-title">Funcionalidades Principales</h2>
-                <p className="section-subtitle">Todo lo que necesitas para gestionar tu negocio de manera profesional</p>
-                <div className="features-grid">
-                    {/* Feature Cards */}
-                    <div className="feature-card">
-                        <div className="feature-icon">🛍️</div>
-                        <h3>Sistema de Ventas Profesional</h3>
-                        <p>Carrito inteligente con 6 formas de pago, cálculo automático de IVA (21%), aplicación de ofertas automáticas y validación en tiempo real. Incluye búsqueda inteligente y control de stock automático.</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">📦</div>
-                        <h3>Gestión de Inventario Avanzada</h3>
-                        <p>Control completo de stock con categorización por marca/color/talle, carga masiva desde CSV, alertas visuales de stock bajo, edición masiva de precios y análisis de rotación de productos.</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">📊</div>
-                        <h3>Reportes y Análisis Completos</h3>
-                        <p>Dashboard de ventas diarias, reportes avanzados por fechas/productos/marcas, análisis de rentabilidad, cierre de caja automático con exportación a CSV y gráficos de tendencias para toma de decisiones informadas.</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">🤖</div>
-                        <h3>Centro de Inteligencia Artificial</h3>
-                        <p>Algoritmos avanzados de IA para análisis predictivo de demanda, sugerencias inteligentes de reposición, optimización automática de precios, análisis de tendencias y alertas predictivas para maximizar tu rentabilidad.</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">🎁</div>
-                        <h3>Sistema de Ofertas Inteligente</h3>
-                        <p>Gestión completa de promociones: ofertas por cantidad (3x2, 2x1, 4x3), descuentos por porcentaje, precios especiales temporales y aplicación automática en el carrito con análisis de efectividad.</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">💾</div>
-                        <h3>100% Offline y Seguro</h3>
-                        <p>Funciona completamente sin internet. Tus datos siempre seguros y bajo tu control en tu propio equipo. Respaldos automáticos, instalación instantánea y compatibilidad total con Windows 10/11.</p>
-                    </div>
+      <main className="min-h-screen bg-[#100F1C] py-20 font-sans text-slate-300">
+        <div className="container mx-auto px-6">
+          {/* Portada */}
+          <section className="mb-24 grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+            <ScrollReveal direction="up">
+              <div>
+                <Link to="/apps" className="mb-8 flex w-fit items-center gap-2 text-sm text-[#00ccff] hover:text-white">
+                  ← Ver todas las apps
+                </Link>
+                <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#00ff88]/40 bg-[#00ff88]/10 px-3 py-1 text-xs font-semibold text-[#00ff88]">
+                  <Download className="h-3.5 w-3.5" />
+                  Gratis para Windows 10 y 11
+                </span>
+                <h1 className="font-display text-4xl font-extrabold leading-tight text-[#F1F5F9] md:text-5xl lg:text-6xl">
+                  Kontrol+: las ventas y el stock de tu negocio,{' '}
+                  <span className="bg-gradient-to-r from-[#00ff88] to-[#00ccff] bg-clip-text text-transparent">
+                    sin internet
+                  </span>
+                </h1>
+                <p className="mt-6 text-lg leading-relaxed text-slate-400">
+                  Un programa para el mostrador: cobrás, controlás el stock y cerrás la caja desde tu computadora.
+                  Sin cuotas mensuales y con tus datos guardados en tu equipo.
+                </p>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <a href="#descargar" className={primaryBtn}>
+                    <Download className="h-5 w-5" />
+                    Descargar gratis
+                  </a>
+                  <a href="#pantallas" className={secondaryBtn}>
+                    Ver cómo se usa
+                  </a>
                 </div>
-            </div>
-        </section>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.15}>
+              <div className="relative">
+                <div className="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(123,44,191,0.35),transparent_70%)]" />
+                <img
+                  src="/images/screenshot/PRINCIPAL-v2.jpeg"
+                  alt="Pantalla principal de Kontrol+"
+                  className="relative w-full rounded-2xl border border-[#3A3A5A] shadow-2xl"
+                />
+              </div>
+            </ScrollReveal>
+          </section>
 
-        <section id="pantallas" className="screens">
-            <div className="container">
-                <h2 className="section-title">Recorrido por las Pantallas</h2>
-                <p className="section-subtitle">Descubre cada funcionalidad del software paso a paso</p>
-                
-                {/* Screen Items */}
-                <ScreenItem title="🏠 Pantalla Principal" description="Tu centro de control con acceso directo a todas las funcionalidades principales. Diseño moderno y profesional que te permite gestionar tu negocio de manera eficiente desde un solo lugar." features={['💰 Venta - Procesar nuevas ventas con Ctrl+V', '📊 Ventas del Día - Resumen completo de ingresos diarios', '🏦 Cierre de Caja - Generación automática de reportes CSV', '⚙️ Menú Gestión - Acceso a herramientas administrativas']} imgSrc="/images/screenshot/PRINCIPAL.jpeg" alt="Pantalla Principal" />
-                <ScreenItem title="💰 Nueva Venta" description="Sistema de ventas profesional con carrito inteligente, múltiples formas de pago y aplicación automática de ofertas. Validación en tiempo real y cálculos automáticos de IVA (21%) para mayor precisión." features={['🔍 Búsqueda inteligente con filtrado en tiempo real', '🛒 Carrito dinámico con validación automática de stock', '💳 6 formas de pago: Efectivo, Débito, Crédito, Transferencia, QR, Otros', '🎁 Aplicación automática de ofertas 3x2, 2x1 y descuentos', '🧮 Cálculo automático de IVA y totales', '✅ Validación visual con bordes verdes/rojos']} imgSrc="/images/screenshot/NUEVA VENTA.jpeg" alt="Nueva Venta" reverse />
-                <ScreenItem title="📊 Ventas del Día" description="Dashboard completo de ventas diarias con análisis detallado por forma de pago, productos más vendidos y control total de ingresos. Incluye generación automática de reportes CSV para contabilidad." features={['📋 Lista detallada de todas las ventas del día', '💰 Totales automáticos por forma de pago', '📈 Análisis de productos más vendidos', '📄 Generación automática de reportes CSV', '🏦 Cierre de caja con archivo de respaldo', '🔍 Filtros por producto, hora y método de pago']} imgSrc="/images/screenshot/pantalla ventas del dia.png" alt="Ventas del Día" />
-                <ScreenItem title="⚙️ Menú de Gestión" description="Centro de control administrativo con acceso organizado a todas las herramientas de gestión. Desde aquí puedes administrar productos, configurar ofertas, generar reportes y acceder al centro de inteligencia artificial." features={['📦 Gestión de Productos - Agregar, editar y eliminar productos', '📊 Reportes Avanzados - Análisis detallado por fechas y productos', '🎁 Sistema de Ofertas - Configurar promociones 3x2, 2x1 y descuentos', '🤖 Centro de IA - Sugerencias inteligentes y análisis predictivo', '📂 Carga Masiva - Importación masiva desde archivos CSV', '⚙️ Configuración - Ajustes del sistema y respaldos']} imgSrc="/images/screenshot/PANTALLA MENU.png" alt="Menú de Gestión" reverse />
-                <ScreenItem title="📝 Alta de Producto" description="Formulario profesional para agregar productos con cálculo automático de precios de venta y amigo. Incluye validación visual en tiempo real, tooltips explicativos y categorización completa por marca, color y talle." features={['🏷️ Categorización completa: Marca, Descripción, Color, Talle', '💰 Cálculo automático de precios de venta y amigo', '📊 Configuración de porcentajes de ganancia personalizables', '✅ Validación visual con bordes verdes/rojos', '💡 Tooltips explicativos para cada campo', '📦 Control de stock inicial al crear el producto']} imgSrc="/images/screenshot/AGREGAR NUEVO PRODUCTO.jpeg" alt="Alta de Producto" />
-                <ScreenItem title="📋 Inventario" description="Panel completo de gestión de inventario con búsqueda inteligente, filtros avanzados y control total del stock. Incluye alertas visuales para productos con stock bajo y herramientas de edición masiva." features={['🔍 Búsqueda inteligente por marca, descripción, color o talle', '📊 Vista tabular con información completa de cada producto', '⚠️ Resaltado automático de productos con stock bajo', '✏️ Edición masiva de precios y porcentajes', '📈 Análisis de rotación y rendimiento por producto', '🔄 Actualización en tiempo real del stock tras ventas']} imgSrc="/images/screenshot/INVENTARIO.jpeg" alt="Inventario" reverse />
-                <ScreenItem title="📂 Carga Masiva" description="Sistema de importación masiva que permite cargar cientos de productos desde archivos CSV en segundos. Incluye plantilla modelo, validación automática de datos y respaldo de seguridad antes de la importación." features={['📄 Descarga de plantilla CSV modelo con formato estándar', '✅ Validación automática de datos antes de la importación', '👁️ Previsualización de productos a importar', '💾 Respaldo automático de datos existentes', '📊 Reporte de productos importados exitosamente', '⚠️ Alertas de productos con datos incompletos o duplicados']} imgSrc="/images/screenshot/REPORTES.jpeg" alt="Carga Masiva" />
-                <ScreenItem title="📈 Reportes Avanzados" description="Sistema completo de análisis y reportes con filtros avanzados por fechas, productos, marcas y formas de pago. Incluye exportación a CSV para análisis externos y toma de decisiones informadas." features={['📅 Filtros por rango de fechas personalizable', '📊 Análisis detallado por producto, marca y categoría', '💰 Análisis de rentabilidad y márgenes de ganancia', '📄 Exportación a CSV para Excel y contabilidad', '📈 Gráficos de tendencias de ventas', '🔍 Búsqueda avanzada en historial de ventas']} imgSrc="/images/screenshot/REPORTES.jpeg" alt="Reportes Avanzados" reverse />
-                <ScreenItem title="🎁 Gestión de Ofertas" description="Sistema completo de gestión de ofertas y promociones con múltiples tipos de descuentos. Permite crear ofertas por cantidad, porcentaje y precios especiales que se aplican automáticamente en las ventas." features={['🎯 Ofertas por cantidad: 3x2, 2x1, 4x3, etc.', '📊 Ofertas por porcentaje: 10%, 20%, 50% de descuento', '💰 Precios especiales fijos para promociones temporales', '🔄 Aplicación automática en el carrito de compras', '⏰ Configuración de fechas de vigencia', '📈 Análisis de efectividad de ofertas']} imgSrc="/images/screenshot/OFERTAS.jpeg" alt="Gestión de Ofertas" />
-                <ScreenItem title="🤖 Centro de Inteligencia Artificial" description="Dashboard inteligente con análisis predictivos avanzados que utiliza algoritmos de IA para optimizar tu negocio. Incluye sugerencias de reposición, análisis de tendencias y optimización automática de precios basada en patrones de venta." features={['🔮 Análisis predictivo de demanda por producto', '📊 Sugerencias inteligentes de reposición de stock', '💰 Optimización automática de precios por IA', '📈 Análisis de tendencias y patrones de venta', '⚠️ Alertas inteligentes de productos con baja rotación', '🎯 Recomendaciones de ofertas basadas en stock']} imgSrc="/images/screenshot/PANEL INTELIGENTE.jpeg" alt="Centro de IA" reverse />
-                <ScreenItem title="🔄 Sugerencias de Reposición IA" description="Sistema inteligente de análisis de stock que utiliza algoritmos avanzados para predecir cuándo y qué productos necesitas reponer. Analiza patrones de venta históricos para optimizar tu inventario y evitar quedarte sin stock." features={['🧠 Análisis inteligente de patrones de venta históricos', '📊 Cálculo automático de días de stock restantes', '⚠️ Alertas automáticas de productos con stock crítico', '📈 Predicción de demanda basada en tendencias', '🎯 Sugerencias de cantidades óptimas de reposición', '📅 Planificación automática de compras futuras']} imgSrc="/images/screenshot/pantalla IA.png" alt="Sugerencias de Reposición IA" />
-                
+          {/* Funciones */}
+          <section id="funcionalidades" className="mb-24 scroll-mt-24">
+            <ScrollReveal>
+              <SectionTitle
+                eyebrow="Funciones"
+                title="Lo que necesita tu mostrador"
+                body="Pensado para comercios chicos y medianos: ropa, almacenes, kioscos, ferreterías."
+              />
+            </ScrollReveal>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {FEATURES.map((f, i) => {
+                const Icon = f.icon
+                return (
+                  <ScrollReveal key={f.title} delay={0.05 * i}>
+                    <article className={`${card} h-full p-6 transition-shadow hover:shadow-[0_0_30px_rgba(199,125,255,0.15)]`}>
+                      <Icon className="mb-4 h-7 w-7 text-[#c77dff]" strokeWidth={2} />
+                      <h3 className="font-display text-lg font-semibold text-[#F1F5F9]">{f.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-400">{f.body}</p>
+                    </article>
+                  </ScrollReveal>
+                )
+              })}
             </div>
-        </section>
+          </section>
 
-        <section id="beneficios" className="benefits">
-            <div className="container">
-                <h2 className="section-title">¿Por qué elegir ALEN.IA?</h2>
-                <p className="section-subtitle">Ventajas que marcan la diferencia en tu negocio</p>
-                <div className="benefits-grid">
-                    <div className="benefit-item">
-                        <div className="benefit-icon">⚡</div>
-                        <h3>Instalación Instantánea</h3>
-                        <p>Descarga y ejecuta inmediatamente. Sin instaladores complejos, sin configuraciones complicadas. Tu negocio funcionando en menos de 2 minutos.</p>
-                    </div>
-                    <div className="benefit-item">
-                        <div className="benefit-icon">🔒</div>
-                        <h3>Máxima Seguridad y Privacidad</h3>
-                        <p>Tus datos siempre bajo tu control. Funciona 100% offline, sin conexión a internet, sin nubes externas. Respaldos automáticos y control total de tu información.</p>
-                    </div>
-                    <div className="benefit-item">
-                        <div className="benefit-icon">💰</div>
-                        <h3>100% Gratuito y Sin Límites</h3>
-                        <p>Sin licencias, sin mensualidades, sin límites de productos o ventas. Software libre y gratuito para siempre. Incluye todas las funcionalidades avanzadas sin costo adicional.</p>
-                    </div>
+          {/* Pantallas */}
+          <section id="pantallas" className="mb-24 scroll-mt-24">
+            <ScrollReveal>
+              <SectionTitle eyebrow="Recorrido" title="Así se ve por dentro" body="Elegí una pantalla para verla." />
+            </ScrollReveal>
+            <ScreensViewer />
+          </section>
+
+          {/* Beneficios */}
+          <section className="mb-24">
+            <ScrollReveal>
+              <SectionTitle eyebrow="Por qué Kontrol+" title="Simple, tuyo y gratis" />
+            </ScrollReveal>
+            <div className="grid gap-6 md:grid-cols-3">
+              {BENEFITS.map((b, i) => {
+                const Icon = b.icon
+                return (
+                  <ScrollReveal key={b.title} delay={0.05 * i}>
+                    <article className={`${card} h-full p-6`}>
+                      <Icon className="mb-4 h-7 w-7 text-[#00ff88]" strokeWidth={2} />
+                      <h3 className="font-display text-lg font-semibold text-[#F1F5F9]">{b.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-400">{b.body}</p>
+                    </article>
+                  </ScrollReveal>
+                )
+              })}
+            </div>
+          </section>
+
+          {/* Descarga */}
+          <section id="descargar" className="scroll-mt-24">
+            <ScrollReveal>
+              <div className={`${card} mx-auto max-w-4xl p-8 md:p-12`}>
+                <div className="text-center">
+                  <h2 className="font-display text-3xl font-bold text-[#F1F5F9] md:text-4xl">Descargá Kontrol+ gratis</h2>
+                  <p className="mx-auto mt-3 max-w-xl text-slate-400">
+                    Dejanos tus datos y la descarga empieza enseguida.
+                  </p>
                 </div>
-            </div>
-        </section>
 
-        <section id="descargar" className="cta-section">
-            <div className="container">
-                <h2>¿Listo para transformar tu negocio?</h2>
-                <p>Descarga ALEN.IA Gestión Kontrol+ y comienza a gestionar tu inventario y ventas de manera profesional.</p>
-                <form className="lead-form" onSubmit={handleLeadSubmit}>
-                    <div className="lead-grid">
-                        <input
-                            type="text"
-                            name="nombre"
-                            value={lead.nombre}
-                            onChange={handleLeadChange}
-                            placeholder="Nombre"
-                            className="lead-input"
-                            required
-                        />
-                        <input
-                            type="email"
-                            name="email"
-                            value={lead.email}
-                            onChange={handleLeadChange}
-                            placeholder="Email"
-                            className="lead-input"
-                            required
-                        />
-                        <select
-                            name="rubro"
-                            value={lead.rubro}
-                            onChange={handleLeadChange}
-                            className="lead-input"
-                            required
-                        >
-                            <option value="">Rubro</option>
-                            <option value="comercio">Comercio</option>
-                            <option value="servicios">Servicios</option>
-                            <option value="fabricacion">Fabricación</option>
-                            <option value="gastronomia">Gastronomía</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
-                    <button type="submit" className="cta-button lead-submit" disabled={isSubmitting}>
-                        {isSubmitting ? 'Enviando...' : '📥 Descargar Ahora - Gratis'}
-                    </button>
-                    {submitStatus === 'error' && (
-                        <p className="lead-error">No pudimos registrar tus datos. Intenta nuevamente.</p>
-                    )}
-                </form>
-                {confirmVisible && (
-                    <div
-                        className="lead-success"
-                        role="status"
-                        aria-live="polite"
-                        style={{
-                            marginTop: '1rem',
-                            padding: '1rem',
-                            borderRadius: '0.5rem',
-                            background: '#0f172a',
-                            border: '1px solid #22d3ee',
-                            color: '#e2e8f0'
-                        }}
+                <form className="mt-8 space-y-4" onSubmit={handleLeadSubmit}>
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <input
+                      type="text"
+                      name="nombre"
+                      value={lead.nombre}
+                      onChange={handleLeadChange}
+                      placeholder="Nombre"
+                      aria-label="Nombre"
+                      autoComplete="name"
+                      className={input}
+                      required
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      value={lead.email}
+                      onChange={handleLeadChange}
+                      placeholder="Email"
+                      aria-label="Email"
+                      autoComplete="email"
+                      className={input}
+                      required
+                    />
+                    <select
+                      name="rubro"
+                      value={lead.rubro}
+                      onChange={handleLeadChange}
+                      aria-label="Rubro"
+                      className={input}
+                      required
                     >
-                        <p style={{ marginBottom: '0.5rem' }}>
-                            {downloadOpened
-                                ? '🎉 La descarga se abrió en una nueva pestaña.'
-                                : 'ℹ️ Si no comenzó la descarga, puede que tu navegador haya bloqueado la ventana emergente.'}
-                        </p>
-                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                            <a
-                                href={DOWNLOAD_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="cta-button"
-                                style={{ padding: '0.5rem 0.75rem' }}
-                            >
-                                Abrir en nueva pestaña
-                            </a>
-                            <button
-                                type="button"
-                                onClick={() => (window.location.href = DOWNLOAD_URL)}
-                                className="cta-button lead-submit"
-                                style={{ padding: '0.5rem 0.75rem' }}
-                            >
-                                Abrir en esta pestaña
-                            </button>
-                            <a
-                                href={DOWNLOAD_URL}
-                                download
-                                className="back-to-home-button header-back-button"
-                                style={{ padding: '0.5rem 0.75rem' }}
-                            >
-                                Descarga directa
-                            </a>
-                        </div>
-                    </div>
-                )}
-                <div style={{marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid #374151'}}>
-                    <h3 style={{marginBottom: '1rem', color: '#4f46e5'}}>Requisitos del Sistema</h3>
-                    <div style={{display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', textAlign: 'left'}}>
-                        <div><strong>🖥️ Sistema:</strong> Windows 10/11 (64-bit)<br/><strong>💾 RAM:</strong> 4GB mínimo (8GB recomendado)<br/><strong>💿 Espacio:</strong> 500MB libres (SSD recomendado)</div>
-                        <div><strong>📱 Pantalla:</strong> 1280x720 mínimo (1920x1080 recomendado)<br/><strong>🌐 Internet:</strong> No requerido (100% offline)<br/><strong>📄 Licencia:</strong> Completamente gratuito y sin límites</div>
-                    </div>
-                    <p style={{marginTop: '1rem', textAlign: 'center', opacity: 0.8, fontSize: '0.9em'}}>
-                        <strong>⚠️ Importante:</strong> Esta versión NO es compatible con sistemas de 32-bit. Asegúrate de tener Windows 10/11 de 64-bit.
+                      <option value="">Rubro</option>
+                      <option value="comercio">Comercio</option>
+                      <option value="servicios">Servicios</option>
+                      <option value="fabricacion">Fabricación</option>
+                      <option value="gastronomia">Gastronomía</option>
+                      <option value="otro">Otro</option>
+                    </select>
+                  </div>
+                  <div className="text-center">
+                    <button type="submit" className={primaryBtn} disabled={isSubmitting}>
+                      <Download className="h-5 w-5" />
+                      {isSubmitting ? 'Preparando la descarga…' : 'Descargar ahora'}
+                    </button>
+                  </div>
+                  {submitStatus === 'error' && (
+                    <p className="text-center text-sm text-red-400">No pudimos registrar tus datos. Probá de nuevo.</p>
+                  )}
+                </form>
+
+                {confirmVisible && (
+                  <div role="status" aria-live="polite" className="mt-6 rounded-xl border border-[#00ccff]/50 bg-[#100F1C] p-4 text-sm">
+                    <p className="mb-3 text-[#F1F5F9]">
+                      {downloadOpened
+                        ? 'La descarga se abrió en una pestaña nueva.'
+                        : 'Si la descarga no empezó, puede que el navegador haya bloqueado la ventana. Usá este botón:'}
                     </p>
+                    <a href={DOWNLOAD_URL} download className={secondaryBtn}>
+                      <Download className="h-4 w-4" />
+                      Descarga directa
+                    </a>
+                  </div>
+                )}
+
+                <div className="mt-10 border-t border-[#3A3A5A] pt-8">
+                  <h3 className="mb-4 text-center font-display text-lg font-semibold text-[#F1F5F9]">Qué necesitás</h3>
+                  <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+                    {REQUIREMENTS.map((r) => {
+                      const Icon = r.icon
+                      return (
+                        <div key={r.label} className="flex items-start gap-3">
+                          <Icon className="mt-0.5 h-5 w-5 shrink-0 text-slate-400" />
+                          <div>
+                            <p className="text-xs uppercase tracking-wider text-slate-500">{r.label}</p>
+                            <p className="text-sm text-[#F1F5F9]">{r.value}</p>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <p className="mt-4 text-center text-xs text-slate-500">
+                    No funciona en Windows de 32 bits. Versión actual: 2.3.
+                  </p>
                 </div>
-            </div>
-        </section>
+              </div>
+            </ScrollReveal>
 
-        <footer className="footer">
-            <div className="footer-content">
-                <p>&copy; 2025 ALEN.IA Gestión Kontrol+. Desarrollado con 💙 para optimizar la gestión de pequeños y medianos negocios.</p>
-                <p style={{marginTop: '1rem', opacity: 0.6}}>Versión 2.2+ | Software libre y gratuito | Compatible con Windows 10/11</p>
-            </div>
-        </footer>
-      </div>
+            <ScrollReveal>
+              <p className="mt-8 text-center text-sm text-slate-400">
+                ¿Querés manejar el negocio desde el celular, con asistente por WhatsApp?{' '}
+                <Link to="/apps" className="inline-flex items-center gap-1 font-semibold text-[#00ccff] hover:text-white">
+                  Conocé Kontrol Pro <ArrowRight className="h-4 w-4" />
+                </Link>
+              </p>
+            </ScrollReveal>
+          </section>
+        </div>
+      </main>
     </>
-  );
-};
-
-const ScreenItem = ({ title, description, features, imgSrc, alt, reverse = false }) => (
-  <div className={`screen-item ${reverse ? 'reverse' : ''}`}>
-      <div className="screen-content">
-          <h3 className="screen-title">{title}</h3>
-          <p className="screen-description">{description}</p>
-          <ul className="feature-list">
-              {features.map((feature, index) => <li key={index}>{feature}</li>)}
-          </ul>
-      </div>
-      <div className="screen-image">
-          <img src={imgSrc} alt={alt} />
-      </div>
-  </div>
-);
-
-export default KontrolPlusLanding;
+  )
+}

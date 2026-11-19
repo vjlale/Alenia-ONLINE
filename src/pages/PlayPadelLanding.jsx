@@ -213,7 +213,7 @@ const PlayPadelLanding = () => {
             <div className="pp-section-header">
               <h2 className="pp-section-title">Para Clubes Inteligentes</h2>
               <p className="pp-section-subtitle">
-                Automatiza la gestión, fideliza clientes y crea una comunidad activa en tu club
+                Automatizá la gestión, fidelizá a tus clientes y armá una comunidad activa en tu club
               </p>
             </div>
 
@@ -221,7 +221,7 @@ const PlayPadelLanding = () => {
               <FeatureCard
                 icon={<Calendar className="w-12 h-12" />}
                 title="Gestión de Reservas"
-                description="Crea un equipo con otro jugador y desafía a otros jugadores. Busca rivales del mismo nivel, envía propuestas de partidos, recibe notificaciones en tiempo real del estado de tus desafíos y genera una RESERVA en tu club favorito."
+                description="Todos los turnos de tus canchas en un calendario: ves qué está libre y ocupado, confirmás reservas al instante y el sistema les recuerda el turno a los jugadores. Menos llamados y menos canchas vacías."
                 highlights={['Vista calendario admin', 'Recordatorios automáticos', 'Control de ocupación']}
               />
               
@@ -235,28 +235,28 @@ const PlayPadelLanding = () => {
               <FeatureCard
                 icon={<Sparkles className="w-12 h-12" />}
                 title="Anuncios y Promociones"
-                description="Publica novedades, promociones y eventos con CTA directo al perfil del club. Comunicación efectiva con todos los miembros."
-                highlights={['Anuncios destacados', 'CTA a perfil del club', 'Comunicación directa']}
+                description="Publicá novedades, promociones y eventos con un botón directo al perfil del club, y llegá a todos tus socios a la vez."
+                highlights={['Anuncios destacados', 'Botón al perfil del club', 'Comunicación directa']}
               />
               
               <FeatureCard
                 icon={<Trophy className="w-12 h-12" />}
                 title="Torneos y Competencias"
-                description="Crea torneos cerrados para miembros del club o abiertos a jugadores de cualquier club. Gestión completa de brackets y resultados."
-                highlights={['Torneos cerrados/abiertos', 'Gestión de brackets', 'Seguimiento de resultados']}
+                description="Armá torneos cerrados para tus socios o abiertos a jugadores de cualquier club. Cuadros, partidos y resultados en un solo lugar."
+                highlights={['Torneos cerrados/abiertos', 'Cuadros del torneo', 'Seguimiento de resultados']}
               />
               
               <FeatureCard
                 icon={<Camera className="w-12 h-12" />}
                 title="Galería y Eventos"
-                description="Sube fotos del club, eventos y torneos. Muestra las instalaciones y crea contenido que atraiga nuevos miembros."
-                highlights={['Galería de fotos', 'Eventos destacados', 'Showcase del club']}
+                description="Subí fotos del club, de eventos y torneos. Mostrá tus instalaciones y atraé nuevos socios."
+                highlights={['Galería de fotos', 'Eventos destacados', 'Vidriera del club']}
               />
               
               <FeatureCard
                 icon={<TrendingUp className="w-12 h-12" />}
-                title="Analytics y Reportes"
-                description="Análisis completo de ocupación, miembros más activos, horarios pico y métricas de engagement para optimizar la gestión."
+                title="Reportes del club"
+                description="Análisis completo de ocupación, miembros más activos, horarios pico y cuánto participa tu comunidad, para decidir con datos."
                 highlights={['Ocupación por horarios', 'Miembros activos', 'Métricas de engagement']}
               />
             </div>

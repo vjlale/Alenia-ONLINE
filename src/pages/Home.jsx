@@ -5,7 +5,6 @@ import { useState } from 'react';
 import emailJSService from '../services/emailJSService';
 import SmartImage from '../components/common/SmartImage';
 import AnimatedLogoBackdrop from '../components/common/AnimatedLogoBackdrop';
-import InteractiveSpaceBanner from '../components/landing/InteractiveSpaceBanner';
 import ParticleBackground from '../components/common/ParticleBackground';
 import NodeNetworkBackground from '../components/common/NodeNetworkBackground';
 import ScrollReveal from '../components/common/ScrollReveal';
@@ -91,9 +90,6 @@ export default function Home() {
   <meta property="twitter:image:alt" content="ALENIA - Resultados con Inteligencia" />
       </Helmet>
       
-      {/* Interactive Space Banner - Fullscreen */}
-      <InteractiveSpaceBanner />
-      
       {/* Particle Background */}
       <ParticleBackground particleCount={30} />
       
@@ -102,6 +98,9 @@ export default function Home() {
         id="contenido-principal"
         className="relative min-h-screen flex items-center justify-center py-20 bg-transparent overflow-hidden scroll-mt-4"
       >
+        {/* Red de nodos de fondo (antes era una pantalla aparte, vacía y con ventana de ayuda) */}
+        <NodeNetworkBackground particleCount={55} maxConnectionDistance={170} />
+
         {/* Parallax background layers */}
         <div className="absolute inset-0 parallax-container">
           <div className="parallax-layer parallax-layer-slow opacity-20">
@@ -138,9 +137,16 @@ export default function Home() {
               
               {/* Título principal */}
               <ScrollReveal delay={0.4} direction="up">
-                <h1 className="grid flex-wrap text-4xl md:text-6xl lg:text-7xl font-display font-extrabold mb-10 max-w-4xl mx-auto relative z-10">
-                  VENIMOS A CAMBIAR LAS REGLAS DEL JUEGO, NO PAGUÉS MÁS SUSCRIPCIONES POR MES!
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-[#F1F5F9] leading-tight mb-6 max-w-4xl mx-auto relative z-10">
+                  Automatizamos tu negocio,{" "}
+                  <span className="bg-gradient-to-r from-[#00ff88] to-[#00ccff] bg-clip-text text-transparent">
+                    de la máquina al celular
+                  </span>
                 </h1>
+                <p className="text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto mb-10 relative z-10">
+                  Con ALENIA HUB tus máquinas cobran con QR o tótem, se activan solas y vos ves todo en un panel en tiempo real.
+                  También desarrollamos las apps y webs que tu operación necesita.
+                </p>
               </ScrollReveal>
               
               {/* CTAs con efecto 3D */}
@@ -156,14 +162,13 @@ export default function Home() {
                     style={{ perspective: 1000 }}
                   >
                     <Link 
-                      to="/apps" 
-                      className="group relative bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-bold px-8 py-4 rounded-xl overflow-hidden glow-btn flex items-center gap-2 justify-center transform-gpu"
+                      to="/soluciones/hub" 
+                      className="group relative bg-gradient-to-r from-[#7b2cbf] to-[#c77dff] text-white font-bold px-8 py-4 rounded-xl overflow-hidden flex items-center gap-2 justify-center transform-gpu shadow-[0_0_24px_rgba(199,125,255,0.35)] hover:shadow-[0_0_36px_rgba(199,125,255,0.6)] transition-shadow"
                     >
                       <span className="relative z-10 flex items-center gap-2">
-                        Ver nuestras apps
+                        Conocé ALENIA HUB
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </Link>
                   </motion.div>
                   
@@ -177,14 +182,13 @@ export default function Home() {
                     style={{ perspective: 1000 }}
                   >
                     <Link 
-                      to="/soluciones" 
-                      className="group relative border-2 border-cyan-500 text-white font-bold px-8 py-4 rounded-xl overflow-hidden hover:bg-cyan-500/10 backdrop-blur-sm flex items-center gap-2 justify-center transform-gpu transition-all duration-300"
+                      to="/apps" 
+                      className="group relative border-2 border-[#00ff88] text-[#00ff88] font-bold px-8 py-4 rounded-xl overflow-hidden hover:bg-[#00ff88]/10 backdrop-blur-sm flex items-center gap-2 justify-center transform-gpu transition-all duration-300"
                     >
                       <span className="relative z-10 flex items-center gap-2">
-                        Ver Soluciones
-                        <Zap className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                        Ver nuestras apps
+                        <LayoutGrid className="w-5 h-5" />
                       </span>
-                      <div className="absolute inset-0 bg-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
                     </Link>
                   </motion.div>
                 </div>
@@ -197,7 +201,7 @@ export default function Home() {
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <span className="text-sm font-medium">Desplázate</span>
+                  <span className="text-sm font-medium">Seguí bajando</span>
                   <ChevronDown className="w-6 h-6" />
                 </motion.div>
               </ScrollReveal>

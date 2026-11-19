@@ -27,6 +27,11 @@ const AnimatedGradient = ({
       }}
       style={{
         backgroundSize: '400% 400%',
+        // Siempre es texto en degradé: sin esto, el fondo de .bg-gradient-animated
+        // (shorthand `background`) anula el recorte y se ve un rectángulo de color.
+        WebkitBackgroundClip: 'text',
+        backgroundClip: 'text',
+        color: 'transparent',
         ...style
       }}
     >

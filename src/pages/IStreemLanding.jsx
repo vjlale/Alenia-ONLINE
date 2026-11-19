@@ -115,7 +115,7 @@ const FEATURE_IMAGES = {
   ver: '/images/i-streem/viewer.png',
   estudio: '/images/i-streem/modo-estudio.png',
   health: '/images/i-streem/health-check.png',
-  resolume: '/images/i-streem/guia-resolume.png',
+  resolume: '/images/i-streem/guia-resolume-v2.png',
 };
 
 const FLOW_STEPS = [
@@ -599,7 +599,7 @@ export default function IStreemLanding() {
                   style={{ color: ORANGE }}
                 >
                   <ShieldCheck className="h-3.5 w-3.5" />
-                  La feature que más nos orgullece
+                  Lo que más nos enorgullece
                 </div>
                 <h2 className="font-display text-4xl font-extrabold leading-tight text-white md:text-5xl">
                   Health Check:
@@ -670,7 +670,7 @@ export default function IStreemLanding() {
               className="relative overflow-hidden rounded-3xl border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.6)]"
             >
               <img
-                src="/images/i-streem/guia-resolume.png"
+                src="/images/i-streem/guia-resolume-v2.png"
                 alt="Guía Resolume — Browser Source"
                 className="w-full object-cover"
               />
