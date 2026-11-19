@@ -219,7 +219,7 @@ function AppContent() {
             "@context": "https://schema.org",
             "@type": "Organization",
             name: "ALENIA",
-            url: "https://alenia.online",
+            url: "https://aleniahub.com",
             logo: BRAND_LOGOS_ABSOLUTE.symbol,
             description: "Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.",
             address: {

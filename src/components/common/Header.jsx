@@ -27,7 +27,7 @@ const navigation = [
     external: true
   },
   {
-    name: 'Play Padel',
+    name: 'Match Pádel',
     href: 'https://www.appmatchpadel.com/landing',
     isLogo: true,
     logoPath: '/images/playpadel/match-padel-logo.png',
@@ -58,17 +58,22 @@ const ActiveUnderline = () => (
 const LogoLink = ({ item, isActive, onClick, mobile = false }) => {
   const className = `flex items-center ${mobile ? 'px-3 py-2 rounded-md' : 'px-2 py-1 rounded'} transition-transform hover:scale-105`
   const style = { minWidth: 70, maxHeight: '48px' }
+  // Logo + nombre: solo el logo chiquito no dejaba claro qué era cada producto.
   const img = (
-    <img
-      src={item.logoPath || '/images/7.png'}
-      alt={item.name}
-      className={`h-10 w-auto ${item.wide ? 'max-w-[96px]' : item.external ? 'max-w-[90px]' : 'max-w-[70px]'} object-contain`}
-    />
+    <span className="flex items-center gap-1.5">
+      <img
+        src={item.logoPath || '/images/7.png'}
+        alt=""
+        aria-hidden="true"
+        className={`${mobile ? 'h-10' : 'h-8'} w-auto ${item.wide ? 'max-w-[80px]' : 'max-w-[56px]'} object-contain`}
+      />
+      <span className={`${mobile ? 'inline' : 'hidden xl:inline'} text-sm font-semibold text-slate-100/80`}>{item.name}</span>
+    </span>
   )
 
   if (item.external) {
     return (
-      <a href={item.href} target="_blank" rel="noopener noreferrer" onClick={onClick} className={className} style={style}>
+      <a href={item.href} target="_blank" rel="noopener noreferrer" onClick={onClick} className={className} style={style} title={item.name} aria-label={`${item.name} (se abre en otra pestaña)`}>
         {img}
       </a>
     )
@@ -80,6 +85,8 @@ const LogoLink = ({ item, isActive, onClick, mobile = false }) => {
       onClick={onClick}
       className={`${className} ${isActive ? 'bg-black/30 text-shadow-glow' : ''}`}
       style={style}
+      title={item.name}
+      aria-label={item.name}
     >
       {img}
     </Link>

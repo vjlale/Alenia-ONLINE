@@ -26,8 +26,11 @@ import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand';
 // Página /apps reconstruida desde el bundle publicado en aleniahub.com (2026-11-07).
 // 2026-11-14: catálogo actualizado (Kontrol Pro, LiveVote, StageLab, Match Padel v6),
 // filtros por categoría, precios reales y tarjeta del caso LaIA.
+// 2026-11-19: revisión de diseño. Sello "Destacada" solo en Kontrol Pro, botones iguales en todas
+// las tarjetas, mismas filas de datos (Plataformas e Ideal para), moneda explícita en los precios,
+// nombres de las apps en lugar de direcciones *.lovable.app y sin puntajes inventados en las mini-apps.
 
-const CANONICAL_URL = 'https://alenia.online/apps';
+const CANONICAL_URL = 'https://aleniahub.com/apps';
 
 // Filtros del catálogo. Cada app declara en `filters` a cuáles pertenece.
 const CATEGORY_FILTERS = [
@@ -40,6 +43,9 @@ const CATEGORY_FILTERS = [
 
 /*
  * Apps propias de la startup.
+ * Campos (2026-11-19):
+ * - featured: tarjeta a todo el ancho con galería automática. showFeaturedBadge: muestra el sello "Destacada".
+ * - audience: fila "Ideal para" (todas las apps la tienen, junto con platforms).
  * Campos nuevos (2026-11-14):
  * - filters: ids de CATEGORY_FILTERS.
  * - priceLabel: texto del badge de precio con el monto (si falta, se usa `pricing`).
@@ -59,9 +65,10 @@ const apps = [
     filters: ['gestion', 'ia'],
     status: 'En producción',
     pricing: 'paid',
-    priceLabel: 'Desde $20.000/mes',
+    priceLabel: 'Desde ARS $20.000/mes',
     platforms: ['Web instalable'],
     highlights: ['Asistente por WhatsApp y Telegram', 'Carga por audio', 'Ventas y finanzas', 'Inventario', 'Sueldos', 'Logística'],
+    audience: ['Comercios', 'Pymes', 'Negocios con stock y empleados'],
     logo: '/images/kontrol-pro/logo.png',
     screenshot: '/images/kontrol-pro/dashboard.webp',
     gallery: ['/images/kontrol-pro/dashboard.webp'],
@@ -74,12 +81,8 @@ const apps = [
     accentColor: '#C97A3D',
     accentColorSoft: '#24703A',
     ctaTextColor: '#fbf7ee',
-    brandColors: [
-      { name: 'Crema', hex: '#fbf7ee' },
-      { name: 'Verde', hex: '#24703A' },
-      { name: 'Cobre', hex: '#C97A3D' },
-    ],
     featured: true,
+    showFeaturedBadge: true,
     modalContent: {
       logoWide: '/images/kontrol-pro/logo-full.webp',
       intro:
@@ -119,13 +122,13 @@ const apps = [
       plans: [
         {
           name: 'Básico',
-          price: '$20.000',
+          price: 'ARS $20.000',
           period: '/mes',
           features: ['Stock, ventas, cobranzas y caja', 'Cheques, gastos fijos y P&L', 'Liquidez y proyecciones', 'Asistente por Telegram (audio y texto)', 'Recordatorios automáticos'],
         },
         {
           name: 'Intermedio',
-          price: '$38.000',
+          price: 'ARS $38.000',
           period: '/mes',
           badge: 'El más elegido',
           highlighted: true,
@@ -133,12 +136,12 @@ const apps = [
         },
         {
           name: 'Premium',
-          price: '$65.000',
+          price: 'ARS $65.000',
           period: '/mes',
           features: ['Todo lo del Intermedio', 'Presupuestos con IA y renders', 'Logística y rutas optimizadas', 'Gestión avanzada de empleados', 'Multisucursal'],
         },
       ],
-      planNote: 'Prueba gratis de 7 días, sin tarjeta. Setup único de $50.000 con la instalación asistida y el onboarding incluidos.',
+      planNote: 'Prueba gratis de 7 días, sin tarjeta. Setup único de ARS $50.000 con la instalación asistida y el onboarding incluidos.',
     },
   },
   {
@@ -158,7 +161,8 @@ const apps = [
     gallery: ['/images/livevote/pantalla-led.webp', '/images/livevote/panel-admin.webp'],
     companionImage: '/images/livevote/voto-celular.webp',
     mockupType: 'desktop',
-    mockupUrl: 'interglock.lovable.app',
+    // En la barra del navegador se muestra el nombre de la app; el enlace real sigue en appUrl.
+    mockupUrl: 'LiveVote',
     appUrl: 'https://interglock.lovable.app',
     useModal: false,
     ctaLabel: 'Probar LiveVote',
@@ -176,7 +180,7 @@ const apps = [
     filters: ['eventos', 'ia'],
     status: 'En producción',
     pricing: 'freemium',
-    priceLabel: 'Gratis · Plan Pro',
+    priceLabel: 'Gratis, con plan Pro opcional',
     platforms: ['Web'],
     highlights: ['Trusses y luces', 'Pantallas LED', 'Sala a medida', 'Modo show', 'Recorrido en primera persona', 'Escena armada por IA'],
     audience: ['VJs', 'Iluminadores', 'Productoras'],
@@ -189,7 +193,7 @@ const apps = [
       { src: '/images/stagelab/plano-sala.webp', fit: 'contain' },
     ],
     mockupType: 'desktop',
-    mockupUrl: 'stagelab.lovable.app',
+    mockupUrl: 'StageLab',
     appUrl: 'https://stagelab.lovable.app',
     useModal: true,
     modalCtaLabel: 'Ver planes',
@@ -209,7 +213,7 @@ const apps = [
         { title: 'Asistente IA', description: 'Pedile la escena con palabras y la IA la arma por vos.', icon: 'Wand2' },
       ],
       plans: [
-        { name: 'Gratis', price: '$0', features: ['Creá tu cuenta', 'Empezá a diseñar tus escenas'] },
+        { name: 'Gratis', price: 'Sin costo', features: ['Creá tu cuenta', 'Empezá a diseñar tus escenas'] },
         {
           name: 'Pro',
           price: 'A consultar',
@@ -232,8 +236,8 @@ const apps = [
     status: 'En producción',
     platforms: ['Web instalable'],
     upcomingPlatforms: ['iOS', 'Android'],
-    stack: ['React Native', 'Node.js', 'PostgreSQL'],
     highlights: ['Reservas', 'Ligas y torneos', 'Clases', 'Perfil del club', 'Novedades', 'Seña con Mercado Pago', 'Métricas'],
+    audience: ['Clubes de pádel', 'Jugadores'],
     logo: '/images/playpadel/match-padel-logo.png',
     screenshot: '/images/playpadel/v6/inicio-club.webp',
     gallery: [
@@ -265,8 +269,8 @@ const apps = [
     priceLabel: 'USD 4/mes',
     platforms: ['Web', 'iOS', 'Android'],
     upcomingPlatforms: [],
-    stack: ['React', 'TypeScript', 'Vite', 'WebRTC', 'STUN/TURN'],
     highlights: ['Baja latencia', 'Multi-viewer', 'Telemetría en vivo', 'Health Check pre-show', 'OBS + Resolume', 'Spout / NDI'],
+    audience: ['VJs', 'Streamers', 'Producciones en vivo'],
     logo: '/images/i-streem/icon.png',
     screenshot: '/images/i-streem/modo-estudio.png',
     gallery: [
@@ -314,14 +318,15 @@ const apps = [
     name: 'E-pix',
     tagline: 'Editor de fotos de productos con IA para e-commerce',
     description:
-      'Convertí fotos simples de tus productos en imágenes profesionales listas para publicar. E-pix usa Google Gemini 2.5 para reemplazar fondos, generar escenas lifestyle, aplicar filtros y crear variantes de beneficios en segundos. Pensada para tiendas online, catálogos y campañas.',
+      'Convertí fotos simples de tus productos en imágenes profesionales listas para publicar. E-pix usa IA para reemplazar fondos, generar escenas lifestyle, aplicar filtros y crear variantes de beneficios en segundos. Pensada para tiendas online, catálogos y campañas.',
     category: 'IA · E-commerce',
     filters: ['ia'],
     status: 'En producción',
     pricing: 'paid',
+    priceLabel: 'Premium: consultá precio',
     platforms: ['Web', 'Android'],
     upcomingPlatforms: ['iOS'],
-    stack: ['React', 'TypeScript', 'Vite', 'Gemini 2.5'],
+    audience: ['Tiendas online', 'Emprendedores y pymes', 'Agencias'],
     highlights: [
       'Edición con prompts',
       'Eliminar fondo',
@@ -418,6 +423,7 @@ const caseStudy = {
 
 // Herramientas gratuitas (sección "Bonus").
 // Se sacaron: Analizador de Competencia, Generador de Hashtags y Optimizador de SEO.
+// 2026-11-19: se sacaron los puntajes y la cantidad de usuarios (no eran datos verificables).
 const freeTools = [
   {
     id: 'picshop',
@@ -426,9 +432,7 @@ const freeTools = [
     icon: <Camera className="h-5 w-5" />,
     color: 'teal',
     link: '/apps/picshop',
-    rating: 4.7,
     timeToComplete: '5 min',
-    users: '1.1k',
   },
   {
     id: 'roi',
@@ -437,9 +441,7 @@ const freeTools = [
     icon: <Calculator className="h-5 w-5" />,
     color: 'green',
     link: '/apps/calculadora-roi',
-    rating: 4.8,
     timeToComplete: '5 min',
-    users: '2.5k',
   },
   {
     id: 'automatizaciones',
@@ -448,9 +450,7 @@ const freeTools = [
     icon: <Bot className="h-5 w-5" />,
     color: 'orange',
     link: '/apps/simulador-automatizaciones',
-    rating: 4.6,
     timeToComplete: '20 min',
-    users: '950',
   },
 ];
 
@@ -471,6 +471,39 @@ function buildRows(list) {
     }
   });
   return rows.map((row) => (row.type === 'pair' && row.items.length === 1 ? { ...row, type: 'full' } : row));
+}
+
+/*
+ * Envoltorio de AppShowcaseCard con ajustes de esta página:
+ * - Botones de acción iguales en todas las tarjetas (alto, ancho mínimo, padding, radio rounded-xl y peso
+ *   de letra); cada app conserva su color. Aplica al botón principal y al secundario.
+ * - Oculta el sello "Destacada" salvo en las apps con showFeaturedBadge.
+ * Se resuelve desde acá con variantes de Tailwind porque AppShowcaseCard lo mantiene otra parte del sitio;
+ * si se edita ese componente, conviene pasar estos estilos adentro y borrar este envoltorio.
+ */
+const CARD_ACTION_CLASSES = [
+  '[&_.mt-auto_a]:h-12 [&_.mt-auto_button]:h-12',
+  '[&_.mt-auto_a]:min-w-[200px] [&_.mt-auto_button]:min-w-[200px]',
+  '[&_.mt-auto_a]:justify-center [&_.mt-auto_button]:justify-center',
+  '[&_.mt-auto_a]:rounded-xl [&_.mt-auto_button]:rounded-xl',
+  '[&_.mt-auto_a]:px-6 [&_.mt-auto_button]:px-6',
+  '[&_.mt-auto_a]:py-0 [&_.mt-auto_button]:py-0',
+  '[&_.mt-auto_a]:text-sm [&_.mt-auto_button]:text-sm',
+  '[&_.mt-auto_a]:font-semibold [&_.mt-auto_button]:font-semibold',
+  '[&_.mt-auto_button]:flex-none',
+  '[&_.mt-auto_button_svg]:h-4 [&_.mt-auto_button_svg]:w-4',
+].join(' ');
+const HIDE_FEATURED_BADGE_CLASS = '[&_header_.text-amber-300]:hidden';
+
+function CatalogCard({ app, ...props }) {
+  const className = ['h-full', CARD_ACTION_CLASSES, app.showFeaturedBadge ? '' : HIDE_FEATURED_BADGE_CLASS]
+    .filter(Boolean)
+    .join(' ');
+  return (
+    <div className={className}>
+      <AppShowcaseCard app={app} {...props} />
+    </div>
+  );
 }
 
 // Texto con gradiente animado (equivalente al AnimatedGradient del bundle publicado,
@@ -515,13 +548,10 @@ function GradientText({ children, from, to }) {
   );
 }
 
-function HeroStat({ value, label, infinite = false }) {
+function HeroStat({ value, label }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-sm sm:p-4">
-      <div className="font-display text-3xl font-extrabold text-white md:text-4xl">
-        {value}
-        {infinite && <span className="text-alenia-primary">∞</span>}
-      </div>
+      <div className="font-display text-3xl font-extrabold text-white md:text-4xl">{value}</div>
       <div className="mt-1 text-[9px] font-semibold uppercase leading-snug tracking-[0.04em] text-white/40 sm:text-[10px] sm:tracking-[0.2em]">
         {label}
       </div>
@@ -642,6 +672,8 @@ export default function Apps() {
 
   const totalApps = apps.length;
   const appsInProduction = apps.filter((app) => app.status === 'En producción').length;
+  // Rubros que cubre el catálogo (los filtros, sin contar "Todas")
+  const totalCategories = CATEGORY_FILTERS.filter((filter) => filter.id !== 'todas').length;
 
   const filterCounts = useMemo(
     () =>
@@ -665,15 +697,15 @@ export default function Apps() {
   return (
     <>
       <Helmet>
-        <title>Apps de la startup Alen.iA — Nuestras apps en producción</title>
+        <title>Apps de la startup ALENIA — Nuestras apps en producción</title>
         <meta
           name="description"
-          content="Conocé las apps desarrolladas por la startup Alen.iA: Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem y E-pix. Productos digitales reales, con precios y planes."
+          content="Conocé las apps desarrolladas por la startup ALENIA: Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem y E-pix. Productos digitales reales, con precios y planes."
         />
         <link rel="canonical" href={CANONICAL_URL} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={CANONICAL_URL} />
-        <meta property="og:title" content="Apps de la startup Alen.iA" />
+        <meta property="og:title" content="Apps de la startup ALENIA" />
         <meta
           property="og:description"
           content="Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem y E-pix: nuestras apps en producción."
@@ -684,7 +716,7 @@ export default function Apps() {
         <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={CANONICAL_URL} />
-        <meta property="twitter:title" content="Apps de la startup Alen.iA" />
+        <meta property="twitter:title" content="Apps de la startup ALENIA" />
         <meta
           property="twitter:description"
           content="Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem y E-pix: productos digitales reales."
@@ -730,7 +762,7 @@ export default function Apps() {
               className="mb-8 inline-flex items-center gap-2 rounded-full border border-alenia-primary/30 bg-alenia-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-alenia-primary"
             >
               <Rocket className="h-3.5 w-3.5" />
-              Startup Alen.iA
+              Startup ALENIA
             </motion.div>
 
             <motion.h1
@@ -760,7 +792,7 @@ export default function Apps() {
             >
               <HeroStat value={totalApps} label="Apps en el catálogo" />
               <HeroStat value={appsInProduction} label="En producción" />
-              <HeroStat value="+" label="Próximas apps" infinite />
+              <HeroStat value={totalCategories} label="Rubros" />
             </motion.div>
 
             <motion.div
@@ -853,12 +885,12 @@ export default function Apps() {
                     const app = row.items[0];
                     const reverse = fullIndex % 2 === 1;
                     fullIndex += 1;
-                    return <AppShowcaseCard key={app.id} app={app} wide reverse={reverse} />;
+                    return <CatalogCard key={app.id} app={app} wide reverse={reverse} />;
                   }
                   return (
                     <div key={row.items.map((app) => app.id).join('-')} className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                       {row.items.map((app, index) => (
-                        <AppShowcaseCard key={app.id} app={app} index={index} />
+                        <CatalogCard key={app.id} app={app} index={index} />
                       ))}
                     </div>
                   );

@@ -6,7 +6,6 @@ import {
   Mail, 
   Phone, 
   MapPin, 
-  Github, 
   Linkedin, 
   Instagram,
   Zap,
@@ -26,14 +25,14 @@ const Footer = () => {
   const quickLinks = [
     { name: 'Inicio', href: '/' },
     { name: 'Soluciones', href: '/soluciones' },
-    { name: 'Apps Gratuitas', href: '/apps' },
+    { name: 'Apps', href: '/apps' },
     { name: 'Desarrollos IA', href: '/desarrollos-ia' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contacto', href: '/contacto' }
   ]
 
   const services = [
-    { name: 'Automatización de máquinas', href: '/soluciones/hub' },
+    { name: 'ALENIA HUB: automatización de máquinas', href: '/soluciones/hub' },
     { name: 'Cobros y accesos con QR', href: '/soluciones/hub' },
     { name: 'Apps y software a medida', href: '/soluciones/digitales' },
     { name: 'Desarrollo Web', href: '/soluciones/desarrollo-web' },
@@ -41,7 +40,6 @@ const Footer = () => {
   ]
 
   const social = [
-    { name: 'GitHub', icon: Github, href: 'https://github.com/vjlale', color: 'hover:text-gray-300' },
     { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/alen-ia/', color: 'hover:text-blue-400' },
     { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/alen.ia_/', color: 'hover:text-pink-400' }
   ]
@@ -106,54 +104,11 @@ const Footer = () => {
               </Link>
             </motion.div>
             <p className="text-alenia-light/70 mb-4 text-sm">
-              Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.
+              Automatización de máquinas con hardware y software, y apps y webs a medida para tu negocio.
             </p>
             <p className="text-alenia-primary font-medium text-sm">
               "Resultados con Inteligencia"
             </p>
-            <a href="https://kontrolpro.app/" target="_blank" rel="noopener noreferrer" className="mt-4 inline-block" aria-label="Kontrol Pro">
-              <motion.img 
-                src="/images/kontrol-pro/logo.png" 
-                alt="Kontrol Pro" 
-                className="w-16 h-auto"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              />
-            </a>
-
-            {/* Website link + brand image */}
-            <div className="mt-5 space-y-2">
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://alenia.online/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-alenia-primary hover:text-alenia-secondary transition-colors text-sm underline decoration-transparent hover:decoration-current"
-                >
-                  alenia.online
-                </a>
-                <span className="text-alenia-light/40">/</span>
-                <a
-                  href="https://www.alenia.online/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-alenia-light/70 hover:text-alenia-primary transition-colors text-xs"
-                >
-                  www.alenia.online
-                </a>
-              </div>
-              <a href="https://alenia.online/" target="_blank" rel="noopener noreferrer" aria-label="Ir a alenia.online">
-                <motion.img
-                  src={BRAND_LOGOS.lockupText}
-                  alt="ALENIA"
-                  className="h-10 w-auto max-w-[220px] object-contain opacity-90"
-                  width="220"
-                  height="55"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                />
-              </a>
-            </div>
           </motion.div>
 
           {/* Quick Links */}
@@ -208,61 +163,30 @@ const Footer = () => {
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>alenia.online@gmail.com</span>
               </motion.a>
+              <motion.a
+                href="https://wa.me/5493516875178?text=Hola%20ALENIA%2C%20quiero%20hacer%20una%20consulta."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 text-sm text-alenia-light/70 hover:text-alenia-primary transition-colors group"
+                whileHover={{ x: 4 }}
+              >
+                <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span>WhatsApp +54 9 351 687-5178</span>
+              </motion.a>
               <div className="flex items-center space-x-2 text-sm text-alenia-light/70">
                 <MapPin className="w-4 h-4" />
                 <span>Córdoba, Argentina</span>
               </div>
             </div>
 
-            {/* Newsletter mejorado */}
-            <div className="mb-6">
-              <h4 className="text-alenia-light font-medium mb-3 text-sm">Newsletter</h4>
-              <form onSubmit={handleNewsletterSubmit} className="space-y-2">
-                <div className="relative">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="tu@email.com"
-                    required
-                    className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm text-alenia-light placeholder-alenia-light/50 focus:outline-none focus:border-alenia-primary focus:ring-2 focus:ring-alenia-primary/20 input-focus-effect transition-all duration-300"
-                  />
-                  {submitStatus === 'success' && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2"
-                    >
-                      <CheckCircle className="w-5 h-5 text-alenia-primary" />
-                    </motion.div>
-                  )}
-                </div>
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting || submitStatus === 'success'}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-brand-gradient glow-btn text-brand-secondary px-4 py-3 rounded-lg text-sm font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="loading-spinner w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
-                      <span>Enviando...</span>
-                    </>
-                  ) : submitStatus === 'success' ? (
-                    <>
-                      <CheckCircle className="w-4 h-4" />
-                      <span>¡Suscrito!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      <span>Suscribirse</span>
-                    </>
-                  )}
-                </motion.button>
-              </form>
-            </div>
+            {/* Llamado a contacto (antes: newsletter simulado que no guardaba nada) */}
+            <Link
+              to="/contacto"
+              className="mb-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#7b2cbf] to-[#c77dff] px-4 py-3 text-sm font-semibold text-white shadow-[0_0_20px_rgba(199,125,255,0.3)] transition-shadow hover:shadow-[0_0_30px_rgba(199,125,255,0.5)]"
+            >
+              <Send className="w-4 h-4" />
+              Hablemos de tu proyecto
+            </Link>
 
             {/* Social con efectos 3D */}
             <div className="flex space-x-4">
@@ -299,27 +223,9 @@ const Footer = () => {
           className="border-t border-white/10 mt-8 pt-8"
         >
           <div className="flex flex-col md:flex-row items-center justify-between text-sm text-alenia-light/70">
-            <p>© {currentYear} Alen.iA. Todos los derechos reservados.</p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link
-                to="/privacidad"
-                className="hover:text-alenia-primary transition-colors link-hover-underline"
-              >
-                Privacidad
-              </Link>
-              <Link
-                to="/terminos"
-                className="hover:text-alenia-primary transition-colors link-hover-underline"
-              >
-                Términos
-              </Link>
-              <Link
-                to="/cookies"
-                className="hover:text-alenia-primary transition-colors link-hover-underline"
-              >
-                Cookies
-              </Link>
-            </div>
+            <p>© {currentYear} ALENIA. Todos los derechos reservados.</p>
+            {/* Privacidad, Términos y Cookies llevaban a páginas que no existen (404): se quitan hasta tenerlas. */}
+            <p className="mt-4 md:mt-0">Córdoba, Argentina · aleniahub.com</p>
           </div>
         </motion.div>
       </div>

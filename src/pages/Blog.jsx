@@ -123,17 +123,17 @@ export default function Blog() {
   return (
     <>
     <Helmet>
-        <title>Blog - IA, Automatización y Desarrollo | Alen.ia</title>
+        <title>Blog - IA, Automatización y Desarrollo | ALENIA</title>
   <meta name="description" content="Contenido actualizado sobre IA, automatización, desarrollo web y estrategias digitales para hacer crecer tu negocio." />
-  <link rel="canonical" href="https://alenia.online/blog" />
+  <link rel="canonical" href="https://aleniahub.com/blog" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://alenia.online/blog" />
-  <meta property="og:title" content="Blog - IA, Automatización y Desarrollo | Alen.ia" />
+  <meta property="og:url" content="https://aleniahub.com/blog" />
+  <meta property="og:title" content="Blog - IA, Automatización y Desarrollo | ALENIA" />
   <meta property="og:description" content="Contenido actualizado sobre IA, automatización y desarrollo web para potenciar tu negocio." />
   <meta property="og:image" content={OG_IMAGE} />
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://alenia.online/blog" />
-  <meta property="twitter:title" content="Blog - IA, Automatización y Desarrollo | Alen.ia" />
+  <meta property="twitter:url" content="https://aleniahub.com/blog" />
+  <meta property="twitter:title" content="Blog - IA, Automatización y Desarrollo | ALENIA" />
   <meta property="twitter:description" content="Contenido actualizado sobre IA, automatización y desarrollo web para potenciar tu negocio." />
   <meta property="twitter:image" content={OG_IMAGE} />
     </Helmet>
@@ -150,7 +150,7 @@ export default function Blog() {
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold mb-6">
               <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
-                Blog de Alen.ia
+                Blog de ALENIA
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -256,7 +256,7 @@ export default function Blog() {
         {filteredPosts.length === 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12 text-slate-400">
             <h3 className="text-2xl font-bold text-white mb-4">No se encontraron artículos</h3>
-            <p>Intenta ajustar los filtros o términos de búsqueda.</p>
+            <p>Probá con otro filtro u otra palabra de búsqueda.</p>
           </motion.div>
         )}
       </div>

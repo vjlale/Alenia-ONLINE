@@ -14,7 +14,7 @@ const PicShopEmbed = () => {
   return (
     <>
       <Helmet>
-        <title>Redirigiendo a PicShop AI Studio | Alen.ia</title>
+        <title>Redirigiendo a PicShop AI Studio | ALENIA</title>
         <meta name="description" content="Redirigiendo al editor de imágenes con IA..." />
       </Helmet>
 

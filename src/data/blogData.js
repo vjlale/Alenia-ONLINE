@@ -1,5 +1,79 @@
 export const blogPosts = [
   {
+    id: 10,
+    slug: 'caso-laia-lavanderia-sin-personal-alenia-hub',
+    title: 'Caso LaIA: una lavandería que funciona sola, las 24 horas',
+    excerpt: 'Cómo se armó en 69 días una lavandería self-service sin personal en Palermo, qué falló en el camino y qué podés llevarte para tu negocio con ALENIA HUB.',
+    date: '19 Nov 2026',
+    readTime: 5,
+    category: 'Automatización',
+    image: '/images/laia/fachada-noche.jpg',
+    featured: true,
+    content: `
+LaIA es una lavandería self-service en Palermo que está abierta las 24 horas y **no tiene a nadie atendiendo**. El cliente entra, paga, usa las máquinas y se va. El dueño controla todo desde el celular.
+
+Desde el primer día, la meta estuvo clara:
+
+> "El reto no era hacer una app: era lograr que un comercio físico funcione solo y sea confiable a las 3 de la mañana."
+
+Te contamos cómo se armó, qué falló en el camino y qué podés llevarte para tu negocio.
+
+## De un local vacío a abrir en 69 días
+
+El 24 de junio había un local vacío, una persona y una IA. **69 días después, LaIA abrió sus puertas** con todo funcionando: lavadoras, secadoras, máquinas de snacks y bebidas, cafetera y una puerta que se abre con QR.
+
+La idea, las decisiones y las pruebas en el local fueron del fundador. Todo el software se desarrolló con un equipo de **15 agentes de inteligencia artificial** dirigido por él. Cada agente se ocupa solo de su área, y siempre con el mismo ciclo: **planificar, construir, revisar y guardar**.
+
+Algunos hitos del camino:
+
+- **Día 17:** las primeras placas. Las máquinas no estaban hechas para hablar con una app, así que una placa chica hace de "monedero": cuando el pago se confirma, pone la ficha.
+- **Día 36:** las 3 lavadoras y las 3 secadoras quedan conectadas.
+- **Día 43:** llegan el tótem y el pago con QR. Desde ese día rige la regla de oro: **ninguna máquina arranca sin pago confirmado**.
+- **Día 68:** la puerta se abre con QR, con cerradura magnética y una pantalla que da la bienvenida.
+- **Día 69:** abre al público. El 2 de septiembre entra el primer pago real.
+
+## Lo que falló (y cómo se resolvió)
+
+Nada salió perfecto a la primera. Y eso es lo más útil de contar:
+
+- **Compras desde la vereda.** La noche de la apertura, dos personas pagaron con la puerta cerrada y una máquina arrancó vacía. Ahora solo se puede comprar si entraste por la puerta con QR en las últimas 3 horas.
+- **Placas que perdían la conexión.** Dos lavadoras apuntaban a una red Wi-Fi que sus placas no veían. Se corrigió la red, se sumó reconexión automática y las placas se actualizan a distancia.
+- **Un asistente que se quedó mudo.** Un proveedor de IA se quedó sin saldo y los asistentes dejaron de responder. Hoy hay una cadena de proveedores: si uno falla, contesta el siguiente.
+
+Cada error dejó una regla nueva. Y una que nunca se rompe: los asistentes nunca mueven dinero solos. Proponen, y una persona confirma.
+
+## Cómo está LaIA hoy
+
+Con los datos del local en septiembre de 2026:
+
+- **800 cuentas** en la app
+- **470 pagos reales** de clientes
+- **Más de 900 servicios** realizados
+- **45% de los que pagaron volvieron**
+- **1 de cada 5 servicios** se usa de noche, cuando un local tradicional estaría cerrado
+
+## Lo que esto significa para tu negocio
+
+Todo lo que funciona en LaIA es **ALENIA HUB**: la solución con la que conectamos máquinas físicas a cobros, app y un panel de control en tiempo real.
+
+- **Activación de máquinas:** el cliente escanea un QR o paga y la máquina arranca sola.
+- **Cobros:** Mercado Pago con QR, Checkout y Point, más saldo y crédito para que tus clientes carguen una vez y usen cuando quieran.
+- **Control de accesos:** puertas que abren con QR. Sabés quién entró y cuándo.
+- **Panel en tiempo real:** estado de cada máquina, ventas, cierre de caja y alertas, desde el celular.
+- **App y tótem con tu marca**, y un **asistente de IA** que responde a tus clientes a cualquier hora.
+
+Sirve para lavanderías self-service, máquinas vending, accesos y gimnasios, lavaderos de autos y cocheras, y cualquier negocio físico que quiera funcionar sin personal. Evaluamos cada equipo: la compatibilidad depende de la marca, el modelo y el controlador.
+
+## ¿Tu negocio es el próximo?
+
+Contanos qué máquinas tenés (marca, modelo y cuántas) y qué querés conectar. Con eso te decimos qué se puede hacer y cómo lo haríamos.
+
+**[Contanos tu proyecto](/contacto)** o **[mirá cómo funciona ALENIA HUB](/soluciones/hub)**.
+
+Si querés ver la historia completa, con fotos del armado, entrá a **[Cómo nació LaIA](/casos/laia)**.
+`
+  },
+  {
     id: 1,
     slug: 'kontrol-plus-sistema-gestion-gratuito',
     title: 'KONTROL+: El sistema que reemplaza software de $150 por mes (¡gratis para siempre!)',
@@ -7,7 +81,7 @@ export const blogPosts = [
     date: '20 Jul 2025',
     readTime: 6,
     category: 'Sistemas de Gestión',
-    image: '/images/blog/casos-de-exito.jpg',
+    image: '/images/blog/casos-de-exito.jpg',
     featured: false,
     content: `
 **¿Cansado de pagar $150 dólares por mes por un software que apenas usás?** 
@@ -115,7 +189,7 @@ Mientras otros te cobran $150 por mes por funciones básicas, nosotros te damos 
 
 No te prometemos magia, te prometemos que en una semana vas a tener la información de tu negocio ordenada, clara y útil.
 
-**[Descargá KONTROL+ gratis](https://alenia.ar/kontrol-plus)** y empezá a gestionar como corresponde.
+**[Descargá KONTROL+ gratis](/kontrol-plus)** y empezá a gestionar como corresponde.
 
 *P.D.: Si después de probarlo una semana no te convence, simplemente lo desinstalás. Pero estamos seguros de que no vas a querer volver a Excel nunca más.*
 `
@@ -128,11 +202,11 @@ No te prometemos magia, te prometemos que en una semana vas a tener la informaci
     date: '18 Jul 2025',
     readTime: 8,
     category: 'Automatización',
-    image: '/images/blog/automatizacion-wsp.jpg',
+    image: '/images/blog/automatizacion-wsp.jpg',
     content: `
 Imaginate esto: Son las 2 de la mañana, vos estás durmiendo, pero tu negocio sigue funcionando. Un cliente te escribe por WhatsApp preguntando por un producto, tu asistente virtual le responde al instante, le muestra el catálogo, procesa el pedido y hasta programa la entrega. 
 
-Cuando te despertás, tenés 3 ventas nuevas esperándote. **Esto no es ciencia ficción, es lo que hacemos todos los días en Alenia.**
+Cuando te despertás, tenés 3 ventas nuevas esperándote. **Esto no es ciencia ficción, es lo que hacemos todos los días en ALENIA.**
 
 ## ¿Cómo funciona realmente?
 
@@ -209,7 +283,7 @@ No hacemos "bots que molestan". Hacemos asistentes que realmente ayudan a tus cl
 
 No te vamos a vender humo. Te vamos a mostrar exactamente cómo funciona con tu negocio específico.
 
-**[Hablemos por WhatsApp](https://alenia.ar/contacto)** y en 15 minutos te mostramos cómo sería tu asistente virtual funcionando.
+**[Hablemos por WhatsApp](/contacto)** y en 15 minutos te mostramos cómo sería tu asistente virtual funcionando.
 
 *P.D.: Si no te convence completamente cómo funciona, no invertís ni un peso. Así de simple.*
 `
@@ -222,7 +296,7 @@ No te vamos a vender humo. Te vamos a mostrar exactamente cómo funciona con tu 
     date: '15 Jul 2025',
     readTime: 10,
     category: 'Desarrollo Web',
-    image: '/images/blog/desarrollo-web-2025.jpg',
+    image: '/images/blog/desarrollo-web-2025.jpg',
     featured: false,
     content: `
 # Progressive Web Apps: La Tecnología que Revoluciona la Experiencia Digital
@@ -436,8 +510,8 @@ Mientras algunas empresas siguen con webs lentas y experiencias frustrantes, otr
     excerpt: 'Cómo utilizar inteligencia artificial para crear campañas de marketing hiperpersonalizadas que aumentan las conversiones hasta en un 400%.',
     date: '12 Jul 2025',
     readTime: 9,
-    category: 'Marketing Digital',
-    image: '/images/blog/marketing.jpg',
+    category: 'Inteligencia Artificial',
+    image: '/images/blog/marketing.jpg',
     content: `
 **🚀 La inteligencia artificial (IA) ha revolucionado el marketing digital**, permitiendo personalizar mensajes, segmentar audiencias y optimizar campañas en tiempo real. 
 
@@ -502,9 +576,9 @@ Pruebas de creatividades generadas por IA + test de incrementality
 
 ## 📞 **Llamado a la acción**
 
-**¿Quieres llevar tu marketing al siguiente nivel con IA?** 
+**¿Querés aplicar IA en tu negocio?** 
 
-👉 **[Contáctanos aquí](https://alenia.ar/contacto)** y diseñamos tu plan 90‑días.
+**[Escribinos acá](/contacto)** y armamos tu plan de 90 días.
 `
   },
   {
@@ -515,7 +589,7 @@ Pruebas de creatividades generadas por IA + test de incrementality
     date: '10 Jul 2025',
     readTime: 12,
     category: 'Inteligencia Artificial',
-    image: '/images/blog/analisis-predictivo.jpg',
+    image: '/images/blog/analisis-predictivo.jpg',
     content: `
 **🔮 El análisis predictivo utiliza modelos de machine learning** para anticipar tendencias, comportamientos y resultados futuros. 
 
@@ -581,9 +655,9 @@ MLOps, monitoreo de drift y retraining automático
 
 ## 📞 **Llamado a la acción**
 
-**¿Quieres aplicar análisis predictivo en tu empresa?** 
+**¿Querés aplicar análisis predictivo en tu empresa?** 
 
-👉 **[Contáctanos aquí](https://alenia.ar/contacto)** y armamos un piloto guiado por KPI.
+**[Escribinos acá](/contacto)** y armamos una prueba piloto con objetivos medibles.
 `
   },
   {
@@ -594,7 +668,7 @@ MLOps, monitoreo de drift y retraining automático
     date: '08 Jul 2025',
     readTime: 6,
     category: 'CRM',
-    image: '/images/blog/crm.jpg',
+    image: '/images/blog/crm.jpg',
     content: `
 **Todas las semanas nos preguntan lo mismo:** *"¿Me conviene un CRM como Salesforce o mejor uno hecho a medida?"*
 
@@ -753,7 +827,7 @@ No existe el CRM perfecto. Existe el CRM correcto para tu momento y tu negocio.
 
 **¿No estás seguro cuál te conviene?**
 
-[Hablemos 15 minutos](https://alenia.ar/contacto) y te ayudamos a decidir sin comprometerte a nada.
+[Hablemos 15 minutos](/contacto) y te ayudamos a decidir sin comprometerte a nada.
 
 *P.D.: Si ya tenés un CRM que no usás, el problema no es la herramienta. Es que no está pensada para como trabajás realmente.*
 `
@@ -765,8 +839,8 @@ No existe el CRM perfecto. Existe el CRM correcto para tu momento y tu negocio.
     excerpt: 'Cómo utilizar la inteligencia artificial para crear campañas de email marketing que aumentan las tasas de apertura y conversión hasta en un 300%.',
     date: '05 Jul 2025',
     readTime: 8,
-    category: 'Email Marketing',
-    image: '/images/blog/email-marketing.jpg',
+    category: 'Automatización',
+    image: '/images/blog/email-marketing.jpg',
     content: `
 **📧 El email marketing sigue siendo una de las herramientas más efectivas** para conectar con clientes. 
 
@@ -844,24 +918,24 @@ Pruebas A/B de creatividades con IA
 
 ## 📞 **Llamado a la acción**
 
-**¿Quieres automatizar tu email marketing con IA?** 
+**¿Querés automatizar tus emails con IA?** 
 
-👉 **[Contáctanos aquí](https://alenia.ar/contacto)** y te mostramos cómo lograrlo.
+**[Escribinos acá](/contacto)** y te mostramos cómo lograrlo.
 `
   },
   {
     id: 8,
     slug: 'tendencias-desarrollo-web-2025',
-    title: 'Las 7 tecnologías web que van a dominar 2025 (y por qué te conviene conocerlas)',
+    title: 'Las 7 tecnologías web que te conviene conocer',
     excerpt: 'Las webs lentas y complicadas están muriendo. Te contamos qué tecnologías están usando las empresas más exitosas para crear experiencias que realmente funcionan.',
     date: '02 Jul 2025',
     readTime: 6,
     category: 'Desarrollo Web',
-    image: '/images/blog/desarrollo-web.jpg',
+    image: '/images/blog/desarrollo-web.jpg',
     content: `
 **¿Tu web carga lento? ¿Se ve mal en móviles? ¿Los clientes se van antes de comprar?**
 
-En 2025, tener una web que "funciona" ya no alcanza. Necesitás una que funcione **rápido, en cualquier dispositivo y que convierta**.
+Hoy, tener una web que "funciona" ya no alcanza. Necesitás una que funcione **rápido, en cualquier dispositivo y que convierta**.
 
 **Te mostramos las 7 tecnologías que están usando los que mejor la tienen:**
 
@@ -991,7 +1065,7 @@ Las herramientas de hoy cuestan menos que el hosting de hace 5 años.
 
 ## Los que se adaptan, ganan
 
-Mientras tu competencia sigue con webs de 2020, vos podés tener tecnología de 2025.
+Mientras tu competencia sigue con webs viejas, vos podés tener tecnología actual.
 
 **No es magia, es elección.**
 
@@ -999,7 +1073,7 @@ Las empresas que mejor la están pasando online no es porque gastan más en mark
 
 **¿Querés saber qué tecnologías específicas le convienen a tu negocio?**
 
-[Hablemos 15 minutos](https://alenia.ar/contacto) y te armamos un plan de modernización sin comprometerte a nada.
+[Hablemos 15 minutos](/contacto) y te armamos un plan de modernización sin comprometerte a nada.
 
 *P.D.: Si tu web tarda más de 3 segundos en cargar, ya estás perdiendo clientes. No esperes a que la competencia se adelante.*
 `
@@ -1012,8 +1086,8 @@ Las empresas que mejor la están pasando online no es porque gastan más en mark
     date: '30 Jun 2025',
     readTime: 11,
     category: 'Automatización',
-    image: '/images/blog/casos-de-exito.jpg',
-    featured: true,
+    image: '/images/blog/casos-de-exito.jpg',
+    featured: false,
     content: `
 **¿Cuántas horas por semana perdés haciendo tareas que podrían hacerse automáticamente?**
 
@@ -1213,7 +1287,7 @@ Una sola automatización bien hecha puede ahorrarte más tiempo y dinero que cua
 
 **¿Querés saber exactamente qué podés automatizar en tu empresa?**
 
-[Agendá una reunión de 30 minutos](https://alenia.ar/contacto) y te hacemos un análisis gratuito de tus procesos.
+[Agendá una reunión de 30 minutos](/contacto) y te hacemos un análisis gratuito de tus procesos.
 
 *P.D.: La consulta es gratis, pero el tiempo que estás perdiendo haciendo cosas manualmente no tiene precio. Cada día que esperás son horas que no vas a recuperar.*
 `
@@ -1225,8 +1299,6 @@ export const categories = [
   'Sistemas de Gestión',
   'Automatización',
   'Desarrollo Web',
-  'Marketing Digital',
   'Inteligencia Artificial',
-  'CRM',
-  'Email Marketing'
+  'CRM'
 ];

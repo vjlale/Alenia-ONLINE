@@ -30,8 +30,8 @@ const contactInfo = [
 
 const faqs = [
     {
-        question: '¿Cuál es el primer paso para trabajar con Alen.ia?',
-        answer: 'El primer paso es completar nuestro formulario de contacto o agendar una videollamada gratuita. Nos pondremos en contacto contigo en menos de 24 horas para entender tus necesidades y proponerte una solución a medida.'
+        question: '¿Cuál es el primer paso para trabajar con ALENIA?',
+        answer: 'El primer paso es completar nuestro formulario de contacto o agendar una videollamada gratuita. Te respondemos en menos de 24 horas para entender qué necesitás y proponerte una solución a medida.'
     },
     {
         question: '¿En cuánto tiempo veré resultados?',
@@ -158,18 +158,18 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contacto - Hablemos de tu Proyecto | Alen.ia</title>
-  <meta name="description" content="Contacta con Alen.ia para transformar tu negocio con soluciones de software, automatización e inteligencia artificial. Estamos en Córdoba, Argentina." />
-  <link rel="canonical" href="https://alenia.online/contacto" />
+        <title>Contacto - Hablemos de tu proyecto | ALENIA</title>
+  <meta name="description" content="Contactá a ALENIA para transformar tu negocio con soluciones de software, automatización e inteligencia artificial. Estamos en Córdoba, Argentina." />
+  <link rel="canonical" href="https://aleniahub.com/contacto" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://alenia.online/contacto" />
-  <meta property="og:title" content="Contacto - Hablemos de tu Proyecto | Alen.ia" />
-  <meta property="og:description" content="Contacta con Alen.ia para transformar tu negocio con soluciones de software, automatización e inteligencia artificial." />
+  <meta property="og:url" content="https://aleniahub.com/contacto" />
+  <meta property="og:title" content="Contacto - Hablemos de tu proyecto | ALENIA" />
+  <meta property="og:description" content="Contactá a ALENIA para transformar tu negocio con soluciones de software, automatización e inteligencia artificial." />
   <meta property="og:image" content={OG_IMAGE} />
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://alenia.online/contacto" />
-  <meta property="twitter:title" content="Contacto - Hablemos de tu Proyecto | Alen.ia" />
-  <meta property="twitter:description" content="Contacta con Alen.ia para transformar tu negocio con soluciones de software, automatización e inteligencia artificial." />
+  <meta property="twitter:url" content="https://aleniahub.com/contacto" />
+  <meta property="twitter:title" content="Contacto - Hablemos de tu proyecto | ALENIA" />
+  <meta property="twitter:description" content="Contactá a ALENIA para transformar tu negocio con soluciones de software, automatización e inteligencia artificial." />
   <meta property="twitter:image" content={OG_IMAGE} />
       </Helmet>
       <main className="min-h-screen bg-gradient-to-br from-slate-900 via-alenia-dark to-slate-900 bg-brand-primary py-20">
@@ -210,7 +210,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <h2 className="text-3xl font-bold text-white mb-6">Envíanos un Mensaje</h2>
+                <h2 className="text-3xl font-bold text-white mb-6">Mandanos un mensaje</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <AnimatePresence mode="wait">
                     {/* Step 1: Información Básica */}

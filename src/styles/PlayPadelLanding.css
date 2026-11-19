@@ -48,12 +48,11 @@
 }
 
 /* === HEADER === */
+/* Debajo del menú general del sitio (antes lo tapaba con position: fixed; top: 0) */
 .pp-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+  position: sticky;
+  top: 4.25rem;
+  z-index: 40;
   background: hsl(var(--pp-card) / 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -318,7 +317,7 @@
   border: 1px solid hsl(var(--pp-border) / 0.5);
   border-radius: 16px;
   padding: 2rem;
-  text-align: center;
+  text-align: left;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -368,13 +367,12 @@
   line-height: 1.6;
 }
 
-/* === SCREEN SHOWCASE === */
+/* === PANTALLAS (texto arriba, mockup con alto limitado) === */
 .pp-screen-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4rem;
   margin-bottom: 6rem;
-  min-height: 500px;
 }
 
 .pp-screen-item:nth-child(even) {
@@ -416,9 +414,12 @@
 }
 
 .pp-screen-image img {
-  width: 100%;
-  max-width: 600px;
+  display: block;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: min(68vh, 640px);
+  object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
@@ -429,9 +430,20 @@
 }
 
 .pp-screen-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   font-size: 2rem;
   font-weight: 700;
+  line-height: 1.2;
   margin-bottom: 1rem;
+  color: hsl(var(--pp-primary));
+}
+
+.pp-screen-title-icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
   color: hsl(var(--pp-primary));
 }
 
@@ -443,7 +455,7 @@
 
 .pp-feature-list {
   list-style: none;
-  space-y: 0.75rem;
+  text-align: left;
 }
 
 .pp-feature-list li {
@@ -451,19 +463,37 @@
   align-items: flex-start;
   gap: 0.75rem;
   padding: 0.5rem 0;
+  text-align: left;
   color: hsl(var(--pp-foreground));
 }
 
-.pp-feature-list li::before {
-  content: "✨";
-  font-size: 1.2rem;
+.pp-check {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.2rem;
   flex-shrink: 0;
+  color: hsl(var(--pp-primary));
 }
 
-/* === BADGES GRID === */
+.pp-feature-list--compact {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.pp-feature-list--compact li {
+  padding: 0.3rem 0;
+}
+
+.pp-feature-list--compact .pp-check {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.15rem;
+}
+
+/* === LOGROS: 4 + 4 en escritorio === */
 .pp-badges-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
   margin: 3rem 0;
 }
@@ -486,8 +516,10 @@
 }
 
 .pp-badge-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  color: hsl(var(--pp-primary));
+  margin-bottom: 0.75rem;
   animation: pp-heartbeat 1.5s ease-in-out infinite;
 }
 
@@ -662,7 +694,7 @@
   }
   
   .pp-badges-grid {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

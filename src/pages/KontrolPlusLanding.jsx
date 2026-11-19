@@ -294,23 +294,23 @@ export default function KontrolPlusLanding() {
     <>
       <Helmet>
         <title>Kontrol+ | Programa gratis de ventas y stock para Windows | ALENIA</title>
-        <link rel="canonical" href="https://alenia.online/kontrol-plus" />
+        <link rel="canonical" href="https://aleniahub.com/kontrol-plus" />
         <meta
           name="description"
           content="Kontrol+ es un programa gratuito para controlar ventas y stock. Funciona sin internet, con reportes, ofertas y sugerencias de reposición. Para Windows 10/11."
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="ALENIA" />
-        <meta property="og:url" content="https://alenia.online/kontrol-plus" />
+        <meta property="og:url" content="https://aleniahub.com/kontrol-plus" />
         <meta property="og:title" content="Kontrol+ | Programa gratis de ventas y stock para Windows" />
         <meta
           property="og:description"
           content="Gestioná ventas y stock con un programa que funciona sin internet. Reportes, ofertas y sugerencias de reposición. Descarga gratuita."
         />
-        <meta property="og:image" content="https://alenia.online/images/7.png?v=2" />
+        <meta property="og:image" content="https://aleniahub.com/images/7.png?v=2" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Kontrol+ | Programa gratis de ventas y stock para Windows" />
-        <meta name="twitter:image" content="https://alenia.online/images/7.png?v=2" />
+        <meta name="twitter:image" content="https://aleniahub.com/images/7.png?v=2" />
       </Helmet>
 
       <main className="min-h-screen bg-[#100F1C] py-20 font-sans text-slate-300">

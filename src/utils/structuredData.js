@@ -7,7 +7,7 @@ export const generateOrganizationSchema = () => ({
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "ALENIA",
-  "url": "https://alenia.online",
+  "url": "https://aleniahub.com",
   "logo": BRAND_LOGOS_ABSOLUTE.symbol,
   "description": "Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.",
   "foundingDate": "2020",
@@ -48,7 +48,7 @@ export const generateArticleSchema = (post) => ({
   "@type": "BlogPosting",
   "headline": post.title,
   "description": post.excerpt,
-  "image": post.image?.startsWith('http') ? post.image : `https://alenia.online${post.image}`,
+  "image": post.image?.startsWith('http') ? post.image : `https://aleniahub.com${post.image}`,
   "datePublished": post.date,
   "author": {
     "@type": "Organization",

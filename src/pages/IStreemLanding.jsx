@@ -33,8 +33,8 @@ const CYAN_DARK = '#0891b2';
 const ORANGE = '#fb923c';
 
 const APP_URL = 'https://i-streem.lovable.app';
-const PAGE_URL = 'https://alenia.online/apps/i-streem';
-const SHARE_IMAGE = 'https://alenia.online/images/i-streem/logo.png';
+const PAGE_URL = 'https://aleniahub.com/apps/i-streem';
+const SHARE_IMAGE = 'https://aleniahub.com/images/i-streem/logo.png';
 
 const FEATURES = [
   {
@@ -212,18 +212,18 @@ export default function IStreemLanding() {
   return (
     <>
       <Helmet>
-        <title>i-Streem — Streaming WebRTC profesional iPhone → PC | Alen.iA</title>
+        <title>i-Streem — Streaming WebRTC profesional iPhone → PC | ALENIA</title>
         <link rel="canonical" href={PAGE_URL} />
         <meta
           name="description"
-          content="i-Streem es la app de streaming WebRTC profesional de Alen.iA. Transmití desde tu iPhone a cualquier PC o Mac con baja latencia, multi-viewer, telemetría en vivo, Health Check pre-show e integración nativa con OBS y Resolume."
+          content="i-Streem es la app de streaming WebRTC profesional de ALENIA. Transmití desde tu iPhone a cualquier PC o Mac con baja latencia, multi-viewer, telemetría en vivo, Health Check pre-show e integración nativa con OBS y Resolume."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:title" content="i-Streem — WebRTC pro iPhone → PC" />
         <meta
           property="og:description"
-          content="Streaming WebRTC profesional con Modo Estudio, Health Check e integración con OBS y Resolume. Desarrollado por la startup Alen.iA."
+          content="Streaming WebRTC profesional con Modo Estudio, Health Check e integración con OBS y Resolume. Desarrollado por la startup ALENIA."
         />
         <meta property="og:image" content={SHARE_IMAGE} />
         <meta property="twitter:card" content="summary_large_image" />
@@ -814,7 +814,7 @@ export default function IStreemLanding() {
                     to="/contacto"
                     className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-7 py-4 text-base font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.08]"
                   >
-                    Hablar con Alen.iA
+                    Hablar con ALENIA
                     <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 </div>

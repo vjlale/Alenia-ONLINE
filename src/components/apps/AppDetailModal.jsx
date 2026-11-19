@@ -537,7 +537,7 @@ export default function AppDetailModal({ app, isOpen, onClose }) {
                   </motion.a>
                   <div className="flex items-center gap-1.5 text-xs text-white/40">
                     <ExternalLink className="h-3 w-3" />
-                    Abre {appUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')} en pestaña nueva
+                    Se abre en una pestaña nueva
                   </div>
                   {secondaryLink &&
                     (isInternalPath(secondaryLink.href) ? (

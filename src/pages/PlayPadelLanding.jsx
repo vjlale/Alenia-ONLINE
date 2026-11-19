@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  Users, 
-  Trophy, 
-  Calendar, 
-  MessageCircle, 
-  Camera, 
+import {
+  ArrowRight,
+  Users,
+  Trophy,
+  Calendar,
+  MessageCircle,
+  Camera,
   Target,
   Award,
   TrendingUp,
@@ -19,7 +19,11 @@ import {
   Crown,
   Flame,
   Sparkles,
-  UserPlus
+  UserPlus,
+  Check,
+  Home,
+  User,
+  HeartHandshake
 } from 'lucide-react';
 import '../styles/PlayPadelLanding.css';
 import { BRAND_LOGOS } from '../config/brand'
@@ -58,43 +62,43 @@ const PlayPadelLanding = () => {
   return (
     <>
       <Helmet>
-        <title>Play Padel - La Plataforma #1 para Pádel | Desarrollado por Alen.iA</title>
-        <link rel="canonical" href="https://alenia.online/play-padel" />
-        <meta name="description" content="Descubre Play Padel: forma equipos de dobles, desafía otras duplas, gestiona tu club con reservas automáticas y fideliza clientes. Torneos, ranking, feed social y más." />
-        
+        <title>Play Padel | Armá partidos y llená tu club | Desarrollado por ALENIA</title>
+        <link rel="canonical" href="https://aleniahub.com/play-padel" />
+        <meta name="description" content="Conocé Play Padel: formá tu dupla, desafiá a otras de tu nivel, gestioná las reservas de tu club y fidelizá a tus socios. Torneos, ranking, muro social y más." />
+
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="ALENIA" />
-        <meta property="og:url" content="https://alenia.online/play-padel" />
-        <meta property="og:title" content="Play Padel - La Plataforma #1 para Pádel" />
-        <meta property="og:description" content="Forma equipos de dobles, desafía otras duplas, gestiona tu club con reservas automáticas y fideliza clientes." />
-        <meta property="og:image" content="https://alenia.online/images/playpadel/650d36c51e390141790f6967b34abe4d8959e5465ed8a3b653d7114402f60ac0.png" />
-        
+        <meta property="og:url" content="https://aleniahub.com/play-padel" />
+        <meta property="og:title" content="Play Padel | Armá partidos y llená tu club" />
+        <meta property="og:description" content="Formá tu dupla, desafiá a otras de tu nivel, gestioná las reservas de tu club y fidelizá a tus socios." />
+        <meta property="og:image" content="https://aleniahub.com/images/playpadel/650d36c51e390141790f6967b34abe4d8959e5465ed8a3b653d7114402f60ac0.png" />
+
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Play Padel - La Plataforma #1 para Pádel" />
-        <meta name="twitter:description" content="Forma equipos de dobles, desafía otras duplas, gestiona tu club. La app definitiva para el mundo del pádel." />
-        
+        <meta name="twitter:title" content="Play Padel | Armá partidos y llená tu club" />
+        <meta name="twitter:description" content="Formá tu dupla, desafiá a otras de tu nivel y gestioná tu club desde una sola app de pádel." />
+
         {/* Preload de fuentes */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </Helmet>
-      
+
       <div className="play-padel-landing">
         {/* Header */}
         <header className="pp-header">
           <div className="pp-nav-container">
-            <Link to="/" className="pp-back-button" aria-label="Volver al Inicio">
+            <Link to="/" className="pp-back-button" aria-label="Volver al inicio">
               <ArrowRight className="w-4 h-4 rotate-180" />
-              Volver al Inicio
+              Volver al inicio
             </Link>
             <nav>
               <ul className="pp-nav-menu">
                 <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#jugadores">Para Jugadores</a></li>
-                <li><a href="#clubes">Para Clubes</a></li>
-                <li><a href="#gamificacion">Gamificación</a></li>
+                <li><a href="#jugadores">Para jugadores</a></li>
+                <li><a href="#clubes">Para clubes</a></li>
+                <li><a href="#gamificacion">Puntos y logros</a></li>
                 <li><a href="#contacto">Contacto</a></li>
               </ul>
             </nav>
@@ -105,35 +109,35 @@ const PlayPadelLanding = () => {
         <section id="inicio" className="pp-hero">
           <div className="pp-hero-content">
             <div className="pp-logo-container">
-              <img 
-                src="/images/playpadel/650d36c51e390141790f6967b34abe4d8959e5465ed8a3b653d7114402f60ac0.png" 
-                alt="Play Padel Logo" 
+              <img
+                src="/images/playpadel/650d36c51e390141790f6967b34abe4d8959e5465ed8a3b653d7114402f60ac0.png"
+                alt="Logo de Play Padel"
               />
             </div>
-            
+
             <h1 className="pp-hero-title">
-              La plataforma #1 para pádel
+              Armá partidos y llená tu club
             </h1>
-            
+
             <p className="pp-hero-subtitle">
-              Forma equipos de dobles, desafía otras duplas de tu nivel, gestiona tu club con reservas automáticas y crea una comunidad activa con torneos y feed social.
+              Formá tu dupla, desafiá a otras de tu nivel, gestioná las reservas de tu club y armá una comunidad activa con torneos y un muro social.
             </p>
-            
+
             <div className="pp-hero-buttons">
               <a href="#jugadores" className="pp-cta-primary">
                 <Users className="w-5 h-5" />
-                Para Jugadores
+                Para jugadores
               </a>
               <a href="#clubes" className="pp-cta-secondary">
                 <Calendar className="w-5 h-5" />
-                Para Clubes
+                Para clubes
               </a>
             </div>
           </div>
-          
+
           <div className="pp-built-by">
-            <span 
-              style={{ 
+            <span
+              style={{
                 background: 'linear-gradient(135deg, hsl(var(--pp-primary)) 0%, hsl(var(--pp-accent)) 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -155,53 +159,53 @@ const PlayPadelLanding = () => {
         <section id="jugadores" className="pp-section">
           <div className="pp-container">
             <div className="pp-section-header">
-              <h2 className="pp-section-title">Para Jugadores Apasionados</h2>
+              <h2 className="pp-section-title">Para jugadores apasionados</h2>
               <p className="pp-section-subtitle">
-                Conecta con jugadores de tu nivel, mejora tu juego y forma parte de una comunidad activa
+                Conectá con jugadores de tu nivel, mejorá tu juego y sumate a una comunidad activa
               </p>
             </div>
 
             <div className="pp-features-grid">
               <FeatureCard
-                icon={<Target className="w-18 h-12" style={{ transform: 'rotate(90deg)', display: 'flex' }} />}
-                title="Sistema de Desafíos de Dobles"
-                description="Crea un equipo con otro jugador y desafía con tu equipo de dobles. Busca rivales del mismo nivel, envía propuestas de partidos y recibe notificaciones en tiempo real del estado de tus desafíos."
-                highlights={['Desafiá, reservá y suma puntos', 'Búsqueda por nivel, ubicación y disponibilidad', 'Notificaciones en tiempo real']}
+                icon={<Target className="w-12 h-12" />}
+                title="Desafíos de dobles"
+                description="Armá un equipo con otro jugador y desafiá a otras duplas. Buscá rivales de tu mismo nivel, mandá propuestas de partido y recibí avisos al instante de cómo van tus desafíos."
+                highlights={['Desafiá, reservá y sumá puntos', 'Búsqueda por nivel, ubicación y disponibilidad', 'Avisos al instante']}
               />
-              
+
               <FeatureCard
                 icon={<Trophy className="w-12 h-12" />}
-                title="Sistema de Puntos y Ranking"
-                description="Gana puntos por cada victoria y mantén rachas ganadoras. Compite en rankings individuales y de dobles para demostrar tu nivel."
-                highlights={['+5 pts por jugar', '+25 pts por victoria dobles', 'Bonus por rachas']}
+                title="Puntos y ranking"
+                description="Ganá puntos por cada victoria y mantené rachas ganadoras. Competí en rankings individuales y de dobles para mostrar tu nivel."
+                highlights={['+5 pts por jugar', '+25 pts por victoria en dobles', 'Puntos extra por rachas']}
               />
-              
+
               <FeatureCard
                 icon={<Users className="w-12 h-12" />}
-                title="Jugadores Cerca"
-                description="Encuentra jugadores de tu nivel y disponibilidad cerca tuyo. Algoritmo inteligente que garantiza partidos equilibrados y competitivos."
-                highlights={['Matching por nivel', 'Filtrado por disponibilidad y mapa de ubicación', 'Partidos equilibrados']}
+                title="Jugadores cerca"
+                description="Encontrá jugadores de tu nivel y con tu disponibilidad cerca tuyo. La app te sugiere rivales parejos para que los partidos sean equilibrados."
+                highlights={['Rivales según tu nivel', 'Filtro por disponibilidad y mapa de ubicación', 'Partidos equilibrados']}
               />
-              
+
               <FeatureCard
                 icon={<MessageCircle className="w-12 h-12" />}
-                title="Feed de Actividades"
-                description="Comparte momentos, fotos de partidos y conecta con la comunidad. Reacciona, comenta y menciona a otros jugadores en un feed social dinámico."
-                highlights={['Posts con fotos', 'Reacciones y comentarios', 'Menciones a jugadores']}
+                title="Muro de actividad"
+                description="Compartí momentos y fotos de tus partidos con la comunidad. Reaccioná, comentá y mencioná a otros jugadores."
+                highlights={['Publicaciones con fotos', 'Reacciones y comentarios', 'Menciones a jugadores']}
               />
-              
+
               <FeatureCard
                 icon={<UserPlus className="w-12 h-12" />}
-                title="Equipos de Dobles"
-                description="Forma múltiples equipos de dobles, invita jugadores y compite con estadísticas separadas. Cada equipo tiene su propio ranking y historial."
-                highlights={['Múltiples equipos', 'Invitaciones a jugadores', 'Ranking de dobles']}
+                title="Equipos de dobles"
+                description="Formá varios equipos de dobles, invitá jugadores y competí con estadísticas separadas. Cada equipo tiene su propio ranking e historial."
+                highlights={['Varios equipos', 'Invitaciones a jugadores', 'Ranking de dobles']}
               />
-              
+
               <FeatureCard
                 icon={<Calendar className="w-12 h-12" />}
-                title="Reserva de Canchas"
-                description="Vista de calendario completa con disponibilidad en tiempo real. Reserva instantánea con confirmación automática y recordatorios."
-                highlights={['Vista mensual/semanal', 'Reserva instantánea', 'Recordatorios automáticos']}
+                title="Reserva de canchas"
+                description="Un calendario con la disponibilidad al momento. Reservás al instante, con confirmación automática y recordatorios."
+                highlights={['Vista mensual y semanal', 'Reserva al instante', 'Recordatorios automáticos']}
               />
             </div>
           </div>
@@ -211,7 +215,7 @@ const PlayPadelLanding = () => {
         <section id="clubes" className="pp-section">
           <div className="pp-container">
             <div className="pp-section-header">
-              <h2 className="pp-section-title">Para Clubes Inteligentes</h2>
+              <h2 className="pp-section-title">Para clubes inteligentes</h2>
               <p className="pp-section-subtitle">
                 Automatizá la gestión, fidelizá a tus clientes y armá una comunidad activa en tu club
               </p>
@@ -220,224 +224,230 @@ const PlayPadelLanding = () => {
             <div className="pp-features-grid">
               <FeatureCard
                 icon={<Calendar className="w-12 h-12" />}
-                title="Gestión de Reservas"
+                title="Gestión de reservas"
                 description="Todos los turnos de tus canchas en un calendario: ves qué está libre y ocupado, confirmás reservas al instante y el sistema les recuerda el turno a los jugadores. Menos llamados y menos canchas vacías."
-                highlights={['Vista calendario admin', 'Recordatorios automáticos', 'Control de ocupación']}
+                highlights={['Calendario para el club', 'Recordatorios automáticos', 'Control de ocupación']}
               />
-              
+
               <FeatureCard
                 icon={<Heart className="w-12 h-12" />}
-                title="Fidelización de Clientes"
-                description="Los miembros siguen el club, participan en rankings internos y se mantienen activos con el sistema de gamificación y torneos exclusivos."
-                highlights={['Sistema de seguidores', 'Rankings por club', 'Comunidad activa']}
+                title="Fidelización de clientes"
+                description="Los socios siguen al club, participan en rankings internos y se mantienen activos con puntos, logros y torneos exclusivos."
+                highlights={['Seguidores del club', 'Rankings por club', 'Comunidad activa']}
               />
-              
+
               <FeatureCard
                 icon={<Sparkles className="w-12 h-12" />}
-                title="Anuncios y Promociones"
+                title="Anuncios y promociones"
                 description="Publicá novedades, promociones y eventos con un botón directo al perfil del club, y llegá a todos tus socios a la vez."
                 highlights={['Anuncios destacados', 'Botón al perfil del club', 'Comunicación directa']}
               />
-              
+
               <FeatureCard
                 icon={<Trophy className="w-12 h-12" />}
-                title="Torneos y Competencias"
+                title="Torneos y competencias"
                 description="Armá torneos cerrados para tus socios o abiertos a jugadores de cualquier club. Cuadros, partidos y resultados en un solo lugar."
-                highlights={['Torneos cerrados/abiertos', 'Cuadros del torneo', 'Seguimiento de resultados']}
+                highlights={['Torneos cerrados o abiertos', 'Cuadros del torneo', 'Seguimiento de resultados']}
               />
-              
+
               <FeatureCard
                 icon={<Camera className="w-12 h-12" />}
-                title="Galería y Eventos"
+                title="Galería y eventos"
                 description="Subí fotos del club, de eventos y torneos. Mostrá tus instalaciones y atraé nuevos socios."
                 highlights={['Galería de fotos', 'Eventos destacados', 'Vidriera del club']}
               />
-              
+
               <FeatureCard
                 icon={<TrendingUp className="w-12 h-12" />}
                 title="Reportes del club"
-                description="Análisis completo de ocupación, miembros más activos, horarios pico y cuánto participa tu comunidad, para decidir con datos."
-                highlights={['Ocupación por horarios', 'Miembros activos', 'Métricas de engagement']}
+                description="Ocupación por horario, socios más activos, horarios pico y cuánto participa tu comunidad, para decidir con datos."
+                highlights={['Ocupación por horarios', 'Socios más activos', 'Participación de la comunidad']}
               />
             </div>
           </div>
         </section>
 
-        {/* Sección de Screenshots */}
+        {/* Sección de pantallas */}
         <section className="pp-section">
           <div className="pp-container">
             <div className="pp-section-header">
-              <h2 className="pp-section-title">Explora la Plataforma</h2>
+              <h2 className="pp-section-title">Explorá la plataforma</h2>
               <p className="pp-section-subtitle">
-                Descubre cada funcionalidad en detalle
+                Mirá cada función en detalle
               </p>
             </div>
 
-            <ScreenShowcase 
-              title="🏠 Feed Social y Home"
-              description="Pantalla principal con actividad del club, publicaciones de jugadores y acceso rápido a todas las funcionalidades. Mantente conectado con tu comunidad de pádel."
+            <ScreenShowcase
+              icon={Home}
+              title="Inicio y muro social"
+              description="La pantalla principal muestra la actividad del club, las publicaciones de los jugadores y accesos rápidos a todo. Así seguís conectado con tu comunidad de pádel."
               features={[
-                'Feed unificado con actividad del club',
-                'Publicaciones de usuarios con fotos',
+                'Toda la actividad del club en un solo lugar',
+                'Publicaciones de jugadores con fotos',
                 'Equipos recién formados',
                 'Acceso rápido a desafíos y reservas',
-                'Notificaciones en tiempo real',
-                'Timeline personalizado'
+                'Avisos al instante',
+                'Actividad a tu medida'
               ]}
               imageSrc="/images/playpadel/home1.png"
-              imageAlt="Home y Feed Social Play Padel"
+              imageAlt="Pantalla de inicio y muro social de Play Padel"
             />
 
-            <ScreenShowcase 
-              title="👤 Perfil Completo del Jugador"
-              description="Perfil personalizado con todas las estadísticas, equipos formados y historial de puntos. Sigue tu progreso y comparte tus logros con la comunidad."
+            <ScreenShowcase
+              icon={User}
+              title="Perfil completo del jugador"
+              description="Tu perfil con todas tus estadísticas, los equipos que armaste y tu historial de puntos. Seguí tu progreso y compartí tus logros con la comunidad."
               features={[
                 'Estadísticas individuales y de dobles',
-                'Lista de todos tus equipos formados',
-                'Historial de puntos y badges',
-                'Configuración de disponibilidad',
-                'Foto de perfil personalizada',
+                'Todos los equipos que formaste',
+                'Historial de puntos e insignias',
+                'Tus días y horarios disponibles',
+                'Foto de perfil',
                 'Progreso visible para otros jugadores'
               ]}
               imageSrc="/images/playpadel/perfil1.png"
-              imageAlt="Perfil de Jugador"
+              imageAlt="Perfil de jugador"
               reverse
             />
 
-            <ScreenShowcase 
-              title="🎯 Búsqueda y Gestión de Desafíos"
-              description="Encuentra rivales perfectos para tu equipo de dobles. Filtra por nivel, disponibilidad y club preferido para encontrar los mejores partidos."
+            <ScreenShowcase
+              icon={Target}
+              title="Búsqueda y gestión de desafíos"
+              description="Encontrá rivales para tu equipo de dobles. Filtrá por nivel, disponibilidad y club preferido para armar los mejores partidos."
               features={[
-                'Búsqueda inteligente de equipos rivales',
+                'Búsqueda de equipos rivales',
                 'Filtros por nivel de juego',
-                'Disponibilidad por días de la semana',
+                'Disponibilidad por día de la semana',
                 'Propuesta de fecha, hora y club',
-                'Sistema de contrapropuestas',
+                'Contrapropuestas',
                 'Historial de desafíos enviados y recibidos'
               ]}
               imageSrc="/images/playpadel/desafio.png"
-              imageAlt="Búsqueda de Desafíos"
+              imageAlt="Búsqueda de desafíos"
             />
 
-            <ScreenShowcase 
-              title="🏆 Rankings y Clasificación"
-              description="Compite en múltiples rankings: individual, dobles y por club. Ve tu posición en tiempo real y compara tu progreso con otros jugadores."
+            <ScreenShowcase
+              icon={Trophy}
+              title="Rankings y clasificación"
+              description="Competí en varios rankings: individual, dobles y por club. Mirá tu posición al momento y compará tu progreso con otros jugadores."
               features={[
                 'Ranking individual por puntos',
                 'Ranking de equipos de dobles',
                 'Clasificación por club',
-                'Filtros por categoría y tiempo',
-                'Estadísticas detalladas de cada jugador',
-                'Actualizaciones en tiempo real'
+                'Filtros por categoría y período',
+                'Estadísticas de cada jugador',
+                'Se actualiza al instante'
               ]}
               imageSrc="/images/playpadel/Ranking.png"
-              imageAlt="Sistema de Rankings"
+              imageAlt="Rankings de jugadores"
               reverse
             />
 
-            <ScreenShowcase 
-              title="🎮 Sistema de Puntos y Logros"
-              description="Sigue tu progreso con el sistema de gamificación. Gana puntos por cada partido, mantén rachas y desbloquea badges exclusivos."
+            <ScreenShowcase
+              icon={Award}
+              title="Puntos y logros"
+              description="Seguí tu progreso: ganá puntos en cada partido, mantené rachas y desbloqueá insignias exclusivas."
               features={[
-                'Puntos por victorias y participación',
-                'Bonus por rachas ganadoras',
-                'Historial detallado de puntos',
-                'Badges desbloqueados',
+                'Puntos por victorias y por jugar',
+                'Puntos extra por rachas ganadoras',
+                'Historial de puntos',
+                'Insignias desbloqueadas',
                 'Progreso mensual y anual',
                 'Comparación con otros jugadores'
               ]}
               imageSrc="/images/playpadel/puntos.png"
-              imageAlt="Sistema de Puntos"
+              imageAlt="Puntos y logros"
             />
 
-            <ScreenShowcase 
-              title="📅 Gestión de Reservas"
-              description="Para clubes: panel completo de gestión de reservas con vista calendario, control de ocupación y notificaciones automáticas para optimizar el uso de canchas."
+            <ScreenShowcase
+              icon={Calendar}
+              title="Gestión de reservas"
+              description="Para clubes: un panel con calendario, control de ocupación y recordatorios automáticos para aprovechar mejor cada cancha."
               features={[
-                'Vista calendario administrativo',
-                'Gestión de todas las reservas',
-                'Filtros por fecha, cancha y usuario',
-                'Notificaciones automáticas de recordatorio',
-                'Cancelación y modificación fácil',
-                'Reportes de ocupación por horarios'
+                'Calendario para el club',
+                'Todas las reservas en un lugar',
+                'Filtros por fecha, cancha y jugador',
+                'Recordatorios automáticos',
+                'Cancelás o modificás en un toque',
+                'Reportes de ocupación por horario'
               ]}
               imageSrc="/images/playpadel/gestionreservas.png"
-              imageAlt="Gestión de Reservas para Clubes"
+              imageAlt="Gestión de reservas para clubes"
               reverse
             />
           </div>
         </section>
 
-        {/* Sección de Gamificación */}
+        {/* Sección de puntos y logros */}
         <section id="gamificacion" className="pp-section">
           <div className="pp-container">
             <div className="pp-section-header">
-              <h2 className="pp-section-title">Sistema de Gamificación</h2>
+              <h2 className="pp-section-title">Puntos, logros y rankings</h2>
               <p className="pp-section-subtitle">
-                Mantén a los jugadores motivados con puntos, badges y rankings competitivos
+                Mantené a los jugadores motivados con puntos, insignias y rankings
               </p>
             </div>
 
             <div className="pp-badges-grid">
-              <BadgeItem 
-                icon="🏆"
-                title="Primera Victoria"
-                description="Gana tu primer partido"
+              <BadgeItem
+                icon={Trophy}
+                title="Primera victoria"
+                description="Ganá tu primer partido"
               />
-              <BadgeItem 
-                icon="🔥"
+              <BadgeItem
+                icon={Flame}
                 title="Racha de 3"
-                description="3 victorias consecutivas"
+                description="3 victorias seguidas"
               />
-              <BadgeItem 
-                icon="⚡"
+              <BadgeItem
+                icon={Zap}
                 title="Racha de 5"
-                description="5 victorias consecutivas"
+                description="5 victorias seguidas"
               />
-              <BadgeItem 
-                icon="🎯"
+              <BadgeItem
+                icon={Target}
                 title="Veterano"
                 description="10 partidos jugados"
               />
-              <BadgeItem 
-                icon="👑"
+              <BadgeItem
+                icon={Crown}
                 title="Leyenda"
                 description="50 partidos jugados"
               />
-              <BadgeItem 
-                icon="👥"
-                title="Dupla Dinámica"
+              <BadgeItem
+                icon={Users}
+                title="Dupla dinámica"
                 description="Primera victoria en dobles"
               />
-              <BadgeItem 
-                icon="🤝"
-                title="Compañero Leal"
+              <BadgeItem
+                icon={HeartHandshake}
+                title="Compañero leal"
                 description="10 partidos con el mismo equipo"
               />
-              <BadgeItem 
-                icon="🌟"
-                title="Estrella del Club"
-                description="Top 3 en ranking del club"
+              <BadgeItem
+                icon={Star}
+                title="Estrella del club"
+                description="Top 3 en el ranking del club"
               />
             </div>
 
             <div className="pp-features-grid" style={{ marginTop: '4rem' }}>
               <FeatureCard
                 icon={<Award className="w-12 h-12" />}
-                title="Sistema de Puntos"
-                description="Gana puntos por cada acción: +30 por victoria individual, +25 por dobles, +10 por participación y bonus especiales por rachas."
+                title="Puntos por partido"
+                description="Sumás puntos en cada partido: +30 por victoria individual, +25 por dobles, +10 por jugar y puntos extra por rachas."
               />
-              
+
               <FeatureCard
                 icon={<Crown className="w-12 h-12" />}
-                title="Rankings Múltiples"
-                description="Compite en ranking individual, de dobles y por club. Tablas actualizadas en tiempo real con filtros por categoría."
+                title="Varios rankings"
+                description="Competí en ranking individual, de dobles y por club. Tablas que se actualizan al instante, con filtros por categoría."
               />
-              
+
               <FeatureCard
                 icon={<Flame className="w-12 h-12" />}
-                title="Rachas y Logros"
-                description="Mantén rachas de victorias para obtener puntos bonus y desbloquear badges exclusivos que demuestran tu progreso."
+                title="Rachas y logros"
+                description="Mantené rachas de victorias para sumar puntos extra y desbloquear insignias exclusivas que muestran tu progreso."
               />
             </div>
           </div>
@@ -447,57 +457,57 @@ const PlayPadelLanding = () => {
         <section className="pp-section">
           <div className="pp-container">
             <div className="pp-section-header">
-              <h2 className="pp-section-title">Tecnología de Vanguardia</h2>
+              <h2 className="pp-section-title">Simple, rápida y segura</h2>
               <p className="pp-section-subtitle">
-                Construida con las mejores tecnologías para una experiencia superior
+                Pensada para usarse fácil desde el celular, con tus datos protegidos
               </p>
             </div>
 
             <div className="pp-features-grid">
               <FeatureCard
                 icon={<Smartphone className="w-12 h-12" />}
-                title="PWA Instalable"
-                description="Instala la app desde el navegador y úsala como una aplicación nativa. Funciona offline y se sincroniza automáticamente."
+                title="Se instala como app"
+                description="Se instala como app desde el navegador, sin pasar por la tienda. Funciona sin conexión y se sincroniza sola cuando volvés a tener señal."
               />
-              
+
               <FeatureCard
                 icon={<Zap className="w-12 h-12" />}
-                title="Tiempo Real"
-                description="Notificaciones instantáneas, actualizaciones live del feed social y sincronización automática entre dispositivos."
+                title="Todo al instante"
+                description="Avisos al momento, un muro que se actualiza solo y tus datos iguales en todos tus dispositivos."
               />
-              
+
               <FeatureCard
                 icon={<Shield className="w-12 h-12" />}
-                title="Seguridad Avanzada"
-                description="Autenticación segura, Row Level Security (RLS) y encriptación end-to-end para proteger todos los datos."
+                title="Datos protegidos"
+                description="Inicio de sesión seguro, datos protegidos por usuario e información cifrada: cada jugador ve solo lo que le corresponde."
               />
             </div>
           </div>
         </section>
 
-        {/* CTA Final */}
+        {/* Llamado final */}
         <section id="contacto" className="pp-cta-section">
           <div className="pp-container">
             <div className="pp-cta-content">
-              <h2 className="pp-cta-title">¿Listo para revolucionar tu experiencia con el pádel?</h2>
+              <h2 className="pp-cta-title">¿Querés probar Play Padel en tu club?</h2>
               <p className="pp-cta-description">
-                Únete a la comunidad de Play Padel y descubre una nueva forma de jugar, competir y gestionar tu club de pádel.
+                Sumate a Play Padel y descubrí una nueva forma de jugar, competir y gestionar tu club de pádel.
               </p>
-              
+
               <div className="pp-hero-buttons">
                 <Link to="/contacto" className="pp-cta-primary">
                   <MessageCircle className="w-5 h-5" />
-                  Contactar para Demo
+                  Pedí una demo
                 </Link>
                 <Link to="/" className="pp-cta-secondary">
                   <ArrowRight className="w-5 h-5" />
-                  Conocer más sobre Alen.iA
+                  Conocé más sobre ALENIA
                 </Link>
               </div>
-              
+
               <div style={{ marginTop: '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-                <span 
-                  style={{ 
+                <span
+                  style={{
                     background: 'linear-gradient(135deg, hsl(var(--pp-primary)) 0%, hsl(var(--pp-accent)) 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
@@ -506,15 +516,12 @@ const PlayPadelLanding = () => {
                     fontWeight: '800',
                     letterSpacing: '0.15em',
                     textTransform: 'uppercase',
-                    fontFamily: 'Montserrat, sans-serif',
-                    position: 'absolute',
-                    left: '171px',
-                    top: '596px'
+                    fontFamily: 'Montserrat, sans-serif'
                   }}
                 >
                   Build By
                 </span>
-                <img 
+                <img
                   src={BRAND_LOGOS.lockupFull}
                   alt="ALENIA"
                   width={216}
@@ -524,11 +531,8 @@ const PlayPadelLanding = () => {
                     maxWidth: 'min(280px, 42vw)',
                     height: '48px',
                     objectFit: 'contain',
-                    filter: 'drop-shadow(0 0 15px hsl(var(--pp-primary) / 0.8))',
-                    position: 'absolute',
-                    left: '283px',
-                    top: '584px'
-                  }} 
+                    filter: 'drop-shadow(0 0 15px hsl(var(--pp-primary) / 0.8))'
+                  }}
                 />
               </div>
             </div>
@@ -539,6 +543,18 @@ const PlayPadelLanding = () => {
   );
 };
 
+// Lista con viñeta de check (ícono de línea, color de acento de la página)
+const CheckList = ({ items, className = '' }) => (
+  <ul className={`pp-feature-list ${className}`}>
+    {items.map((item, index) => (
+      <li key={index}>
+        <Check className="pp-check" strokeWidth={2} aria-hidden="true" />
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+);
+
 // Componente FeatureCard
 const FeatureCard = ({ icon, title, description, highlights = [] }) => (
   <div className="pp-feature-card">
@@ -547,40 +563,33 @@ const FeatureCard = ({ icon, title, description, highlights = [] }) => (
     </div>
     <h3 className="pp-feature-title">{title}</h3>
     <p className="pp-feature-description">{description}</p>
-    {highlights.length > 0 && (
-      <ul className="pp-feature-list" style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
-        {highlights.map((highlight, index) => (
-          <li key={index} style={{ color: 'hsl(var(--pp-foreground))', fontSize: '0.85rem' }}>
-            {highlight}
-          </li>
-        ))}
-      </ul>
-    )}
+    {highlights.length > 0 && <CheckList items={highlights} className="pp-feature-list--compact" />}
   </div>
 );
 
 // Componente ScreenShowcase
-const ScreenShowcase = ({ title, description, features, imageSrc, imageAlt, reverse = false }) => (
+const ScreenShowcase = ({ icon: Icon, title, description, features, imageSrc, imageAlt, reverse = false }) => (
   <div className={`pp-screen-item ${reverse ? 'reverse' : ''}`}>
     <div className="pp-screen-content">
-      <h3 className="pp-screen-title">{title}</h3>
+      <h3 className="pp-screen-title">
+        {Icon && <Icon className="pp-screen-title-icon" strokeWidth={2} aria-hidden="true" />}
+        <span>{title}</span>
+      </h3>
       <p className="pp-screen-description">{description}</p>
-      <ul className="pp-feature-list">
-        {features.map((feature, index) => (
-          <li key={index}>{feature}</li>
-        ))}
-      </ul>
+      <CheckList items={features} />
     </div>
     <div className="pp-screen-image">
-      <img src={imageSrc} alt={imageAlt} />
+      <img src={imageSrc} alt={imageAlt} loading="lazy" />
     </div>
   </div>
 );
 
 // Componente BadgeItem
-const BadgeItem = ({ icon, title, description }) => (
+const BadgeItem = ({ icon: Icon, title, description }) => (
   <div className="pp-badge-item">
-    <div className="pp-badge-icon">{icon}</div>
+    <div className="pp-badge-icon">
+      <Icon className="w-10 h-10" strokeWidth={2} aria-hidden="true" />
+    </div>
     <div className="pp-badge-title">{title}</div>
     <div className="pp-badge-description">{description}</div>
   </div>

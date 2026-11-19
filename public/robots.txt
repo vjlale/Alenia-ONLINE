@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://alenia.online/sitemap.xml
+Sitemap: https://aleniahub.com/sitemap.xml
 
 # Optimización para crawlers
 Crawl-delay: 1

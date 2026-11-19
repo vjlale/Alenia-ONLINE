@@ -76,20 +76,20 @@ export default function ServiceDetail() {
     return (
         <main className="min-h-screen bg-slate-900 py-20">
             <Helmet>
-                <title>{`${nombre} - ${subtitulo} | Alen.ia`}</title>
+                <title>{`${nombre} - ${subtitulo} | ALENIA`}</title>
                 <meta name="description" content={descripcion} />
-                <link rel="canonical" href={`https://alenia.online/soluciones/detalle/${id}`} />
+                <link rel="canonical" href={`https://aleniahub.com/soluciones/detalle/${id}`} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content={`https://alenia.online/soluciones/detalle/${id}`} />
-                <meta property="og:title" content={`${nombre} - ${subtitulo} | Alen.ia`} />
+                <meta property="og:url" content={`https://aleniahub.com/soluciones/detalle/${id}`} />
+                <meta property="og:title" content={`${nombre} - ${subtitulo} | ALENIA`} />
                 <meta property="og:description" content={descripcion} />
                 <meta property="og:image" content={OG_IMAGE} />
                 <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
                 <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
                 <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content={`https://alenia.online/soluciones/detalle/${id}`} />
-                <meta property="twitter:title" content={`${nombre} - ${subtitulo} | Alen.ia`} />
+                <meta property="twitter:url" content={`https://aleniahub.com/soluciones/detalle/${id}`} />
+                <meta property="twitter:title" content={`${nombre} - ${subtitulo} | ALENIA`} />
                 <meta property="twitter:description" content={descripcion} />
                 <meta property="twitter:image" content={OG_IMAGE} />
             </Helmet>

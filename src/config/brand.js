@@ -5,7 +5,7 @@ export const BRAND_LOGOS = {
   lockupText: '/images/logos-alenia/lockup-text.png',
 }
 
-const absolute = (path) => (path.startsWith('http') ? path : `https://alenia.online${path}`)
+const absolute = (path) => (path.startsWith('http') ? path : `https://aleniahub.com${path}`)
 
 export const BRAND_LOGOS_ABSOLUTE = {
   symbol: absolute(BRAND_LOGOS.symbol),

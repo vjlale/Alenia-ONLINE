@@ -61,14 +61,14 @@ function Services() {
       <Helmet>
         <title>{SEO_TITLE}</title>
         <meta name="description" content={SEO_DESCRIPTION} />
-        <link rel="canonical" href="https://alenia.online/soluciones" />
+        <link rel="canonical" href="https://aleniahub.com/soluciones" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://alenia.online/soluciones" />
+        <meta property="og:url" content="https://aleniahub.com/soluciones" />
         <meta property="og:title" content={SEO_TITLE} />
         <meta property="og:description" content={SEO_DESCRIPTION} />
         <meta property="og:image" content={OG_IMAGE} />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://alenia.online/soluciones" />
+        <meta property="twitter:url" content="https://aleniahub.com/soluciones" />
         <meta property="twitter:title" content={SEO_TITLE} />
         <meta property="twitter:description" content={SEO_DESCRIPTION} />
         <meta property="twitter:image" content={OG_IMAGE} />
@@ -323,7 +323,7 @@ function ServiceCard({ servicio, index, onOpenForm }) {
   };
 
   return (
-    <ScrollReveal delay={index * 0.1} direction="up">
+    <ScrollReveal delay={index * 0.1} direction="up" className="h-full">
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
@@ -360,7 +360,8 @@ function ServiceCard({ servicio, index, onOpenForm }) {
             </div>
           </div>
 
-          <div className="space-y-3 mt-auto">
+          {/* Alto fijo del bloque de botones: así "Solicitar información" queda a la misma altura en todas las tarjetas */}
+          <div className="space-y-3 mt-auto min-h-[8.5rem]">
             <button
               type="button"
               onClick={() => onOpenForm(servicio)}

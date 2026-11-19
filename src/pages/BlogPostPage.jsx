@@ -44,7 +44,7 @@ function ShareButtons({ url, title, excerpt }) {
 export default function BlogPostPage() {
     const { slug } = useParams();
     const post = blogPosts.find(p => p.slug === slug);
-    const postUrl = `https://alenia.online/blog/${slug}`;
+    const postUrl = `https://aleniahub.com/blog/${slug}`;
 
     if (!post) {
         return <div className="text-center py-20 text-white">Post no encontrado.</div>;
@@ -55,18 +55,18 @@ export default function BlogPostPage() {
     return (
         <>
             <Helmet>
-                <title>{`${post.title} | Blog de Alen.ia`}</title>
+                <title>{`${post.title} | Blog de ALENIA`}</title>
                 <meta name="description" content={post.excerpt} />
                 <link rel="canonical" href={postUrl} />
                 <meta property="og:title" content={post.title} />
                 <meta property="og:description" content={post.excerpt} />
-                <meta property="og:image" content={post.image?.startsWith('http') ? post.image : `https://alenia.online${post.image}`} />
+                <meta property="og:image" content={post.image?.startsWith('http') ? post.image : `https://aleniahub.com${post.image}`} />
                 <meta property="og:url" content={postUrl} />
                 <meta property="og:type" content="article" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta property="twitter:title" content={post.title} />
                 <meta property="twitter:description" content={post.excerpt} />
-                <meta property="twitter:image" content={post.image?.startsWith('http') ? post.image : `https://alenia.online${post.image}`} />
+                <meta property="twitter:image" content={post.image?.startsWith('http') ? post.image : `https://aleniahub.com${post.image}`} />
                 <script type="application/ld+json">
                   {JSON.stringify(generateArticleSchema(post))}
                 </script>

@@ -23,7 +23,7 @@ import ServiceFormModal from '../components/forms/ServiceFormModal';
 // Página reconstruida desde el bundle publicado en aleniahub.com
 // (SolucionesDigitales-c14778ac.js), sin las líneas de marketing ni métricas de casos.
 
-const SITE_URL = 'https://alenia.online';
+const SITE_URL = 'https://aleniahub.com';
 const PAGE_PATH = '/soluciones/digitales';
 
 const SEO_TITLE = 'Soluciones digitales | Webs interactivas y apps a medida | ALENIA';
@@ -464,8 +464,11 @@ export default function SolucionesDigitales() {
           <div className="grid md:grid-cols-3 gap-8">
             {PROCESO.steps.map((step, i) => (
               <ScrollReveal key={step.title} delay={0.1 * i}>
-                <div className="relative text-center md:text-left">
-                  <span className="text-5xl font-black text-white/10 absolute -top-4 left-0 md:left-0">{i + 1}</span>
+                <div className="relative h-full rounded-2xl border border-[#3A3A5A] bg-[#1A1A2E] p-6 text-center md:text-left">
+                  {/* Antes el número iba detrás del título, medio tapado; ahora es una insignia propia */}
+                  <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#00ff88]/70 font-display text-base font-bold text-[#00ff88]">
+                    {i + 1}
+                  </span>
                   <h3 className="text-lg font-bold text-white mb-2 relative">{step.title}</h3>
                   <p className="text-sm text-alenia-light/75 leading-relaxed relative">{step.body}</p>
                 </div>

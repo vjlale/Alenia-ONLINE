@@ -45,6 +45,8 @@ import {
   Package,
   Bell,
   CheckCircle2,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand';
@@ -55,7 +57,7 @@ import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand';
 /*  ruta acá (los archivos viven en public/images/laia/).                      */
 /* -------------------------------------------------------------------------- */
 
-const SITE_URL = 'https://alenia.online';
+const SITE_URL = 'https://aleniahub.com';
 const PAGE_PATH = '/casos/laia';
 const PAGE_TITLE = 'Cómo nació LaIA | Un local que funciona solo, creado con IA | ALENIA';
 const PAGE_DESCRIPTION =
@@ -206,6 +208,9 @@ const MILESTONES = [
   },
 ];
 
+// Posición del hito de apertura (Día 69) en la línea de tiempo
+const OPENING_INDEX = Math.max(0, MILESTONES.findIndex((ms) => ms.highlight));
+
 const METHOD_STEPS = [
   { icon: Lightbulb, title: 'Planificar', text: 'Nada se toca hasta que el plan está aprobado.' },
   { icon: Hammer, title: 'Construir', text: 'La IA escribe la solución pieza por pieza.' },
@@ -273,30 +278,36 @@ const STORE_STATS = [
   { value: 45, suffix: '%', label: 'de los que pagaron volvieron' },
 ];
 
+// Las primeras 9 de la lista son las que se ven en "Todo" sin expandir:
+// un recorrido corto del local vacío a la apertura.
+// MEDIA.totemInicio (diseño de pantalla con avatar generado, no es foto real)
+// quedó fuera de la galería; el tótem real se ve en MEDIA.totemPared.
 const GALLERY = [
   { src: MEDIA.localVacio, caption: 'Así empezó: el local vacío', group: 'armado', tall: true },
   { src: MEDIA.obra1, caption: '7 de julio: obra en marcha', group: 'armado', tall: true },
+  { src: MEDIA.placaEsp32, caption: '11 de julio: las primeras placas en la mesa', group: 'fierro', tall: true },
+  { src: MEDIA.placaInstalada2, caption: '30 de julio: instalando una placa en el local', group: 'fierro', tall: true },
+  { src: MEDIA.totemPared, caption: '6 de agosto: el tótem ya está en la pared', group: 'armado', tall: true },
+  { src: MEDIA.releMano, caption: '19 de agosto: el relé para la cafetera', group: 'fierro', tall: true },
+  { src: MEDIA.lectorQr, caption: 'En la puerta desde la apertura: acercá tu QR para entrar', group: 'local', tall: true },
+  { src: MEDIA.aperturaMaquinas, caption: '2 de septiembre: el día del primer pago real', group: 'local' },
+  { src: MEDIA.fachadaNoche, caption: 'Lavander.IA, abierta las 24 horas', group: 'local' },
   { src: MEDIA.fachadaObra, caption: '7 de agosto: la fachada, todavía tapada', group: 'armado' },
   { src: MEDIA.armadoMaquinas, caption: 'Llegan las máquinas, todavía embaladas', group: 'armado', tall: true },
-  { src: MEDIA.totemPared, caption: '6 de agosto: el tótem ya está en la pared', group: 'armado', tall: true },
   { src: MEDIA.lucesMaquinas, caption: '8 de agosto: luces y últimos detalles', group: 'armado' },
   { src: MEDIA.puesto, caption: 'Donde se construyó el software: una mesa y tres pantallas', group: 'armado' },
-  { src: MEDIA.placaEsp32, caption: '11 de julio: las primeras placas en la mesa', group: 'fierro', tall: true },
   { src: MEDIA.placaEnCaja, caption: '26 de julio: la placa en su caja, con su relé', group: 'fierro', tall: true },
-  { src: MEDIA.placaInstalada2, caption: '30 de julio: instalando una placa en el local', group: 'fierro', tall: true },
-  { src: MEDIA.releMano, caption: '19 de agosto: el relé para la cafetera', group: 'fierro', tall: true },
   { src: MEDIA.placaTablero, caption: 'Por dentro de la cafetera: la placa original', group: 'fierro' },
   { src: MEDIA.croquis, caption: 'El croquis a mano de cómo conectarla', group: 'fierro' },
-  { src: MEDIA.fachadaNoche, caption: 'Lavander.IA, abierta las 24 horas', group: 'local' },
-  { src: MEDIA.aperturaMaquinas, caption: '2 de septiembre: el día del primer pago real', group: 'local' },
   { src: MEDIA.lavadora1, caption: 'Lavadora 1, lista para usar con la app', group: 'local', tall: true },
   { src: MEDIA.vendingLlena, caption: 'Snacks y bebidas, dentro del mismo sistema', group: 'local', tall: true },
   { src: MEDIA.cafetera, caption: 'La cafetera, conectada desde la apertura', group: 'local', tall: true },
-  { src: MEDIA.lectorQr, caption: 'En la puerta desde la apertura: acercá tu QR para entrar', group: 'local', tall: true },
   { src: MEDIA.appHome, caption: 'La app: todo el local en el bolsillo', group: 'pantallas', tall: true },
-  { src: MEDIA.totemInicio, caption: 'El tótem: comprar en el local, paso a paso', group: 'pantallas', tall: true },
   { src: MEDIA.panel, caption: 'El panel del dueño (montos ocultos)', group: 'pantallas' },
 ];
+
+// Cuántas fotos se muestran antes de "Ver todas" (múltiplo de 3 para que la grilla cierre pareja)
+const GALLERY_PREVIEW = 9;
 
 const GALLERY_TABS = [
   { id: 'todas', label: 'Todo' },
@@ -604,7 +615,7 @@ function Timeline() {
               De un proyecto vacío a una lavandería que <GradientText>funciona sola</GradientText>
             </>
           }
-          subtitle="Tocá cada hito o arrastrá la barra para recorrer cómo se construyó LaIA."
+          subtitle="Tocá cada hito para recorrer cómo se construyó LaIA."
         />
 
         {/* Barra de hitos */}
@@ -641,6 +652,7 @@ function Timeline() {
             ))}
           </div>
 
+          {/* En escritorio alcanza con los puntos; la barra deslizable queda solo para pantallas chicas */}
           <input
             type="range"
             min={0}
@@ -648,14 +660,20 @@ function Timeline() {
             step={1}
             value={active}
             onChange={(e) => go(Number(e.target.value))}
-            className="laia-range w-full"
+            className="laia-range w-full md:hidden"
             aria-label="Recorrer la historia"
             style={{ accentColor: C.goldLight }}
           />
-          <div className="mt-2 flex justify-between text-[11px] uppercase tracking-[0.2em] text-white/60">
-            <span>Día 0</span>
-            <span>Día 69 · apertura</span>
-            <span>Día 99</span>
+          {/* Etiquetas alineadas con el punto de cada hito */}
+          <div className="relative mt-2 h-5 text-xs uppercase tracking-[0.2em] text-white/60">
+            <span className="absolute left-0 top-0 whitespace-nowrap">Día 0</span>
+            <span
+              className="absolute top-0 hidden -translate-x-1/2 whitespace-nowrap sm:block"
+              style={{ left: `${(OPENING_INDEX / last) * 100}%`, color: C.goldLight }}
+            >
+              Día 69 · apertura
+            </span>
+            <span className="absolute right-0 top-0 whitespace-nowrap">Día 99</span>
           </div>
           {!reduce && (
             <div className="mt-4 flex justify-center">
@@ -811,7 +829,7 @@ function Method() {
 
         {/* Equipo de especialistas */}
         <div className="mx-auto mt-16 max-w-5xl rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
-          <div className="grid items-center gap-8 md:grid-cols-[0.8fr_1.2fr]">
+          <div className="grid items-start gap-8 md:grid-cols-[0.8fr_1.2fr]">
             <div>
               <figure className="mb-6 overflow-hidden rounded-2xl border border-white/10">
                 <img src={MEDIA.puesto} alt="El puesto de trabajo donde se construyó LaIA" loading="lazy" className="aspect-[16/9] w-full object-cover" />
@@ -860,7 +878,26 @@ function Method() {
 function Gallery() {
   const [tab, setTab] = useState('todas');
   const [open, setOpen] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+  const sectionRef = useRef(null);
+  const reduce = useReducedMotion();
   const items = tab === 'todas' ? GALLERY : GALLERY.filter((g) => g.group === tab);
+  const hasMore = items.length > GALLERY_PREVIEW;
+  const visible = showAll || !hasMore ? items : items.slice(0, GALLERY_PREVIEW);
+
+  const changeTab = (id) => {
+    setTab(id);
+    setShowAll(false);
+  };
+
+  const toggleAll = () => {
+    if (showAll) {
+      setShowAll(false);
+      sectionRef.current?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    } else {
+      setShowAll(true);
+    }
+  };
 
   const move = useCallback(
     (dir) => setOpen((i) => (i === null ? i : (i + dir + items.length) % items.length)),
@@ -869,7 +906,7 @@ function Gallery() {
   const close = useCallback(() => setOpen(null), []);
 
   return (
-    <section className="relative py-20">
+    <section ref={sectionRef} className="relative scroll-mt-20 py-20">
       <div className="container mx-auto px-6">
         <SectionTitle
           eyebrow="Del código al fierro"
@@ -889,7 +926,7 @@ function Gallery() {
               type="button"
               role="tab"
               aria-selected={tab === t.id}
-              onClick={() => setTab(t.id)}
+              onClick={() => changeTab(t.id)}
               className="rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
               style={{
                 borderColor: tab === t.id ? C.goldLight : 'rgba(255,255,255,.15)',
@@ -902,15 +939,16 @@ function Gallery() {
           ))}
         </div>
 
-        <motion.div layout className="mx-auto max-w-6xl columns-1 gap-4 sm:columns-2 lg:columns-3">
+        {/* Grilla pareja: todas las fotos con el mismo tamaño; la última fila, si queda corta, va centrada */}
+        <motion.div layout className="mx-auto flex max-w-6xl flex-wrap justify-center gap-4">
           <AnimatePresence>
-            {items.map((g, i) => (
+            {visible.map((g, i) => (
               <motion.button
                 layout
                 key={g.src}
                 type="button"
                 onClick={() => setOpen(i)}
-                className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/10 text-left"
+                className="group relative block w-full overflow-hidden rounded-2xl border border-white/10 text-left sm:w-[calc((100%_-_1rem)/2)] lg:w-[calc((100%_-_2rem)/3)]"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
@@ -921,7 +959,7 @@ function Gallery() {
                   src={g.src}
                   alt={g.caption}
                   loading="lazy"
-                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${g.tall ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}
+                  className={`aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105 ${g.group === 'pantallas' ? 'object-top' : ''}`}
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-4 pt-10">
                   <p className="text-sm font-medium text-white">{g.caption}</p>
@@ -933,6 +971,28 @@ function Gallery() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {hasMore && (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={toggleAll}
+              className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition-colors hover:bg-white/10"
+              style={{ borderColor: `${C.goldLight}88`, color: C.goldLight }}
+              aria-expanded={showAll}
+            >
+              {showAll ? (
+                <>
+                  Ver menos <ChevronUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  Ver todas las fotos ({items.length}) <ChevronDown className="h-4 w-4" />
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
 
       <AnimatePresence>
@@ -958,11 +1018,11 @@ function Failures() {
           {FAILURES.map((f, i) => {
             const isSolved = !!solved[i];
             return (
-              <ScrollReveal key={f.problem} delay={0.06 * i}>
+              <ScrollReveal key={f.problem} delay={0.06 * i} className="h-full">
                 <button
                   type="button"
                   onClick={() => setSolved((s) => ({ ...s, [i]: !s[i] }))}
-                  className="relative h-full min-h-[220px] w-full overflow-hidden rounded-2xl border p-6 text-left transition-colors"
+                  className="relative flex h-full min-h-[220px] w-full flex-col items-stretch justify-start overflow-hidden rounded-2xl border p-6 text-left transition-colors"
                   style={{
                     borderColor: isSolved ? '#34d39988' : '#fb923c55',
                     background: isSolved ? '#34d39910' : '#fb923c0d',
@@ -1007,9 +1067,9 @@ function Failures() {
               </ScrollReveal>
             );
           })}
-          <ScrollReveal delay={0.35}>
+          <ScrollReveal delay={0.35} className="h-full">
             <div
-              className="flex h-full min-h-[220px] flex-col justify-center rounded-2xl border p-6"
+              className="flex h-full min-h-[220px] flex-col justify-start rounded-2xl border p-6"
               style={{ borderColor: `${C.gold}55`, background: `${C.gold}0f` }}
             >
               <ShieldCheck className="h-8 w-8" style={{ color: C.goldLight }} />

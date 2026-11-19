@@ -1,13 +1,75 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Sparkles, Brain, Layers, Target, Compass, ArrowRight } from 'lucide-react';
+import {
+  Sparkles,
+  Brain,
+  Layers,
+  Target,
+  Compass,
+  ArrowRight,
+  MessageCircle,
+  Lightbulb,
+  Box,
+  LayoutDashboard,
+  Stethoscope,
+  SearchCheck,
+  Calculator,
+  FileSpreadsheet,
+  FileCog,
+  Contact,
+  Image as ImageIcon,
+  Utensils,
+  Sprout,
+  CalendarClock,
+  Shirt,
+  Landmark,
+  Baby,
+  Projector
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import { appsCatalog, catalogFilters } from '../data/appsCatalog';
+import { appsCatalog } from '../data/appsCatalog';
 import analyticsService from '../services/analyticsService';
-import AppCatalogCard from '../components/apps/AppCatalogCard';
 import { OG_IMAGE } from '../config/brand'
+
+// WhatsApp de consultas de ALENIA
+const WHATSAPP_NUMBER = '5493516875178';
+const whatsappLink = (projectName) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola ALENIA, quiero consultar por ${projectName}.`)}`;
+
+// Ícono de cada proyecto (campo `icono` de appsCatalog). Si falta, se usa Box.
+const PROJECT_ICONS = {
+  LayoutDashboard,
+  Stethoscope,
+  SearchCheck,
+  Calculator,
+  FileSpreadsheet,
+  FileCog,
+  Contact,
+  Image: ImageIcon,
+  Utensils,
+  Sprout,
+  CalendarClock,
+  Shirt,
+  Landmark,
+  Baby,
+  Projector
+};
+
+// Rótulo visible del tipo de proyecto y color del brillo de su tarjeta
+const TIPO_CONFIG = {
+  Producto: {
+    label: 'Producto propio',
+    glow: '#00ff88',
+    badge: 'border-emerald-400/30 bg-emerald-400/10 text-emerald-300'
+  },
+  Cliente: {
+    label: 'A medida',
+    glow: '#00ccff',
+    badge: 'border-sky-400/30 bg-sky-400/10 text-sky-300'
+  }
+};
 
 const structuredData = (apps) => ({
   '@context': 'https://schema.org',
@@ -28,33 +90,181 @@ const structuredData = (apps) => ({
         priceCurrency: 'USD',
         availability: 'https://schema.org/InStock'
       },
-      url: app.enlaces?.sitio || app.enlaces?.demo || 'https://alenia.online/desarrollos-ia'
+      url: app.enlaces?.sitio || app.enlaces?.demo || 'https://aleniahub.com/desarrollos-ia'
     }))
 });
 
 const heroHighlights = [
   {
     icon: Brain,
-    title: 'IA aplicada a negocio',
-    description: 'Soluciones entrenadas con modelos generativos para resolver retos reales de nuestros clientes.'
+    title: 'IA aplicada a tu negocio',
+    description: 'Usamos inteligencia artificial para resolver problemas concretos de nuestros clientes, no para hacer ruido.'
   },
   {
     icon: Layers,
-    title: 'Stacks combinados',
-    description: 'Frontend moderno, backends robustos y automatizaciones listas para escalar.'
+    title: 'Todo conectado',
+    description: 'Apps web, de escritorio y para el celular que trabajan juntas y crecen con tu negocio.'
   },
   {
     icon: Target,
     title: 'Casos a medida',
-    description: 'Desarrollos creados para sectores clave: salud, retail, logística, operación de máquinas y más.'
+    description: 'Desarrollos creados para sectores clave: salud, comercio, logística, operación de máquinas y más.'
   }
 ];
+
+// Número grande arriba y rótulo abajo, igual que los indicadores de /apps
+function HeroStat({ value, label }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+      <div className="font-display text-3xl font-extrabold text-white">{value}</div>
+      <div className="mt-1 text-[10px] font-semibold uppercase leading-snug tracking-[0.2em] text-white/40">{label}</div>
+    </div>
+  );
+}
+
+// Tarjeta de proyecto: cabecera sobria con ícono (las ilustraciones genéricas se sacaron),
+// datos clave y consulta directa por WhatsApp.
+function ProjectCard({ app, index = 0, onLinkClick }) {
+  const { nombre, descripcion, tipo, plataformas = [], etiquetas = [], estado, enfoque = [], icono } = app;
+  const Icon = PROJECT_ICONS[icono] || Box;
+  const tipoConfig = TIPO_CONFIG[tipo] ?? TIPO_CONFIG.Producto;
+  const href = whatsappLink(nombre);
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      whileHover={{ y: -6, transition: { duration: 0.3 } }}
+      transition={{ duration: 0.4, delay: (index % 2) * 0.1 }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[#3A3A5A] bg-[#1A1A2E] shadow-lg shadow-black/30 transition-colors hover:border-white/20"
+    >
+      <div
+        className="relative flex h-44 items-center justify-center overflow-hidden border-b border-[#3A3A5A]"
+        style={{
+          background: `radial-gradient(circle at 50% 55%, ${tipoConfig.glow}26 0%, transparent 60%), #1A1A2E`
+        }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{ background: `radial-gradient(circle at 50% 55%, ${tipoConfig.glow}1f 0%, transparent 70%)` }}
+        />
+        <div
+          className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]"
+          style={{ color: tipoConfig.glow }}
+        >
+          <Icon className="h-10 w-10" strokeWidth={2} aria-hidden="true" />
+        </div>
+
+        {estado && (
+          <span className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur">
+            {estado}
+          </span>
+        )}
+      </div>
+
+      <div className="relative flex flex-1 flex-col gap-6 p-6">
+        <header className="flex flex-col gap-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <span
+              className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide ${tipoConfig.badge}`}
+            >
+              {tipoConfig.label}
+            </span>
+            {enfoque.slice(0, 2).map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/70"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <h3 className="font-display text-2xl font-semibold text-[#F1F5F9]">{nombre}</h3>
+          <p className="text-sm leading-relaxed text-white/70">{descripcion}</p>
+        </header>
+
+        <section className="flex flex-wrap gap-4">
+          <div className="flex min-w-[160px] flex-1 flex-col gap-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wide text-white/60">Plataformas</h4>
+            <div className="flex flex-wrap gap-2">
+              {plataformas.map((plataforma) => (
+                <span key={plataforma} className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
+                  {plataforma}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {etiquetas.length > 0 && (
+            <div className="flex min-w-[200px] flex-1 flex-col gap-2">
+              <h4 className="text-xs font-semibold uppercase tracking-wide text-white/60">Tecnologías clave</h4>
+              <div className="flex flex-wrap gap-2">
+                {etiquetas.slice(0, 3).map((tag) => (
+                  <span key={tag} className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/70">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+
+        <footer className="mt-auto pt-2">
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => onLinkClick?.('whatsapp', app, href)}
+            className="inline-flex items-center gap-2 rounded-xl border border-[#00ff88] px-5 py-2.5 text-sm font-semibold text-[#00ff88] transition-colors hover:bg-[#00ff88]/10"
+          >
+            <MessageCircle className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+            Consultar por este proyecto
+          </a>
+        </footer>
+      </div>
+    </motion.article>
+  );
+}
+
+// Tarjeta final para cerrar la grilla cuando la última fila queda con una sola tarjeta
+function IdeaCard() {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.4, delay: 0.1 }}
+      className="relative flex flex-col items-start justify-center gap-6 overflow-hidden rounded-2xl border border-[#3A3A5A] bg-[#1A1A2E] p-8"
+      style={{ background: 'radial-gradient(circle at 80% 20%, rgba(199,125,255,0.18) 0%, transparent 55%), #1A1A2E' }}
+    >
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-[#c77dff]">
+        <Lightbulb className="h-8 w-8" strokeWidth={2} aria-hidden="true" />
+      </div>
+      <div className="space-y-3">
+        <h3 className="font-display text-2xl font-semibold text-[#F1F5F9]">¿Tenés una idea? Contanos</h3>
+        <p className="text-sm leading-relaxed text-white/70">
+          Si tu negocio necesita una herramienta que todavía no existe, la pensamos y la construimos con vos.
+        </p>
+      </div>
+      <Link
+        to="/contacto"
+        className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#7b2cbf] to-[#c77dff] px-6 py-3 text-sm font-semibold text-white shadow-[0_0_24px_rgba(199,125,255,0.35)] transition-all hover:shadow-[0_0_36px_rgba(199,125,255,0.55)]"
+      >
+        Contanos tu idea
+        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={2} />
+      </Link>
+    </motion.article>
+  );
+}
 
 export default function DesarrollosIA() {
   const [sortBy, setSortBy] = useState('name-asc');
 
   const totalProductos = appsCatalog.filter((app) => app.tipo === 'Producto').length;
   const totalClientes = appsCatalog.filter((app) => app.tipo === 'Cliente').length;
+  const totalEnProduccion = appsCatalog.filter((app) => app.estado === 'En producción').length;
 
   useEffect(() => {
     analyticsService.trackPageView('/desarrollos-ia', 'DESARROLLOS IA - Catálogo');
@@ -68,6 +278,9 @@ export default function DesarrollosIA() {
     });
     return sorted;
   }, [sortBy]);
+
+  // En la grilla de dos columnas, si la última fila queda con una sola tarjeta se suma la de "¿Tenés una idea?"
+  const showIdeaCard = filteredApps.length % 2 === 1;
 
   const handleSortChange = (option) => {
     setSortBy(option);
@@ -98,20 +311,20 @@ export default function DesarrollosIA() {
         <title>DESARROLLOS IA | ALENIA</title>
         <meta
           name="description"
-          content="Catálogo de desarrollos IA creados por ALENIA: soluciones personalizadas y productos listos para escalar en salud, retail, logística y más."
+          content="Catálogo de desarrollos IA creados por ALENIA: soluciones personalizadas y productos listos para escalar en salud, comercio, logística y más."
         />
-        <link rel="canonical" href="https://alenia.online/desarrollos-ia" />
+        <link rel="canonical" href="https://aleniahub.com/desarrollos-ia" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://alenia.online/desarrollos-ia" />
+        <meta property="og:url" content="https://aleniahub.com/desarrollos-ia" />
         <meta property="og:title" content="Catálogo de Desarrollos IA | ALENIA" />
         <meta
           property="og:description"
-          content="Explora los desarrollos de inteligencia artificial y software a medida creados para clientes y productos propios de ALENIA."
+          content="Explorá los desarrollos de inteligencia artificial y software a medida creados para clientes y productos propios de ALENIA."
         />
         <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:image:alt" content="ALENIA - Desarrollos IA" />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://alenia.online/desarrollos-ia" />
+        <meta property="twitter:url" content="https://aleniahub.com/desarrollos-ia" />
         <meta property="twitter:title" content="Catálogo de Desarrollos IA | ALENIA" />
         <meta
           property="twitter:description"
@@ -135,26 +348,17 @@ export default function DesarrollosIA() {
                   <Sparkles className="h-4 w-4" />
                   Desarrollos IA
                 </span>
-                <h1 className="text-4xl font-extrabold text-white md:text-5xl">
+                <h1 className="font-display text-4xl font-extrabold text-white md:text-5xl">
                   Innovación aplicada en cada solución creada por ALENIA
                 </h1>
                 <p className="max-w-2xl text-lg text-white/70">
                   Conectamos estrategia, creatividad y tecnología para diseñar experiencias digitales con IA. Descubrí los productos que comercializamos y los desarrollos a medida que construimos junto a nuestros clientes.
                 </p>
-                <dl className="grid grid-cols-1 gap-4 text-sm text-white/60 sm:grid-cols-3">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <dt className="mb-1 uppercase tracking-widest text-white/40">Productos con IA</dt>
-                    <dd className="text-2xl font-semibold text-white">{totalProductos}</dd>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <dt className="mb-1 uppercase tracking-widest text-white/40">Casos a medida</dt>
-                    <dd className="text-2xl font-semibold text-white">{totalClientes}</dd>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <dt className="mb-1 uppercase tracking-widest text-white/40">Tecnologías activas</dt>
-                    <dd className="text-2xl font-semibold text-white">{appsCatalog.flatMap(app => app.tecnologias).filter((value, index, self) => self.indexOf(value) === index).length}</dd>
-                  </div>
-                </dl>
+                <div className="grid grid-cols-1 gap-4 text-sm text-white/60 sm:grid-cols-3">
+                  <HeroStat value={totalProductos} label="Productos propios" />
+                  <HeroStat value={totalClientes} label="Casos a medida" />
+                  <HeroStat value={totalEnProduccion} label="En producción" />
+                </div>
               </div>
 
               <div className="flex-1">
@@ -171,7 +375,7 @@ export default function DesarrollosIA() {
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold text-white">{title}</h2>
+                        <h2 className="font-display text-lg font-semibold text-white">{title}</h2>
                         <p className="text-sm text-white/60">{description}</p>
                       </div>
                     </motion.div>
@@ -185,7 +389,7 @@ export default function DesarrollosIA() {
             <header className="flex flex-wrap items-center justify-between gap-4 text-white/70">
               <div className="flex items-center gap-3">
                 <Compass className="h-6 w-6 text-alenia-primary" />
-                <h2 className="text-xl font-semibold">
+                <h2 className="font-display text-xl font-semibold">
                   {filteredApps.length} desarrollo{filteredApps.length === 1 ? '' : 's'} listados
                 </h2>
               </div>
@@ -203,9 +407,10 @@ export default function DesarrollosIA() {
               </motion.div>
             ) : (
               <div className="grid gap-8 md:grid-cols-2">
-                {filteredApps.map((app) => (
-                  <AppCatalogCard key={app.id} app={app} onLinkClick={handleLinkClick} />
+                {filteredApps.map((app, index) => (
+                  <ProjectCard key={app.id} app={app} index={index} onLinkClick={handleLinkClick} />
                 ))}
+                {showIdeaCard && <IdeaCard />}
               </div>
             )}
           </section>
@@ -223,17 +428,17 @@ export default function DesarrollosIA() {
                   <Sparkles className="h-4 w-4" />
                   ¿Necesitás tu propia solución IA?
                 </span>
-                <h3 className="text-3xl font-bold">Contanos tu desafío y diseñamos el próximo desarrollo juntos</h3>
+                <h3 className="font-display text-3xl font-bold">Contanos tu desafío y diseñamos el próximo desarrollo juntos</h3>
                 <p className="text-white/70">
-                  Nuestro equipo técnico lidera proyectos end-to-end: estrategia, UX, desarrollo full-stack, despliegue y soporte continuo.
+                  Nos ocupamos de todo: entender tu negocio, diseñar la solución, desarrollarla, ponerla en marcha y acompañarte después.
                 </p>
               </div>
               <Link
                 to="/contacto"
-                className="inline-flex items-center gap-3 rounded-full bg-alenia-primary px-6 py-3 text-base font-semibold text-black transition-transform hover:-translate-y-1"
+                className="group inline-flex shrink-0 items-center gap-3 rounded-xl bg-gradient-to-r from-[#7b2cbf] to-[#c77dff] px-6 py-3 text-base font-semibold text-white shadow-[0_0_24px_rgba(199,125,255,0.35)] transition-all hover:-translate-y-1 hover:shadow-[0_0_36px_rgba(199,125,255,0.55)]"
               >
-                Agenda una demo
-                <ArrowRight className="h-5 w-5" />
+                Agendá una demo
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           </motion.section>
@@ -242,4 +447,3 @@ export default function DesarrollosIA() {
     </>
   );
 }
-

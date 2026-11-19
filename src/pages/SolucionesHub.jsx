@@ -42,7 +42,7 @@ const MotionLink = motion(Link)
 /*                                   SEO                                      */
 /* -------------------------------------------------------------------------- */
 
-const SITE_URL = 'https://alenia.online'
+const SITE_URL = 'https://aleniahub.com'
 const PAGE_PATH = '/soluciones/hub'
 const PAGE_TITLE = 'ALENIA HUB | Automatización de máquinas con hardware y software'
 const PAGE_DESCRIPTION =

@@ -69,9 +69,9 @@ const SolucionLevels = () => {
       <Helmet>
   <title>{`${solucion.nombre} - Niveles de Servicio | ALENIA`}</title>
   <meta name="description" content={`Elige el nivel perfecto de ${solucion.nombre}: Elemental, Moderado o Visionario. ${solucion.descripcionGeneral || ''}`} />
-  <link rel="canonical" href={`https://alenia.online/soluciones/${solucion.categoria}`} />
+  <link rel="canonical" href={`https://aleniahub.com/soluciones/${solucion.categoria}`} />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content={`https://alenia.online/soluciones/${solucion.categoria}`} />
+  <meta property="og:url" content={`https://aleniahub.com/soluciones/${solucion.categoria}`} />
   <meta property="og:title" content={`${solucion.nombre} - Niveles de Servicio | ALENIA`} />
   <meta property="og:description" content={`Elige el nivel perfecto de ${solucion.nombre}: Elemental, Moderado o Visionario.`} />
   <meta property="og:image" content={OG_IMAGE} />
@@ -79,7 +79,7 @@ const SolucionLevels = () => {
   <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
   <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content={`https://alenia.online/soluciones/${solucion.categoria}`} />
+  <meta property="twitter:url" content={`https://aleniahub.com/soluciones/${solucion.categoria}`} />
   <meta property="twitter:title" content={`${solucion.nombre} - Niveles de Servicio | ALENIA`} />
   <meta property="twitter:description" content={`Elige el nivel perfecto de ${solucion.nombre}: Elemental, Moderado o Visionario.`} />
   <meta property="twitter:image" content={OG_IMAGE} />

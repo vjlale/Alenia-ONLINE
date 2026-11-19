@@ -1,41 +1,57 @@
-const defaultImage = '/images/apps/catalog-placeholder.svg';
-
+/*
+ * Catálogo de /desarrollos-ia (solo lo usa src/pages/DesarrollosIA.jsx).
+ * 2026-11-19 (revisión de diseño):
+ * - Nombres comerciales en vez de nombres de archivo ("Kontrol+ (escritorio)", "Gestión Pilchero").
+ * - Se unificaron "CRM Startup Digital" y "CRM Startup Digital UTM" en una sola tarjeta.
+ * - Se sacaron los proyectos que solo estaban en planificación (DrinKing).
+ * - El portal institucional ya no nombra al organismo.
+ * - etiquetas: hasta 3 rótulos que entiende un dueño de negocio (se muestran en "Tecnologías clave").
+ * - tecnologias: referencia interna del stack; no se muestra en la tarjeta.
+ * - icono: nombre del ícono de lucide-react que usa la tarjeta (ver PROJECT_ICONS en DesarrollosIA.jsx).
+ * - imagen: se dejó de mostrar porque eran ilustraciones genéricas hechas con IA, no capturas del producto.
+ */
 export const appsCatalog = [
   {
     id: 'alenia-gestion-kontrol-v2-2',
-    nombre: 'ALENIA-GESTION-KONTROL +V2.2',
+    nombre: 'Kontrol+ (escritorio)',
     tipo: 'Cliente',
-    plataformas: ['Desktop', 'Web'],
+    plataformas: ['Escritorio', 'Web'],
     tecnologias: ['Python', 'Tkinter', 'CustomTkinter', 'Flask', 'SQLite', 'Pandas', 'FPDF'],
+    etiquetas: ['App de escritorio', 'App web', 'Reportes en PDF'],
+    icono: 'LayoutDashboard',
     descripcion:
-      'Sistema integral de gestión para PYMES que combina módulos CRM, inventario, ventas, gastos y reportes con distribución empaquetada.',
-    estado: 'Producción',
-    enfoque: ['Gestión empresarial', 'Backoffice'],
+      'Sistema de gestión para pymes que junta clientes, stock, ventas, gastos y reportes en un solo programa, listo para instalar en la computadora del negocio.',
+    estado: 'En producción',
+    enfoque: ['Gestión', 'Administración'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/alenia-gestion-kontrol-v2-2.png'
   },
   {
     id: 'aleniahealth',
-    nombre: 'AleniaHealth',
+    nombre: 'ALENIA Health',
     tipo: 'Producto',
     plataformas: ['Web'],
     tecnologias: ['Python', 'Flask', 'LLM MedGemma', 'Tailwind'],
+    etiquetas: ['IA', 'App web'],
+    icono: 'Stethoscope',
     descripcion:
-      'Plataforma web de consultas médicas asistidas por IA especializada (MedGemma) con respuestas contextualizadas para profesionales de salud.',
+      'Plataforma web de consultas médicas asistidas por una IA especializada en salud (MedGemma), con respuestas en contexto para profesionales.',
     estado: 'Beta privada',
-    enfoque: ['Salud', 'IA generativa'],
+    enfoque: ['Salud', 'IA'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/aleniahealth.png'
   },
   {
     id: 'analizador-ecommerce-seo',
-    nombre: 'Analizador Inteligente de E-commerce y SEO',
+    nombre: 'Analizador de E-commerce y SEO',
     tipo: 'Producto',
     plataformas: ['Web'],
     tecnologias: ['TypeScript', 'React', 'Vite', 'Tailwind'],
+    etiquetas: ['IA', 'App web', 'Posicionamiento en Google'],
+    icono: 'SearchCheck',
     descripcion:
-      'Dashboard inteligente que audita tiendas online, analiza SEO técnico y entrega recomendaciones automatizadas basadas en IA.',
-    estado: 'Producción',
+      'Panel que revisa tu tienda online, analiza cómo aparece en Google y te da recomendaciones concretas generadas con IA.',
+    estado: 'En producción',
     enfoque: ['E-commerce', 'Marketing'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/analizador-ecommerce-seo.png'
@@ -46,23 +62,27 @@ export const appsCatalog = [
     tipo: 'Producto',
     plataformas: ['Web'],
     tecnologias: ['HTML', 'CSS', 'JavaScript', 'Tailwind'],
+    etiquetas: ['App web', 'Mercado Libre'],
+    icono: 'Calculator',
     descripcion:
-      'Single Page Application que calcula precios optimizados para publicaciones Premium en Mercado Libre con desglose completo de comisiones e impuestos.',
-    estado: 'Producción',
+      'Calculá a qué precio publicar en Mercado Libre (publicaciones Premium) con el detalle completo de comisiones e impuestos.',
+    estado: 'En producción',
     enfoque: ['E-commerce'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/calculadora-mercado-libre.png'
   },
   {
     id: 'carga-masiva-import',
-    nombre: 'ALENIA CargaMasiva',
+    nombre: 'Carga Masiva de datos',
     tipo: 'Cliente',
-    plataformas: ['Desktop', 'Web'],
+    plataformas: ['Escritorio', 'Web'],
     tecnologias: ['Python', 'Flask', 'Pandas', 'PyInstaller'],
+    etiquetas: ['App de escritorio', 'Planillas CSV', 'Automatización'],
+    icono: 'FileSpreadsheet',
     descripcion:
-      'Aplicación de escritorio con interfaz web para importación masiva de datos vía archivos CSV, automatizando procesos repetitivos internos.',
-    estado: 'Producción',
-    enfoque: ['Automatización', 'Backoffice'],
+      'Programa para cargar muchos datos de una sola vez desde planillas CSV, que automatiza tareas repetitivas del día a día.',
+    estado: 'En producción',
+    enfoque: ['Automatización', 'Administración'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/carga-masiva-import.png'
   },
@@ -70,64 +90,45 @@ export const appsCatalog = [
     id: 'converx-to-file',
     nombre: 'ConverX to File',
     tipo: 'Producto',
-    plataformas: ['Web', 'PWA'],
+    plataformas: ['Web', 'Instalable'],
     tecnologias: ['TypeScript', 'React', 'Vite', 'Service Worker'],
+    etiquetas: ['App web', 'Instalable', 'Funciona sin internet'],
+    icono: 'FileCog',
     descripcion:
-      'Aplicación PWA para transformar archivos entre múltiples formatos con funcionamiento offline y experiencia instalable.',
-    estado: 'Producción',
+      'App para convertir archivos entre distintos formatos. Se instala como cualquier app y funciona incluso sin internet.',
+    estado: 'En producción',
     enfoque: ['Productividad'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/converx-to-file.png'
   },
   {
+    // Unifica las antiguas tarjetas "CRM Startup Digital" y "CRM Startup Digital UTM".
     id: 'crm-startup-digital',
     nombre: 'CRM Startup Digital',
     tipo: 'Producto',
     plataformas: ['Web'],
     tecnologias: ['Node.js', 'Express', 'React', 'Vite', 'Tailwind'],
+    etiquetas: ['App web', 'Seguimiento de campañas'],
+    icono: 'Contact',
     descripcion:
-      'Solución CRM full-stack para startups digitales con gestión de clientes, prospectos y operaciones comerciales.',
-    estado: 'Producción',
+      'CRM para startups digitales: clientes, prospectos y ventas en un solo lugar, con seguimiento de campañas de marketing (UTM) para saber de dónde llega cada cliente.',
+    estado: 'En producción',
     enfoque: ['CRM', 'Ventas'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/crm-startup-digital.png'
   },
   {
-    id: 'crm-startup-digital-utm',
-    nombre: 'CRM Startup Digital UTM',
-    tipo: 'Producto',
-    plataformas: ['Web'],
-    tecnologias: ['Node.js', 'Express', 'React', 'Vite', 'Tailwind'],
-    descripcion:
-      'Versión extendida del CRM con tracking de parámetros UTM para campañas de marketing y atribución avanzada.',
-    estado: 'Producción',
-    enfoque: ['CRM', 'Marketing'],
-    enlaces: { sitio: null, repo: null, tienda: null, demo: null },
-    imagen: '/images/apps/crm-startup-digital-utm.png'
-  },
-  {
-    id: 'drinking-app',
-    nombre: 'DrinKing (Planificación)',
-    tipo: 'Producto',
-    plataformas: ['Mobile (Planificado)'],
-    tecnologias: ['React Native', 'NestJS', 'Cloud Architecture'],
-    descripcion:
-      'Proyecto planificado de app móvil para experiencias en bares con definición completa de arquitectura, squads y procesos DevOps.',
-    estado: 'Planificación',
-    enfoque: ['Entretenimiento', 'Planificación'],
-    enlaces: { sitio: null, repo: null, tienda: null, demo: null },
-    imagen: '/images/apps/drinking-app.png'
-  },
-  {
     id: 'e-pix',
     nombre: 'E-pix',
     tipo: 'Producto',
-    plataformas: ['Web', 'Android (TWA)', 'PWA'],
+    plataformas: ['Web', 'Android', 'Instalable'],
     tecnologias: ['React', 'TypeScript', 'Vite', 'TWA'],
+    etiquetas: ['IA', 'App web', 'Android'],
+    icono: 'Image',
     descripcion:
-      'Suite de generación y edición de imágenes con IA distribuida como PWA y app Android mediante Trusted Web Activity.',
-    estado: 'Producción',
-    enfoque: ['IA generativa', 'Creatividad'],
+      'Generación y edición de imágenes con IA. Funciona desde el navegador y también como app de Android.',
+    estado: 'En producción',
+    enfoque: ['IA', 'Diseño'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/e-pix.png'
   },
@@ -137,10 +138,12 @@ export const appsCatalog = [
     tipo: 'Producto',
     plataformas: ['Web'],
     tecnologias: ['TypeScript', 'NestJS', 'React', 'Tailwind'],
+    etiquetas: ['App web', 'Panel de administración'],
+    icono: 'Utensils',
     descripcion:
-      'Plataforma modular de servicios de comida con backend NestJS, app cliente y panel admin independientes.',
-    estado: 'Producción',
-    enfoque: ['Alimentación', 'Logística'],
+      'Plataforma para servicios de comida, con una app para los clientes y un panel de administración separado para el negocio.',
+    estado: 'En producción',
+    enfoque: ['Gastronomía', 'Logística'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/foodapp.png'
   },
@@ -148,12 +151,14 @@ export const appsCatalog = [
     id: 'garden-compositor',
     nombre: 'Garden Compositor',
     tipo: 'Producto',
-    plataformas: ['Web', 'Android (TWA)', 'PWA'],
+    plataformas: ['Web', 'Android', 'Instalable'],
     tecnologias: ['React', 'TypeScript', 'Vite', 'Gemini 2.5', 'JSZip'],
+    etiquetas: ['IA', 'App web', 'Android'],
+    icono: 'Sprout',
     descripcion:
-      'PWA que compone escenas de jardín con IA, ajustando escala, perspectiva e iluminación y exportando variaciones optimizadas.',
-    estado: 'Producción',
-    enfoque: ['IA generativa', 'Arquitectura'],
+      'App que arma escenas de jardín con IA: ajusta escala, perspectiva e iluminación y exporta varias versiones listas para mostrar.',
+    estado: 'En producción',
+    enfoque: ['IA', 'Paisajismo'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/garden-compositor.png'
   },
@@ -163,36 +168,42 @@ export const appsCatalog = [
     tipo: 'Producto',
     plataformas: ['Web'],
     tecnologias: ['TypeScript', 'React', 'Vite', 'date-fns'],
+    etiquetas: ['App web', 'Turnos automáticos'],
+    icono: 'CalendarClock',
     descripcion:
-      'Herramienta de planificación de turnos que calcula horarios óptimos según disponibilidad y reglas de negocio.',
-    estado: 'Producción',
-    enfoque: ['RRHH', 'Productividad'],
+      'Herramienta que arma los turnos de trabajo según la disponibilidad del equipo y las reglas de tu negocio.',
+    estado: 'En producción',
+    enfoque: ['Recursos humanos', 'Productividad'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/generador-turnos-trabajo.png'
   },
   {
     id: 'gestion-pilchero',
-    nombre: 'GESTION-PILCHERO v1.0',
+    nombre: 'Gestión Pilchero',
     tipo: 'Cliente',
-    plataformas: ['Desktop'],
+    plataformas: ['Escritorio'],
     tecnologias: ['Python', 'Tkinter', 'JSON Storage'],
+    etiquetas: ['App de escritorio', 'Punto de venta'],
+    icono: 'Shirt',
     descripcion:
-      'Sistema POS de escritorio para tiendas de ropa con control de inventario y registro de ventas, distribuido como ejecutable.',
-    estado: 'Producción',
-    enfoque: ['Retail', 'Backoffice'],
+      'Sistema de punto de venta para tiendas de ropa, con control de stock y registro de ventas. Se instala en la computadora del local.',
+    estado: 'En producción',
+    enfoque: ['Comercio', 'Administración'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/gestion-pilchero.png'
   },
   {
     id: 'policia-cordoba-web',
-    nombre: 'Policía Córdoba Web',
+    nombre: 'Portal institucional · organismo público',
     tipo: 'Cliente',
     plataformas: ['Web'],
     tecnologias: ['Next.js', 'TypeScript', 'Tailwind', 'Vercel'],
+    etiquetas: ['Sitio web', 'Pensado para Google'],
+    icono: 'Landmark',
     descripcion:
-      'Portal institucional en construcción para la Policía de Córdoba con stack Next.js optimizado para SEO y despliegue en Vercel.',
+      'Portal institucional para un organismo público, pensado para cargar rápido y aparecer bien en Google.',
     estado: 'En desarrollo',
-    enfoque: ['Gobierno', 'Institucional'],
+    enfoque: ['Sector público', 'Institucional'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/policia-cordoba-web.png'
   },
@@ -202,22 +213,26 @@ export const appsCatalog = [
     tipo: 'Producto',
     plataformas: ['Web'],
     tecnologias: ['TypeScript', 'React', 'Vite', 'Howler.js'],
+    etiquetas: ['App web', 'Audio', 'Juego educativo'],
+    icono: 'Baby',
     descripcion:
-      'Aplicación educativa interactiva tipo flashcards con soporte de audio y animaciones para aprender primeras palabras.',
-    estado: 'Producción',
-    enfoque: ['EdTech', 'Infancias'],
+      'App educativa con tarjetas, sonidos y animaciones para que los más chicos aprendan sus primeras palabras.',
+    estado: 'En producción',
+    enfoque: ['Educación', 'Infancias'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/primeras-palabras-bebes.png'
   },
   {
     id: 'stage-visualizer-resolume',
-    nombre: 'Stage Visualizer from Resolume XML',
+    nombre: 'Stage Visualizer para Resolume',
     tipo: 'Producto',
     plataformas: ['Web'],
     tecnologias: ['TypeScript', 'React', 'Vite', 'fast-xml-parser', 'react-konva'],
+    etiquetas: ['App web', 'Resolume'],
+    icono: 'Projector',
     descripcion:
-      'Visualizador 2D para escenarios de eventos que parsea configuraciones XML de Resolume Arena y permite documentar montajes complejos.',
-    estado: 'Producción',
+      'Visualizador 2D de escenarios para eventos: lee la configuración de Resolume Arena y te ayuda a documentar montajes complejos.',
+    estado: 'En producción',
     enfoque: ['Eventos', 'Visuales'],
     enlaces: { sitio: null, repo: null, tienda: null, demo: null },
     imagen: '/images/apps/stage-visualizer-resolume.png'
@@ -226,31 +241,26 @@ export const appsCatalog = [
 
 export const catalogFilters = {
   tipos: ['Cliente', 'Producto'],
-  plataformas: [
-    'Web',
-    'Desktop',
-    'PWA',
-    'Android (TWA)',
-    'Mobile (Planificado)'
-  ],
+  plataformas: ['Web', 'Escritorio', 'Instalable', 'Android'],
   enfoques: [
-    'IA generativa',
+    'IA',
     'Automatización',
     'CRM',
+    'Ventas',
     'Marketing',
     'E-commerce',
     'Productividad',
-    'RRHH',
-    'Gobierno',
-    'EdTech',
+    'Recursos humanos',
+    'Sector público',
+    'Educación',
     'Eventos',
     'Salud',
-    'Backoffice',
-    'Entretenimiento',
-    'Arquitectura',
-    'Alimentación',
-    'Logística',
-    'Planificación'
+    'Administración',
+    'Gestión',
+    'Comercio',
+    'Diseño',
+    'Paisajismo',
+    'Gastronomía',
+    'Logística'
   ]
 };
-
