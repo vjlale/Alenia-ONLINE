@@ -13,8 +13,6 @@ import {
   CheckCircle2,
   Network,
   Layers,
-  Cpu,
-  CreditCard,
   Smartphone,
   LayoutDashboard,
   DoorOpen,
@@ -26,15 +24,15 @@ import {
   Dumbbell,
   Car,
   Store,
-  Users,
   Info,
-  ExternalLink,
   Maximize2,
 } from 'lucide-react'
 import ScrollReveal from '../components/common/ScrollReveal'
 import AnimatedGradient from '../components/common/AnimatedGradient'
 import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand'
 import HubSimulation from '../components/hub-sim/HubSimulation'
+import FaqSection from '../components/common/FaqSection'
+import { FAQS, SEO_PAGES } from '../data/seoPages'
 
 const MotionLink = motion(Link)
 
@@ -44,9 +42,9 @@ const MotionLink = motion(Link)
 
 const SITE_URL = 'https://aleniahub.com'
 const PAGE_PATH = '/soluciones/hub'
-const PAGE_TITLE = 'ALENIA HUB | Automatización de máquinas con hardware y software'
-const PAGE_DESCRIPTION =
-  'ALENIA HUB conecta tus máquinas con cobros, app, tótem y un panel de control en tiempo real. El cliente paga desde el celular, la máquina arranca sola y vos ves todo desde donde estés.'
+const HUB_SEO = SEO_PAGES.find((p) => p.path === PAGE_PATH)
+const PAGE_TITLE = HUB_SEO.title
+const PAGE_DESCRIPTION = HUB_SEO.description
 
 /* -------------------------------------------------------------------------- */
 /*                                 Contenido                                  */
@@ -57,15 +55,14 @@ const HERO = {
   title: 'De la máquina al negocio conectado',
   tagline: 'Tu máquina. Tu marca. Tu experiencia de venta.',
   body:
-    'ALENIA HUB conecta tus máquinas con cobros, una app y un panel de control en tiempo real. El cliente paga desde el celular o en un tótem táctil, la máquina se activa sola y vos ves todo lo que pasa en tu local, en el momento.',
+    'Conectamos tus máquinas con cobros, app, tótem y un panel en tiempo real. El cliente paga, la máquina arranca sola y vos lo ves todo desde el celular.',
   primaryCta: 'Contanos qué máquinas tenés',
   secondaryCta: 'Ver webs y apps',
 }
 
 const SIMULATION = {
   title: 'Mirá una compra de punta a punta',
-  body:
-    'Así funciona una expendedora conectada al HUB: el cliente arma el carrito, paga con QR o en el tótem y la máquina entrega sola. Al mismo tiempo, al dueño le llega todo al celular, el panel se actualiza y, si algo falla, el asistente de soporte lo resuelve. Tocá cualquier pantalla para hacerlo vos.',
+  body: 'Una expendedora conectada: el cliente paga y la máquina entrega; al dueño le llega todo al celular. Tocá cualquier pantalla.',
 }
 
 const MODULES = [
@@ -74,73 +71,49 @@ const MODULES = [
     icon: Zap,
     title: 'Activación de máquinas',
     description:
-      'El cliente escanea un QR o paga y la máquina arranca sola. Nos conectamos al equipo con pulsos o relés, sin que nadie tenga que intervenir.',
+      'El cliente paga y la máquina arranca sola, por pulso, relé o placa del fabricante.',
   },
   {
     id: 'cobros',
     icon: Wallet,
     title: 'Cobros e ingresos',
     description:
-      'Mercado Pago con QR, Checkout y Point. También saldo y crédito para que tus clientes carguen una vez y usen cuando quieran.',
+      'Mercado Pago con QR, Checkout y Point, más saldo y crédito en la app.',
   },
   {
     id: 'accesos',
     icon: DoorOpen,
     title: 'Control de accesos',
-    description: 'Puertas y cerraduras que abren con un QR. Sabés quién entró y cuándo, sin llaves ni personal en la puerta.',
+    description: 'Puertas que abren con QR. Sabés quién entró y cuándo.',
   },
   {
     id: 'panel',
     icon: LayoutDashboard,
     title: 'Panel de control en tiempo real',
     description:
-      'El estado de cada máquina, las ventas, el cierre de caja y las alertas, todo en un mismo lugar y desde el celular.',
+      'Estado de cada máquina, ventas, caja y alertas, desde el celular.',
   },
   {
     id: 'app-totem',
     icon: Smartphone,
     title: 'App y tótem con tu marca',
     description:
-      'App móvil, tótem táctil y pantallas propias con tu logo y tus colores. La experiencia de venta es tuya, no de un tercero.',
+      'Con tu logo y tus colores. La experiencia de venta es tuya.',
   },
   {
     id: 'asistente',
     icon: Bot,
     title: 'Asistente IA de soporte 24/7',
     description:
-      'Un asistente que responde a tus clientes a cualquier hora: cómo usar las máquinas, qué hacer si algo falla y cuándo avisarte.',
+      'Responde a tus clientes a cualquier hora y te avisa si algo falla.',
   },
 ]
 
 const PHASES = [
-  {
-    step: 1,
-    title: 'Diagnóstico de tus equipos',
-    body:
-      'Antes de tocar un cable, relevamos lo que ya tenés. Cada equipo es distinto, así que arrancamos por entender cómo funciona hoy tu negocio.',
-    bullets: ['Marca y modelo de cada máquina', 'Controlador o placa que usa', 'Conectividad del local', 'Cómo cobrás hoy'],
-  },
-  {
-    step: 2,
-    title: 'Conexión física',
-    body:
-      'Conectamos las máquinas al HUB con el hardware que corresponda en cada caso: placas IoT, relés y cerraduras, o integración directa con las placas o APIs del fabricante.',
-    bullets: ['Placas IoT y relés', 'Cerraduras y accesos', 'Placas o APIs del fabricante'],
-  },
-  {
-    step: 3,
-    title: 'Software a medida',
-    body:
-      'Armamos el software que usan tus clientes y tu equipo: la app, el tótem, el panel de administración y el asistente de soporte, con tu marca.',
-    highlight: 'Todo conectado entre sí: lo que pasa en la máquina se ve en el panel.',
-  },
-  {
-    step: 4,
-    title: 'Puesta en marcha y soporte',
-    body:
-      'Probamos todo en el local, con las máquinas funcionando de verdad. Después seguimos al lado: monitoreo, alertas y ajustes a medida que el negocio lo pide.',
-    bullets: ['Pruebas en campo', 'Monitoreo y alertas', 'Ajustes continuos'],
-  },
+  { step: 1, title: 'Diagnóstico', body: 'Relevamos marca, modelo y placa de cada máquina, la conexión del local y cómo cobrás hoy.' },
+  { step: 2, title: 'Conexión física', body: 'Instalamos placas IoT, relés y cerraduras, o nos integramos con la placa del fabricante.' },
+  { step: 3, title: 'Software con tu marca', body: 'App, tótem, panel y asistente, todo conectado: lo que pasa en la máquina se ve en el panel.' },
+  { step: 4, title: 'Puesta en marcha', body: 'Probamos en el local con las máquinas funcionando y seguimos con monitoreo y ajustes.' },
 ]
 
 const INDUSTRIES = [
@@ -158,62 +131,27 @@ const CASE_STUDY = {
   title: 'Caso real: LaIA',
   subtitle: 'Lavandería self-service 24/7, sin personal en el local.',
   body:
-    'LaIA es una lavandería que funciona las 24 horas sin nadie atendiendo. Con ALENIA HUB, el cliente hace todo solo: entra, paga, usa las máquinas y se va. El dueño controla todo desde el panel.',
+    'Abierta las 24 horas sin nadie atendiendo, en Palermo. La armamos en 69 días; el primer pago real fue el 2 de septiembre de 2026.',
   items: [
-    'Lavadoras y secadoras Electrolux conectadas',
-    'Expendedoras vending integradas en modo crédito: la app carga saldo y muestra un código que se marca en la máquina',
-    'Pago con Mercado Pago',
-    'Puerta que abre con QR',
-    'Tótem táctil en el local',
-    'App para clientes y panel de administración',
+    '3 lavadoras y 3 secadoras Electrolux conectadas',
+    '2 expendedoras y cafetera en el mismo pago',
+    'Puerta con QR, tótem, app y panel',
+    '470 pagos reales y 45% de clientes que vuelven (sept. 2026)',
   ],
-  linkLabel: 'Conocé LaIA',
-  linkHref: 'https://applaia.com',
-}
-
-const OWNER_GAINS = {
-  title: 'Qué ganás como dueño',
-  subtitle: 'Lo que cambia en el día a día cuando tus máquinas están conectadas.',
-  items: [
-    {
-      icon: Users,
-      label: 'Operación',
-      value: 'Menos personal en el local',
-      detail: 'Los clientes pagan y usan las máquinas solos. Tu equipo se enfoca en lo que de verdad necesita una persona.',
-    },
-    {
-      icon: CreditCard,
-      label: 'Cobros',
-      value: 'Cobro sin efectivo',
-      detail: 'QR, app, tótem o Point. Menos plata en el local y cada cobro registrado.',
-    },
-    {
-      icon: Smartphone,
-      label: 'Control',
-      value: 'Todo desde el celular',
-      detail: 'Ventas, estado de las máquinas y alertas al instante, estés donde estés.',
-    },
-    {
-      icon: Cpu,
-      label: 'Información',
-      value: 'Datos de cada máquina',
-      detail: 'Cuánto se usa cada equipo, cuándo falla y qué deja. Decidís con información, no a ojo.',
-    },
-  ],
+  linkLabel: 'Ver el caso completo',
+  linkHref: '/casos/laia',
 }
 
 const WHY_ALENIA = {
   title: 'Por qué ALENIA',
   paragraphs: [
-    'ALENIA es una empresa argentina que une hardware y software. Trabajamos del lado de la máquina y del lado de la pantalla, así no tenés que coordinar a un electricista, a un programador y a una plataforma de pagos por separado.',
-    'ALENIA HUB no es una presentación: ya está funcionando en un negocio real sin personal, como LaIA. Lo que te ofrecemos lo armamos y lo probamos en el local, con máquinas de verdad.',
+    'Un tótem cobra. Nosotros operamos el negocio entero: máquina, pago, puerta, panel e IA, con un solo equipo. Y ya funciona en un local real.',
   ],
 }
 
 const FINAL_CTA = {
   title: '¿Qué máquinas querés conectar?',
-  body:
-    'Contanos la marca y el modelo de tus equipos, cuántas máquinas tenés funcionando y qué querés conectar: cobros, accesos, app, tótem o panel. Con eso te decimos qué se puede hacer y cómo lo haríamos.',
+  body: 'Pasanos marca, modelo y cantidad de equipos. Te decimos qué se puede hacer y cómo.',
 }
 
 /* -------------------------------------------------------------------------- */
@@ -507,17 +445,15 @@ export default function SolucionesHub() {
                 </h2>
                 <p className="text-lg font-medium text-emerald-300/90 mb-4">{CASE_STUDY.subtitle}</p>
                 <p className="text-alenia-light/80 leading-relaxed mb-8">{CASE_STUDY.body}</p>
-                <motion.a
-                  href={CASE_STUDY.linkHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <MotionLink
+                  to={CASE_STUDY.linkHref}
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 border border-cyan-400/40 text-cyan-300 hover:text-cyan-200 hover:bg-cyan-500/10 font-semibold px-6 py-3 rounded-xl transition-colors"
+                  className="inline-flex min-h-[48px] items-center gap-2 border border-cyan-400/40 text-cyan-300 hover:text-cyan-200 hover:bg-cyan-500/10 font-semibold px-6 py-3 rounded-xl transition-colors"
                 >
                   {CASE_STUDY.linkLabel}
-                  <ExternalLink className="w-4 h-4" />
-                </motion.a>
+                  <ArrowRight className="w-4 h-4" />
+                </MotionLink>
               </div>
             </ScrollReveal>
             <ul className="grid gap-3">
@@ -530,36 +466,6 @@ export default function SolucionesHub() {
                 </ScrollReveal>
               ))}
             </ul>
-          </div>
-        </section>
-
-        {/* Qué gana el dueño */}
-        <section
-          className="mb-24 rounded-3xl border border-white/10 bg-slate-900/30 p-8 md:p-12"
-          aria-labelledby="hub-gains-heading"
-        >
-          <ScrollReveal>
-            <h2 id="hub-gains-heading" className="text-2xl md:text-3xl font-bold text-white mb-2">
-              {OWNER_GAINS.title}
-            </h2>
-            <p className="text-sm text-alenia-light/60 mb-10 max-w-3xl">{OWNER_GAINS.subtitle}</p>
-          </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {OWNER_GAINS.items.map((item, index) => {
-              const Icon = item.icon
-              return (
-                <ScrollReveal key={item.value} delay={0.05 * index}>
-                  <div className="h-full rounded-xl bg-black/30 border border-emerald-500/15 p-5">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Icon className="w-4 h-4 text-emerald-400" />
-                      <p className="text-xs uppercase tracking-wider text-emerald-400/80">{item.label}</p>
-                    </div>
-                    <p className="text-xl font-bold text-white mb-2">{item.value}</p>
-                    <p className="text-sm text-alenia-light/70">{item.detail}</p>
-                  </div>
-                </ScrollReveal>
-              )
-            })}
           </div>
         </section>
 
@@ -576,6 +482,8 @@ export default function SolucionesHub() {
             ))}
           </ScrollReveal>
         </section>
+
+        <FaqSection items={FAQS.hub} className="mb-24" />
 
         {/* CTA final */}
         <ScrollReveal>

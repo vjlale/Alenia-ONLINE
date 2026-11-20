@@ -49,6 +49,8 @@ import {
   ChevronUp,
 } from 'lucide-react';
 import ScrollReveal from '../components/common/ScrollReveal';
+import FaqSection from '../components/common/FaqSection';
+import { FAQS, SEO_PAGES } from '../data/seoPages';
 import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand';
 
 /* -------------------------------------------------------------------------- */
@@ -59,9 +61,9 @@ import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand';
 
 const SITE_URL = 'https://aleniahub.com';
 const PAGE_PATH = '/casos/laia';
-const PAGE_TITLE = 'Cómo nació LaIA | Un local que funciona solo, creado con IA | ALENIA';
-const PAGE_DESCRIPTION =
-  'La historia de LaIA: una lavandería self-service 24/7 sin personal, creada en 69 días por un fundador y un equipo de agentes de inteligencia artificial.';
+const LAIA_SEO = SEO_PAGES.find((p) => p.path === PAGE_PATH);
+const PAGE_TITLE = LAIA_SEO.title;
+const PAGE_DESCRIPTION = LAIA_SEO.description;
 
 const C = {
   navy: '#070e20',
@@ -1226,6 +1228,9 @@ export default function LaiaHistoria() {
       <Gallery />
       <Failures />
       <Today />
+      <div className="px-6 py-16">
+        <FaqSection items={FAQS.laia} />
+      </div>
       <ClosingCTA />
     </div>
   );

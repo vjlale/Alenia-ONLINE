@@ -48,4 +48,7 @@ if (fs.existsSync(sourceHtaccess)) {
   console.log('✅ .htaccess copiado');
 }
 
+// HTML con texto por ruta para buscadores e IA (GEO/AEO)
+await import('./scripts/prerender-seo.mjs');
+
 console.log('✅ Proceso post-build completado');

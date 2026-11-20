@@ -504,54 +504,6 @@ Mientras algunas empresas siguen con webs lentas y experiencias frustrantes, otr
 `
   },
   {
-    id: 4,
-    slug: 'marketing-digital-con-ia',
-    title: 'IA para atender a tus clientes: respuestas al instante, a cualquier hora',
-    excerpt: 'Un asistente con IA puede responder las preguntas de siempre, guiar a tus clientes y avisarte solo cuando hace falta una persona. Te contamos cómo funciona y por dónde empezar.',
-    date: '12 Jul 2025',
-    readTime: 5,
-    category: 'Inteligencia Artificial',
-    image: '/images/blog/marketing.jpg',
-    content: `
-Si tenés un negocio, sabés que hay preguntas que se repiten todo el día: *¿a qué hora abren?*, *¿cómo pago?*, *¿qué hago si la máquina no arranca?* Cada una se contesta en un minuto, pero sumadas te comen horas. Y si el cliente pregunta a las 11 de la noche, nadie le responde hasta el otro día.
-
-Un **asistente con inteligencia artificial** resuelve justamente eso: atiende a tus clientes al instante, a cualquier hora, y te deja a vos lo que de verdad necesita una persona.
-
-## Qué hace un asistente de atención
-
-- **Responde las preguntas frecuentes** con la información de tu negocio: horarios, precios, formas de pago, cómo usar un servicio.
-- **Guía paso a paso** cuando el cliente tiene un problema simple, como no saber cómo cargar saldo o cómo usar una máquina.
-- **Junta los datos del caso** (nombre, qué pasó, cuándo) antes de pasártelo, así no tenés que volver a preguntar todo.
-- **Te avisa** cuando algo se sale de lo normal o el cliente pide hablar con alguien.
-
-## Dónde se nota más
-
-### Negocios que funcionan sin personal
-En un local de autoservicio, el asistente es "la persona" que el cliente encuentra cuando tiene una duda. En LaIA, la lavandería self-service que armamos con **ALENIA HUB**, un asistente de soporte atiende a los clientes las 24 horas: cómo usar las máquinas, qué hacer si algo falla y cuándo avisarle al dueño.
-
-### Comercios con mucha consulta por WhatsApp
-Si tu WhatsApp explota con las mismas preguntas, el asistente contesta lo repetido y vos te ocupás de vender.
-
-### Servicios con turnos o reservas
-Puede informar disponibilidad, explicar cómo reservar y recordar lo que el cliente tiene que llevar o saber antes de ir.
-
-## Lo que no tiene que hacer
-
-Un buen asistente **no reemplaza el trato humano**: lo cuida. No inventa respuestas, no promete lo que el negocio no puede cumplir y, ante la duda, deriva. Por eso lo configuramos con información real de tu negocio y con reglas claras de cuándo pasarte la conversación.
-
-## Cómo empezar
-
-1. **Anotá las 10 preguntas que más te hacen.** Ese es el primer contenido del asistente.
-2. **Definí qué casos querés atender vos** siempre, por ejemplo reclamos o pedidos especiales.
-3. **Elegí el canal**: WhatsApp, la web, una pantalla en el local o la app de tu negocio.
-4. **Probalo con casos reales** y ajustalo con lo que vayas viendo.
-
----
-
-¿Querés ver cómo funcionaría en tu negocio? [Contanos qué consultas recibís](/contacto) y te mostramos cómo lo armaríamos. Si tenés máquinas o un local sin personal, mirá también [ALENIA HUB](/soluciones/hub).
-`
-  },
-  {
     id: 5,
     slug: 'analisis-predictivo-toma-de-decisiones',
     title: 'Análisis predictivo: El futuro de la toma de decisiones',
@@ -800,50 +752,6 @@ No existe el CRM perfecto. Existe el CRM correcto para tu momento y tu negocio.
 [Hablemos 15 minutos](/contacto) y te ayudamos a decidir sin comprometerte a nada.
 
 *P.D.: Si ya tenés un CRM que no usás, el problema no es la herramienta. Es que no está pensada para como trabajás realmente.*
-`
-  },
-  {
-    id: 7,
-    slug: 'email-marketing-con-ia',
-    title: 'Mensajes automáticos para tu negocio: recordatorios, avisos y seguimiento',
-    excerpt: 'Turnos que se olvidan, pagos que se atrasan, clientes que quedan sin respuesta. Con mensajes automáticos, todo eso se avisa solo. Te contamos qué conviene automatizar primero.',
-    date: '05 Jul 2025',
-    readTime: 5,
-    category: 'Automatización',
-    image: '/images/blog/email-marketing.jpg',
-    content: `
-Hay mensajes que tu negocio manda todos los días y que siempre son iguales: *"te recuerdo tu turno de mañana"*, *"tu pago está pendiente"*, *"tu pedido ya está listo"*. Escribirlos a mano lleva tiempo, y cuando hay mucho trabajo, alguno se olvida.
-
-**Automatizarlos** significa que se envían solos, en el momento justo, por mail o por mensaje, sin que tengas que acordarte.
-
-## Qué conviene automatizar primero
-
-### Recordatorios
-Turnos, reservas, vencimientos, renovaciones. Un aviso el día anterior reduce los olvidos y te ahorra el llamado.
-
-### Avisos de pago
-Cuando se acredita un pago, cuando falta uno o cuando se acerca una fecha. El cliente queda informado y vos no tenés que perseguir a nadie.
-
-### Confirmaciones
-"Recibimos tu pedido", "tu compra fue aprobada", "tu equipo ya está listo para retirar". Son los mensajes que dan tranquilidad y evitan la consulta de *"¿y?"*.
-
-### Seguimiento de consultas
-Si alguien preguntó por un producto y no compró, un mensaje unos días después, bien escrito y sin insistir, muchas veces cierra la venta.
-
-## Cómo hacerlo bien
-
-- **Escribí como hablás con tus clientes.** Un mensaje automático no tiene que sonar a robot.
-- **Mandá solo lo útil.** Si cada aviso aporta algo, la gente los lee.
-- **Dejá siempre una salida**: un número o un link para responder si algo no está bien.
-- **Conectalo con tus sistemas.** El aviso de pago tiene que salir cuando el pago se acredita de verdad, no cuando alguien se acuerda de mandarlo.
-
-## Un ejemplo real
-
-En negocios conectados con **ALENIA HUB**, los avisos salen solos a partir de lo que pasa en el local: el cliente paga, la máquina arranca y el dueño recibe la información en su celular, sin intermediarios.
-
----
-
-¿Qué mensajes mandás todos los días a mano? [Contanos](/contacto) y te decimos cuáles se pueden automatizar y cómo lo haríamos. También podés ver [qué más automatizamos](/automatizaciones).
 `
   },
   {

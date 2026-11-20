@@ -28,8 +28,19 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     const el = containerRef.current;
     if (!el) return;
 
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     let lastTouchTime = 0;
+    // Antes se ignoraba el mouse en cualquier equipo con pantalla táctil (notebooks
+    // táctiles, tablets con mouse): la red no reaccionaba. Ahora el mouse funciona
+    // siempre, salvo los "clics fantasma" que el navegador genera justo después de un toque.
+    const isGhostMouse = () => Date.now() - lastTouchTime < 800;
+
+    // Toques y clics sobre botones, links o ventanas (modal de bienvenida,
+    // "Salir de esta interacción") no son para la red: si les hacemos
+    // preventDefault el celular nunca dispara el clic y el botón "no anda".
+    const INTERACTIVE_SELECTOR =
+      'button, a, input, textarea, select, label, [role="dialog"], [data-banner-ignore-touch]';
+    const isInteractiveTarget = (e) =>
+      e.target instanceof Element && e.target.closest(INTERACTIVE_SELECTOR) !== null;
 
     const getPos = (e) => {
       const rect = el.getBoundingClientRect();
@@ -56,7 +67,7 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleMouseDown = (e) => {
-      if (isTouchDevice) {
+      if (isGhostMouse() || isInteractiveTarget(e)) {
         return;
       }
       isMouseDownRef.current = true;
@@ -70,7 +81,7 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleMouseMove = (e) => {
-      if (isTouchDevice) return;
+      if (isGhostMouse()) return;
       const pos = getPos(e);
       mousePositionRef.current = pos;
       setMousePosition(pos);
@@ -84,13 +95,13 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleMouseUp = () => {
-      if (isTouchDevice) return;
+      if (isGhostMouse()) return;
       isMouseDownRef.current = false;
       deactivateCentral();
     };
 
     const handleMouseLeave = () => {
-      if (isTouchDevice) return;
+      if (isGhostMouse()) return;
       isMouseDownRef.current = false;
       isMouseActiveRef.current = false;
       mousePositionRef.current = null;
@@ -101,6 +112,7 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleTouchStart = (e) => {
+      if (isInteractiveTarget(e)) return;
       if (e.touches.length >= 2) {
         return;
       }
@@ -120,6 +132,7 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleTouchMove = (e) => {
+      if (isInteractiveTarget(e)) return;
       if (e.touches.length >= 2) {
         deactivateCentral();
         return;
@@ -150,8 +163,10 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleTouchEnd = (e) => {
+      if (isInteractiveTarget(e)) return;
       if (e.touches.length >= 2) return;
       if (e.cancelable) e.preventDefault();
+      lastTouchTime = Date.now();
       touchMoveTimeoutRef.current = setTimeout(() => {
         isMouseActiveRef.current = false;
         mousePositionRef.current = null;
@@ -166,6 +181,7 @@ export function useMouseInteraction(containerRef, containerReady = true) {
     };
 
     const handleTouchCancel = (e) => {
+      if (isInteractiveTarget(e)) return;
       if (e.touches.length >= 2) return;
       if (e.cancelable) e.preventDefault();
       isMouseActiveRef.current = false;

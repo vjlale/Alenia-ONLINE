@@ -14,11 +14,25 @@ RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # ------------------------------------------------------------
+# 1b) Notas del blog borradas -> al blog (301)
+# ------------------------------------------------------------
+RewriteRule ^blog/(marketing-digital-con-ia|email-marketing-con-ia)/?$ /blog [L,R=301]
+
+# ------------------------------------------------------------
 # 2) Fallback SPA de la sub-app /e-pix (tiene su propio index)
 # ------------------------------------------------------------
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^e-pix/ /e-pix/index.html [L]
+
+# ------------------------------------------------------------
+# 3a) Páginas con texto para buscadores e IA (GEO/AEO)
+#     /soluciones/hub -> /p/soluciones/hub.html si existe.
+#     Lo genera scripts/prerender-seo.mjs; React arranca igual.
+# ------------------------------------------------------------
+RewriteCond %{REQUEST_URI} ^/(.+?)/?$
+RewriteCond %{DOCUMENT_ROOT}/p/%1.html -f
+RewriteRule ^ /p/%1.html [L]
 
 # ------------------------------------------------------------
 # 3) Fallback SPA principal (React Router)

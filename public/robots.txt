@@ -1,15 +1,26 @@
 User-agent: *
 Allow: /
+Disallow: /p/
+Disallow: /admin/
 
-# Sitemaps
+# Buscadores con IA: bienvenidos
+User-agent: GPTBot
+Allow: /
+Disallow: /p/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /p/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /p/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /p/
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://aleniahub.com/sitemap.xml
-
-# Optimización para crawlers
-Crawl-delay: 1
-
-# Bloquear archivos innecesarios
-Disallow: /node_modules/
-Disallow: /src/
-Disallow: /.git/
-Disallow: /dist/
-Disallow: /build/

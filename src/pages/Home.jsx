@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Zap, Settings, X, ChevronDown, LayoutGrid, Target, Cpu, CreditCard, DoorOpen, LayoutDashboard } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, X, ChevronDown, Cpu, CreditCard, DoorOpen, LayoutDashboard } from 'lucide-react';
 import { useState } from 'react';
 import emailJSService from '../services/emailJSService';
 import SmartImage from '../components/common/SmartImage';
@@ -10,7 +10,11 @@ import ParticleBackground from '../components/common/ParticleBackground';
 import NodeNetworkBackground from '../components/common/NodeNetworkBackground';
 import ScrollReveal from '../components/common/ScrollReveal';
 import { Helmet } from 'react-helmet-async';
+import FaqSection from '../components/common/FaqSection';
+import { FAQS, SEO_PAGES } from '../data/seoPages';
 import { BRAND_LOGOS, OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand'
+
+const HOME_SEO = SEO_PAGES.find((p) => p.path === '/');
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -72,21 +76,21 @@ export default function Home() {
   return (
     <main className="relative font-inter bg-brand-primary box-shadow-brand">
       <Helmet>
-        <title>Alen.iA - Resultados con Inteligencia</title>
-        <meta name="description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
+        <title>{HOME_SEO.title}</title>
+        <meta name="description" content={HOME_SEO.description} />
         <link rel="canonical" href="https://aleniahub.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://aleniahub.com/" />
-        <meta property="og:title" content="Alen.iA - Resultados con Inteligencia" />
-        <meta property="og:description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
+        <meta property="og:title" content={HOME_SEO.title} />
+        <meta property="og:description" content={HOME_SEO.description} />
   <meta property="og:image" content={OG_IMAGE} />
   <meta property="og:image:alt" content="ALENIA - Resultados con Inteligencia" />
   <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
   <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://aleniahub.com/" />
-        <meta property="twitter:title" content="Alen.iA - Resultados con Inteligencia" />
-        <meta property="twitter:description" content="Automatización de máquinas con hardware y software: cobros digitales, activación automática, accesos con QR y panel en tiempo real. Apps y webs a medida." />
+        <meta property="twitter:title" content={HOME_SEO.title} />
+        <meta property="twitter:description" content={HOME_SEO.description} />
   <meta property="twitter:image" content={OG_IMAGE} />
   <meta property="twitter:image:alt" content="ALENIA - Resultados con Inteligencia" />
       </Helmet>
@@ -232,15 +236,12 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="glass-advanced rounded-2xl p-8 md:p-12 border border-alenia-primary/20 text-center">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+            <div className="glass-advanced rounded-2xl p-6 md:p-12 border border-alenia-primary/20 text-center">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-3">
                 Sin suscripciones. Sin pagos mensuales.
               </h2>
-              <p className="text-xl md:text-2xl text-alenia-primary font-semibold mb-6">
-                Pagás una vez. Tenés tu app. Para siempre.
-              </p>
-              <p className="text-white/90 text-lg max-w-2xl mx-auto">
-                Venimos a cambiar las reglas del juego. No más facturas mensuales que se acumulan. Tecnología que trabaja por vos, no al revés.
+              <p className="text-xl md:text-2xl text-alenia-primary font-semibold">
+                Pagás una vez. Tenés tu sistema. Para siempre.
               </p>
             </div>
           </motion.section>
@@ -253,20 +254,20 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="glass-advanced rounded-2xl p-8 md:p-10 border border-green-400/30 overflow-hidden">
+            <div className="glass-advanced rounded-2xl p-6 md:p-10 border border-green-400/30 overflow-hidden">
               <span className="text-xs uppercase tracking-widest font-bold text-green-300">ALENIA HUB</span>
-              <h2 className="mt-2 text-3xl md:text-4xl font-bold text-white mb-4">
-                De la máquina al negocio conectado
+              <h2 className="mt-2 text-3xl md:text-4xl font-bold text-white mb-3">
+                Un tótem cobra. Nosotros operamos el negocio entero.
               </h2>
-              <p className="text-white/90 text-lg mb-8">
-                Conectamos tus máquinas con pagos, app y un panel de control. El cliente paga desde el celular, la máquina arranca sola y vos controlás todo en tiempo real. Ya funciona en LaIA, una lavandería self-service abierta 24/7 sin personal.
+              <p className="text-white/90 text-lg mb-6">
+                Conectamos tus máquinas con cobros, app, tótem y panel. Ya funciona en LaIA, una lavandería 24&nbsp;h sin personal.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {[
-                  { icon: Cpu, text: 'Activación de máquinas con QR o pago' },
-                  { icon: CreditCard, text: 'Cobros con Mercado Pago, saldo y crédito' },
-                  { icon: DoorOpen, text: 'Accesos y puertas que abren con QR' },
-                  { icon: LayoutDashboard, text: 'Panel con estado, ventas y alertas' }
+                  { icon: Cpu, text: 'La máquina arranca sola al pagar' },
+                  { icon: CreditCard, text: 'Mercado Pago, saldo y crédito' },
+                  { icon: DoorOpen, text: 'Puertas que abren con QR' },
+                  { icon: LayoutDashboard, text: 'Ventas y alertas en el celular' }
                 ].map((item) => (
                   <div key={item.text} className="flex items-center gap-3 text-white/90">
                     <item.icon className="w-5 h-5 text-green-400 flex-shrink-0" />
@@ -274,96 +275,64 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <Link
-                to="/soluciones/hub"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black px-6 py-3 rounded-xl font-semibold transition-all"
-              >
-                Conocer ALENIA HUB
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </motion.section>
-
-          {/* Quiénes Somos – Startup de Apps a Medida */}
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="glass-advanced rounded-2xl p-8 md:p-10 border border-white/10 overflow-hidden">
-              <div className="flex items-center gap-3 mb-6">
-                <LayoutGrid className="w-8 h-8 text-alenia-primary" />
-                <h2 className="text-3xl md:text-4xl font-bold text-white">
-                  Apps a medida para tu negocio
-                </h2>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  to="/soluciones/hub"
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 text-black px-6 py-3 rounded-xl font-semibold transition-all"
+                >
+                  Conocer ALENIA HUB
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  to="/casos/laia"
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-white/20 text-white hover:bg-white/5 px-6 py-3 rounded-xl font-semibold transition-colors"
+                >
+                  Ver el caso LaIA
+                </Link>
               </div>
-              <p className="text-white/90 text-lg mb-8">
-                Somos una startup que crea aplicaciones hechas a tu medida. Automatizamos procesos y organizamos cada aspecto de tu operación. Sin plantillas genéricas. Sin sorpresas.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  { icon: LayoutGrid, text: 'Apps hechas a medida para tu negocio' },
-                  { icon: Zap, text: 'Automatización de procesos' },
-                  { icon: Target, text: 'Organización que escala contigo' },
-                  { icon: Settings, text: 'Sin contratos largos ni sorpresas' }
-                ].map((item, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 * i }}
-                    viewport={{ once: true }}
-                    className="flex items-center gap-4 text-white/90"
-                  >
-                    <item.icon className="w-5 h-5 text-alenia-primary flex-shrink-0" />
-                    <span>{item.text}</span>
-                  </motion.li>
-                ))}
-              </ul>
             </div>
           </motion.section>
 
-          {/* Proceso – 3 Pasos */}
+          {/* Prueba: el caso LaIA en números */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
+            aria-labelledby="home-prueba"
           >
-            <div className="glass-advanced rounded-2xl p-8 md:p-10 border border-white/10 overflow-hidden">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                Simple. Rápido. Efectivo.
+            <div className="glass-advanced rounded-2xl p-6 md:p-10 border border-white/10">
+              <h2 id="home-prueba" className="text-2xl md:text-3xl font-bold text-white mb-6">
+                LaIA, hecha por ALENIA
               </h2>
-              <p className="text-white/90 text-lg mb-10">
-                Diagnóstico → Solución a medida → Tu equipo capacitado. En semanas, no en meses.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <dl className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { n: '1', title: 'Diagnóstico Estratégico', desc: 'Analizamos tu estructura para crear una hoja de ruta personalizada.' },
-                  { n: '2', title: 'Solución a Medida', desc: 'Implementamos un sistema inteligente adaptado a tu negocio.' },
-                  { n: '3', title: 'Adopción de tu Equipo', desc: 'Capacitación continua para que tu equipo potencie su talento.' }
-                ].map((step, i) => (
-                  <motion.div
-                    key={step.n}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.15 * (i + 1) }}
-                    viewport={{ once: true }}
-                    className="rounded-xl p-6 border border-alenia-primary/20 bg-white/5"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-bold flex items-center justify-center text-xl mb-4">
-                      {step.n}
-                    </div>
-                    <h3 className="text-lg font-semibold text-alenia-primary mb-2">{step.title}</h3>
-                    <p className="text-white/90 text-sm">{step.desc}</p>
-                  </motion.div>
+                  { n: '69', label: 'días hasta abrir' },
+                  { n: '24 h', label: 'abierta, sin personal' },
+                  { n: '470', label: 'pagos reales en septiembre' },
+                  { n: '45%', label: 'de los clientes volvió' }
+                ].map((stat) => (
+                  <div key={stat.label} className="rounded-xl border border-alenia-primary/20 bg-white/5 p-4">
+                    <dt className="sr-only">{stat.label}</dt>
+                    <dd>
+                      <span className="block text-3xl font-extrabold text-white">{stat.n}</span>
+                      <span className="block text-sm text-white/75">{stat.label}</span>
+                    </dd>
+                  </div>
                 ))}
-              </div>
+              </dl>
+              <p className="mt-6 text-white/80">
+                ¿Necesitás una app o una web?{' '}
+                <Link to="/soluciones/digitales" className="text-alenia-primary font-semibold underline underline-offset-4">
+                  También las hacemos a medida
+                </Link>
+                .
+              </p>
             </div>
           </motion.section>
+
+          <FaqSection items={FAQS.home} />
 
           {/* CTA Final */}
           <motion.section
@@ -378,7 +347,7 @@ export default function Home() {
                 ¿Listo para cambiar las reglas?
               </h2>
               <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-                Agendá una consultoría gratuita y recibí un plan personalizado para tu negocio.
+                Contanos qué querés automatizar y te decimos cómo lo haríamos.
               </p>
               <motion.button
                 onClick={() => setShowModal(true)}

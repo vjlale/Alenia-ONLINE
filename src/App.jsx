@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { AnimatePresence } from 'framer-motion';
 import { useState, useEffect, lazy } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
-import { Helmet } from 'react-helmet-async';
 import Header from './components/common/Header'
 import Footer from './components/common/Footer'
 import LoadingSpinner from './components/common/LoadingSpinner'
@@ -44,7 +43,6 @@ const SolucionesDigitales = lazy(() => import('./pages/SolucionesDigitales'));
 const LaiaHistoria = lazy(() => import('./pages/LaiaHistoria'));
 
 import './styles/globals.css'
-import { BRAND_LOGOS_ABSOLUTE } from './config/brand'
 
 // Componente para tracking de navegación
 function NavigationTracker() {
@@ -213,33 +211,7 @@ function AppContent() {
   return (
     <BannerCursorProvider>
     <div className="relative min-h-screen bg-alenia-dark">
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "ALENIA",
-            url: "https://aleniahub.com",
-            logo: BRAND_LOGOS_ABSOLUTE.symbol,
-            description: "Soluciones inteligentes con IA, automatizaciones y desarrollo web para empresas.",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Córdoba",
-              addressCountry: "AR"
-            },
-            contactPoint: {
-              "@type": "ContactPoint",
-              email: "alenia.online@gmail.com",
-              contactType: "customer service"
-            },
-            sameAs: [
-              "https://www.instagram.com/alen.ia_/",
-              "https://www.linkedin.com/company/alen-ia/",
-              "https://github.com/vjlale"
-            ]
-          })}
-        </script>
-      </Helmet>
+      {/* El schema Organization/WebSite/FAQ va en el HTML estático (scripts/prerender-seo.mjs). */}
       <NavigationTracker />
       <ScrollToTop />
       <ScrollProgress />
