@@ -47,6 +47,8 @@ export default function InteractiveSpaceBanner() {
       /* ignore */
     }
     setIntroDismissed(true);
+    // Al cerrar el anuncio, la página queda ubicada en la experiencia aunque se haya movido detrás.
+    sectionRef.current?.scrollIntoView({ behavior: 'auto', block: 'start' });
   }, []);
 
   const scrollToMainContent = useCallback(() => {
@@ -55,6 +57,34 @@ export default function InteractiveSpaceBanner() {
 
   useLayoutEffect(() => {
     if (sectionRef.current) setContainerReady(true);
+  }, []);
+
+  // El botón de salida va fijo al borde inferior de la pantalla mientras la red está a la vista.
+  const [bannerInView, setBannerInView] = useState(true);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(([entry]) => setBannerInView(entry.intersectionRatio >= 0.3), {
+      threshold: [0, 0.3, 1],
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Si el aviso de cookies está abierto, el botón se ubica justo encima para no quedar tapado.
+  const [cookieBannerHeight, setCookieBannerHeight] = useState(0);
+  useEffect(() => {
+    const measure = () => {
+      setCookieBannerHeight(document.getElementById('cookie-banner')?.offsetHeight ?? 0);
+    };
+    measure();
+    const mo = new MutationObserver(measure);
+    mo.observe(document.body, { childList: true });
+    window.addEventListener('resize', measure);
+    return () => {
+      mo.disconnect();
+      window.removeEventListener('resize', measure);
+    };
   }, []);
 
   const prefersReducedMotion = useReducedMotion();
@@ -259,12 +289,15 @@ export default function InteractiveSpaceBanner() {
       <CustomCursor isActive={isMouseActive} position={globalMousePosition} />
       <BannerExperienceIntroModal isOpen={!introDismissed} onDismiss={dismissIntro} />
       {introDismissed && <BannerInstructionsOverlay />}
-      {introDismissed && (
-        <div className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 pointer-events-auto">
+      {introDismissed && bannerInView && (
+        <div
+          className="fixed left-1/2 z-40 -translate-x-1/2 pointer-events-auto"
+          style={{ bottom: `calc(${cookieBannerHeight}px + 0.75rem + env(safe-area-inset-bottom, 0px))` }}
+        >
           <button
             type="button"
             onClick={scrollToMainContent}
-            className="cursor-pointer rounded-full border border-cyan-400/70 bg-black/50 px-5 py-2.5 text-sm font-semibold text-cyan-100 font-inter backdrop-blur-md shadow-[0_0_24px_rgba(34,211,238,0.2)] transition-all hover:border-cyan-300 hover:bg-black/65 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="cursor-pointer whitespace-nowrap rounded-full border border-cyan-400/70 bg-black/60 px-4 py-2.5 text-xs sm:px-5 sm:text-sm font-semibold text-cyan-100 font-inter backdrop-blur-md shadow-[0_0_24px_rgba(34,211,238,0.2)] transition-all hover:border-cyan-300 hover:bg-black/75 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             {bannerExitInteractionLabel}
           </button>

@@ -6,30 +6,19 @@ export const HOME_CONTENT_ANCHOR_ID = 'contenido-principal';
 
 export const bannerIntroTitle = 'Experiencia interactiva';
 
-export const bannerIntroAccordionItems = [
+/** Dos bloques cortos, sin acordeón ni separación por dispositivo. */
+export const bannerIntroItems = [
   {
     id: 'vista',
     title: 'Qué vas a ver',
     body:
-      'Una red de nodos luminosos conectados entre sí. Las conexiones y la intensidad visual reaccionan cuando acercás el foco: el espacio cobra vida alrededor de tu interacción.',
+      'Una simulación de una red neuronal, como las del cerebro humano. Es la base de la inteligencia artificial.',
   },
   {
-    id: 'raton',
-    title: 'Ratón (escritorio)',
+    id: 'uso',
+    title: 'Cómo usarla',
     body:
-      'Verás un cursor personalizado. Mantené pulsado y arrastrá para colocar un nodo central: atrae partículas cercanas y refuerza los enlaces hacia ese punto. Sin pulsar, el movimiento del puntero modula la red a tu alrededor.',
-  },
-  {
-    id: 'tactil',
-    title: 'Táctil (móvil y tablet)',
-    body:
-      'Con un dedo podés mantener y arrastrar para el mismo nodo central. Para bajar por la página y salir del área interactiva, usá dos dedos a la vez: así el scroll del sitio no se bloquea.',
-  },
-  {
-    id: 'flujo',
-    title: 'Flujo de movimiento',
-    body:
-      'Sin nodo central activo, la red responde al puntero o al tacto con un efecto de repulsión y refuerzo visual cercano. Con el nodo central, el movimiento se orienta hacia la atracción y las líneas hacia ese foco.',
+      'Mantené apretado y arrastrá: la red te sigue. Para seguir viendo el sitio, tocá «Salir de esta interacción».',
   },
 ];
 
