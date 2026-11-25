@@ -3,9 +3,7 @@ import {
   ArrowRight,
   Check,
   Cpu,
-  CreditCard,
-  DoorOpen,
-  LayoutDashboard,
+  Network,
   Smartphone,
   Bot,
   ExternalLink,
@@ -19,21 +17,19 @@ import ScrollReveal from '../components/common/ScrollReveal';
 import AnimatedGradient from '../components/common/AnimatedGradient';
 import { OG_IMAGE } from '../config/brand';
 
-const SEO_TITLE = 'Soluciones | ALENIA - Automatización de máquinas, apps y webs';
+const SEO_TITLE = 'Soluciones | ALENIA - Automatización a medida, apps y webs';
 const SEO_DESCRIPTION =
-  'Conectamos tus máquinas con pagos, apps y un panel de control: activación automática, cobros digitales, accesos con QR y gestión en tiempo real. También desarrollamos apps, software y webs a medida.';
+  'Traenos el desafío y lo automatizamos: soluciones a medida con hardware, software e IA. También desarrollamos apps, software y webs a medida.';
 
-// Módulos del producto principal (ALENIA HUB)
+// Con qué resuelve ALENIA HUB cada desafío (capacidades, no un paquete)
 const hubModules = [
-  { icon: Cpu, title: 'Activación de máquinas', text: 'El cliente paga o escanea un QR y la máquina arranca sola.' },
-  { icon: CreditCard, title: 'Cobros e ingresos', text: 'Mercado Pago, saldo y crédito, sin efectivo ni fichas.' },
-  { icon: DoorOpen, title: 'Control de accesos', text: 'Puertas y cerraduras que abren con QR.' },
-  { icon: LayoutDashboard, title: 'Panel en tiempo real', text: 'Estado de cada equipo, ventas, caja y alertas.' },
-  { icon: Smartphone, title: 'App y tótem con tu marca', text: 'Autoservicio desde el celular o una pantalla táctil.' },
-  { icon: Bot, title: 'Asistente IA de soporte', text: 'Atiende a tus clientes las 24 horas.' },
+  { icon: Cpu, title: 'Hardware a medida', text: 'Placas, sensores y conexiones para que tus equipos trabajen solos.' },
+  { icon: Smartphone, title: 'Software a medida', text: 'Apps, pantallas y paneles pensados para tu operación.' },
+  { icon: Bot, title: 'IA aplicada', text: 'Asistentes que atienden, avisan y resuelven a cualquier hora.' },
+  { icon: Network, title: 'Integraciones', text: 'Lo nuevo conectado con los equipos y sistemas que ya usás.' },
 ];
 
-const rubros = ['Lavanderías self-service', 'Máquinas vending', 'Accesos y gimnasios', 'Lavaderos y cocheras', 'Locales sin personal'];
+const rubros = ['Locales que atienden solos', 'Equipos que se activan sin una persona', 'Atención con IA', 'Ideas que todavía no existen'];
 
 // Productos propios de ALENIA
 const productos = [
@@ -103,7 +99,7 @@ function Services() {
           </div>
         </ScrollReveal>
 
-        {/* Producto principal: ALENIA HUB */}
+        {/* ALENIA HUB: soluciones a medida */}
         <ScrollReveal direction="up" delay={0.3}>
           <section
             aria-labelledby="hub-heading"
@@ -115,26 +111,25 @@ function Services() {
             <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-start">
               <div>
                 <span className="text-xs uppercase tracking-widest font-bold text-green-300">
-                  Producto principal
+                  Soluciones a medida
                 </span>
                 <h2 id="hub-heading" className="mt-2 text-3xl md:text-4xl font-bold text-white">
                   ALENIA HUB
                 </h2>
                 <p className="mt-2 text-lg font-semibold text-green-300">
-                  Tu máquina. Tu marca. Tu experiencia de venta.
+                  Traenos el desafío. Nosotros lo automatizamos.
                 </p>
                 <p className="mt-4 text-gray-300 leading-relaxed">
-                  Conectamos tus equipos físicos con pagos, app, tótem y un panel de control. El
-                  cliente paga desde el celular, la máquina arranca sola y vos ves todo en tiempo real,
-                  desde donde estés.
+                  Desarrollamos soluciones con inteligencia: hardware, software e IA diseñados para
+                  tu negocio. No es un paquete armado: partimos de tu idea y construimos lo que hace
+                  falta.
                 </p>
 
                 <div className="mt-6 rounded-xl border border-cyan-400/30 bg-cyan-500/5 p-4">
                   <p className="text-sm text-cyan-200 font-semibold">Caso real: LaIA</p>
                   <p className="mt-1 text-sm text-gray-300">
-                    Lavandería self-service que funciona 24/7 sin personal: lavadoras y secadoras
-                    conectadas, vending integrado, pago con Mercado Pago, puerta con QR, tótem, app y
-                    panel de administración.
+                    Nos pidieron una lavandería que funcione sola, 24/7 y sin personal. La
+                    desarrollamos a medida, del local vacío a la apertura en 69 días.
                   </p>
                   <a
                     href="https://applaia.com"
@@ -168,7 +163,7 @@ function Services() {
                       onClick={() => openServiceForm(automatizacion)}
                       className="inline-flex items-center justify-center gap-2 border border-green-400/60 text-green-200 hover:bg-green-500/10 px-6 py-3 rounded-xl font-semibold transition-all"
                     >
-                      Contanos qué máquinas tenés
+                      Contanos tu desafío
                     </button>
                   )}
                 </div>
@@ -183,7 +178,7 @@ function Services() {
                   </div>
                 ))}
                 <p className="sm:col-span-2 text-xs text-gray-500">
-                  Evaluamos cada equipo: la compatibilidad depende de la marca, el modelo y el controlador.
+                  Cada proyecto se evalúa y se diseña desde cero.
                 </p>
               </div>
             </div>
@@ -243,11 +238,11 @@ function Services() {
             <div className="glass-advanced bg-gradient-to-r from-alenia-primary/10 to-alenia-secondary/10 rounded-2xl p-8 md:p-12 border border-alenia-primary/30 max-w-4xl mx-auto relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-animated opacity-5 pointer-events-none" />
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 relative z-10">
-                ¿Tenés máquinas que querés conectar?
+                ¿Qué querés automatizar?
               </h3>
               <p className="text-alenia-light/70 mb-8 text-lg relative z-10">
-                Contanos marca y modelo, cuántos equipos operás y qué querés lograr. Evaluamos tus
-                equipos y te proponemos un alcance.
+                Contanos la idea, aunque todavía no esté definida. La evaluamos y te proponemos
+                un alcance.
               </p>
               <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }} className="relative z-10">
                 <Link

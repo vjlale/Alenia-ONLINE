@@ -19,7 +19,7 @@ import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand'
 
 const TITLE = 'Automatizaciones para tu negocio | ALENIA'
 const DESCRIPTION =
-  'Automatizamos lo que hoy hacés a mano: respuestas por WhatsApp, recordatorios, seguimiento de ventas, reportes y conexión entre sistemas. Y con ALENIA HUB, también tus máquinas.'
+  'Automatizamos lo que hoy hacés a mano: respuestas por WhatsApp, recordatorios, seguimiento de ventas, reportes y conexión entre sistemas. Y con ALENIA HUB, también tu negocio físico.'
 
 const TASKS = [
   { icon: MessageCircle, title: 'Respuestas por WhatsApp', body: 'Un asistente que contesta las preguntas de siempre a cualquier hora y te pasa los casos que necesitan una persona.' },
@@ -114,16 +114,16 @@ export default function Automatizaciones() {
                   </ScrollReveal>
                 )
               })}
-              {/* Sexta tarjeta: máquinas, el producto principal */}
+              {/* Sexta tarjeta: ALENIA HUB, soluciones a medida */}
               <ScrollReveal delay={0.25} className="h-full">
                 <Link
                   to="/soluciones/hub"
                   className={`${card} group flex h-full flex-col border-[#00ff88]/40 p-6 transition-shadow hover:shadow-[0_0_30px_rgba(0,255,136,0.15)]`}
                 >
                   <Cpu className="mb-4 h-7 w-7 text-[#00ff88]" strokeWidth={2} />
-                  <h3 className="font-display text-lg font-semibold text-[#F1F5F9]">Tus máquinas, con ALENIA HUB</h3>
+                  <h3 className="font-display text-lg font-semibold text-[#F1F5F9]">Tu negocio físico, con ALENIA HUB</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                    Lavadoras, expendedoras, puertas o cocheras que cobran con QR, se activan solas y te avisan todo.
+                    Locales y equipos que funcionan solos, con hardware, software e IA diseñados para tu negocio.
                   </p>
                   <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-[#00ff88]">
                     Conocé ALENIA HUB <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

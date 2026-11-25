@@ -3,15 +3,15 @@ import { Globe, Cpu, Smartphone } from 'lucide-react';
 export const soluciones = [
   {
     id: 2,
-    nombre: 'Automatización de máquinas',
+    nombre: 'Automatización a medida',
     categoria: 'automatizacion',
-    subtitulo: 'ALENIA HUB · Hardware + software',
-    descripcion: 'Conectamos tus máquinas con pagos, app y un panel de control: el cliente paga y la máquina arranca sola.',
-    descripcionGeneral: 'De la máquina al negocio conectado. Integramos tus equipos físicos (lavadoras, vending, puertas, molinetes) con cobros digitales, una app o tótem con tu marca y un panel para ver todo en tiempo real. Es lo que hicimos en LaIA, una lavandería self-service que funciona 24/7 sin personal.',
+    subtitulo: 'ALENIA HUB · Hardware + software + IA',
+    descripcion: 'Traenos el desafío: diseñamos y construimos la solución para que tu negocio funcione solo.',
+    descripcionGeneral: 'Desarrollamos soluciones con inteligencia. Partimos de tu idea y combinamos hardware, software e IA para que tu negocio físico funcione solo. No es un paquete armado: cada proyecto se diseña desde cero. Así resolvimos LaIA, una lavandería self-service que funciona 24/7 sin personal.',
     incluye: [
-      'Activación de máquinas con QR o pago digital.',
-      'Cobros con Mercado Pago, saldo y crédito.',
-      'Panel en tiempo real: estado, ventas, caja y alertas.'
+      'Hardware a medida: placas, sensores y conexiones.',
+      'Software a medida: apps, pantallas y paneles.',
+      'IA aplicada e integración con lo que ya usás.'
     ],
     icon: Cpu,
     color: 'green',
@@ -228,7 +228,7 @@ export const soluciones = [
 export const formularios = {
   // Formularios originales (mantener para compatibilidad)
   1: { titulo: 'Estás a un paso de tener tu web profesional.', subtitulo: 'Completa tus datos y un experto te contactará para explicarte cómo funciona, sin compromiso.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: 'Si ya tienes una página web, déjanos el enlace aquí (Opcional)', name: 'web', type: 'text', required: false, help: 'Este campo nos ayuda a entender tu situación actual para darte una mejor recomendación.' } ], textoBoton: 'Solicitar mi Web Profesional', agradecimiento: '¡Gracias! Hemos recibido tu solicitud.\nUn experto de ALENIA te contactará en menos de 24 horas para conversar sobre tu proyecto.' },
-  2: { titulo: 'Contanos qué máquinas tenés.', subtitulo: 'Con estos datos evaluamos tus equipos y te proponemos cómo conectarlos.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: 'Marca y modelo de tus máquinas, cuántas operás y qué querés conectar', name: 'tarea', type: 'textarea', required: false, help: 'La compatibilidad depende de la marca, el modelo y el controlador.' } ], textoBoton: 'Pedir evaluación', agradecimiento: '¡Gracias! Recibimos tu consulta.\nUn especialista de ALENIA te va a contactar para evaluar tus equipos.' },
+  2: { titulo: 'Contanos qué querés automatizar.', subtitulo: 'Con estos datos evaluamos tu idea y te proponemos cómo resolverla.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false }, { label: 'Tu negocio, qué querés que funcione solo y con qué equipos contás', name: 'tarea', type: 'textarea', required: false, help: 'No hace falta que la idea esté definida.' } ], textoBoton: 'Pedir evaluación', agradecimiento: '¡Gracias! Recibimos tu consulta.\nUn especialista de ALENIA te va a contactar para evaluar tu proyecto.' },
   'cta-final': { titulo: '¡Estás a un paso de transformar tu negocio!', subtitulo: 'Completa tus datos y accede a todas nuestras herramientas de forma gratuita.', campos: [ { label: 'Nombre', name: 'nombre', type: 'text', required: true }, { label: 'Email de Contacto', name: 'email', type: 'email', required: true }, { label: 'Teléfono (Opcional)', name: 'telefono', type: 'tel', required: false } ], textoBoton: 'Obtener Acceso Inmediato Gratuito', agradecimiento: '¡Gracias! Hemos recibido tu solicitud.\nEn breve recibirás acceso a nuestras herramientas.' },
 
   // Formularios específicos por nivel

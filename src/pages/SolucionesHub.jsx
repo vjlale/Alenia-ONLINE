@@ -1,7 +1,6 @@
-// ALENIA HUB — producto insignia: automatización que conecta máquinas físicas
-// (hardware) con software: cobros, app, tótem y panel de administración.
-// Reconstruido a partir del bundle publicado en aleniahub.com
-// (assets/SolucionesHub-834e7567.js) y reescrito para el nuevo foco del producto.
+// ALENIA HUB — soluciones de automatización a medida (hardware + software + IA).
+// Enfoque: "traenos el desafío, nosotros lo automatizamos". No se vende un paquete
+// cerrado ni el sistema de LaIA: LaIA aparece solo como un desafío resuelto.
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
@@ -14,16 +13,13 @@ import {
   Network,
   Layers,
   Smartphone,
-  LayoutDashboard,
-  DoorOpen,
   Bot,
-  Zap,
-  Wallet,
-  Shirt,
+  Cpu,
   Coffee,
   Dumbbell,
   Car,
   Store,
+  Sparkles,
   Info,
   Maximize2,
 } from 'lucide-react'
@@ -51,92 +47,81 @@ const PAGE_DESCRIPTION = HUB_SEO.description
 /* -------------------------------------------------------------------------- */
 
 const HERO = {
-  badge: 'Producto insignia',
-  title: 'De la máquina al negocio conectado',
-  tagline: 'Tu máquina. Tu marca. Tu experiencia de venta.',
+  badge: 'Soluciones a medida',
+  title: 'Traenos el desafío. Nosotros lo automatizamos.',
+  tagline: 'Desarrollamos soluciones con inteligencia.',
   body:
-    'Conectamos tus máquinas con cobros, app, tótem y un panel en tiempo real. El cliente paga, la máquina arranca sola y vos lo ves todo desde el celular.',
-  primaryCta: 'Contanos qué máquinas tenés',
+    'Hardware, software e IA diseñados para tu negocio. No vendemos un paquete armado: partimos de tu idea y construimos lo que hace falta para que funcione sola.',
+  primaryCta: 'Contanos tu desafío',
   secondaryCta: 'Ver webs y apps',
 }
 
 const SIMULATION = {
-  title: 'Mirá una compra de punta a punta',
-  body: 'Una expendedora conectada: el cliente paga y la máquina entrega; al dueño le llega todo al celular. Tocá cualquier pantalla.',
+  title: 'Un ejemplo, de punta a punta',
+  body: 'Una expendedora conectada: el cliente paga y la máquina entrega; al dueño le llega todo al celular. Es una muestra: tu solución se diseña para tu negocio. Tocá cualquier pantalla.',
 }
 
+// Con qué resolvemos cada desafío (capacidades, no un paquete).
 const MODULES = [
   {
-    id: 'activacion',
-    icon: Zap,
-    title: 'Activación de máquinas',
+    id: 'hardware',
+    icon: Cpu,
+    title: 'Hardware a medida',
     description:
-      'El cliente paga y la máquina arranca sola, por pulso, relé o placa del fabricante.',
+      'Placas, sensores y conexiones para que tus equipos hagan solos lo que hoy hace una persona.',
   },
   {
-    id: 'cobros',
-    icon: Wallet,
-    title: 'Cobros e ingresos',
-    description:
-      'Mercado Pago con QR, Checkout y Point, más saldo y crédito en la app.',
-  },
-  {
-    id: 'accesos',
-    icon: DoorOpen,
-    title: 'Control de accesos',
-    description: 'Puertas que abren con QR. Sabés quién entró y cuándo.',
-  },
-  {
-    id: 'panel',
-    icon: LayoutDashboard,
-    title: 'Panel de control en tiempo real',
-    description:
-      'Estado de cada máquina, ventas, caja y alertas, desde el celular.',
-  },
-  {
-    id: 'app-totem',
+    id: 'software',
     icon: Smartphone,
-    title: 'App y tótem con tu marca',
+    title: 'Software a medida',
     description:
-      'Con tu logo y tus colores. La experiencia de venta es tuya.',
+      'Apps, pantallas y paneles pensados para tu operación, con tu marca.',
   },
   {
-    id: 'asistente',
+    id: 'ia',
     icon: Bot,
-    title: 'Asistente IA de soporte 24/7',
+    title: 'IA aplicada',
     description:
-      'Responde a tus clientes a cualquier hora y te avisa si algo falla.',
+      'Asistentes que atienden, avisan y resuelven a cualquier hora.',
+  },
+  {
+    id: 'integraciones',
+    icon: Network,
+    title: 'Integraciones',
+    description:
+      'Lo nuevo conectado con los equipos y sistemas que ya usás.',
   },
 ]
 
 const PHASES = [
-  { step: 1, title: 'Diagnóstico', body: 'Relevamos marca, modelo y placa de cada máquina, la conexión del local y cómo cobrás hoy.' },
-  { step: 2, title: 'Conexión física', body: 'Instalamos placas IoT, relés y cerraduras, o nos integramos con la placa del fabricante.' },
-  { step: 3, title: 'Software con tu marca', body: 'App, tótem, panel y asistente, todo conectado: lo que pasa en la máquina se ve en el panel.' },
-  { step: 4, title: 'Puesta en marcha', body: 'Probamos en el local con las máquinas funcionando y seguimos con monitoreo y ajustes.' },
+  { step: 1, title: 'Nos contás el desafío', body: 'Qué querés que pase solo, cómo trabajás hoy y qué te frena.' },
+  { step: 2, title: 'Diseñamos la solución', body: 'Te mostramos qué se puede hacer, con qué piezas y en cuánto tiempo.' },
+  { step: 3, title: 'La construimos', body: 'Hardware, software e IA, probados con vos en condiciones reales.' },
+  { step: 4, title: 'Puesta en marcha', body: 'La dejamos funcionando y seguimos con monitoreo y ajustes.' },
 ]
 
+// Ejemplos de desafíos (no es una lista cerrada de rubros).
 const INDUSTRIES = [
-  { id: 'lavanderias', icon: Shirt, title: 'Lavanderías self-service' },
-  { id: 'vending', icon: Coffee, title: 'Máquinas vending' },
-  { id: 'accesos', icon: Dumbbell, title: 'Accesos y gimnasios' },
-  { id: 'lavaderos', icon: Car, title: 'Lavaderos de autos y cocheras' },
-  { id: 'sin-personal', icon: Store, title: 'Negocios físicos sin personal' },
+  { id: 'cafe', icon: Coffee, title: 'Un local de café que atienda solo' },
+  { id: 'gimnasio', icon: Dumbbell, title: 'Un gimnasio abierto las 24 horas' },
+  { id: 'lavadero', icon: Car, title: 'Un lavadero de autos sin cajero' },
+  { id: 'comercio', icon: Store, title: 'Un comercio que venda de noche' },
+  { id: 'idea', icon: Sparkles, title: 'Una idea que todavía no existe' },
 ]
 
-const INDUSTRIES_NOTE = 'Evaluamos cada equipo: la compatibilidad depende de la marca, el modelo y el controlador.'
+const INDUSTRIES_NOTE = 'Cada proyecto se evalúa y se diseña desde cero.'
 
 const CASE_STUDY = {
   eyebrow: 'Caso real',
-  title: 'Caso real: LaIA',
-  subtitle: 'Lavandería self-service 24/7, sin personal en el local.',
+  title: 'LaIA: un desafío resuelto',
+  subtitle: 'Nos pidieron una lavandería que funcione sola. La desarrollamos a medida.',
   body:
-    'Abierta las 24 horas sin nadie atendiendo, en Palermo. La armamos en 69 días; el primer pago real fue el 2 de septiembre de 2026.',
+    'Abierta las 24 horas sin nadie atendiendo, en Palermo. Del local vacío a la apertura pasaron 69 días; el primer pago real fue el 2 de septiembre de 2026.',
   items: [
-    '3 lavadoras y 3 secadoras Electrolux conectadas',
-    '2 expendedoras y cafetera en el mismo pago',
-    'Puerta con QR, tótem, app y panel',
+    '9 máquinas y la puerta conectadas',
+    'App, tótem y panel hechos para ese local',
     '470 pagos reales y 45% de clientes que vuelven (sept. 2026)',
+    'Un desarrollo exclusivo de ese proyecto',
   ],
   linkLabel: 'Ver el caso completo',
   linkHref: '/casos/laia',
@@ -145,13 +130,13 @@ const CASE_STUDY = {
 const WHY_ALENIA = {
   title: 'Por qué ALENIA',
   paragraphs: [
-    'Un tótem cobra. Nosotros operamos el negocio entero: máquina, pago, puerta, panel e IA, con un solo equipo. Y ya funciona en un local real.',
+    'No adaptamos tu negocio a un producto: diseñamos la solución para tu negocio. Hardware, software e IA, con un solo equipo. Y ya lo hicimos en un local real.',
   ],
 }
 
 const FINAL_CTA = {
-  title: '¿Qué máquinas querés conectar?',
-  body: 'Pasanos marca, modelo y cantidad de equipos. Te decimos qué se puede hacer y cómo.',
+  title: '¿Qué querés automatizar?',
+  body: 'Contanos la idea, aunque todavía no esté definida. Te decimos qué se puede hacer y cómo.',
 }
 
 /* -------------------------------------------------------------------------- */
@@ -199,7 +184,7 @@ export default function SolucionesHub() {
         <meta property="og:title" content={PAGE_TITLE} />
         <meta property="og:description" content={PAGE_DESCRIPTION} />
         <meta property="og:image" content={OG_IMAGE} />
-        <meta property="og:image:alt" content="ALENIA HUB - De la máquina al negocio conectado" />
+        <meta property="og:image:alt" content="ALENIA HUB - Traenos el desafío, nosotros lo automatizamos" />
         <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
         <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
         <meta name="twitter:card" content="summary_large_image" />
@@ -258,7 +243,7 @@ export default function SolucionesHub() {
 
         </div>
 
-        {/* Simulación: una compra real de punta a punta */}
+        {/* Simulación: un ejemplo de punta a punta */}
         <section className="mb-24" aria-labelledby="hub-sim-heading">
           <ScrollReveal direction="up" delay={0.15}>
             <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -292,7 +277,7 @@ export default function SolucionesHub() {
           </ScrollReveal>
         </section>
 
-        {/* Módulos */}
+        {/* Con qué lo resolvemos */}
         <section className="mb-24" aria-labelledby="hub-modules-heading">
           <ScrollReveal>
             <h2
@@ -300,13 +285,13 @@ export default function SolucionesHub() {
               className="text-3xl md:text-4xl font-bold text-white text-center mb-4 flex items-center justify-center gap-3"
             >
               <Network className="w-8 h-8 text-violet-400" />
-              Qué conecta ALENIA HUB
+              Con qué lo resolvemos
             </h2>
             <p className="text-center text-alenia-light/70 max-w-2xl mx-auto mb-12">
-              Módulos que se combinan según tu negocio: de la máquina al cobro, y del cobro a tu panel.
+              Cada solución combina lo que tu negocio necesita. Nada viene armado de antemano.
             </p>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {MODULES.map((module, index) => {
               const Icon = module.icon
               return (
@@ -325,14 +310,14 @@ export default function SolucionesHub() {
           </div>
         </section>
 
-        {/* Cuatro fases */}
+        {/* Cuatro pasos */}
         <section className="mb-24" aria-labelledby="hub-phases-heading">
           <ScrollReveal>
             <h2 id="hub-phases-heading" className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
-              Cómo lo implementamos, en cuatro fases
+              Cómo trabajamos, en cuatro pasos
             </h2>
             <p className="text-center text-alenia-light/70 max-w-2xl mx-auto mb-14">
-              Relevamos tus equipos, los conectamos, armamos el software y lo ponemos en marcha con vos.
+              De la idea a la solución funcionando, con vos en cada paso.
             </p>
           </ScrollReveal>
           <ol className="relative max-w-5xl mx-auto space-y-8 md:space-y-0">
@@ -362,7 +347,7 @@ export default function SolucionesHub() {
                         } glass-advanced rounded-2xl p-6 md:p-7 border border-white/10 hover:border-emerald-400/30 transition-colors`}
                       >
                         <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400/80 mb-1">
-                          Fase {phase.step}
+                          Paso {phase.step}
                         </p>
                         <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                           <Layers className="w-5 h-5 text-cyan-400 shrink-0" />
@@ -393,14 +378,14 @@ export default function SolucionesHub() {
           </ol>
         </section>
 
-        {/* Rubros */}
+        {/* Ejemplos de desafíos */}
         <section className="mb-24" aria-labelledby="hub-industries-heading">
           <ScrollReveal>
             <h2 id="hub-industries-heading" className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
-              Rubros donde aplica
+              Desafíos que podés traernos
             </h2>
             <p className="text-center text-alenia-light/70 max-w-2xl mx-auto mb-12">
-              Negocios donde una máquina cobra, se activa o abre una puerta, y el dueño quiere controlarlo todo a distancia.
+              Son ejemplos. Si se puede automatizar, lo pensamos con vos.
             </p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -538,12 +523,12 @@ export default function SolucionesHub() {
                   <Network className="w-8 h-8" />
                 </div>
                 <h3 id="hub-intro-title" className="text-2xl font-bold text-white mb-3">
-                  Viví una compra real, de los dos lados
+                  Mirá un ejemplo, de los dos lados
                 </h3>
                 <p className="text-alenia-light/80 mb-8 leading-relaxed">
-                  Vas a ver a un cliente comprar en una expendedora conectada: carrito, pago con QR o en el tótem y
-                  entrega. Del otro lado, el celular del dueño recibe cada aviso, el panel suma las ventas y el
-                  asistente resuelve un atasco solo. Tocá cualquier pantalla para hacerlo vos.
+                  Es una muestra de lo que podemos construir: un cliente compra en una expendedora conectada y,
+                  del otro lado, el celular del dueño recibe cada aviso y el asistente resuelve un atasco solo.
+                  Tocá cualquier pantalla para hacerlo vos.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 w-full">
                   <button

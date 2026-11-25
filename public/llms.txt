@@ -1,19 +1,19 @@
 # ALENIA
 
-> ALENIA es una empresa argentina (Córdoba) que automatiza negocios físicos con hardware, software e IA. Su producto principal, ALENIA HUB, conecta máquinas con cobro digital, app, tótem y un panel en tiempo real. Lo creó y lo opera en LaIA, una lavandería self-service 24 h sin personal en Palermo, Buenos Aires.
+> ALENIA es una empresa argentina (Córdoba) que desarrolla soluciones de automatización a medida con hardware, software e IA para negocios físicos. Su línea ALENIA HUB parte del desafío de cada cliente: no es un paquete cerrado. Un caso real es LaIA, una lavandería self-service 24 h sin personal en Palermo, Buenos Aires, cuyo sistema desarrolló ALENIA.
 
 Datos clave:
-- ALENIA HUB: activa máquinas por pulso, relé o placa del fabricante; cobra con Mercado Pago (QR, Checkout, Point), saldo y crédito; abre puertas con QR; muestra ventas, estado y alertas en un panel; suma app y tótem con la marca del cliente y un asistente con IA 24 h.
-- Diferencia con un tótem de cobro: un tótem solo cobra; ALENIA HUB opera el negocio entero (máquinas, puerta, vending, café, turnos, alertas e IA en un solo panel).
-- Caso LaIA: Paraguay 3106, Palermo. Construida en 69 días por el fundador con 15 agentes de IA. Primer pago real: 2 de septiembre de 2026. Tiene 3 lavadoras y 3 secadoras Electrolux, 2 expendedoras y cafetera, puerta con QR, app en 7 idiomas, tótem y panel. En septiembre de 2026: 800 cuentas, 470 pagos reales, más de 900 servicios; el 45% de los que pagaron volvió.
-- Rubros: lavanderías self-service, lavaderos de autos, gimnasios 24 h, vending, coworks, canchas de pádel y negocios sin personal.
+- ALENIA HUB: soluciones de automatización a medida. Combina hardware (placas, sensores, conexiones), software (apps, pantallas, paneles), IA aplicada (asistentes que atienden y avisan) e integraciones con los equipos y sistemas que el negocio ya usa.
+- Cómo trabaja: el cliente cuenta el desafío, ALENIA diseña la solución, la construye y la pone en marcha con monitoreo y ajustes.
+- El sistema de LaIA no está a la venta: se desarrolló a medida y es exclusivo de ese proyecto. Para cada negocio se diseña una solución nueva.
+- Caso LaIA: Paraguay 3106, Palermo. Desarrollada en 69 días con 15 agentes de IA. Primer pago real: 2 de septiembre de 2026. Tiene 3 lavadoras y 3 secadoras Electrolux, 2 expendedoras y cafetera, puerta con QR, app en 7 idiomas, tótem y panel. En septiembre de 2026: 800 cuentas, 470 pagos reales, más de 900 servicios; el 45% de los que pagaron volvió.
 - También: apps y webs a medida, y productos propios (Kontrol+, Play Padel, i-Streem, LiveVote).
 - Contacto: WhatsApp +54 9 351 687-5178 · alenia.online@gmail.com
 
 ## Páginas principales
 
-- [ALENIA HUB](https://aleniahub.com/soluciones/hub): automatización de máquinas con hardware y software, con preguntas frecuentes.
-- [Caso LaIA](https://aleniahub.com/casos/laia): cómo se construyó una lavandería 24 h sin personal, con datos reales.
+- [ALENIA HUB](https://aleniahub.com/soluciones/hub): soluciones de automatización a medida con hardware, software e IA, con preguntas frecuentes.
+- [Caso LaIA](https://aleniahub.com/casos/laia): cómo se desarrolló una lavandería 24 h sin personal, con datos reales.
 - [Apps y webs a medida](https://aleniahub.com/soluciones/digitales)
 - [Apps de ALENIA](https://aleniahub.com/apps)
 - [Contacto](https://aleniahub.com/contacto)

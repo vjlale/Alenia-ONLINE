@@ -23,7 +23,6 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
   const [errors, setErrors] = useState({});
 
   const tiposNegocio = [
-    { value: 'lavanderia', label: 'Lavandería self-service', icon: '🧺' },
     { value: 'vending', label: 'Máquinas vending', icon: '🥤' },
     { value: 'accesos-gimnasio', label: 'Accesos / Gimnasio', icon: '🚪' },
     { value: 'lavadero-cochera', label: 'Lavadero de autos / Cochera', icon: '🚗' },
@@ -115,7 +114,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
     if (!formData.tipoNegocio) newErrors.tipoNegocio = 'Elegí tu tipo de negocio';
     if (!formData.problemaPrincipal) newErrors.problemaPrincipal = 'Elegí qué querés resolver';
     if (formData.procesosAutomatizar.length === 0) newErrors.procesosAutomatizar = 'Elegí al menos una opción';
-    if (!formData.descripcionSituacion.trim()) newErrors.descripcionSituacion = 'Contanos un poco de tus máquinas';
+    if (!formData.descripcionSituacion.trim()) newErrors.descripcionSituacion = 'Contanos un poco de tu proyecto';
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -390,7 +389,7 @@ const AutomatizacionForm = ({ onSubmit, nivel }) => {
       {/* Situación Actual */}
       <div>
         <label className="block text-sm font-medium text-gray-300 mb-2">
-          Contanos marca y modelo de tus máquinas y qué necesitás *
+          Contanos qué querés automatizar y cómo trabajás hoy *
         </label>
         <textarea
           name="descripcionSituacion"

@@ -1170,11 +1170,11 @@ function ClosingCTA() {
             />
             <img src={MEDIA.buildBy} alt="Build by ALENIA" className="relative mx-auto h-10 w-auto opacity-90" />
             <h2 className="relative mt-8 font-display text-3xl font-extrabold text-white md:text-5xl">
-              ¿Tu negocio es el próximo?
+              ¿Cuál es tu desafío?
             </h2>
             <p className="relative mx-auto mt-4 max-w-2xl text-lg text-white/70">
-              Lo que hicimos en LaIA lo podemos llevar a tus máquinas: cobros digitales, activación automática,
-              accesos con QR y un panel para controlar todo.
+              LaIA empezó como un desafío. Traenos el tuyo: diseñamos una solución a medida de tu negocio,
+              con hardware, software e IA.
             </p>
             <div className="relative mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link

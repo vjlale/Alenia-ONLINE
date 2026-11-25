@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Zap, X, ChevronDown, Cpu, CreditCard, DoorOpen, LayoutDashboard } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, X, ChevronDown, Cpu, Smartphone, Bot, Network } from 'lucide-react';
 import { useState } from 'react';
 import emailJSService from '../services/emailJSService';
 import SmartImage from '../components/common/SmartImage';
@@ -257,17 +257,17 @@ export default function Home() {
             <div className="glass-advanced rounded-2xl p-6 md:p-10 border border-green-400/30 overflow-hidden">
               <span className="text-xs uppercase tracking-widest font-bold text-green-300">ALENIA HUB</span>
               <h2 className="mt-2 text-3xl md:text-4xl font-bold text-white mb-3">
-                Un tótem cobra. Nosotros operamos el negocio entero.
+                Traenos el desafío. Nosotros lo automatizamos.
               </h2>
               <p className="text-white/90 text-lg mb-6">
-                Conectamos tus máquinas con cobros, app, tótem y panel. Ya funciona en LaIA, una lavandería 24&nbsp;h sin personal.
+                Desarrollamos soluciones con inteligencia: hardware, software e IA diseñados para tu negocio. Así resolvimos LaIA, una lavandería que funciona sola las 24&nbsp;h.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {[
-                  { icon: Cpu, text: 'La máquina arranca sola al pagar' },
-                  { icon: CreditCard, text: 'Mercado Pago, saldo y crédito' },
-                  { icon: DoorOpen, text: 'Puertas que abren con QR' },
-                  { icon: LayoutDashboard, text: 'Ventas y alertas en el celular' }
+                  { icon: Cpu, text: 'Hardware a medida' },
+                  { icon: Smartphone, text: 'Software a medida' },
+                  { icon: Bot, text: 'IA aplicada' },
+                  { icon: Network, text: 'Integraciones con lo que ya usás' }
                 ].map((item) => (
                   <div key={item.text} className="flex items-center gap-3 text-white/90">
                     <item.icon className="w-5 h-5 text-green-400 flex-shrink-0" />

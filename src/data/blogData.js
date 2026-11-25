@@ -3,7 +3,7 @@ export const blogPosts = [
     id: 10,
     slug: 'caso-laia-lavanderia-sin-personal-alenia-hub',
     title: 'Caso LaIA: una lavandería que funciona sola, las 24 horas',
-    excerpt: 'Cómo se armó en 69 días una lavandería self-service sin personal en Palermo, qué falló en el camino y qué podés llevarte para tu negocio con ALENIA HUB.',
+    excerpt: 'Cómo se armó en 69 días una lavandería self-service sin personal en Palermo, qué falló en el camino y qué aprendimos para el próximo desafío.',
     date: '19 Nov 2026',
     readTime: 5,
     category: 'Automatización',
@@ -54,19 +54,18 @@ Con los datos del local en septiembre de 2026:
 
 ## Lo que esto significa para tu negocio
 
-Todo lo que funciona en LaIA es **ALENIA HUB**: la solución con la que conectamos máquinas físicas a cobros, app y un panel de control en tiempo real.
+LaIA empezó como un desafío: lograr que un local funcione solo. Se resolvió con un desarrollo hecho a medida, que es exclusivo de ese proyecto.
 
-- **Activación de máquinas:** el cliente escanea un QR o paga y la máquina arranca sola.
-- **Cobros:** Mercado Pago con QR, Checkout y Point, más saldo y crédito para que tus clientes carguen una vez y usen cuando quieran.
-- **Control de accesos:** puertas que abren con QR. Sabés quién entró y cuándo.
-- **Panel en tiempo real:** estado de cada máquina, ventas, cierre de caja y alertas, desde el celular.
-- **App y tótem con tu marca**, y un **asistente de IA** que responde a tus clientes a cualquier hora.
+Eso es lo que hace **ALENIA HUB**: desarrollar soluciones con inteligencia. No vendemos un paquete armado. Partimos de tu idea y combinamos lo que haga falta:
 
-Sirve para lavanderías self-service, máquinas vending, accesos y gimnasios, lavaderos de autos y cocheras, y cualquier negocio físico que quiera funcionar sin personal. Evaluamos cada equipo: la compatibilidad depende de la marca, el modelo y el controlador.
+- **Hardware a medida:** placas, sensores y conexiones para que tus equipos hagan solos lo que hoy hace una persona.
+- **Software a medida:** apps, pantallas y paneles pensados para tu operación, con tu marca.
+- **IA aplicada:** asistentes que atienden, avisan y resuelven a cualquier hora.
+- **Integraciones:** lo nuevo conectado con los equipos y sistemas que ya usás.
 
-## ¿Tu negocio es el próximo?
+## ¿Cuál es tu desafío?
 
-Contanos qué máquinas tenés (marca, modelo y cuántas) y qué querés conectar. Con eso te decimos qué se puede hacer y cómo lo haríamos.
+Contanos qué querés automatizar, aunque la idea todavía no esté definida. Con eso te decimos qué se puede hacer y cómo lo haríamos.
 
 **[Contanos tu proyecto](/contacto)** o **[mirá cómo funciona ALENIA HUB](/soluciones/hub)**.
 

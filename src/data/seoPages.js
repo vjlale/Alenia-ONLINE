@@ -20,7 +20,7 @@ export const SITE = {
   country: 'AR',
   logo: 'https://aleniahub.com/images/logos-alenia/lockup-full.png?v=3',
   description:
-    'ALENIA es una empresa argentina de Córdoba que automatiza negocios físicos con hardware, software e IA. Creó ALENIA HUB, el sistema que conecta máquinas con cobros, app, tótem y panel, y que funciona en LaIA, una lavandería 24 h sin personal en Palermo.',
+    'ALENIA es una empresa argentina de Córdoba que desarrolla soluciones de automatización a medida con hardware, software e IA para negocios físicos. Desarrolló el sistema de LaIA, una lavandería 24 h sin personal en Palermo.',
   sameAs: [
     'https://www.instagram.com/alen.ia_/',
     'https://www.linkedin.com/company/alen-ia/',
@@ -42,29 +42,35 @@ export const LAIA_FACTS = {
 const HUB_FAQ = [
   {
     q: '¿Qué es ALENIA HUB?',
-    a: 'Es el sistema de ALENIA que conecta máquinas físicas (lavadoras, secadoras, expendedoras, cafeteras y puertas) con cobro digital, app, tótem y un panel en tiempo real. El cliente paga desde el celular y la máquina arranca sola. Funciona en LaIA desde septiembre de 2026.',
+    a: 'Es la línea de ALENIA que desarrolla soluciones de automatización a medida, con hardware, software e inteligencia artificial. No es un paquete cerrado: cada proyecto se diseña para el negocio que lo encarga.',
   },
   {
-    q: '¿Qué diferencia hay entre un tótem de cobro y ALENIA HUB?',
-    a: 'Un tótem cobra. ALENIA HUB opera el negocio entero: cobra, activa las máquinas, abre la puerta con QR, integra vending y café, maneja turnos y alertas, y suma un asistente con IA. Todo en un solo panel.',
+    q: '¿Qué tipo de cosas automatizan?',
+    a: 'Negocios y procesos físicos: locales que atienden solos, equipos que se activan sin una persona, avisos y atención con IA. Si la idea todavía no existe en el mercado, la diseñamos con vos.',
   },
   {
-    q: '¿Con qué máquinas funciona?',
-    a: 'Con equipos que se activan por pulso, relé o placa del fabricante: lavadoras y secadoras industriales, expendedoras, cafeteras y cerraduras. Antes de cotizar revisamos marca, modelo y controlador de cada equipo.',
+    q: '¿Venden el sistema de LaIA?',
+    a: 'No. Ese desarrollo se hizo a medida para LaIA y es exclusivo de ese proyecto. Para tu negocio diseñamos una solución nueva, pensada para lo que necesitás.',
   },
   {
-    q: '¿Qué medios de pago acepta?',
-    a: 'Mercado Pago con QR, Checkout y Point, más saldo y crédito dentro de la app. Ninguna máquina arranca sin pago confirmado.',
+    q: '¿Cómo empieza un proyecto?',
+    a: 'Nos contás qué querés automatizar. Relevamos cómo trabajás hoy y te proponemos una solución con alcance, tiempos y etapas.',
   },
   {
-    q: '¿Para qué rubros sirve?',
-    a: 'Lavanderías self-service, lavaderos de autos, gimnasios 24 h, máquinas vending, coworks, canchas de pádel y cualquier negocio que pueda funcionar sin personal en el local.',
+    q: '¿Con qué equipos y sistemas trabajan?',
+    a: 'Con los que ya tenés o con equipos nuevos. Antes de cotizar revisamos qué se puede conectar y qué conviene desarrollar.',
   },
   {
     q: '¿Cuánto tarda en estar funcionando?',
-    a: 'Depende de los equipos. LaIA pasó de un local vacío a abrir al público en 69 días, con 9 máquinas y la puerta conectadas.',
+    a: 'Depende del proyecto. Como referencia, LaIA pasó de un local vacío a abrir al público en 69 días.',
   },
 ]
+
+// Pregunta que se muestra en Inicio (lo visible de Inicio no se toca sin OK del usuario).
+const HOME_TOTEM_FAQ = {
+  q: '¿Qué diferencia hay entre un tótem de cobro y ALENIA HUB?',
+  a: 'Un tótem cobra. ALENIA HUB diseña la solución completa para tu negocio: los equipos, el software y la IA que hagan falta para que funcione solo.',
+}
 
 const LAIA_FAQ = [
   {
@@ -88,9 +94,9 @@ const LAIA_FAQ = [
 const HOME_FAQ = [
   {
     q: '¿Qué hace ALENIA?',
-    a: 'Automatizamos negocios físicos con hardware, software e IA. Nuestro producto principal es ALENIA HUB: conecta tus máquinas con cobros, app, tótem y panel. También hacemos apps y webs a medida.',
+    a: 'Desarrollamos soluciones de automatización a medida con hardware, software e IA. Traenos el desafío y lo automatizamos: eso es ALENIA HUB. También hacemos apps y webs a medida.',
   },
-  HUB_FAQ[1],
+  HOME_TOTEM_FAQ,
   {
     q: '¿Dónde está ALENIA y cómo los contacto?',
     a: `Estamos en Córdoba, Argentina. Escribinos por WhatsApp al ${SITE.whatsapp} o a ${SITE.email}.`,
@@ -110,17 +116,16 @@ export const FAQS = {
 export const SEO_PAGES = [
   {
     path: '/',
-    title: 'ALENIA | Automatización de máquinas con hardware, software e IA',
+    title: 'ALENIA | Automatización a medida con hardware, software e IA',
     description:
-      'ALENIA conecta tus máquinas con cobros, app, tótem y panel en tiempo real. Creamos LaIA, una lavandería 24 h sin personal. Apps y webs a medida. Córdoba, Argentina.',
+      'ALENIA desarrolla soluciones de automatización a medida con hardware, software e IA. Traenos el desafío y lo automatizamos. Apps y webs a medida. Córdoba, Argentina.',
     h1: 'Automatizamos tu negocio completo: hardware, software e IA',
     summary:
-      'Construimos LaIA, una lavandería que funciona sola las 24 horas. Ese mismo sistema, ALENIA HUB, lo llevamos a tus máquinas: el cliente paga desde el celular, la máquina arranca sola y vos controlás todo desde el panel.',
+      'Desarrollamos soluciones con inteligencia: hardware, software e IA a medida de cada negocio. Traenos el desafío y lo automatizamos. Un caso real: LaIA, una lavandería que funciona sola las 24 horas.',
     points: [
-      'Cobros con Mercado Pago, saldo y crédito',
-      'Máquinas que arrancan solas al confirmarse el pago',
-      'Puertas que abren con QR',
-      'Panel con ventas, estado de máquinas y alertas',
+      'Automatización a medida con hardware, software e IA',
+      'Locales y procesos que funcionan solos',
+      'Asistentes con IA que atienden a cualquier hora',
       'Apps y webs a medida',
     ],
     links: [
@@ -133,23 +138,22 @@ export const SEO_PAGES = [
   },
   {
     path: '/soluciones/hub',
-    title: 'ALENIA HUB | Automatización de máquinas con hardware y software',
+    title: 'ALENIA HUB | Automatización a medida con hardware, software e IA',
     description:
-      'ALENIA HUB conecta tus máquinas con cobros, app, tótem y panel en tiempo real. Probado en LaIA, lavandería 24 h sin personal. Para lavanderías, vending, gimnasios y más.',
-    h1: 'ALENIA HUB: de la máquina al negocio conectado',
+      'Traenos el desafío y lo automatizamos. ALENIA HUB desarrolla soluciones a medida con hardware, software e IA para negocios físicos. Caso real: LaIA, 24 h sin personal.',
+    h1: 'ALENIA HUB: traenos el desafío, nosotros lo automatizamos',
     summary:
-      'ALENIA HUB conecta tus máquinas con cobros, app, tótem y un panel en tiempo real. Un tótem cobra; HUB opera el negocio entero. Funciona en LaIA desde septiembre de 2026.',
+      'ALENIA HUB desarrolla soluciones de automatización a medida con hardware, software e inteligencia artificial. No es un paquete cerrado: cada proyecto se diseña para el negocio que lo encarga. Caso real: LaIA, una lavandería que funciona sola las 24 horas.',
     points: [
-      'Activación de máquinas por pulso, relé o placa del fabricante',
-      'Cobros con Mercado Pago (QR, Checkout y Point), saldo y crédito',
-      'Control de accesos con QR',
-      'Panel en tiempo real desde el celular',
-      'App y tótem con tu marca',
-      'Asistente con IA para tus clientes, las 24 horas',
+      'Hardware a medida: placas, sensores y conexiones',
+      'Software a medida: apps, pantallas y paneles con tu marca',
+      'IA aplicada: asistentes que atienden, avisan y resuelven',
+      'Integraciones con los equipos y sistemas que ya usás',
+      'Cuatro pasos: nos contás el desafío, diseñamos, construimos y ponemos en marcha',
     ],
     links: [
       ['/casos/laia', 'Ver el caso LaIA'],
-      ['/contacto', 'Contanos qué máquinas tenés'],
+      ['/contacto', 'Contanos tu desafío'],
     ],
     faq: HUB_FAQ,
     schemaType: 'Service',
@@ -169,7 +173,7 @@ export const SEO_PAGES = [
       LAIA_FACTS.stats,
     ],
     links: [
-      ['/soluciones/hub', 'Llevar este sistema a tus máquinas'],
+      ['/soluciones/hub', 'Traenos tu desafío'],
       [LAIA_FACTS.url, 'Sitio de LaIA'],
     ],
     faq: LAIA_FAQ,
@@ -177,13 +181,13 @@ export const SEO_PAGES = [
   },
   {
     path: '/soluciones',
-    title: 'Soluciones | ALENIA - Automatización de máquinas, apps y webs',
+    title: 'Soluciones | ALENIA - Automatización a medida, apps y webs',
     description:
-      'Automatización de máquinas con ALENIA HUB, cobros y accesos con QR, apps y software a medida y desarrollo web. Hecho por el equipo que creó LaIA.',
+      'Automatización a medida con ALENIA HUB (hardware, software e IA), apps y software a medida y desarrollo web. Hecho por el equipo que desarrolló LaIA.',
     h1: 'Soluciones de ALENIA',
     summary:
-      'Tres líneas: ALENIA HUB para automatizar máquinas y locales sin personal, apps y software a medida, y webs que venden. Todo lo hace el mismo equipo que creó LaIA.',
-    points: ['ALENIA HUB: máquinas, cobros, accesos y panel', 'Apps y software a medida', 'Desarrollo web'],
+      'Tres líneas: ALENIA HUB para automatizar negocios físicos a medida, apps y software a medida, y webs que venden. Todo lo hace el mismo equipo que desarrolló LaIA.',
+    points: ['ALENIA HUB: automatización a medida con hardware, software e IA', 'Apps y software a medida', 'Desarrollo web'],
     links: [
       ['/soluciones/hub', 'ALENIA HUB'],
       ['/soluciones/digitales', 'Apps y webs'],
@@ -230,10 +234,10 @@ export const SEO_PAGES = [
     path: '/automatizaciones',
     title: 'Automatizaciones para tu negocio | ALENIA',
     description:
-      'Automatizamos lo que hoy hacés a mano: respuestas por WhatsApp, recordatorios, reportes y conexión entre sistemas. Y con ALENIA HUB, también tus máquinas.',
+      'Automatizamos lo que hoy hacés a mano: respuestas por WhatsApp, recordatorios, reportes y conexión entre sistemas. Y con ALENIA HUB, también tu negocio físico.',
     h1: 'Dejá de hacer a mano lo que se puede hacer solo',
     summary:
-      'Respuestas por WhatsApp, recordatorios, seguimiento de ventas, reportes y conexión entre sistemas. Si tu negocio tiene máquinas, ALENIA HUB también las automatiza.',
+      'Respuestas por WhatsApp, recordatorios, seguimiento de ventas, reportes y conexión entre sistemas. Si el desafío incluye equipos físicos, ALENIA HUB lo resuelve con hardware a medida.',
     points: ['WhatsApp y recordatorios', 'Reportes automáticos', 'Conexión entre sistemas'],
     links: [['/soluciones/hub', 'ALENIA HUB']],
   },
@@ -278,8 +282,8 @@ export const SEO_PAGES = [
   {
     path: '/contacto',
     title: 'Contacto | ALENIA',
-    description: `Contactá a ALENIA por WhatsApp (${SITE.whatsapp}) o por mail. Automatización de máquinas, apps y webs. Córdoba, Argentina.`,
+    description: `Contactá a ALENIA por WhatsApp (${SITE.whatsapp}) o por mail. Automatización a medida, apps y webs. Córdoba, Argentina.`,
     h1: 'Hablemos de tu proyecto',
-    summary: `Escribinos por WhatsApp al ${SITE.whatsapp} o a ${SITE.email}. Contanos qué máquinas o qué proceso querés automatizar.`,
+    summary: `Escribinos por WhatsApp al ${SITE.whatsapp} o a ${SITE.email}. Contanos qué querés automatizar.`,
   },
 ]
