@@ -69,7 +69,7 @@ const apps = [
     platforms: ['Web instalable'],
     highlights: ['Asistente por WhatsApp y Telegram', 'Carga por audio', 'Ventas y finanzas', 'Inventario', 'Sueldos', 'Logística'],
     audience: ['Comercios', 'Pymes', 'Negocios con stock y empleados'],
-    logo: '/images/kontrol-pro/logo.png',
+    logo: '/images/kontrol-pro/kontrol-pro-icon.webp',
     screenshot: '/images/kontrol-pro/dashboard.webp',
     gallery: ['/images/kontrol-pro/dashboard.webp'],
     mockupType: 'desktop',
@@ -84,7 +84,6 @@ const apps = [
     featured: true,
     showFeaturedBadge: true,
     modalContent: {
-      logoWide: '/images/kontrol-pro/logo-full.webp',
       intro:
         'Kontrol Pro es un sistema de gestión completo con un asistente de IA que escucha. Le hablás como a un empleado: le mandás un audio, un comprobante o una pregunta, y él anota, organiza y responde. Todo queda visible al instante en la app: caja, cheques, stock y sueldos.',
       features: [
@@ -238,7 +237,7 @@ const apps = [
     upcomingPlatforms: ['iOS', 'Android'],
     highlights: ['Reservas', 'Ligas y torneos', 'Clases', 'Perfil del club', 'Novedades', 'Seña con Mercado Pago', 'Métricas'],
     audience: ['Clubes de pádel', 'Jugadores'],
-    logo: '/images/playpadel/match-padel-logo.png',
+    logo: '/images/playpadel/match-padel-logo-v2.webp',
     screenshot: '/images/playpadel/v6/inicio-club.webp',
     gallery: [
       '/images/playpadel/v6/inicio-club.webp',

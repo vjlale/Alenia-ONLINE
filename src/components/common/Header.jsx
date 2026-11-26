@@ -23,14 +23,14 @@ const navigation = [
     name: 'Kontrol Pro',
     href: 'https://kontrolpro.app/',
     isLogo: true,
-    logoPath: '/images/kontrol-pro/logo.png',
+    logoPath: '/images/kontrol-pro/kontrol-pro-icon.webp',
     external: true
   },
   {
     name: 'Match Pádel',
     href: 'https://www.appmatchpadel.com/landing',
     isLogo: true,
-    logoPath: '/images/playpadel/match-padel-logo.png',
+    logoPath: '/images/playpadel/match-padel-logo-v2.webp',
     external: true
   },
   { name: 'Contacto', href: '/contacto' }
