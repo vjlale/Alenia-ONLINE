@@ -30,7 +30,7 @@ const navigation = [
     name: 'Match Pádel',
     href: 'https://www.appmatchpadel.com/landing',
     isLogo: true,
-    logoPath: '/images/playpadel/match-padel-logo.png',
+    logoPath: '/images/playpadel/match-padel-logo-v2.webp',
     external: true
   },
   { name: 'Contacto', href: '/contacto' }

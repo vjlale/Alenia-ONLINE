@@ -237,7 +237,7 @@ const apps = [
     upcomingPlatforms: ['iOS', 'Android'],
     highlights: ['Reservas', 'Ligas y torneos', 'Clases', 'Perfil del club', 'Novedades', 'Seña con Mercado Pago', 'Métricas'],
     audience: ['Clubes de pádel', 'Jugadores'],
-    logo: '/images/playpadel/match-padel-logo.png',
+    logo: '/images/playpadel/match-padel-logo-v2.webp',
     screenshot: '/images/playpadel/v6/inicio-club.webp',
     gallery: [
       '/images/playpadel/v6/inicio-club.webp',
