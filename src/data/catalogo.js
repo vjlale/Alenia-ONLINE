@@ -15,7 +15,7 @@
 export const productos = [
   {
     id: 'alenia-hub-contenido',
-    nombre: 'Alen.iA HUB',
+    nombre: 'PostLab',
     pitch: 'Contenido diario para tus marcas, generado con IA.',
     descripcion:
       'Subís el PDF de tu marca y tu plan de marketing; la IA arma el plan editorial, los posts, las imágenes y los textos. Vos revisás y publicás en Instagram o LinkedIn.',
@@ -28,7 +28,7 @@ export const productos = [
   },
   {
     id: 'lead-web-capture',
-    nombre: 'Lead Web Capture',
+    nombre: 'WebLab',
     pitch: 'Encontrá negocios sin web y mandales una propuesta lista.',
     descripcion:
       'Busca comercios en Google Maps por rubro y zona, les arma una web de muestra y se la enviás por email o WhatsApp.',
