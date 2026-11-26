@@ -26,7 +26,6 @@ import NotFound from './pages/NotFound'
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const Apps = lazy(() => import('./pages/Apps'));
-const DesarrollosIA = lazy(() => import('./pages/DesarrollosIA'));
 const Services = lazy(() => import('./pages/Services'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const SolucionLevels = lazy(() => import('./pages/SolucionLevels'));
@@ -91,7 +90,6 @@ function AppContent() {
         () => import('./pages/Blog'),
         () => import('./pages/Services'),
         () => import('./pages/Apps'),
-        () => import('./pages/DesarrollosIA'),
         () => import('./pages/Contact')
       ];
 
@@ -227,7 +225,8 @@ function AppContent() {
           <Route path="/blog" element={<LazyRoute component={Blog} />} />
           <Route path="/blog/:slug" element={<LazyRoute component={BlogPostPage} />} />
           <Route path="/apps" element={<LazyRoute component={Apps} />} />
-          <Route path="/desarrollos-ia" element={<LazyRoute component={DesarrollosIA} />} />
+          {/* /desarrollos-ia se unió al catálogo de /apps (2026-11-26) */}
+          <Route path="/desarrollos-ia" element={<Navigate to={{ pathname: '/apps', hash: '#a-medida' }} replace />} />
           <Route path="/apps/calculadora-roi" element={<LazyRoute component={ROICalculator} />} />
           <Route path="/apps/simulador-automatizaciones" element={<LazyRoute component={AutomationSimulator} />} />
           {/* Herramientas de marketing retiradas: redirigen al catálogo */}

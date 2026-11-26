@@ -206,29 +206,18 @@ export const SEO_PAGES = [
   },
   {
     path: '/apps',
-    title: 'Apps de ALENIA | Productos en producción',
+    title: 'Apps y desarrollos de ALENIA',
     description:
-      'Apps creadas por ALENIA: Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem y E-pix. Productos reales, con precios y planes.',
-    h1: 'Apps de ALENIA',
+      'Apps creadas por ALENIA (Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem, E-pix y más) y software a medida para clientes de distintos rubros.',
+    h1: 'Apps y desarrollos de ALENIA',
     summary:
-      'Productos propios que ya están funcionando: Kontrol Pro (ventas y stock), LiveVote (votación en vivo en pantalla), StageLab, Match Padel, i-Streem (streaming de iPhone a PC) y E-pix.',
+      'Productos propios que ya están funcionando: Kontrol Pro (ventas y stock), LiveVote (votación en vivo en pantalla), StageLab, Match Padel, i-Streem (cámara del celular a la PC) y E-pix. Además, más productos en beta y desarrollos hechos a medida para clientes.',
     points: ['Kontrol Pro', 'LiveVote', 'StageLab', 'Match Padel', 'i-Streem', 'E-pix'],
     links: [
       ['/kontrol-plus', 'Kontrol+'],
       ['/play-padel', 'Play Padel'],
       ['/apps/i-streem', 'i-Streem'],
     ],
-  },
-  {
-    path: '/desarrollos-ia',
-    title: 'Desarrollos con IA | ALENIA',
-    description:
-      'Desarrollos con inteligencia artificial hechos por ALENIA: asistentes de atención por voz y chat, bots de gestión y automatizaciones a medida.',
-    h1: 'Desarrollos con IA',
-    summary:
-      'Asistentes que atienden por voz y por chat, bots que le avisan al dueño cuánto vendió y automatizaciones a medida. Probados en un negocio real: LaIA usa 7 asistentes de IA.',
-    points: ['Asistentes de atención por voz y chat', 'Bots de gestión para el dueño', 'Automatizaciones a medida'],
-    links: [['/casos/laia', 'Caso LaIA']],
   },
   {
     path: '/automatizaciones',
