@@ -23,7 +23,7 @@ const navigation = [
     name: 'Kontrol Pro',
     href: 'https://kontrolpro.app/',
     isLogo: true,
-    logoPath: '/images/kontrol-pro/logo.png',
+    logoPath: '/images/kontrol-pro/kontrol-pro-icon.webp',
     external: true
   },
   {
