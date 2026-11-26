@@ -18,6 +18,9 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # ------------------------------------------------------------
 RewriteRule ^blog/(marketing-digital-con-ia|email-marketing-con-ia)/?$ /blog [L,R=301]
 
+# /desarrollos-ia se unió al catálogo de /apps (2026-11-26)
+RewriteRule ^desarrollos-ia/?$ /apps#a-medida [L,R=301,NE]
+
 # ------------------------------------------------------------
 # 2) Fallback SPA de la sub-app /e-pix (tiene su propio index)
 # ------------------------------------------------------------

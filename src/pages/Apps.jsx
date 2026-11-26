@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
   Rocket,
-  ChevronDown,
   Zap,
   Sparkles,
   ArrowRight,
@@ -21,6 +20,8 @@ import {
 import ScrollReveal from '../components/common/ScrollReveal';
 import AppShowcaseCard from '../components/apps/AppShowcaseCard';
 import FreeToolCard from '../components/apps/FreeToolCard';
+import CompactAppCard from '../components/apps/CompactAppCard';
+import { productos, casosAMedida } from '../data/catalogo';
 import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand';
 
 // Página /apps reconstruida desde el bundle publicado en aleniahub.com (2026-11-07).
@@ -29,6 +30,9 @@ import { OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../config/brand';
 // 2026-11-19: revisión de diseño. Sello "Destacada" solo en Kontrol Pro, botones iguales en todas
 // las tarjetas, mismas filas de datos (Plataformas e Ideal para), moneda explícita en los precios,
 // nombres de las apps en lugar de direcciones *.lovable.app y sin puntajes inventados en las mini-apps.
+// 2026-11-26: catálogo unificado. /desarrollos-ia se sumó acá (estantes "Más productos" y "Hecho a medida",
+// datos en src/data/catalogo.js). Encabezado más bajo, el caso LaIA va después del catálogo,
+// captura real de Kontrol Pro y link a la web de E-pix.
 
 const CANONICAL_URL = 'https://aleniahub.com/apps';
 
@@ -70,8 +74,8 @@ const apps = [
     highlights: ['Asistente por WhatsApp y Telegram', 'Carga por audio', 'Ventas y finanzas', 'Inventario', 'Sueldos', 'Logística'],
     audience: ['Comercios', 'Pymes', 'Negocios con stock y empleados'],
     logo: '/images/kontrol-pro/kontrol-pro-icon.webp',
-    screenshot: '/images/kontrol-pro/dashboard.webp',
-    gallery: ['/images/kontrol-pro/dashboard.webp'],
+    screenshot: '/images/kontrol-pro/landing-real.webp',
+    gallery: ['/images/kontrol-pro/landing-real.webp'],
     mockupType: 'desktop',
     mockupUrl: 'kontrolpro.app',
     appUrl: 'https://kontrolpro.app/',
@@ -322,7 +326,7 @@ const apps = [
     filters: ['ia'],
     status: 'En producción',
     pricing: 'paid',
-    priceLabel: 'Premium: consultá precio',
+    priceLabel: 'Prueba gratis · Premium',
     platforms: ['Web', 'Android'],
     upcomingPlatforms: ['iOS'],
     audience: ['Tiendas online', 'Emprendedores y pymes', 'Agencias'],
@@ -339,8 +343,9 @@ const apps = [
     gallery: ['/images/e-pix/hero.png', '/images/e-pix/ui-editor.png', '/images/e-pix/ui-controls.png', '/images/e-pix/backdrop.png'],
     mockupType: 'poster',
     fanpageUrl: null,
-    appUrl: 'https://e-pix.alenia.online',
+    appUrl: 'https://aleniahub.com/e-pix/',
     useModal: true,
+    secondaryLink: { label: 'Abrir E-pix', href: 'https://aleniahub.com/e-pix/' },
     accentColor: '#a855f7',
     accentColorSoft: '#6366f1',
     featured: false,
@@ -453,6 +458,14 @@ const freeTools = [
   },
 ];
 
+// Atajos del encabezado a cada estante del catálogo.
+const SECTION_LINKS = [
+  { href: '#apps-destacadas', label: 'Apps destacadas', count: apps.length },
+  { href: '#productos', label: 'Más productos', count: productos.length },
+  { href: '#a-medida', label: 'Hecho a medida', count: casosAMedida.length },
+  { href: '#gratis', label: 'Gratis', count: freeTools.length },
+];
+
 /*
  * Arma las filas del catálogo: las destacadas van a todo el ancho (con la imagen
  * alternando de lado) y las demás de a dos. Si una no destacada queda sola, va a todo el ancho.
@@ -544,17 +557,6 @@ function GradientText({ children, from, to }) {
     >
       {children}
     </span>
-  );
-}
-
-function HeroStat({ value, label }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-sm sm:p-4">
-      <div className="font-display text-3xl font-extrabold text-white md:text-4xl">{value}</div>
-      <div className="mt-1 text-[9px] font-semibold uppercase leading-snug tracking-[0.04em] text-white/40 sm:text-[10px] sm:tracking-[0.2em]">
-        {label}
-      </div>
-    </div>
   );
 }
 
@@ -652,9 +654,6 @@ function CaseStudyCard({ data }) {
 }
 
 export default function Apps() {
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 400], [0, 120]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
   const [activeFilter, setActiveFilter] = useState('todas');
 
@@ -669,10 +668,15 @@ export default function Apps() {
     return () => window.removeEventListener('mousemove', onMouseMove);
   }, []);
 
-  const totalApps = apps.length;
-  const appsInProduction = apps.filter((app) => app.status === 'En producción').length;
-  // Rubros que cubre el catálogo (los filtros, sin contar "Todas")
-  const totalCategories = CATEGORY_FILTERS.filter((filter) => filter.id !== 'todas').length;
+  // Si se llega con #a-medida (por ejemplo desde /desarrollos-ia), baja hasta esa sección.
+  const location = useLocation();
+  useEffect(() => {
+    if (!location.hash) return undefined;
+    const timer = setTimeout(() => {
+      document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [location.hash]);
 
   const filterCounts = useMemo(
     () =>
@@ -696,15 +700,15 @@ export default function Apps() {
   return (
     <>
       <Helmet>
-        <title>Apps de la startup ALENIA — Nuestras apps en producción</title>
+        <title>Apps y desarrollos de ALENIA</title>
         <meta
           name="description"
-          content="Conocé las apps desarrolladas por la startup ALENIA: Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem y E-pix. Productos digitales reales, con precios y planes."
+          content="Las apps de ALENIA (Kontrol Pro, Match Padel, LiveVote, StageLab, i-Streem, E-pix y más) y los desarrollos a medida que hicimos para clientes de distintos rubros."
         />
         <link rel="canonical" href={CANONICAL_URL} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={CANONICAL_URL} />
-        <meta property="og:title" content="Apps de la startup ALENIA" />
+        <meta property="og:title" content="Apps y desarrollos de ALENIA" />
         <meta
           property="og:description"
           content="Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem y E-pix: nuestras apps en producción."
@@ -715,7 +719,7 @@ export default function Apps() {
         <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={CANONICAL_URL} />
-        <meta property="twitter:title" content="Apps de la startup ALENIA" />
+        <meta property="twitter:title" content="Apps y desarrollos de ALENIA" />
         <meta
           property="twitter:description"
           content="Kontrol Pro, LiveVote, StageLab, Match Padel, i-Streem y E-pix: productos digitales reales."
@@ -742,12 +746,12 @@ export default function Apps() {
         />
 
         {/* Hero */}
-        <section className="relative min-h-[80vh] pt-28 pb-12">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto max-w-6xl px-6">
+        <section className="relative pt-28 pb-10">
+          <div className="container mx-auto max-w-6xl px-6">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
               <Link
                 to="/"
-                className="group mb-10 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
+                className="group mb-8 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
               >
                 <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 Volver al inicio
@@ -758,7 +762,7 @@ export default function Apps() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-alenia-primary/30 bg-alenia-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-alenia-primary"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-alenia-primary/30 bg-alenia-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-alenia-primary"
             >
               <Rocket className="h-3.5 w-3.5" />
               Startup ALENIA
@@ -768,67 +772,53 @@ export default function Apps() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+              className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl"
             >
-              Nuestras <HeroGradientText>Apps</HeroGradientText>
+              Apps y <HeroGradientText>desarrollos</HeroGradientText>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.45 }}
-              className="mt-8 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
+              className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70"
             >
-              Productos digitales reales desarrollados por nuestra startup: gestión para tu negocio, herramientas para
-              eventos y shows, deporte e IA. Software que pensamos, lanzamos y hacemos crecer.
+              Las apps que hicimos y vendemos, y el software a medida que construimos para clientes de distintos rubros.
+              Probalas, pedí acceso a las que están en beta o contanos qué necesitás.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
+            <motion.nav
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-12 grid max-w-2xl grid-cols-3 gap-4"
+              transition={{ duration: 0.6, delay: 0.5 }}
+              aria-label="Secciones del catálogo"
+              className="mt-8 flex flex-wrap gap-2"
             >
-              <HeroStat value={totalApps} label="Apps en el catálogo" />
-              <HeroStat value={appsInProduction} label="En producción" />
-              <HeroStat value={totalCategories} label="Rubros" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-              className="mt-16 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/40"
-            >
-              <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}>
-                <ChevronDown className="h-4 w-4" />
-              </motion.div>
-              Desplazate para explorar
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* Caso de éxito */}
-        <section className="relative pb-16">
-          <div className="container mx-auto max-w-7xl px-6">
-            <CaseStudyCard data={caseStudy} />
+              {SECTION_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-4 text-sm font-medium text-white/80 transition-colors hover:border-alenia-primary/60 hover:text-white"
+                >
+                  {link.label}
+                  <span className="rounded-full bg-white/10 px-1.5 text-[11px] font-semibold text-white/70">{link.count}</span>
+                </a>
+              ))}
+            </motion.nav>
           </div>
         </section>
 
         {/* Catálogo de apps */}
-        <section className="relative pb-24 pt-4" aria-labelledby="catalogo-titulo">
+        <section id="apps-destacadas" className="relative scroll-mt-24 pb-20 pt-4" aria-labelledby="catalogo-titulo">
           <div className="container mx-auto max-w-7xl px-6">
             <div className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/40">
                   <Sparkles className="h-3.5 w-3.5" />
-                  Catálogo
+                  Listas para usar hoy
                 </div>
                 <h2 id="catalogo-titulo" className="font-display text-3xl font-bold leading-tight text-white md:text-4xl">
-                  Elegí la app que{' '}
-                  <GradientText from="#00ff88" to="#22d3ee">
-                    necesitás
-                  </GradientText>
+                  Apps destacadas
                 </h2>
               </div>
 
@@ -899,8 +889,55 @@ export default function Apps() {
           </div>
         </section>
 
+        {/* Más productos (antes en /desarrollos-ia) */}
+        <section id="productos" className="relative scroll-mt-24 pb-20" aria-labelledby="productos-titulo">
+          <div className="container mx-auto max-w-7xl px-6">
+            <div className="mb-8 max-w-3xl">
+              <h2 id="productos-titulo" className="font-display text-3xl font-bold leading-tight text-white md:text-4xl">
+                Más productos de ALENIA
+              </h2>
+              <p className="mt-3 text-base text-white/70">
+                Herramientas propias para vender más, ordenar tu negocio o crear contenido. Las que están en beta se usan
+                pidiendo acceso.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {productos.map((item, index) => (
+                <CompactAppCard key={item.id} item={item} index={index} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Caso de éxito */}
+        <section className="relative pb-20">
+          <div className="container mx-auto max-w-7xl px-6">
+            <CaseStudyCard data={caseStudy} />
+          </div>
+        </section>
+
+        {/* Hecho a medida (antes /desarrollos-ia) */}
+        <section id="a-medida" className="relative scroll-mt-24 pb-24" aria-labelledby="medida-titulo">
+          <div className="container mx-auto max-w-7xl px-6">
+            <div className="mb-8 max-w-3xl">
+              <h2 id="medida-titulo" className="font-display text-3xl font-bold leading-tight text-white md:text-4xl">
+                Hecho a medida
+              </h2>
+              <p className="mt-3 text-base text-white/70">
+                Software que construimos para clientes de distintos rubros. Si necesitás algo parecido, escribinos y lo
+                pensamos con vos.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {casosAMedida.map((item, index) => (
+                <CompactAppCard key={item.id} item={item} index={index} variante="medida" />
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Herramientas gratuitas */}
-        <section className="relative border-t border-white/5 bg-black/30 py-24">
+        <section id="gratis" className="relative scroll-mt-24 border-t border-white/5 bg-black/30 py-24">
           <div className="container mx-auto max-w-7xl px-6">
             <ScrollReveal direction="up">
               <div className="mb-12 max-w-3xl">

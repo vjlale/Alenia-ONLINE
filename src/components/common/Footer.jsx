@@ -26,7 +26,7 @@ const Footer = () => {
     { name: 'Inicio', href: '/' },
     { name: 'Soluciones', href: '/soluciones' },
     { name: 'Apps', href: '/apps' },
-    { name: 'Desarrollos IA', href: '/desarrollos-ia' },
+    { name: 'Hecho a medida', href: '/apps#a-medida' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contacto', href: '/contacto' }
   ]
